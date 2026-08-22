@@ -23,6 +23,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Build and validate v0.9.0
+        run: |
+          cat build/v090/core_transform_part1.txt build/v090/core_transform_part2.txt build/v090/core_transform_part3.txt build/v090/core_transform_part4.txt > /tmp/core_transform_v090.py
+          python /tmp/core_transform_v090.py
+          cp build/v090/index.html index.html
+          cp build/v090/cosmetics-v090.css cosmetics-v090.css
+          cp build/v090/qa-v090.js qa-v090.js
+          node --check core-v090.js
+          test -s index.html
+          test -s core-v090.js
+          test -s cosmetics-v090.css
+          test -s qa-v090.js
+          grep -q "v0.9.0" index.html
+          grep -q "Daredevil" core-v090.js
+          grep -q "Moon Knight" core-v090.js
+          grep -q "spider-symbiote" core-v090.js
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
