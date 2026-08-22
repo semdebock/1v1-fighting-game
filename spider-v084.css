@@ -1,0 +1,39 @@
+/* Fight Arena v0.8.4 — Interface & Web Burst Fix */
+.spiderman{filter:drop-shadow(0 7px 3px #0009) drop-shadow(0 0 10px #e92d3d55)}
+.spiderman .head{background:linear-gradient(145deg,#fb4554,#c20f24 72%)!important;border-radius:18px!important;border-color:#090b11!important}
+.spiderman .head:before{content:'';position:absolute;inset:4px;border-radius:13px;background:repeating-radial-gradient(circle at 50% 55%,transparent 0 7px,#6c111e 7px 8px,transparent 8px 13px);opacity:.76}
+.spiderman .head:after{content:'';position:absolute;left:18px;top:3px;width:2px;height:31px;background:#71101d;opacity:.9}
+.spiderman .eye{top:8px!important;width:12px!important;height:20px!important;background:linear-gradient(#fff,#dcecff)!important;border:3px solid #090b11!important;clip-path:polygon(44% 0,100% 22%,82% 100%,12% 82%,0 28%)!important;z-index:9}
+.spiderman .eye.l{left:3px!important}.spiderman .eye.r{right:3px!important;transform:scaleX(-1)}
+.spiderman .body{background:linear-gradient(90deg,#ec2e42 0 25%,#1f55aa 25% 75%,#ec2e42 75%)!important;border-color:#090b11!important}
+.spiderman .body:before{content:'◆'!important;position:absolute;left:17px!important;top:14px!important;color:#0d121a!important;font-size:15px!important;filter:none!important;transform:scaleX(.72)}
+.spiderman .body:after{content:'';position:absolute;left:23px;top:2px;width:2px;height:47px;background:#66121c;box-shadow:-8px 8px 0 -1px #66121c,8px 8px 0 -1px #66121c;opacity:.72}
+.spiderman .arm{background:linear-gradient(#f43b4c,#c81529)!important;border-color:#090b11!important}.spiderman .arm:after{content:'';position:absolute;left:3px;right:3px;top:19px;height:2px;background:#71101d;box-shadow:0 10px 0 #71101d}
+.spiderman .leg{background:linear-gradient(#2358ad,#173b78)!important;border-color:#090b11!important}.spiderman .leg:after{content:'';position:absolute;left:-4px;right:-4px;bottom:-4px;height:15px;background:#df293b;border:4px solid #090b11}
+.spiderman:after{content:''!important;position:absolute!important;left:13px!important;top:96px!important;width:58px!important;height:10px!important;background:#df293b!important;border:3px solid #090b11!important;z-index:7!important}
+
+/* Main menu detail layer */
+.home-hub{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:-6px}
+.hub-card{position:relative;overflow:hidden;padding:13px 14px;border-radius:16px;border:1px solid #2d3c57;background:linear-gradient(180deg,#121b2d,#0a101c);box-shadow:inset 0 1px 0 #ffffff0b}
+.hub-card:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 100% 0,#6077ff22,transparent 45%);pointer-events:none}.hub-card small{display:block;margin-bottom:4px}.hub-card strong{display:block;font-size:16px}.hub-card span{display:block;color:#9eacc1;font-size:11px;margin-top:3px}.hub-progress{height:5px;border-radius:99px;background:#050914;margin-top:9px;overflow:hidden}.hub-progress i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#5d75ff,#9d66ff)}
+.latest-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 8px;border:1px solid #3b4d6e;border-radius:999px;background:#0b1220;color:#b9c6da;font-size:10px;font-weight:800}
+
+/* Cleaner gallery */
+#chars .cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+#chars .card{min-height:222px;padding:13px;border-radius:22px;overflow:hidden;background:radial-gradient(circle at 50% 34%,#546cff1a,transparent 35%),linear-gradient(180deg,#151f33,#0b121f)}
+#chars .card .portrait{height:132px;margin:2px -3px 7px;border-radius:16px;background:linear-gradient(180deg,#0e1728aa,#080e19aa);border:1px solid #22314a}
+#chars .card .portrait .fighter{transform:scale(.72)!important}
+#chars .card h3{font-size:16px;margin:6px 0 4px;letter-spacing:.02em}
+#chars .card small:last-child{display:inline-flex;margin-top:4px;padding:5px 8px;border-radius:999px;background:#08101c;border:1px solid #263650;color:#b9c5d7}
+#chars .card.active{outline:none;border-color:#8193ff;box-shadow:0 0 0 2px #657aff55,0 14px 35px #0004}
+#chars .panel{border-radius:22px;background:linear-gradient(180deg,#151f31,#0c1321)}
+.gallery-summary{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:0 0 12px;padding:10px 12px;border-radius:14px;border:1px solid #293952;background:#0a111e}.gallery-summary b{font-size:13px}.gallery-summary span{font-size:11px;color:#96a5bb}.role-chip{display:inline-flex;padding:5px 8px;border-radius:999px;border:1px solid #354761;background:#101a2c;color:#bdc9db;font-size:10px;font-weight:900;letter-spacing:.07em}
+
+/* Spider web controls */
+.spider-actions{display:none;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}.spider-actions.active{display:grid}.spider-actions button{min-height:52px;padding:9px 4px;border-color:#aebbd0;background:linear-gradient(180deg,#f8fbff,#bccce6);color:#142039;text-shadow:none;box-shadow:inset 0 1px 0 #fff,0 8px 16px #0003}.spider-actions button:disabled{opacity:.45}.web-cd{font-size:9px;display:block;color:#4d5a72;margin-top:2px}
+.webshot2{position:absolute;width:30px;height:14px;border-radius:50%;background:#f7fbff;border:2px solid #afc2dc;box-shadow:0 0 14px #dce6ff;z-index:24}.webshot2:after{content:'';position:absolute;right:22px;top:4px;width:42px;height:3px;background:repeating-linear-gradient(90deg,#edf5ff 0 6px,transparent 6px 9px)}
+.webline2{position:absolute;height:3px;background:repeating-linear-gradient(90deg,#f4f8ff 0 7px,transparent 7px 10px);transform-origin:left center;z-index:23;filter:drop-shadow(0 0 3px #d9e7ff)}
+.webburst2{position:absolute;width:82px;height:82px;border:5px dashed #eff7ff;border-radius:50%;z-index:25;animation:webburst2 .4s ease-out forwards;pointer-events:none;box-shadow:0 0 25px #eaf5ff99,inset 0 0 18px #eaf5ff66}.webburst2:before,.webburst2:after{content:'';position:absolute;inset:14px;border:3px solid #eff7ff;border-radius:50%;opacity:.8}.webburst2:after{inset:29px;transform:rotate(45deg)}@keyframes webburst2{to{transform:scale(2.35) rotate(55deg);opacity:0}}
+.special-ready{animation:specialReady 1s ease-in-out infinite alternate;border-color:#e9f4ff!important;box-shadow:0 0 20px #dbeaff88!important}@keyframes specialReady{to{filter:brightness(1.22)}}
+
+@media(max-width:700px){.home-hub{grid-template-columns:repeat(3,1fr);gap:6px}.hub-card{padding:9px}.hub-card strong{font-size:12px}.hub-card span{font-size:9px}#chars .cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}#chars .card{padding:8px;min-height:183px}#chars .card .portrait{height:105px}#chars .card .portrait .fighter{transform:scale(.58)!important}#chars .card h3{font-size:11px}.spider-actions{gap:5px}.spider-actions button{font-size:10px;padding:8px 2px}}
