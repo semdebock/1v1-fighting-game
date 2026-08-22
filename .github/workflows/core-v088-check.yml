@@ -1,0 +1,32 @@
+name: Fight Arena Core Check
+
+on:
+  push:
+    paths:
+      - 'v088.html'
+      - 'core-v088.js'
+      - 'core-v088.css'
+      - '.github/workflows/core-v088-check.yml'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax check
+        run: node --check core-v088.js
+      - name: Required clean-core files
+        run: |
+          test -s v088.html
+          test -s core-v088.css
+          test -s core-v088.js
+      - name: Ensure preview has no legacy patch imports
+        run: |
+          ! grep -q 'spider-v084.js' v088.html
+          ! grep -q 'heroes-v085.js' v088.html
+          ! grep -q 'stability-v086.js' v088.html
+          ! grep -q 'villains-v087.js' v088.html
