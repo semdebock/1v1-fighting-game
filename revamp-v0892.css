@@ -1,0 +1,58 @@
+/* Fight Arena v0.8.9.2 — Character Revamp Fix
+   Visual-only. No gameplay, stats, movement, hitbox or ability changes. */
+
+.fighter.rookie,.fighter.primo,.fighter.spiderman{
+  image-rendering:pixelated;
+  filter:drop-shadow(0 9px 4px rgba(0,0,0,.48)) drop-shadow(0 0 9px rgba(255,255,255,.045));
+}
+.fighter.rookie .head,.fighter.rookie .body,.fighter.rookie .arm,.fighter.rookie .leg,
+.fighter.primo .head,.fighter.primo .body,.fighter.primo .arm,.fighter.primo .leg,
+.fighter.spiderman .head,.fighter.spiderman .body,.fighter.spiderman .arm,.fighter.spiderman .leg{overflow:visible}
+
+/* ROOKIE — premium original street-fighter silhouette */
+.fighter.rookie .head{left:20px;top:5px;width:44px;height:41px;border-radius:8px 8px 12px 12px;background:linear-gradient(180deg,#efbd86 0%,#d99a60 100%);box-shadow:inset 0 -4px 0 rgba(95,45,18,.16)}
+.fighter.rookie .head::before{content:"";position:absolute;left:-4px;right:-4px;top:-10px;height:17px;background:#693718;border:4px solid #0d1016;clip-path:polygon(0 100%,5% 44%,18% 58%,25% 12%,38% 48%,49% 0,60% 44%,73% 16%,82% 57%,96% 33%,100% 100%)}
+.fighter.rookie .head::after{content:"";position:absolute;left:16px;bottom:7px;width:12px;height:3px;background:#7a4528;border-radius:2px}
+.fighter.rookie .eye{top:16px;width:6px;height:6px;background:#17202a;border-radius:2px;box-shadow:none}.fighter.rookie .eye.l{left:8px}.fighter.rookie .eye.r{right:8px}
+.fighter.rookie::before{content:"";position:absolute;left:14px;top:40px;width:56px;height:25px;z-index:1;border:4px solid #0d1016;border-bottom:0;border-radius:18px 18px 5px 5px;background:#313b49}
+.fighter.rookie .body{left:16px;top:44px;width:52px;height:63px;z-index:4;border-radius:8px 8px 6px 6px;background:linear-gradient(90deg,#202936 0 28%,#151d28 28% 72%,#202936 72% 100%)}
+.fighter.rookie .body::before{content:"";position:absolute;left:17px;top:4px;width:10px;height:43px;background:linear-gradient(180deg,#f1f3f6,#cbd4dc);border:3px solid #0d1016}
+.fighter.rookie .body::after{content:"";position:absolute;left:5px;right:5px;bottom:-5px;height:11px;background:#d93634;border:4px solid #0d1016;border-radius:3px}
+.fighter.rookie .arm{top:50px;width:21px;height:56px;background:linear-gradient(180deg,#252f3c 0 72%,#d89b63 72% 100%);border-radius:6px}.fighter.rookie .arm.l{left:3px}.fighter.rookie .arm.r{right:3px}
+.fighter.rookie .arm::before{content:"";position:absolute;left:-2px;right:-2px;top:29px;height:7px;background:#8d9aa9;border-top:3px solid #0d1016;border-bottom:3px solid #0d1016}
+.fighter.rookie .leg{top:101px;width:25px;height:48px;background:linear-gradient(180deg,#151c26,#0c1118)}.fighter.rookie .leg.l{left:16px}.fighter.rookie .leg.r{right:16px}
+.fighter.rookie .leg::after{content:"";position:absolute;bottom:-6px;width:29px;height:13px;background:#eef2f5;border:4px solid #0d1016;border-radius:5px}.fighter.rookie .leg.l::after{right:-1px}.fighter.rookie .leg.r::after{left:-1px}
+
+/* EL PRIMO — bigger, heavier, clearer luchador identity */
+.fighter.primo .head{left:18px;top:2px;width:48px;height:48px;z-index:7;background:linear-gradient(180deg,#2878da 0%,#1450aa 100%);border-radius:15px 15px 12px 12px}
+.fighter.primo .head::before{content:"★";position:absolute;left:50%;top:-10px;transform:translateX(-50%);z-index:5;color:#ffd94b;font-size:17px;line-height:1;text-shadow:0 0 5px rgba(255,217,75,.4)}
+.fighter.primo .head::after{content:"";position:absolute;left:7px;right:7px;bottom:4px;height:15px;background:#c6814b;border:3px solid #10141b;border-radius:3px 3px 9px 9px;clip-path:polygon(0 0,100% 0,90% 100%,10% 100%)}
+.fighter.primo .eye{top:16px;width:10px;height:8px;background:#f8fbff;border:2px solid #10141b;border-radius:2px;z-index:4}.fighter.primo .eye.l{left:6px}.fighter.primo .eye.r{right:6px}
+.fighter.primo::before{content:"";position:absolute;left:5px;top:46px;width:74px;height:28px;z-index:2;border:4px solid #10141b;border-bottom:0;border-radius:28px 28px 5px 5px;background:#b9743f}
+.fighter.primo .body{left:11px;top:47px;width:62px;height:66px;z-index:4;background:linear-gradient(180deg,#c9854b 0%,#ad6634 100%);border-radius:20px 20px 8px 8px}
+.fighter.primo .body::before{content:"";position:absolute;left:9px;right:9px;top:8px;height:25px;background:linear-gradient(90deg,transparent 47%,rgba(108,51,20,.38) 48% 52%,transparent 53%),radial-gradient(ellipse at 25% 50%,rgba(244,186,128,.38),transparent 58%),radial-gradient(ellipse at 75% 50%,rgba(244,186,128,.38),transparent 58%);border-bottom:3px solid rgba(100,50,25,.35)}
+.fighter.primo .body::after{content:"";position:absolute;left:-2px;right:-2px;bottom:-6px;height:15px;background:#ca312b;border:4px solid #10141b;border-radius:5px}
+.fighter.primo::after{content:"★";position:absolute;left:50%;top:105px;transform:translateX(-50%);z-index:9;width:25px;height:25px;display:grid;place-items:center;border-radius:50%;background:#dfa11b;border:4px solid #10141b;color:#ffe76a;font-size:14px;line-height:1}
+.fighter.primo .arm{top:56px;width:25px;height:60px;background:linear-gradient(180deg,#c78349 0%,#ad6332 100%);border-radius:9px}.fighter.primo .arm.l{left:-1px;transform:rotate(10deg)}.fighter.primo .arm.r{right:-1px;transform:rotate(-10deg)}
+.fighter.primo .arm::before{content:"";position:absolute;left:-2px;right:-2px;bottom:14px;height:9px;background:#2368c5;border-top:3px solid #10141b;border-bottom:3px solid #10141b}
+.fighter.primo .arm::after{content:"";position:absolute;left:-3px;right:-3px;bottom:-7px;height:18px;background:#a85b2d;border:4px solid #10141b;border-radius:6px}
+.fighter.primo .leg{top:109px;width:29px;height:42px;background:linear-gradient(180deg,#2166c4,#154999)}.fighter.primo .leg.l{left:13px}.fighter.primo .leg.r{right:13px}
+.fighter.primo .leg::before{content:"";position:absolute;top:5px;bottom:5px;width:5px;background:#f2c63d;opacity:.9}.fighter.primo .leg.l::before{right:2px}.fighter.primo .leg.r::before{left:2px}
+.fighter.primo .leg::after{content:"";position:absolute;bottom:-7px;width:34px;height:15px;background:#f4f6f8;border:4px solid #10141b;border-radius:5px}.fighter.primo .leg.l::after{right:-1px}.fighter.primo .leg.r::after{left:-1px}
+
+/* SPIDER-MAN — iconic mask, cleaner web pattern, stronger suit */
+.fighter.spiderman .head{left:19px;top:3px;width:46px;height:46px;z-index:7;background:linear-gradient(180deg,#e52a30 0%,#b71018 100%);border-radius:15px 15px 13px 13px}
+.fighter.spiderman .head::before{content:"";position:absolute;inset:3px;z-index:0;opacity:.72;pointer-events:none;background:repeating-radial-gradient(circle at 50% 96%,transparent 0 7px,#171b22 8px 9px,transparent 10px 15px),repeating-conic-gradient(from -8deg at 50% 96%,transparent 0 12deg,#171b22 13deg 15deg,transparent 16deg 43deg);border-radius:12px}
+.fighter.spiderman .head::after{content:none}
+.fighter.spiderman .eye{top:11px;width:13px;height:18px;z-index:5;background:#f8fbff;border:3px solid #11161d;box-shadow:none;border-radius:0}.fighter.spiderman .eye.l{left:5px;clip-path:polygon(100% 0,78% 100%,0 72%,20% 18%)}.fighter.spiderman .eye.r{right:5px;clip-path:polygon(0 0,22% 100%,100% 72%,80% 18%)}
+.fighter.spiderman .body{left:15px;top:46px;width:54px;height:63px;z-index:4;border-radius:10px 10px 7px 7px;background:linear-gradient(90deg,#2056b8 0 17%,#d81f27 17% 83%,#2056b8 83% 100%)}
+.fighter.spiderman .body::before{content:"";position:absolute;left:10px;right:10px;top:2px;height:34px;opacity:.74;z-index:1;background:repeating-radial-gradient(circle at 50% 0,transparent 0 7px,#171b22 8px 9px,transparent 10px 15px),repeating-conic-gradient(from 0deg at 50% 0,transparent 0 13deg,#171b22 14deg 16deg,transparent 17deg 45deg)}
+.fighter.spiderman .body::after{content:"";position:absolute;left:50%;top:20px;transform:translateX(-50%);z-index:5;width:18px;height:24px;background:#10151c;clip-path:polygon(46% 0,54% 0,62% 20%,78% 10%,95% 17%,72% 31%,88% 43%,77% 51%,60% 39%,59% 100%,50% 76%,41% 100%,40% 39%,23% 51%,12% 43%,28% 31%,5% 17%,22% 10%,38% 20%)}
+.fighter.spiderman .arm{top:51px;width:21px;height:57px;border-radius:6px;background:linear-gradient(180deg,#db2028 0 33%,#2156b6 33% 68%,#d81f27 68% 100%)}.fighter.spiderman .arm.l{left:2px}.fighter.spiderman .arm.r{right:2px}
+.fighter.spiderman .arm::before{content:"";position:absolute;left:2px;right:2px;top:2px;height:17px;opacity:.75;background:repeating-linear-gradient(0deg,transparent 0 5px,#171b22 6px 7px)}
+.fighter.spiderman .arm::after{content:"";position:absolute;left:4px;right:4px;bottom:2px;height:17px;opacity:.68;background:repeating-linear-gradient(0deg,transparent 0 5px,#171b22 6px 7px)}
+.fighter.spiderman .leg{top:102px;width:25px;height:48px;background:linear-gradient(180deg,#2258bd 0 70%,#d91f27 70% 100%)}.fighter.spiderman .leg.l{left:16px}.fighter.spiderman .leg.r{right:16px}
+.fighter.spiderman .leg::before{content:"";position:absolute;top:2px;bottom:13px;width:4px;background:#143d86;opacity:.85}.fighter.spiderman .leg.l::before{right:3px}.fighter.spiderman .leg.r::before{left:3px}
+.fighter.spiderman .leg::after{content:"";position:absolute;left:-2px;right:-2px;bottom:-6px;height:13px;background:#d91f27;border:4px solid #0d1016;border-radius:5px}
+
+.portrait .fighter.primo{margin-left:0!important}.hero-card .fighter.primo{margin-left:0!important}
