@@ -1,0 +1,50 @@
+/* Fight Arena v0.9.5.6 — premium Green Goblin rebuild + Training Lab polish */
+/* The old early-core Goblin was intentionally simple. This layer fully overrides it without touching stable base CSS. */
+.fighter.greengoblin{width:96px;height:164px;filter:drop-shadow(0 11px 5px #000d) drop-shadow(0 0 13px #79d73f38);transform-origin:bottom center}
+.greengoblin.idle{animation:goblinHover956 1.05s ease-in-out infinite alternate}
+@keyframes goblinHover956{to{transform:translateY(-6px) rotate(-.6deg)}}
+
+/* ICONIC GOBLIN GLIDER — always visible behind Norman in arena and previews */
+.greengoblin:before{content:"";position:absolute;left:-20px;bottom:-8px;width:137px;height:31px;z-index:1;background:linear-gradient(180deg,#b8bec1 0 10%,#555d62 11% 31%,#23282b 32% 72%,#0d1011 73%);border:3px solid #090b0c;clip-path:polygon(0 58%,18% 34%,35% 39%,43% 8%,50% 0,57% 8%,65% 39%,82% 34%,100% 58%,83% 74%,63% 67%,55% 100%,45% 100%,37% 67%,17% 74%);box-shadow:inset 0 3px #e7ecef38,0 7px 12px #0009,0 0 12px #a8b1b844}
+.greengoblin:after{content:"";position:absolute;left:15px;bottom:-22px;width:66px;height:28px;z-index:0;background:radial-gradient(ellipse at 50% 0,#ffef8f 0 9%,#f4a22f 10% 27%,#8f4620 28% 44%,transparent 45%),linear-gradient(90deg,transparent 0 20%,#ffbd3b88 33%,transparent 45% 55%,#ffbd3b88 67%,transparent 80%);filter:blur(.4px) drop-shadow(0 0 8px #ff9a2e);opacity:.68;clip-path:polygon(9% 0,35% 0,48% 100%,58% 0,89% 0,67% 100%,46% 53%,31% 100%);animation:goblinThruster956 .52s ease-in-out infinite alternate}
+@keyframes goblinThruster956{to{opacity:1;transform:scaleY(1.22)}}
+
+/* FACE / HOOD / EARS */
+.greengoblin .head{left:23px;top:4px;width:48px;height:48px;border-radius:19px 19px 15px 15px!important;background:radial-gradient(circle at 35% 30%,#8ec365 0 12%,transparent 13%),linear-gradient(145deg,#689a45 0 30%,#3e712b 31% 66%,#28521f 67%)!important;border:4px solid #10140d!important;box-shadow:inset 0 5px #a8d77d33,inset 0 -7px #13261166,0 0 9px #5c9c3a44!important}
+.greengoblin .head:before{content:""!important;position:absolute!important;left:-10px!important;right:-10px!important;top:-18px!important;height:32px!important;background:linear-gradient(145deg,#684096,#402465 72%,#28163f)!important;border:4px solid #0d0e12!important;border-radius:48% 52% 15% 15%!important;clip-path:polygon(3% 72%,20% 42%,30% 15%,45% 31%,58% 0,70% 35%,96% 49%,82% 100%,18% 100%)!important;box-shadow:inset 0 5px #8e64b955,0 4px 6px #0007!important;z-index:-1!important}
+.greengoblin .head:after{content:"";position:absolute;left:7px;right:7px;bottom:5px;height:10px;border-radius:2px 2px 8px 8px;background:repeating-linear-gradient(90deg,#ecdfbb 0 5px,#313420 5px 7px);border:2px solid #1b2316;clip-path:polygon(0 10%,100% 0,88% 100%,12% 100%);box-shadow:0 2px 0 #1d3118}
+.greengoblin .eye{top:15px!important;width:12px!important;height:6px!important;background:#ffd94a!important;border:2px solid #202415!important;box-shadow:0 0 7px #ffdf3b!important;clip-path:polygon(0 20%,100% 0,74% 100%,12% 78%)}
+.greengoblin .eye.l{left:5px!important;transform:rotate(-7deg)}.greengoblin .eye.r{right:5px!important;transform:scaleX(-1) rotate(-7deg)}
+/* pointed green ears extending past the hood */
+.greengoblin .body:before{content:"";position:absolute;left:-3px;right:-3px;top:8px;height:44px;border:3px solid #1a2515;border-radius:9px;background:linear-gradient(135deg,#517d39,#263f25 48%,#426832 49% 72%,#1a2f1b 73%);clip-path:polygon(0 17%,19% 0,50% 10%,81% 0,100% 17%,91% 100%,9% 100%);box-shadow:inset 0 4px #9fc87925}
+
+/* ARMORED TORSO + PURPLE FABRIC / BELT */
+.greengoblin .body{left:16px;top:50px;width:62px;height:68px;border-radius:13px 13px 8px 8px!important;background:linear-gradient(90deg,#2e5224 0 14%,#5f8d42 14% 30%,#243d25 30% 43%,#4e2f70 43% 57%,#243d25 57% 70%,#5f8d42 70% 86%,#2e5224 86%)!important;border-color:#0d120c!important;box-shadow:inset 0 6px #9bc17625,inset 0 -8px #171520,0 0 10px #4c80302b!important}
+.greengoblin .body:after{content:"";position:absolute;left:4px;right:4px;bottom:5px;height:13px;border-radius:4px;background:repeating-linear-gradient(90deg,#251731 0 8px,#8155a5 8px 16px,#24162f 16px 24px);border:3px solid #0c0d0d;box-shadow:inset 0 2px #bb8fe144}
+
+/* segmented shoulder/forearm armor and purple gloves */
+.greengoblin .arm{top:54px;width:23px;height:65px;border-radius:9px!important;background:linear-gradient(180deg,#659147 0 30%,#365b2c 31% 59%,#68438f 60% 78%,#392653 79%)!important;border-color:#0d120c!important;box-shadow:inset 0 4px #a6c77b26!important}
+.greengoblin .arm.l{left:0!important;transform:rotate(10deg)}.greengoblin .arm.r{right:0!important;transform:rotate(-12deg)}
+.greengoblin .arm:after{content:"";position:absolute;left:-2px;right:-2px;bottom:-2px;height:18px;border-radius:6px;background:linear-gradient(#7d52a2,#3b2654);border:3px solid #0c0d10;box-shadow:inset 0 3px #b48bd244}
+
+/* armored legs, knee plates and purple boots */
+.greengoblin .leg{top:112px;width:27px;height:48px;border-radius:6px!important;background:linear-gradient(180deg,#426b32 0 35%,#253f28 36% 61%,#543673 62% 100%)!important;border-color:#0c100c!important;box-shadow:inset 0 3px #8fb86f22!important;z-index:3!important}
+.greengoblin .leg.l{left:19px!important}.greengoblin .leg.r{right:19px!important}
+.greengoblin .leg:after{content:"";position:absolute;left:-4px;right:-4px;bottom:-7px;height:15px;border-radius:4px 7px 3px 3px;background:linear-gradient(#6e4991,#352348);border:3px solid #0b0c0d;box-shadow:inset 0 3px #ae82cd35}
+
+/* small armor rivets / tech highlights */
+.greengoblin .body{background-image:radial-gradient(circle at 17% 20%,#b3cf8b 0 2px,transparent 3px),radial-gradient(circle at 83% 20%,#b3cf8b 0 2px,transparent 3px),linear-gradient(90deg,#2e5224 0 14%,#5f8d42 14% 30%,#243d25 30% 43%,#4e2f70 43% 57%,#243d25 57% 70%,#5f8d42 70% 86%,#2e5224 86%)!important}
+
+/* COMBAT ANIMATIONS */
+.greengoblin.goblin-bomb-cast .arm.r{animation:goblinThrow956 .42s ease}.greengoblin.goblin-razor-cast .arm.l{animation:goblinThrow956 .42s ease}.greengoblin.goblin-barrage{animation:goblinBarrage956 .64s ease}.greengoblin.goblin-glider-rush{animation:goblinRush956 .56s ease;filter:drop-shadow(0 11px 5px #000d) drop-shadow(0 0 19px #ffb13f88) brightness(1.08)}
+@keyframes goblinThrow956{45%{transform:rotate(-88deg) translateY(-8px)}}@keyframes goblinBarrage956{35%{transform:translateY(-9px) rotate(2deg)}70%{transform:translateY(-4px) rotate(-2deg)}}@keyframes goblinRush956{30%{transform:translateY(-12px) rotate(-8deg) scale(1.05)}70%{transform:translateY(2px) rotate(4deg) scale(1.02)}}
+.projectile.goblin-pumpkin{width:27px;height:27px;border-radius:50%;background:radial-gradient(circle at 38% 35%,#ffd05a 0 10%,#ff8c1e 11% 55%,#71300d 56% 74%,#2f1d12 75%);border:2px solid #2a190e;box-shadow:0 0 11px #ff8a25,0 0 23px #ff6d224f}.projectile.goblin-pumpkin:before{content:"";position:absolute;left:9px;top:-8px;width:7px;height:10px;background:#488531;border-radius:8px 1px 2px 2px;transform:rotate(20deg)}
+.projectile.goblin-razorbat{width:34px;height:18px;background:linear-gradient(90deg,#adb5ba,#42494d 46%,#161a1d);clip-path:polygon(0 50%,20% 10%,44% 38%,50% 0,56% 38%,80% 10%,100% 50%,80% 90%,56% 62%,50% 100%,44% 62%,20% 90%);filter:drop-shadow(0 0 5px #c4d1d6);animation:goblinBatSpin956 .14s linear infinite}@keyframes goblinBatSpin956{to{transform:rotate(360deg)}}
+
+/* TRAINING LAB visual confirmation */
+.training-mode #trainingSpecial{position:relative;overflow:hidden}.training-mode #trainingSpecial:active{filter:brightness(1.35)}
+.training-mode .specialrow .bar i{will-change:width}.training-mode #trainingHeroStat{min-width:42px;display:inline-block;text-align:right}
+
+/* Keep the glider readable in the small Collection-style preview while respecting existing scale transforms. */
+.portrait .greengoblin:before,.fighter-preview .greengoblin:before{filter:brightness(1.08)}
+@media(max-width:700px){.fighter.greengoblin{width:88px;height:156px}.greengoblin:before{left:-18px;width:125px}.greengoblin .body{left:14px;width:60px}.greengoblin .head{left:21px}}
