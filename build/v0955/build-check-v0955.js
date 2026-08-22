@@ -1,0 +1,18 @@
+const fs=require('fs');
+const path=require('path');
+const t94=require('../v094/transform-v094.js');
+const t941=require('../v0941/transform-v0941.js');
+const t95=require('../v095/transform-v095.js');
+const t951=require('../v0951/transform-v0951.js');
+const t952=require('../v0952/transform-v0952.js');
+const t953=require('../v0953/transform-v0953.js');
+const t9531=require('../v09531/transform-v09531.js');
+const t954=require('../v0954/transform-v0954.js');
+const t955=require('./transform-v0955.js');
+const root=path.resolve(__dirname,'../..');
+const files=['core-v093-part1.txt','core-v093-part2.txt','core-v093-part3.txt','core-v093-part4.txt'];
+let code='';for(const file of files)code+=fs.readFileSync(path.join(root,'build/v093',file),'utf8');
+const built=t955(t954(t9531(t953(t952(t951(t95(t941(t94(code)))))))));
+fs.writeFileSync('/tmp/core-v0955-built.js',built);
+for(const marker of ["version:'0.9.5.5'","name:'Mysterio'","name:'Green Goblin'","hp:205,dmg:1.30,coins:900,xp:180","hp:220,dmg:1.34,coins:1000,xp:195",'SINISTER_INTROS',"Mysterio:['NOTHING HERE IS REAL'","'Green Goblin':['CHAOS FROM ABOVE'",'ILLUSION CLONE','SMOKE TELEPORT','PUMPKIN BOMB',"'Rhino','Electro','Mysterio','Green Goblin'",'fillTrainingSpecial','SPECIAL + KINETIC READY',"F.sp=100",'F.kinetic=100','F.ph=F.pm','F.cooldowns=[0,0,0]','renderHeroActions();toast(\'TRAINING RESET\')','punisherUnlockShown','showPunisherUnlock','rematch(){','next(){','screen(\'results\')','clearFightTouchLock',"name:'Ultron'","name:'Prowler'","code==='DIAMONDS'"])if(!built.includes(marker))throw new Error('v0.9.5.5 marker missing: '+marker);
+console.log('v0.9.5.5 transformed bytes:',Buffer.byteLength(built));
