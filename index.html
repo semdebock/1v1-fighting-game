@@ -8,14 +8,14 @@
 <style>html,body{margin:0;min-height:100%;background:#02040a;color:white;font-family:system-ui,-apple-system,sans-serif}.boot{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}.boot b{font-size:22px}.boot small{display:block;margin-top:8px;color:#9ba8bd}</style>
 </head>
 <body>
-<div class="boot"><div><b>FIGHT ARENA v0.8.5</b><small>Loading Compatibility Hotfix…</small></div></div>
+<div class="boot"><div><b>FIGHT ARENA v0.8.5</b><small>Loading Hero Expansion • build 0854…</small></div></div>
 <script>
 (async()=>{
   try{
     const base='https://raw.githubusercontent.com/semdebock/1v1-fighting-game/2e257323bb448211ecfb259ca910b23c074ca3d4/index.html';
     let html=await (await fetch(base,{cache:'no-store'})).text();
-    html=html.replace('</head>','<link rel="stylesheet" href="spider-v084.css?v=0853"><link rel="stylesheet" href="heroes-v085.css?v=0853"></head>');
-    html=html.replace('</body>','<script src="spider-v084.js?v=0853"><\/script><script src="heroes-v085.js?v=0853"><\/script></body>');
+    html=html.replace('</head>','<link rel="stylesheet" href="spider-v084.css?v=0854"><link rel="stylesheet" href="heroes-v085.css?v=0854"></head>');
+    html=html.replace('</body>','<script src="spider-v084.js?v=0854"><\/script><script src="heroes-v085.js?v=0854"><\/script></body>');
     document.open();document.write(html);document.close();
   }catch(e){document.body.innerHTML='<div class="boot"><div><b>Could not load Fight Arena</b><small>Refresh the page to try again.</small></div></div>'}
 })();
