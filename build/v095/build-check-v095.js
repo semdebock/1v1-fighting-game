@@ -1,0 +1,12 @@
+const fs=require('fs');
+const path=require('path');
+const transform94=require('../v094/transform-v094.js');
+const transform941=require('../v0941/transform-v0941.js');
+const transform95=require('./transform-v095.js');
+const root=path.resolve(__dirname,'../..');
+const files=['core-v093-part1.txt','core-v093-part2.txt','core-v093-part3.txt','core-v093-part4.txt'];
+let code='';for(const file of files)code+=fs.readFileSync(path.join(root,'build/v093',file),'utf8');
+const built=transform95(transform941(transform94(code)));
+fs.writeFileSync('/tmp/core-v095-built.js',built);
+for(const marker of ["version:'0.9.5'",'cleanupArenaTransient','skin-hero-group','fighterKitPanel',"'Black Panther'","'Wolverine'","code==='DIAMONDS'"])if(!built.includes(marker))throw new Error('v0.9.5 marker missing: '+marker);
+console.log('v0.9.5 transformed bytes:',Buffer.byteLength(built));
