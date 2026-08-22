@@ -5,50 +5,47 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#070b16">
 <style>.hidden{display:none!important}.pause-overlay.hidden{display:none!important}</style>
-<title>Fight Arena v0.9.4.1 — Combat Stability & Collection UI</title>
-<link rel="stylesheet" href="core-v088.css?v=094">
-<link rel="stylesheet" href="owner-v0881.css?v=094">
-<link rel="stylesheet" href="features-v089.css?v=094">
-<link rel="stylesheet" href="revamp-v0892.css?v=094">
-<link rel="stylesheet" href="build/v090/cosmetics-v090.css?v=094">
-<link rel="stylesheet" href="device-v092.css?v=094">
-<link rel="stylesheet" href="balance-v093.css?v=094">
-<link rel="stylesheet" href="touch-v0941.css?v=0941">
-<link rel="stylesheet" href="heroes-v094.css?v=0941">
-<link rel="stylesheet" href="collection-v0941.css?v=0941">
+<title>Fight Arena v0.9.5 — Campaign Phases Foundation</title>
+<link rel="stylesheet" href="core-v088.css?v=095">
+<link rel="stylesheet" href="owner-v0881.css?v=095">
+<link rel="stylesheet" href="features-v089.css?v=095">
+<link rel="stylesheet" href="revamp-v0892.css?v=095">
+<link rel="stylesheet" href="build/v090/cosmetics-v090.css?v=095">
+<link rel="stylesheet" href="device-v092.css?v=095">
+<link rel="stylesheet" href="balance-v093.css?v=095">
+<link rel="stylesheet" href="touch-v0941.css?v=095">
+<link rel="stylesheet" href="heroes-v094.css?v=095">
+<link rel="stylesheet" href="collection-v0941.css?v=095">
+<link rel="stylesheet" href="campaign-v095.css?v=095">
 </head>
 <body>
 <main class="app">
-<header class="top"><div><div class="eyebrow">NEO CITY COMBAT LEAGUE</div><div class="brand">FIGHT ARENA <span class="tag">v0.9.4.1</span></div></div><div class="currency"><button class="pill device-pill" id="devicePill" type="button">DEVICE</button><span class="pill">LV <b id="lv">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">💎 <b id="gems">0</b></span></div></header>
+<header class="top"><div><div class="eyebrow">NEO CITY COMBAT LEAGUE</div><div class="brand">FIGHT ARENA <span class="tag">v0.9.5</span></div></div><div class="currency"><button class="pill device-pill" id="devicePill" type="button">DEVICE</button><span class="pill">LV <b id="lv">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">💎 <b id="gems">0</b></span></div></header>
 
 <section id="home" class="screen active"><div class="home">
-<div class="hero-copy"><span class="tag">COMBAT STABILITY & COLLECTION UI</span><h1>STAY LOCKED IN.<br>FIND YOUR FIGHTER.</h1><p>Safari combat input is now treated like a true game touch-zone, temporary Arena effects are cleaned between fights, and Collection is rebuilt into cleaner fighter and suit categories.</p>
-<div class="buttons">
-<button class="primary" id="play">⚔️ PLAY CAMPAIGN</button>
-<div class="mode-buttons"><button id="training" class="training-launch">🎯 TRAINING MODE</button><button id="settings" class="settings-launch">⚙️ SETTINGS</button></div>
-<button id="gallery">🗂️ COLLECTION</button><button id="daily">🎁 DAILY REWARD</button><button id="updates" class="update-btn">📋 UPDATE LOG • v0.9.4.1</button>
-</div></div>
+<div class="hero-copy"><span class="tag">CAMPAIGN REBORN</span><h1>PHASES ARE HERE.<br>THE ROAD IS SET.</h1><p>The Campaign now has a permanent Prologue, Phase 1 and Phase 2 structure. Fifteen villain slots are mapped before we build the next enemies.</p>
+<div class="buttons"><button class="primary" id="play">⚔️ PLAY CAMPAIGN</button><div class="mode-buttons"><button id="training" class="training-launch">🎯 TRAINING MODE</button><button id="settings" class="settings-launch">⚙️ SETTINGS</button></div><button id="gallery">🗂️ COLLECTION</button><button id="daily">🎁 DAILY REWARD</button><button id="updates" class="update-btn">📋 UPDATE LOG • v0.9.5</button></div>
+</div>
 <div class="hero-card"><div class="fighter-preview" id="homePreview"></div><div class="hero-name"><small>SELECTED FIGHTER</small><strong id="selectedName">ROOKIE</strong></div></div>
 <div class="hero-dashboard"><div class="dash-title"><div><small>FIGHTER COMMAND CENTER</small><strong>READY FOR BATTLE</strong></div><span class="live-dot">● CORE ONLINE</span></div><div class="dash-grid">
 <div class="dash-stat"><small>ACTIVE HERO</small><b id="dashHero">ROOKIE</b><span>Current selected fighter</span></div>
 <div class="dash-stat"><small>ROSTER</small><b id="dashRoster">1/9</b><span>Visible fighters unlocked</span></div>
-<div class="dash-stat"><small>NEXT TARGET</small><b id="dashTarget">NIGHTFANG</b><span id="dashLevel">Campaign Level 1</span></div>
+<div class="dash-stat"><small>NEXT TARGET</small><b id="dashTarget">NIGHTFANG</b><span id="dashLevel">Prologue • Section 01</span></div>
 <div class="dash-stat"><small>BALANCE</small><b id="dashCoins">0 🪙</b><span>Character purchase currency</span></div>
-<div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.9.4.1</b><span>Safari Lock • Arena Cleanup • Collection Refresh</span></div>
-</div><div class="build-health"><span>◆ BUILD HEALTH</span><b>STABILITY CORE • v0.9.4.1</b></div></div>
+<div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.9.5</b><span>Campaign Phases • 15 Planned Slots • Standby Vault</span></div>
+</div><div class="build-health"><span>◆ BUILD HEALTH</span><b>CAMPAIGN CORE • v0.9.5</b></div></div>
 </div></section>
 
 <section id="updatesScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">WHAT'S NEW</div><h2>UPDATE LOG</h2></div><button class="back">← BACK</button></div><div class="panel">
-<span class="tag">v0.9.4.1 • COMBAT STABILITY & COLLECTION UI</span><h2>CLEANER INPUT. CLEANER ARENA. CLEANER COLLECTION.</h2><div class="changelog"><div class="log-item"><div class="log-icon">👆</div><div><b>Strict Safari combat touch-zone</b><p>During fights, the Arena and combat controls now block browser touch gestures at the event level while preserving multi-touch gameplay such as moving with the joystick and attacking at the same time.</p></div></div><div class="log-item"><div class="log-icon">🧹</div><div><b>Central Arena Cleanup</b><p>Mysterio clones, projectiles and temporary combat effects are removed whenever a fight starts, ends, restarts or is left, preventing leftovers from carrying into later battles.</p></div></div><div class="log-item"><div class="log-icon">🗂️</div><div><b>Collection hierarchy refresh</b><p>Fighters are presented in cleaner rank blocks with full combat identity panels. Suits are now grouped by hero with clear Default Suit, Cosmetic Skin and Ability Variant labels.</p></div></div>
-<div class="log-item"><div class="log-icon">🐾</div><div><b>Black Panther — A+ Rank</b><p>3,200 coins. Vibranium Claws, Panther Pounce, Kinetic Absorb and Kinetic Release create an absorb-and-release playstyle built around timing.</p></div></div>
-<div class="log-item"><div class="log-icon">💜</div><div><b>Kinetic Panther — 80 💎 Ability Variant</b><p>A charged purple Wakandan suit with its own moveset: Kinetic Claw Wave, Vibranium Rush, Perfect Absorb and the stronger Kinetic Overdrive special.</p></div></div>
-<div class="log-item"><div class="log-icon">🐺</div><div><b>Wolverine — S Rank</b><p>4,000 coins. Classic yellow-and-blue comic suit, Adamantium Slash, Feral Lunge, Healing Surge, passive Healing Factor and Berserker Rage.</p></div></div>
-<div class="log-item"><div class="log-icon">🎨</div><div><b>Suit & animation focus</b><p>Both new fighters receive dedicated silhouettes, masks, claws, suit details, movement animations, impact effects and special-attack VFX rather than recolored base models.</p></div></div>
-<div class="log-item"><div class="log-icon">🎯</div><div><b>Hero-specific Training Data</b><p>Black Panther shows live Kinetic Energy. Wolverine tracks Healing Recovered alongside Last Hit, Combo Damage, DPS and the existing Training statistics.</p></div></div>
-<div class="log-item"><div class="log-icon">🏆</div><div><b>Expanded ranked roster</b><p>S Rank now contains Iron Man, Wolverine and Spider-Man. A+ contains Black Panther, Moon Knight and Captain America. Existing price hierarchy stays intact.</p></div></div>
-<div class="log-item"><div class="log-icon">✨</div><div><b>Fighter introductions</b><p>Campaign fights now open with a short Arena intro showing the selected hero’s rank, power class and combat role.</p></div></div>
-<div class="log-item"><div class="log-icon">👆</div><div><b>Touch Hotfix retained</b><p>Rapid combat taps remain protected from Safari double-tap and gesture zoom on iPhone and iPad.</p></div></div>
-<div class="log-item"><div class="log-icon">💎</div><div><b>DIAMONDS code retained</b><p>DIAMONDS still grants +100 diamonds once per save. Nanotech Iron Man remains the premium 100-diamond Ability Variant.</p></div></div>
+<span class="tag">v0.9.5 • CAMPAIGN PHASES FOUNDATION</span><h2>THE CAMPAIGN NOW HAS A ROADMAP.</h2><div class="changelog">
+<div class="log-item"><div class="log-icon">🗺️</div><div><b>Phases & Sections</b><p>Campaign is now divided into a five-fight Prologue, five-fight Phase 1 and five-fight Phase 2, each split into named Sections.</p></div></div>
+<div class="log-item"><div class="log-icon">🥊</div><div><b>Prologue — Neo City Arena</b><p>Nightfang remains Fight 1. Voltage, Razor, Titan and Arena Champion are reserved as original Fight Arena characters. No MCU villains enter the Prologue.</p></div></div>
+<div class="log-item"><div class="log-icon">🏙️</div><div><b>Phase 1 — Street Criminals</b><p>Crossbones, Bullseye, Punisher, Taskmaster and Kingpin are the permanent lineup. Punisher is planned to unlock as a playable fighter when his encounter is built and defeated.</p></div></div>
+<div class="log-item"><div class="log-icon">🐙</div><div><b>Phase 2 — Sinister Threat</b><p>Rhino, Electro, Mysterio, Green Goblin and Doctor Octopus form the single Spider-Man villain Phase. Doctor Octopus is reserved as the Phase Boss.</p></div></div>
+<div class="log-item"><div class="log-icon">📦</div><div><b>Standby Vault</b><p>Existing villains without a chosen Phase are hidden from the Campaign but fully preserved in source so they can return instantly when their Phase is decided. Nothing was deleted.</p></div></div>
+<div class="log-item"><div class="log-icon">🛠️</div><div><b>Foundation-only release</b><p>No new villain models, abilities or combat kits are introduced in v0.9.5. The next v0.9.5.x update can start filling the roadmap one villain at a time.</p></div></div>
+<div class="log-item"><div class="log-icon">👆</div><div><b>v0.9.4.1 stability retained</b><p>Strict Safari combat input, Arena cleanup, Mysterio clone protection and the reorganized Collection remain intact underneath the new Campaign layer.</p></div></div>
+<div class="log-item"><div class="log-icon">🐾</div><div><b>v0.9.4 heroes retained</b><p>Black Panther, Kinetic Panther and Wolverine remain unchanged with their full abilities, suits and Training systems.</p></div></div>
 </div>
 <div class="redeem-card"><div><small>REDEEM CENTER</small><h3>ENTER A GAME CODE</h3><p>Currency and private owner-access codes remain supported.</p></div><div class="redeem-row"><input id="redeemInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Enter code"><button id="redeemBtn">REDEEM</button></div><div id="redeemStatus" class="redeem-status">Waiting for code…</div></div>
 </div></section>
@@ -60,24 +57,14 @@
 <div class="setting-row device-setting-row"><div><b>DEVICE LAYOUT</b><span>Switch between Auto, iPhone, iPad/Tablet and Desktop without resetting your game.</span></div><button id="deviceModeBtn" type="button">CHOOSE</button></div>
 </div></div></section>
 
-<section id="trainingScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">PRACTICE LAB</div><h2>TRAINING MODE</h2></div><button class="back">← BACK</button></div>
-<div class="training-header"><div class="training-info"><small>SELECTED TRAINING FIGHTER</small><strong id="trainingHero">ROOKIE</strong><span id="trainingDesc"></span></div><button id="trainingStart" class="primary">START TRAINING</button></div>
-<div class="cards" id="trainingCards"></div>
+<section id="trainingScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">PRACTICE LAB</div><h2>TRAINING MODE</h2></div><button class="back">← BACK</button></div><div class="training-header"><div class="training-info"><small>SELECTED TRAINING FIGHTER</small><strong id="trainingHero">ROOKIE</strong><span id="trainingDesc"></span></div><button id="trainingStart" class="primary">START TRAINING</button></div><div class="cards" id="trainingCards"></div></section>
+
+<section id="chars" class="screen"><div class="sectionhead"><div><div class="eyebrow">YOUR COLLECTION</div><h2>COLLECTION</h2></div><button class="back">← BACK</button></div><div class="collection-tabs"><button class="active" data-collection-tab="fighters">🥊 FIGHTERS</button><button data-collection-tab="skins">💎 SKINS</button></div>
+<div id="fightersPane" class="collection-pane"><div class="gallery-summary" id="gallerySummary"></div><div class="cards" id="charCards"></div><div class="panel profile"><div class="eyebrow">FIGHTER PROFILE</div><h2 id="charTitle"></h2><p id="charDesc"></p><div class="stats" id="charStats"></div><button class="primary" id="charAction"></button></div></div>
+<div id="skinsPane" class="collection-pane hidden"><div class="collection-diamond-note"><b>💎 COSMETICS + ABILITY VARIANTS.</b> Kinetic Panther costs 80 💎 and changes Black Panther’s kit. Nanotech Iron Man remains 100 💎. Wolverine launches only with his classic yellow/blue suit.</div><div class="cards" id="skinCards"></div><div class="panel skin-profile"><div class="skin-showcase" id="skinPreview"></div><div class="skin-copy"><div class="eyebrow">COSMETIC PREVIEW</div><h2 id="skinTitle">KINETIC PANTHER</h2><div class="skin-meta"><span id="skinHero">BLACK PANTHER</span><span id="skinRarity">LEGENDARY</span><span class="skin-price" id="skinPrice">80 💎</span></div><p id="skinDesc"></p><button class="primary" id="skinAction">BUY</button></div></div></div>
 </section>
 
-<section id="chars" class="screen"><div class="sectionhead"><div><div class="eyebrow">YOUR COLLECTION</div><h2>COLLECTION</h2></div><button class="back">← BACK</button></div>
-<div class="collection-tabs"><button class="active" data-collection-tab="fighters">🥊 FIGHTERS</button><button data-collection-tab="skins">💎 SKINS</button></div>
-<div id="fightersPane" class="collection-pane">
-<div class="gallery-summary" id="gallerySummary"></div><div class="cards" id="charCards"></div><div class="panel profile"><div class="eyebrow">FIGHTER PROFILE</div><h2 id="charTitle"></h2><p id="charDesc"></p><div class="stats" id="charStats"></div><button class="primary" id="charAction"></button></div>
-</div>
-<div id="skinsPane" class="collection-pane hidden">
-<div class="collection-diamond-note"><b>💎 COSMETICS + ABILITY VARIANTS.</b> Kinetic Panther costs 80 💎 and changes Black Panther’s kit. Nanotech Iron Man remains 100 💎. Wolverine launches only with his classic yellow/blue suit.</div>
-<div class="cards" id="skinCards"></div>
-<div class="panel skin-profile"><div class="skin-showcase" id="skinPreview"></div><div class="skin-copy"><div class="eyebrow">COSMETIC PREVIEW</div><h2 id="skinTitle">KINETIC PANTHER</h2><div class="skin-meta"><span id="skinHero">BLACK PANTHER</span><span id="skinRarity">LEGENDARY</span><span class="skin-price" id="skinPrice">80 💎</span></div><p id="skinDesc"></p><button class="primary" id="skinAction">BUY</button></div></div>
-</div>
-</section>
-
-<section id="levels" class="screen"><div class="sectionhead"><div><div class="eyebrow">STORY PROGRESSION</div><h2>CAMPAIGN</h2></div><button class="back">← BACK</button></div><div class="cards level-cards" id="levelCards"></div><div class="panel profile"><span class="tag" id="diff"></span><h2 id="levelTitle"></h2><p id="levelDesc"></p><div class="stats" id="levelStats"></div><button class="primary" id="start">FIGHT</button></div></section>
+<section id="levels" class="screen"><div class="sectionhead"><div><div class="eyebrow">PHASED STORY PROGRESSION</div><h2>CAMPAIGN</h2></div><button class="back">← BACK</button></div><div class="cards level-cards" id="levelCards"></div><div class="panel profile"><span class="tag" id="diff"></span><h2 id="levelTitle"></h2><p id="levelDesc"></p><div class="stats" id="levelStats"></div><button class="primary" id="start">FIGHT</button></div></section>
 
 <section id="fight" class="screen">
 <div class="sectionhead fighthead"><button id="quit">← QUIT</button><button id="pauseBtn">⏸ PAUSE</button><b id="timer">60</b><span class="tag" id="fightTag"></span></div>
@@ -94,20 +81,17 @@
 </main>
 
 <div id="portraitHint" class="portrait-hint hidden">📱 iPhone mode is portrait-first — rotate upright for the best layout</div>
-<div id="deviceChooser" class="device-overlay hidden" role="dialog" aria-modal="true" aria-label="Choose device layout"><div class="device-modal"><div class="eyebrow">FIGHT ARENA v0.9.4.1</div><h2>CHOOSE YOUR DEVICE</h2><p>This changes layout and controls only. Your fighters, skins, coins and campaign save stay exactly the same.</p><div class="device-grid"><button class="device-choice" data-device-mode="auto"><span class="device-icon">🤖</span><b>AUTO DETECT</b><span>Let Fight Arena choose the best layout for this device.</span></button><button class="device-choice" data-device-mode="iphone"><span class="device-icon">📱</span><b>iPHONE</b><span>Vertical / portrait-first touch layout made for a phone held upright.</span></button><button class="device-choice" data-device-mode="tablet"><span class="device-icon">📲</span><b>iPAD / TABLET</b><span>Larger touch layout with the classic Fight Arena control spacing.</span></button><button class="device-choice" data-device-mode="desktop"><span class="device-icon">🖥️</span><b>DESKTOP</b><span>Wide arena, mouse support and full keyboard controls.</span></button></div><div class="device-foot">You can change this later in SETTINGS → DEVICE LAYOUT.</div></div></div>
-<div id="pauseOverlay" class="pause-overlay hidden"><div class="pause-card"><div class="eyebrow">FIGHT ARENA</div><h2>PAUSED</h2><div class="pause-actions"><button id="pauseResume" class="primary">▶ RESUME</button><button id="pauseRestart">↻ RESTART</button><button id="pauseSettings">⚙ SETTINGS</button><button id="pauseMenu">⌂ MAIN MENU</button></div>
-<div id="pauseSettingsPanel" class="pause-settings-panel hidden"><div class="settings-grid">
-<div class="setting-row"><div><b>DAMAGE NUMBERS</b></div><button data-setting="damageNumbers">ON</button></div>
-<div class="setting-row"><div><b>SCREEN SHAKE</b></div><button data-setting="screenShake">ON</button></div>
-<div class="setting-row"><div><b>HAPTICS</b></div><button data-setting="haptics">ON</button></div>
-</div></div></div></div>
+<div id="deviceChooser" class="device-overlay hidden" role="dialog" aria-modal="true" aria-label="Choose device layout"><div class="device-modal"><div class="eyebrow">FIGHT ARENA v0.9.5</div><h2>CHOOSE YOUR DEVICE</h2><p>This changes layout and controls only. Your fighters, skins, coins and campaign save stay exactly the same.</p><div class="device-grid"><button class="device-choice" data-device-mode="auto"><span class="device-icon">🤖</span><b>AUTO DETECT</b><span>Let Fight Arena choose the best layout for this device.</span></button><button class="device-choice" data-device-mode="iphone"><span class="device-icon">📱</span><b>iPHONE</b><span>Vertical / portrait-first touch layout made for a phone held upright.</span></button><button class="device-choice" data-device-mode="tablet"><span class="device-icon">📲</span><b>iPAD / TABLET</b><span>Larger touch layout with the classic Fight Arena control spacing.</span></button><button class="device-choice" data-device-mode="desktop"><span class="device-icon">🖥️</span><b>DESKTOP</b><span>Wide arena, mouse support and full keyboard controls.</span></button></div><div class="device-foot">You can change this later in SETTINGS → DEVICE LAYOUT.</div></div></div>
+<div id="pauseOverlay" class="pause-overlay hidden"><div class="pause-card"><div class="eyebrow">FIGHT ARENA</div><h2>PAUSED</h2><div class="pause-actions"><button id="pauseResume" class="primary">▶ RESUME</button><button id="pauseRestart">↻ RESTART</button><button id="pauseSettings">⚙ SETTINGS</button><button id="pauseMenu">⌂ MAIN MENU</button></div><div id="pauseSettingsPanel" class="pause-settings-panel hidden"><div class="settings-grid"><div class="setting-row"><div><b>DAMAGE NUMBERS</b></div><button data-setting="damageNumbers">ON</button></div><div class="setting-row"><div><b>SCREEN SHAKE</b></div><button data-setting="screenShake">ON</button></div><div class="setting-row"><div><b>HAPTICS</b></div><button data-setting="haptics">ON</button></div></div></div></div></div>
 
-<script src="build/v094/transform-v094.js?v=0941"></script>
-<script src="build/v0941/transform-v0941.js?v=0941"></script>
-<script src="core-v0941.js?v=0941"></script>
-<script src="device-v092.js?v=0941"></script>
-<script src="touch-v0941.js?v=0941"></script>
-<script src="stability-v0941.js?v=0941"></script>
-<script src="qa-v0941.js?v=0941"></script>
+<script src="build/v094/transform-v094.js?v=095"></script>
+<script src="build/v0941/transform-v0941.js?v=095"></script>
+<script src="build/v095/transform-v095.js?v=095"></script>
+<script src="core-v095.js?v=095"></script>
+<script src="device-v092.js?v=095"></script>
+<script src="touch-v0941.js?v=095"></script>
+<script src="stability-v0941.js?v=095"></script>
+<script src="campaign-v095.js?v=095"></script>
+<script src="qa-v095.js?v=095"></script>
 </body>
 </html>
