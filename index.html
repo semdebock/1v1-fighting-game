@@ -5,33 +5,34 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#070b16">
 <style>.hidden{display:none!important}.pause-overlay.hidden{display:none!important}</style>
-<title>Fight Arena v0.9.5.6 — Goblin Rework & Training Lab</title>
-<link rel="stylesheet" href="core-v088.css?v=0956">
-<link rel="stylesheet" href="owner-v0881.css?v=0956">
-<link rel="stylesheet" href="features-v089.css?v=0956">
-<link rel="stylesheet" href="revamp-v0892.css?v=0956">
-<link rel="stylesheet" href="build/v090/cosmetics-v090.css?v=0956">
-<link rel="stylesheet" href="device-v092.css?v=0956">
-<link rel="stylesheet" href="balance-v093.css?v=0956">
-<link rel="stylesheet" href="touch-v0941.css?v=0956">
-<link rel="stylesheet" href="heroes-v094.css?v=0956">
-<link rel="stylesheet" href="collection-v0941.css?v=0956">
-<link rel="stylesheet" href="campaign-v095.css?v=0956">
-<link rel="stylesheet" href="neo-v0951.css?v=0956">
-<link rel="stylesheet" href="street-v0952.css?v=0956">
-<link rel="stylesheet" href="vigilante-v0953.css?v=0956">
-<link rel="stylesheet" href="results-v09531.css?v=0956">
-<link rel="stylesheet" href="sinister-v0954.css?v=0956">
-<link rel="stylesheet" href="smoke-v0955.css?v=0956">
-<link rel="stylesheet" href="goblin-v0956.css?v=0956">
+<title>Multiverse Arena v0.9.5.7 — Master Plan</title>
+<link rel="stylesheet" href="core-v088.css?v=0957">
+<link rel="stylesheet" href="owner-v0881.css?v=0957">
+<link rel="stylesheet" href="features-v089.css?v=0957">
+<link rel="stylesheet" href="revamp-v0892.css?v=0957">
+<link rel="stylesheet" href="build/v090/cosmetics-v090.css?v=0957">
+<link rel="stylesheet" href="device-v092.css?v=0957">
+<link rel="stylesheet" href="balance-v093.css?v=0957">
+<link rel="stylesheet" href="touch-v0941.css?v=0957">
+<link rel="stylesheet" href="heroes-v094.css?v=0957">
+<link rel="stylesheet" href="collection-v0941.css?v=0957">
+<link rel="stylesheet" href="campaign-v095.css?v=0957">
+<link rel="stylesheet" href="neo-v0951.css?v=0957">
+<link rel="stylesheet" href="street-v0952.css?v=0957">
+<link rel="stylesheet" href="vigilante-v0953.css?v=0957">
+<link rel="stylesheet" href="results-v09531.css?v=0957">
+<link rel="stylesheet" href="sinister-v0954.css?v=0957">
+<link rel="stylesheet" href="smoke-v0955.css?v=0957">
+<link rel="stylesheet" href="goblin-v0956.css?v=0957">
+<link rel="stylesheet" href="masterplan-v0957.css?v=0957">
 </head>
 <body>
 <main class="app">
-<header class="top"><div><div class="eyebrow">NEO CITY COMBAT LEAGUE</div><div class="brand">FIGHT ARENA <span class="tag">v0.9.5.6</span></div></div><div class="currency"><button class="pill device-pill" id="devicePill" type="button">DEVICE</button><span class="pill">LV <b id="lv">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">💎 <b id="gems">0</b></span></div></header>
+<header class="top"><div><div class="eyebrow">NEO CITY COMBAT LEAGUE</div><div class="brand">MULTIVERSE ARENA <span class="tag">v0.9.5.7</span></div></div><div class="currency"><button class="pill device-pill" id="devicePill" type="button">DEVICE</button><span class="pill">LV <b id="lv">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">💎 <b id="gems">0</b></span></div></header>
 
 <section id="home" class="screen active"><div class="home">
-<div class="hero-copy"><span class="tag">PHASE 2 • SMOKE & CHAOS</span><h1>THE GOBLIN<br>TAKES FLIGHT.</h1><p>Green Goblin now has a premium armored rebuild, an iconic Goblin Glider and a true aerial combat kit. Training Lab also received a deeper reliability pass.</p>
-<div class="buttons"><button class="primary" id="play">⚔️ PLAY CAMPAIGN</button><div class="mode-buttons"><button id="training" class="training-launch">🎯 TRAINING MODE</button><button id="settings" class="settings-launch">⚙️ SETTINGS</button></div><button id="gallery">🗂️ COLLECTION</button><button id="daily">🎁 DAILY REWARD</button><button id="updates" class="update-btn">📋 UPDATE LOG • v0.9.5.6</button></div>
+<div class="hero-copy"><span class="tag">PHASE 2 • MASTER PLAN</span><h1>THE ARMS<br>ARE THINKING.</h1><p>Doctor Octopus closes Phase 2 as a brutal tactical boss. Read four intelligent tentacles, survive escalating phases and strike only when Otto overextends.</p>
+<div class="buttons"><button class="primary" id="play">⚔️ PLAY CAMPAIGN</button><div class="mode-buttons"><button id="training" class="training-launch">🎯 TRAINING MODE</button><button id="settings" class="settings-launch">⚙️ SETTINGS</button></div><button id="gallery">🗂️ COLLECTION</button><button id="daily">🎁 DAILY REWARD</button><button id="updates" class="update-btn">📋 UPDATE LOG • v0.9.5.7</button></div>
 </div>
 <div class="hero-card"><div class="fighter-preview" id="homePreview"></div><div class="hero-name"><small>SELECTED FIGHTER</small><strong id="selectedName">ROOKIE</strong></div></div>
 <div class="hero-dashboard"><div class="dash-title"><div><small>FIGHTER COMMAND CENTER</small><strong>READY FOR BATTLE</strong></div><span class="live-dot">● CORE ONLINE</span></div><div class="dash-grid">
@@ -39,12 +40,12 @@
 <div class="dash-stat"><small>ROSTER</small><b id="dashRoster">1/9</b><span>Visible fighters unlocked</span></div>
 <div class="dash-stat"><small>NEXT TARGET</small><b id="dashTarget">NIGHTFANG</b><span id="dashLevel">Prologue • 1/5</span></div>
 <div class="dash-stat"><small>BALANCE</small><b id="dashCoins">0 🪙</b><span>Character purchase currency</span></div>
-<div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.9.5.6</b><span>Green Goblin Rework • Training Lab Fix</span></div>
-</div><div class="build-health"><span>◆ BUILD HEALTH</span><b>GOBLIN REWORK CORE • v0.9.5.6</b></div></div>
+<div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.9.5.7</b><span>Doctor Octopus • Master Plan • Rewards</span></div>
+</div><div class="build-health"><span>◆ BUILD HEALTH</span><b>MASTER PLAN CORE • v0.9.5.7</b></div></div>
 </div></section>
 
 <section id="updatesScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">WHAT'S NEW</div><h2>UPDATE LOG</h2></div><button class="back">← BACK</button></div><div class="panel">
-<span class="tag">v0.9.5.6 • GOBLIN REWORK + TRAINING LAB</span><h2>THE GOBLIN TAKES FLIGHT.</h2><div class="changelog"><div class="log-item"><div class="log-icon">🛸</div><div><b>Green Goblin — Premium Rebuild</b><p>Norman now has layered green armor, purple hood and gear, a more sinister Goblin face and his iconic metallic Goblin Glider in combat and previews.</p></div></div><div class="log-item"><div class="log-icon">🎃</div><div><b>True Goblin Combat Kit</b><p>Pumpkin Bomb is joined by Glider Rush, Bomb Barrage and Razor Bat so Green Goblin finally fights like an aerial chaos villain instead of a basic ground enemy.</p></div></div><div class="log-item"><div class="log-icon">🎯</div><div><b>Training Lab Reliability Pass</b><p>FILL SPECIAL now hard-syncs internal charge, the visible bar, percentage text and Special button. Black Panther also receives 100% Kinetic Energy.</p></div></div><div class="log-item"><div class="log-icon">🧹</div><div><b>True Training Reset</b><p>RESET now clears running projectiles/effects and restores health, positions, movement, busy states, cooldowns, Special, hero systems and fighter visuals in one clean reset.</p></div></div><div class="log-item"><div class="log-icon">🔮</div><div><b>Mysterio — Phase 2 Fight 3</b><p>The preserved illusion-controller returns with Mystic Orbs, Illusion Clone and Smoke Teleport, now rebalanced for Phase 2 progression.</p></div></div><div class="log-item"><div class="log-icon">🎃</div><div><b>Green Goblin — Phase 2 Fight 4</b><p>The preserved Goblin bomber is live after Mysterio with stronger Phase 2 health, damage and rewards while keeping his established Pumpkin Bomb combat identity.</p></div></div><div class="log-item"><div class="log-icon">🎯</div><div><b>Training Lab Fix</b><p>FILL SPECIAL now force-syncs the special meter for every fighter and fills Black Panther’s Kinetic Energy too. RESET also restores health, positions, cooldowns, special charge and temporary hero states.</p></div></div><div class="log-item"><div class="log-icon">🧹</div><div><b>Stable systems retained</b><p>Centered results, NEXT FIGHT, REMATCH, Punisher unlock, 2.6 second fight intros and Mysterio clone cleanup remain intact.</p></div></div><div class="log-item"><div class="log-icon">🦏</div><div><b>Rhino — Phase 2 Fight 1</b><p>A cinematic mechanized juggernaut with Rhino Charge, Horn Toss, Ground Quake and Stampede. His fight is built around readable momentum and brutal punish windows.</p></div></div><div class="log-item"><div class="log-icon">⚡</div><div><b>Electro — Phase 2 Fight 2</b><p>No Way Home-inspired yellow electricity, tactical detailing, Arc Bolt, Volt Blink, Chain Lightning and Power Grid. Below 45% HP he enters Overcharge.</p></div></div><div class="log-item"><div class="log-icon">🕷️</div><div><b>Sinister Threat • Raw Power</b><p>Defeat Kingpin to open Phase 2. Rhino unlocks first, Electro follows, while Mysterio and Green Goblin remain preserved for the next Section.</p></div></div><div class="log-item"><div class="log-icon">🏁</div><div><b>v0.9.5.3.1 Result Flow retained</b><p>Centered results, NEXT FIGHT, REMATCH, MAIN MENU, one-time Punisher unlock reveal and the 2.6 second fight-intro pause all remain intact.</p></div></div><div class="log-item"><div class="log-icon">🏁</div><div><b>Centered Match Results</b><p>The fight screen now closes completely at K.O. Results appear as a fixed center overlay with no post-fight scrolling or touch-lock traps.</p></div></div><div class="log-item"><div class="log-icon">🔓</div><div><b>One-Time Punisher Unlock Reveal</b><p>Your first Punisher victory now triggers a dedicated Collection unlock animation. Rematches never replay the unlock reveal.</p></div></div><div class="log-item"><div class="log-icon">▶</div><div><b>Next Fight Flow</b><p>Results now offer NEXT FIGHT, REMATCH and MAIN MENU in one centered action stack.</p></div></div>
+<span class="tag">v0.9.5.7 • MASTER PLAN</span><h2>THE ARMS ARE THINKING.</h2><div class="changelog"><div class="log-item"><div class="log-icon">🐙</div><div><b>Doctor Octopus — Phase 2 Boss</b><p>A premium Otto Octavius build with four articulated mechanical arms, escalating AI phases and a difficult tactical boss encounter.</p></div></div><div class="log-item"><div class="log-icon">🦾</div><div><b>Intelligent Tentacle Combat</b><p>Tentacle Jab, Arm Sweep, Pincer Lock, Tentacle Grab and Four-Arm Crossfire force you to jump, reposition and wait for recovery windows instead of button-mashing.</p></div></div><div class="log-item"><div class="log-icon">🎁</div><div><b>Visible Villain Rewards</b><p>Every Campaign villain now shows the coins, XP, gems or fighter unlock available for defeating them. Match Results also clearly show exactly what you earned.</p></div></div><div class="log-item"><div class="log-icon">🏆</div><div><b>Master Plan Reward</b><p>Defeat Doctor Octopus for 1,400 coins, 260 XP and 10 gems and complete the five-fight Sinister Threat phase.</p></div></div><div class="log-item"><div class="log-icon">🛸</div><div><b>Green Goblin — Premium Rebuild</b><p>Norman now has layered green armor, purple hood and gear, a more sinister Goblin face and his iconic metallic Goblin Glider in combat and previews.</p></div></div><div class="log-item"><div class="log-icon">🎃</div><div><b>True Goblin Combat Kit</b><p>Pumpkin Bomb is joined by Glider Rush, Bomb Barrage and Razor Bat so Green Goblin finally fights like an aerial chaos villain instead of a basic ground enemy.</p></div></div><div class="log-item"><div class="log-icon">🎯</div><div><b>Training Lab Reliability Pass</b><p>FILL SPECIAL now hard-syncs internal charge, the visible bar, percentage text and Special button. Black Panther also receives 100% Kinetic Energy.</p></div></div><div class="log-item"><div class="log-icon">🧹</div><div><b>True Training Reset</b><p>RESET now clears running projectiles/effects and restores health, positions, movement, busy states, cooldowns, Special, hero systems and fighter visuals in one clean reset.</p></div></div><div class="log-item"><div class="log-icon">🔮</div><div><b>Mysterio — Phase 2 Fight 3</b><p>The preserved illusion-controller returns with Mystic Orbs, Illusion Clone and Smoke Teleport, now rebalanced for Phase 2 progression.</p></div></div><div class="log-item"><div class="log-icon">🎃</div><div><b>Green Goblin — Phase 2 Fight 4</b><p>The preserved Goblin bomber is live after Mysterio with stronger Phase 2 health, damage and rewards while keeping his established Pumpkin Bomb combat identity.</p></div></div><div class="log-item"><div class="log-icon">🎯</div><div><b>Training Lab Fix</b><p>FILL SPECIAL now force-syncs the special meter for every fighter and fills Black Panther’s Kinetic Energy too. RESET also restores health, positions, cooldowns, special charge and temporary hero states.</p></div></div><div class="log-item"><div class="log-icon">🧹</div><div><b>Stable systems retained</b><p>Centered results, NEXT FIGHT, REMATCH, Punisher unlock, 2.6 second fight intros and Mysterio clone cleanup remain intact.</p></div></div><div class="log-item"><div class="log-icon">🦏</div><div><b>Rhino — Phase 2 Fight 1</b><p>A cinematic mechanized juggernaut with Rhino Charge, Horn Toss, Ground Quake and Stampede. His fight is built around readable momentum and brutal punish windows.</p></div></div><div class="log-item"><div class="log-icon">⚡</div><div><b>Electro — Phase 2 Fight 2</b><p>No Way Home-inspired yellow electricity, tactical detailing, Arc Bolt, Volt Blink, Chain Lightning and Power Grid. Below 45% HP he enters Overcharge.</p></div></div><div class="log-item"><div class="log-icon">🕷️</div><div><b>Sinister Threat • Raw Power</b><p>Defeat Kingpin to open Phase 2. Rhino unlocks first, Electro follows, while Mysterio and Green Goblin remain preserved for the next Section.</p></div></div><div class="log-item"><div class="log-icon">🏁</div><div><b>v0.9.5.3.1 Result Flow retained</b><p>Centered results, NEXT FIGHT, REMATCH, MAIN MENU, one-time Punisher unlock reveal and the 2.6 second fight-intro pause all remain intact.</p></div></div><div class="log-item"><div class="log-icon">🏁</div><div><b>Centered Match Results</b><p>The fight screen now closes completely at K.O. Results appear as a fixed center overlay with no post-fight scrolling or touch-lock traps.</p></div></div><div class="log-item"><div class="log-icon">🔓</div><div><b>One-Time Punisher Unlock Reveal</b><p>Your first Punisher victory now triggers a dedicated Collection unlock animation. Rematches never replay the unlock reveal.</p></div></div><div class="log-item"><div class="log-icon">▶</div><div><b>Next Fight Flow</b><p>Results now offer NEXT FIGHT, REMATCH and MAIN MENU in one centered action stack.</p></div></div>
 <div class="log-item"><div class="log-icon">💀</div><div><b>Punisher — Fight 3 + Fighter Unlock</b><p>Iconic skull tactical build with Rifle Burst, Frag Grenade, Combat Roll and War Zone. Defeat him to unlock Punisher in the Collection.</p></div></div>
 <div class="log-item"><div class="log-icon">🛡️</div><div><b>Taskmaster — Fight 4</b><p>Classic skull-mask, blue hood and orange-white combat build with shield, sword, bow and Combat Masterclass.</p></div></div>
 <div class="log-item"><div class="log-icon">↻</div><div><b>REMATCH</b><p>Fight the same target again directly from the results screen.</p></div></div>
@@ -95,24 +96,25 @@
 </main>
 
 <div id="portraitHint" class="portrait-hint hidden">📱 iPhone mode is portrait-first — rotate upright for the best layout</div>
-<div id="deviceChooser" class="device-overlay hidden" role="dialog" aria-modal="true" aria-label="Choose device layout"><div class="device-modal"><div class="eyebrow">FIGHT ARENA v0.9.5.6</div><h2>CHOOSE YOUR DEVICE</h2><p>This changes layout and controls only. Your fighters, skins, coins and campaign save stay exactly the same.</p><div class="device-grid"><button class="device-choice" data-device-mode="auto"><span class="device-icon">🤖</span><b>AUTO DETECT</b><span>Let Fight Arena choose the best layout for this device.</span></button><button class="device-choice" data-device-mode="iphone"><span class="device-icon">📱</span><b>iPHONE</b><span>Vertical / portrait-first touch layout made for a phone held upright.</span></button><button class="device-choice" data-device-mode="tablet"><span class="device-icon">📲</span><b>iPAD / TABLET</b><span>Larger touch layout with the classic Fight Arena control spacing.</span></button><button class="device-choice" data-device-mode="desktop"><span class="device-icon">🖥️</span><b>DESKTOP</b><span>Wide arena, mouse support and full keyboard controls.</span></button></div><div class="device-foot">You can change this later in SETTINGS → DEVICE LAYOUT.</div></div></div>
+<div id="deviceChooser" class="device-overlay hidden" role="dialog" aria-modal="true" aria-label="Choose device layout"><div class="device-modal"><div class="eyebrow">MULTIVERSE ARENA v0.9.5.7</div><h2>CHOOSE YOUR DEVICE</h2><p>This changes layout and controls only. Your fighters, skins, coins and campaign save stay exactly the same.</p><div class="device-grid"><button class="device-choice" data-device-mode="auto"><span class="device-icon">🤖</span><b>AUTO DETECT</b><span>Let Fight Arena choose the best layout for this device.</span></button><button class="device-choice" data-device-mode="iphone"><span class="device-icon">📱</span><b>iPHONE</b><span>Vertical / portrait-first touch layout made for a phone held upright.</span></button><button class="device-choice" data-device-mode="tablet"><span class="device-icon">📲</span><b>iPAD / TABLET</b><span>Larger touch layout with the classic Fight Arena control spacing.</span></button><button class="device-choice" data-device-mode="desktop"><span class="device-icon">🖥️</span><b>DESKTOP</b><span>Wide arena, mouse support and full keyboard controls.</span></button></div><div class="device-foot">You can change this later in SETTINGS → DEVICE LAYOUT.</div></div></div>
 <div id="pauseOverlay" class="pause-overlay hidden"><div class="pause-card"><div class="eyebrow">FIGHT ARENA</div><h2>PAUSED</h2><div class="pause-actions"><button id="pauseResume" class="primary">▶ RESUME</button><button id="pauseRestart">↻ RESTART</button><button id="pauseSettings">⚙ SETTINGS</button><button id="pauseMenu">⌂ MAIN MENU</button></div><div id="pauseSettingsPanel" class="pause-settings-panel hidden"><div class="settings-grid"><div class="setting-row"><div><b>DAMAGE NUMBERS</b></div><button data-setting="damageNumbers">ON</button></div><div class="setting-row"><div><b>SCREEN SHAKE</b></div><button data-setting="screenShake">ON</button></div><div class="setting-row"><div><b>HAPTICS</b></div><button data-setting="haptics">ON</button></div></div></div></div></div>
 
-<script src="build/v094/transform-v094.js?v=0956"></script>
-<script src="build/v0941/transform-v0941.js?v=0956"></script>
-<script src="build/v095/transform-v095.js?v=0956"></script>
-<script src="build/v0951/transform-v0951.js?v=0956"></script>
-<script src="build/v0952/transform-v0952.js?v=0956"></script>
-<script src="build/v0953/transform-v0953.js?v=0956"></script>
-<script src="build/v09531/transform-v09531.js?v=0956"></script>
-<script src="build/v0954/transform-v0954.js?v=0956"></script>
-<script src="build/v0955/transform-v0955.js?v=0956"></script>
-<script src="build/v0956/transform-v0956.js?v=0956"></script>
-<script src="core-v0956.js?v=0956"></script>
-<script src="device-v092.js?v=0956"></script>
-<script src="touch-v0941.js?v=0956"></script>
-<script src="stability-v0941.js?v=0956"></script>
-<script src="campaign-v0956.js?v=0956"></script>
-<script src="qa-v0956.js?v=0956"></script>
+<script src="build/v094/transform-v094.js?v=0957"></script>
+<script src="build/v0941/transform-v0941.js?v=0957"></script>
+<script src="build/v095/transform-v095.js?v=0957"></script>
+<script src="build/v0951/transform-v0951.js?v=0957"></script>
+<script src="build/v0952/transform-v0952.js?v=0957"></script>
+<script src="build/v0953/transform-v0953.js?v=0957"></script>
+<script src="build/v09531/transform-v09531.js?v=0957"></script>
+<script src="build/v0954/transform-v0954.js?v=0957"></script>
+<script src="build/v0955/transform-v0955.js?v=0957"></script>
+<script src="build/v0956/transform-v0956.js?v=0957"></script>
+<script src="build/v0957/transform-v0957.js?v=0957"></script>
+<script src="core-v0957.js?v=0957"></script>
+<script src="device-v092.js?v=0957"></script>
+<script src="touch-v0941.js?v=0957"></script>
+<script src="stability-v0941.js?v=0957"></script>
+<script src="campaign-v0957.js?v=0957"></script>
+<script src="qa-v0957.js?v=0957"></script>
 </body>
 </html>
