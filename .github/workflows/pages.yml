@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.5.5 Smoke and Chaos
+      - name: Validate v0.9.5.6 Goblin Rework and Training Lab
         run: |
           node --check build/v094/transform-v094.js
           node --check build/v0941/transform-v0941.js
@@ -35,19 +35,20 @@ jobs:
           node --check build/v09531/transform-v09531.js
           node --check build/v0954/transform-v0954.js
           node --check build/v0955/transform-v0955.js
-          node --check build/v0955/build-check-v0955.js
-          node --check build/v0955/campaign-check-v0955.js
-          node --check build/v0955/patch-index-v0955.js
-          node --check core-v0955.js
-          node --check campaign-v0955.js
-          node --check qa-v0955.js
+          node --check build/v0956/transform-v0956.js
+          node --check build/v0956/build-check-v0956.js
+          node --check build/v0956/campaign-check-v0956.js
+          node --check build/v0956/patch-index-v0956.js
+          node --check core-v0956.js
+          node --check campaign-v0956.js
+          node --check qa-v0956.js
           node --check device-v092.js
           node --check touch-v0941.js
           node --check stability-v0941.js
-          node build/v0955/build-check-v0955.js
-          node --check /tmp/core-v0955-built.js
-          node build/v0955/campaign-check-v0955.js
-          node build/v0955/patch-index-v0955.js
+          node build/v0956/build-check-v0956.js
+          node --check /tmp/core-v0956-built.js
+          node build/v0956/campaign-check-v0956.js
+          node build/v0956/patch-index-v0956.js
           test -s index.html
           test -s campaign-v095.css
           test -s neo-v0951.css
@@ -56,48 +57,58 @@ jobs:
           test -s results-v09531.css
           test -s sinister-v0954.css
           test -s smoke-v0955.css
+          test -s goblin-v0956.css
           test -s collection-v0941.css
           test -s touch-v0941.css
-          grep -q "Fight Arena v0.9.5.5 — Smoke & Chaos" index.html
-          grep -q "PHASE 2 • SMOKE & CHAOS" index.html
-          grep -q "smoke-v0955.css" index.html
-          grep -q "campaign-v0955.js" index.html
-          grep -q "core-v0955.js" index.html
-          grep -q "transform-v0955.js" index.html
+          grep -q "Fight Arena v0.9.5.6 — Goblin Rework & Training Lab" index.html
+          grep -q "THE GOBLIN<br>TAKES FLIGHT." index.html
+          grep -q "goblin-v0956.css" index.html
+          grep -q "campaign-v0956.js" index.html
+          grep -q "core-v0956.js" index.html
+          grep -q "transform-v0956.js" index.html
+          grep -q "qa-v0956.js" index.html
           grep -q 'id="trainingSpecial"' index.html
+          grep -q 'id="trainingReset"' index.html
           grep -q 'id="rematch"' index.html
           grep -q 'id="continue">NEXT FIGHT' index.html
-          grep -q "version:'0.9.5.5'" /tmp/core-v0955-built.js
-          grep -q "name:'Mysterio'" /tmp/core-v0955-built.js
-          grep -q "name:'Green Goblin'" /tmp/core-v0955-built.js
-          grep -q "hp:205,dmg:1.30,coins:900,xp:180" /tmp/core-v0955-built.js
-          grep -q "hp:220,dmg:1.34,coins:1000,xp:195" /tmp/core-v0955-built.js
-          grep -q "NOTHING HERE IS REAL" /tmp/core-v0955-built.js
-          grep -q "CHAOS FROM ABOVE" /tmp/core-v0955-built.js
-          grep -q "ILLUSION CLONE" /tmp/core-v0955-built.js
-          grep -q "SMOKE TELEPORT" /tmp/core-v0955-built.js
-          grep -q "PUMPKIN BOMB" /tmp/core-v0955-built.js
-          grep -q "fillTrainingSpecial" /tmp/core-v0955-built.js
-          grep -q "SPECIAL + KINETIC READY" /tmp/core-v0955-built.js
-          grep -q "F.kinetic=100" /tmp/core-v0955-built.js
-          grep -q "F.ph=F.pm" /tmp/core-v0955-built.js
-          grep -q "F.cooldowns=\[0,0,0\]" /tmp/core-v0955-built.js
-          grep -q "punisherUnlockShown" /tmp/core-v0955-built.js
-          grep -q "showPunisherUnlock" /tmp/core-v0955-built.js
-          grep -q "rematch(){" /tmp/core-v0955-built.js
-          grep -q "next(){" /tmp/core-v0955-built.js
-          grep -q "screen('results')" /tmp/core-v0955-built.js
-          grep -q "clearFightTouchLock" /tmp/core-v0955-built.js
-          grep -q "name:'Rhino'" /tmp/core-v0955-built.js
-          grep -q "name:'Electro'" /tmp/core-v0955-built.js
-          grep -q "name:'Ultron'" /tmp/core-v0955-built.js
-          grep -q "name:'Prowler'" /tmp/core-v0955-built.js
-          grep -q "code==='DIAMONDS'" /tmp/core-v0955-built.js
-          grep -q "phase2Order=\['Rhino','Electro','Mysterio','Green Goblin'\]" campaign-v0955.js
-          grep -q "smokeChaosComplete" campaign-v0955.js
-          grep -q "FightArenaCampaignV0955" campaign-v0955.js
+          grep -q "version:'0.9.5.6'" /tmp/core-v0956-built.js
+          grep -q "name:'Green Goblin'" /tmp/core-v0956-built.js
+          grep -q "ARMORED GLIDER BOMBER" /tmp/core-v0956-built.js
+          grep -q "goblinPumpkin" /tmp/core-v0956-built.js
+          grep -q "goblinRazorBat" /tmp/core-v0956-built.js
+          grep -q "goblinBombBarrage" /tmp/core-v0956-built.js
+          grep -q "goblinGliderRush" /tmp/core-v0956-built.js
+          grep -q "goblin-glider-rush" /tmp/core-v0956-built.js
+          grep -q "cleanupTrainingArena" /tmp/core-v0956-built.js
+          grep -q "resetTrainingLab" /tmp/core-v0956-built.js
+          grep -q "fillTrainingSpecial" /tmp/core-v0956-built.js
+          grep -q "FightArenaTrainingControls" /tmp/core-v0956-built.js
+          grep -q "F.sp=100" /tmp/core-v0956-built.js
+          grep -q "F.kinetic=100" /tmp/core-v0956-built.js
+          grep -q "F.cooldowns=\[0,0,0\]" /tmp/core-v0956-built.js
+          grep -q "F.busy=false" /tmp/core-v0956-built.js
+          grep -q "punisherUnlockShown" /tmp/core-v0956-built.js
+          grep -q "showPunisherUnlock" /tmp/core-v0956-built.js
+          grep -q "rematch(){" /tmp/core-v0956-built.js
+          grep -q "next(){" /tmp/core-v0956-built.js
+          grep -q "screen('results')" /tmp/core-v0956-built.js
+          grep -q "clearFightTouchLock" /tmp/core-v0956-built.js
+          grep -q "name:'Mysterio'" /tmp/core-v0956-built.js
+          grep -q "name:'Rhino'" /tmp/core-v0956-built.js
+          grep -q "name:'Electro'" /tmp/core-v0956-built.js
+          grep -q "name:'Ultron'" /tmp/core-v0956-built.js
+          grep -q "name:'Prowler'" /tmp/core-v0956-built.js
+          grep -q "code==='DIAMONDS'" /tmp/core-v0956-built.js
+          grep -q "phase2Order=\['Rhino','Electro','Mysterio','Green Goblin'\]" campaign-v0956.js
+          grep -q "AERIAL CHAOS" campaign-v0956.js
+          grep -q "Glider Rush" campaign-v0956.js
+          grep -q "FightArenaCampaignV0956" campaign-v0956.js
           grep -q "name:'Doctor Octopus'.*boss:true" campaign-v0954.js
           grep -q "STANDBY=\['Ultron','Prowler'\]" campaign-v0954.js
+          grep -q ".fighter.greengoblin" goblin-v0956.css
+          grep -q "ICONIC GOBLIN GLIDER" goblin-v0956.css
+          grep -q "goblin-glider-rush" goblin-v0956.css
+          grep -q "goblin-razorbat" goblin-v0956.css
           grep -q "#results.active" results-v09531.css
           grep -q "fighter-unlock-reveal" results-v09531.css
           grep -q "touchstart" touch-v0941.js
@@ -106,13 +117,13 @@ jobs:
           grep -q "device-iphone" device-v092.css
           grep -q "KeyA" device-v092.js
 
-      - name: Persist v0.9.5.5 release index
+      - name: Persist v0.9.5.6 release index
         run: |
           if ! git diff --quiet -- index.html; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html
-            git commit -m "Release Fight Arena v0.9.5.5 index [skip ci]"
+            git commit -m "Release Fight Arena v0.9.5.6 index [skip ci]"
             git push
           fi
 
