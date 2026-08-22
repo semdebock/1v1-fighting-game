@@ -5,23 +5,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#070b16">
 <style>.hidden{display:none!important}.pause-overlay.hidden{display:none!important}</style>
-<title>Fight Arena v0.9.1 — Stability Hotfix</title>
-<link rel="stylesheet" href="core-v088.css?v=091">
-<link rel="stylesheet" href="owner-v0881.css?v=091">
-<link rel="stylesheet" href="features-v089.css?v=091">
-<link rel="stylesheet" href="revamp-v0892.css?v=091">
-<link rel="stylesheet" href="build/v090/cosmetics-v090.css?v=091">
+<title>Fight Arena v0.9.2 — Device & Controls Update</title>
+<link rel="stylesheet" href="core-v088.css?v=092">
+<link rel="stylesheet" href="owner-v0881.css?v=092">
+<link rel="stylesheet" href="features-v089.css?v=092">
+<link rel="stylesheet" href="revamp-v0892.css?v=092">
+<link rel="stylesheet" href="build/v090/cosmetics-v090.css?v=092">
+<link rel="stylesheet" href="device-v092.css?v=092">
 </head>
 <body>
 <main class="app">
-<header class="top"><div><div class="eyebrow">NEO CITY COMBAT LEAGUE</div><div class="brand">FIGHT ARENA <span class="tag">v0.9.1</span></div></div><div class="currency"><span class="pill">LV <b id="lv">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">💎 <b id="gems">0</b></span></div></header>
+<header class="top"><div><div class="eyebrow">NEO CITY COMBAT LEAGUE</div><div class="brand">FIGHT ARENA <span class="tag">v0.9.2</span></div></div><div class="currency"><button class="pill device-pill" id="devicePill" type="button">DEVICE</button><span class="pill">LV <b id="lv">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">💎 <b id="gems">0</b></span></div></header>
 
 <section id="home" class="screen active"><div class="home">
-<div class="hero-copy"><span class="tag">STABILITY HOTFIX</span><h1>BUILD YOUR<br>LEGACY</h1><p>Diamonds finally have a purpose. Unlock premium skins, equip your favorite looks and master two brand-new heroes: Daredevil and Moon Knight.</p>
+<div class="hero-copy"><span class="tag">DEVICE & CONTROLS UPDATE</span><h1>FIGHT<br>ANYWHERE</h1><p>Fight Arena now adapts to iPhone, iPad/tablet and desktop. iPhone is built portrait-first, while desktop adds full keyboard controls.</p>
 <div class="buttons">
 <button class="primary" id="play">⚔️ PLAY CAMPAIGN</button>
 <div class="mode-buttons"><button id="training" class="training-launch">🎯 TRAINING MODE</button><button id="settings" class="settings-launch">⚙️ SETTINGS</button></div>
-<button id="gallery">🗂️ COLLECTION</button><button id="daily">🎁 DAILY REWARD</button><button id="updates" class="update-btn">📋 UPDATE LOG • v0.9.1</button>
+<button id="gallery">🗂️ COLLECTION</button><button id="daily">🎁 DAILY REWARD</button><button id="updates" class="update-btn">📋 UPDATE LOG • v0.9.2</button>
 </div></div>
 <div class="hero-card"><div class="fighter-preview" id="homePreview"></div><div class="hero-name"><small>SELECTED FIGHTER</small><strong id="selectedName">ROOKIE</strong></div></div>
 <div class="hero-dashboard"><div class="dash-title"><div><small>FIGHTER COMMAND CENTER</small><strong>READY FOR BATTLE</strong></div><span class="live-dot">● CORE ONLINE</span></div><div class="dash-grid">
@@ -29,12 +30,12 @@
 <div class="dash-stat"><small>ROSTER</small><b id="dashRoster">1/7</b><span>Visible fighters unlocked</span></div>
 <div class="dash-stat"><small>NEXT TARGET</small><b id="dashTarget">NIGHTFANG</b><span id="dashLevel">Campaign Level 1</span></div>
 <div class="dash-stat"><small>BALANCE</small><b id="dashCoins">0 🪙</b><span>Character purchase currency</span></div>
-<div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.9.1</b><span>Button Fixes • Stable Deployment</span></div>
-</div><div class="build-health"><span>◆ BUILD HEALTH</span><b>STABLE CORE • v0.9.1</b></div></div>
+<div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.9.2</b><span>Device Modes • iPhone Portrait • Desktop Controls</span></div>
+</div><div class="build-health"><span>◆ BUILD HEALTH</span><b>DEVICE CORE • v0.9.2</b></div></div>
 </div></section>
 
 <section id="updatesScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">WHAT'S NEW</div><h2>UPDATE LOG</h2></div><button class="back">← BACK</button></div><div class="panel">
-<span class="tag">v0.9.1 • STABILITY HOTFIX</span><h2>A NEW ERA FOR FIGHT ARENA.</h2><div class="changelog"><div class="log-item"><div class="log-icon">🛠️</div><div><b>Button & navigation fixes</b><p>Collection, Campaign Fight and other main navigation buttons now use the validated static core build directly, removing the deployment mismatch that caused taps to fail.</p></div></div>
+<span class="tag">v0.9.2 • DEVICE & CONTROLS</span><h2>ONE GAME. THREE WAYS TO PLAY.</h2><div class="changelog"><div class="log-item"><div class="log-icon">📱</div><div><b>iPhone Portrait Mode</b><p>A dedicated vertical layout with a compact arena, portrait-friendly HUD, left-thumb joystick and touch combat controls designed to fit without horizontal scrolling.</p></div></div><div class="log-item"><div class="log-icon">📲</div><div><b>iPad / Tablet Mode</b><p>The current touch-first layout is refined for larger screens with comfortable controls, larger arena space and three-column Collection browsing.</p></div></div><div class="log-item"><div class="log-icon">🖥️</div><div><b>Desktop Mode + Keyboard</b><p>A/D move, W or Space jump, J punch, K kick, L special, Shift block, 1–3 hero abilities and Escape pause. Mouse controls remain available.</p></div></div><div class="log-item"><div class="log-icon">🤖</div><div><b>Auto Detect + Saved Choice</b><p>Choose Auto, iPhone, iPad/Tablet or Desktop on first launch. The choice is saved and can always be changed from Settings.</p></div></div><div class="log-item"><div class="log-icon">🛠️</div><div><b>Button & navigation fixes</b><p>Collection, Campaign Fight and other main navigation buttons now use the validated static core build directly, removing the deployment mismatch that caused taps to fail.</p></div></div>
 <div class="log-item"><div class="log-icon">💎</div><div><b>Cosmetics System</b><p>Diamonds can now be spent on permanent skins. Preview, buy, own and equip cosmetics from the new Collection screen. Skins never change combat stats.</p></div></div>
 <div class="log-item"><div class="log-icon">🕷️</div><div><b>Five launch cosmetics</b><p>Symbiote Spider-Man, Nanotech Iron Man, Hydra Captain America, Golden Champion El Primo and Neo City Fighter Rookie are now available.</p></div></div>
 <div class="log-item"><div class="log-icon">😈</div><div><b>Daredevil joins the roster</b><p>A premium technical martial artist with Billy Club Throw, Grapple Rush, Radar Counter and the multi-hit Devil's Combo special.</p></div></div>
@@ -49,6 +50,7 @@
 <div class="setting-row"><div><b>FLOATING DAMAGE NUMBERS</b><span>Show exact damage above fighters when attacks connect.</span></div><button data-setting="damageNumbers">ON</button></div>
 <div class="setting-row"><div><b>SCREEN SHAKE</b><span>Allow impact and boss attacks to shake the arena.</span></div><button data-setting="screenShake">ON</button></div>
 <div class="setting-row"><div><b>HAPTICS</b><span>Use vibration feedback on supported devices.</span></div><button data-setting="haptics">ON</button></div>
+<div class="setting-row device-setting-row"><div><b>DEVICE LAYOUT</b><span>Switch between Auto, iPhone portrait, iPad/Tablet and Desktop without resetting your game.</span></div><button id="deviceModeBtn" type="button">CHOOSE</button></div>
 </div></div></section>
 
 <section id="trainingScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">PRACTICE LAB</div><h2>TRAINING MODE</h2></div><button class="back">← BACK</button></div>
@@ -77,12 +79,15 @@
 <div class="arena" id="arena"><div class="city"></div><div class="floor"></div><div id="pF" class="fighter player"></div><div id="eF" class="fighter enemy"></div></div>
 <div class="specialrow"><span>⚡ <b id="spText">0%</b></span><div class="bar"><i id="sp"></i></div></div>
 <div class="controls"><div class="stickwrap"><div><div class="stick" id="stick"><div class="knob" id="knob"></div></div><small>MOVE</small></div></div><div class="actionwrap"><div class="actions"><button id="punch">👊 PUNCH</button><button id="kick">🦵 KICK</button><button id="special">⚡ SPECIAL</button><button id="jump">↑ JUMP</button><button id="block">🛡 BLOCK</button><button disabled id="tagfighter"></button></div><div id="heroActions" class="hero-actions"></div></div></div>
+<div id="desktopControlsHint" class="desktop-controls-hint hidden"><b>KEYBOARD:</b> A/D MOVE • W/SPACE JUMP • J PUNCH • K KICK • L SPECIAL • SHIFT BLOCK • 1–3 ABILITIES • ESC PAUSE</div>
 </section>
 
 <section id="results" class="screen result"><div class="eyebrow">MATCH RESULT</div><h1 id="resultTitle"></h1><p id="resultText"></p><div class="cards resultcards"><div class="panel">🪙 <b id="rCoins"></b></div><div class="panel">XP <b id="rXp"></b></div><div class="panel" id="rGemsWrap">💎 <b id="rGems"></b></div></div><h2 id="unlock"></h2><button class="primary" id="continue">CONTINUE</button><button id="menu">MAIN MENU</button></section>
 <div id="toast" class="toast hidden"></div>
 </main>
 
+<div id="portraitHint" class="portrait-hint hidden">📱 iPhone mode is portrait-first — rotate upright for the best layout</div>
+<div id="deviceChooser" class="device-overlay hidden" role="dialog" aria-modal="true" aria-label="Choose device layout"><div class="device-modal"><div class="eyebrow">FIGHT ARENA v0.9.2</div><h2>CHOOSE YOUR DEVICE</h2><p>This changes layout and controls only. Your fighters, skins, coins and campaign save stay exactly the same.</p><div class="device-grid"><button class="device-choice" data-device-mode="auto"><span class="device-icon">🤖</span><b>AUTO DETECT</b><span>Let Fight Arena choose the best layout for this device.</span></button><button class="device-choice" data-device-mode="iphone"><span class="device-icon">📱</span><b>iPHONE</b><span>Vertical / portrait-first touch layout made for a phone held upright.</span></button><button class="device-choice" data-device-mode="tablet"><span class="device-icon">📲</span><b>iPAD / TABLET</b><span>Larger touch layout with the classic Fight Arena control spacing.</span></button><button class="device-choice" data-device-mode="desktop"><span class="device-icon">🖥️</span><b>DESKTOP</b><span>Wide arena, mouse support and full keyboard controls.</span></button></div><div class="device-foot">You can change this later in SETTINGS → DEVICE LAYOUT.</div></div></div>
 <div id="pauseOverlay" class="pause-overlay hidden"><div class="pause-card"><div class="eyebrow">FIGHT ARENA</div><h2>PAUSED</h2><div class="pause-actions"><button id="pauseResume" class="primary">▶ RESUME</button><button id="pauseRestart">↻ RESTART</button><button id="pauseSettings">⚙ SETTINGS</button><button id="pauseMenu">⌂ MAIN MENU</button></div>
 <div id="pauseSettingsPanel" class="pause-settings-panel hidden"><div class="settings-grid">
 <div class="setting-row"><div><b>DAMAGE NUMBERS</b></div><button data-setting="damageNumbers">ON</button></div>
@@ -90,8 +95,8 @@
 <div class="setting-row"><div><b>HAPTICS</b></div><button data-setting="haptics">ON</button></div>
 </div></div></div></div>
 
-<script src="core-v091.js?v=091"></script>
-<script src="qa-v089.js?v=091"></script>
-<script src="qa-v091.js?v=091"></script>
+<script src="core-v092.js?v=092"></script>
+<script src="device-v092.js?v=092"></script>
+<script src="qa-v092.js?v=092"></script>
 </body>
 </html>
