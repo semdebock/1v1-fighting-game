@@ -38,7 +38,7 @@ function bullseyePerfect(){if(!F)return;callout('PERFECT AIM');const e=$('eF');e
  rep('\n}\nfunction stopFightTimers(){',streetAI+'\n}\nfunction stopFightTimers(){','street ai');
  rep("screen('fight');draw();renderHeroActions();if(!training&&NEO_INTROS[l.name])neoIntro(l.name);","screen('fight');draw();renderHeroActions();if(!training&&NEO_INTROS[l.name])neoIntro(l.name);if(!training&&STREET_INTROS[l.name])streetIntro(l.name);",'street intro trigger');
 
- rep('.fighter-intro,.boss-intro\').forEach(n=>n.remove());','.fighter-intro,.boss-intro,.street-intro,.crossbones-bladefx,.crossbones-warfx,.bullseye-ricochet,.bullseye-perfectfx\').forEach(n=>n.remove());','cleanup street fx');
+ rep(".fighter-intro,.boss-intro').forEach(n=>n.remove());",".fighter-intro,.boss-intro,.street-intro,.crossbones-bladefx,.crossbones-warfx,.bullseye-ricochet,.bullseye-perfectfx').forEach(n=>n.remove());",'cleanup street fx');
  rep("e?.classList.remove('cloaked','rage','hurt','enemy-punch','illusion');","e?.classList.remove('cloaked','rage','hurt','enemy-punch','illusion','crossbones-breaker','crossbones-fire','crossbones-blade','crossbones-war','bullseye-throw','bullseye-step','bullseye-perfect');",'cleanup street classes');
  rep('// v0.9.5.1 public control bridge','// v0.9.5.2 public control bridge','control bridge comment');
  return code;
