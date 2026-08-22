@@ -39,8 +39,6 @@ jobs:
           node --check build/v0957/transform-v0957.js
           node --check build/v0957/build-check-v0957.js
           node --check build/v0957/campaign-check-v0957.js
-          node --check build/v0957/patch-index-v0957.js
-          node --check build/v09571/patch-index-v09571.js
           node --check build/v09572/patch-index-v09572.js
           node --check core-v0957.js
           node --check campaign-v0957.js
@@ -53,8 +51,6 @@ jobs:
           node build/v0957/build-check-v0957.js
           node --check /tmp/core-v0957-built.js
           node build/v0957/campaign-check-v0957.js
-          node build/v0957/patch-index-v0957.js
-          node build/v09571/patch-index-v09571.js
           node build/v09572/patch-index-v09572.js
           test -s index.html
           test -s masterplan-v0957.css
@@ -82,7 +78,7 @@ jobs:
           grep -q "MultiverseArenaUI" ui-v09571.js
           grep -q "HERO_INTROS" polish-v09572.js
           grep -q "versusIntro" polish-v09572.js
-          grep -q "bossPhaseHud" polish-v09572.js
+          grep -q "bossHud" polish-v09572.js
           grep -q "gauntletCompletion" polish-v09572.js
           grep -q "fighter-detail-grid" polish-v09572.css
           grep -q "versus-sequence" polish-v09572.css
