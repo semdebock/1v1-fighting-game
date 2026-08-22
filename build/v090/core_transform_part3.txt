@@ -1,0 +1,33 @@
+=src.index('function draw()',start)
+events="""$('charAction').onclick=()=>{const c=CHARS[chosen];if(c.hidden&&!save.ownerGodUnlocked)return toast('OWNER ACCESS REQUIRED');if(!save.owned[chosen]){if(save.coins<c.price)return toast('Not enough coins');save.coins-=c.price;save.owned[chosen]=true}save.selected=chosen;persist();renderChars();renderCharInfo();renderTraining();toast(`${chosen.toUpperCase()} SELECTED`)};
+$('skinAction').onclick=()=>{const s=skinById(skinChosen);if(!s)return;if(!save.owned[s.hero])return toast('OWN THE HERO FIRST');if(!save.skinsOwned[s.id]){if(save.gems<s.price)return toast('NOT ENOUGH DIAMONDS');save.gems-=s.price;save.skinsOwned[s.id]=true;toast(`${s.name.toUpperCase()} UNLOCKED 💎`)}save.equippedSkins[s.hero]=s.id;persist();renderSkins();renderSkinInfo();renderChars();renderTraining();if(save.selected===s.hero)hud()};
+document.querySelectorAll('[data-collection-tab]').forEach(b=>b.onclick=()=>showCollectionTab(b.dataset.collectionTab));
+$('play').onclick=()=>{chosenLevel=clamp(save.unlocked,1,LEVELS.length);renderLevels();renderLevelInfo();screen('levels')};
+$('gallery').onclick=()=>{chosen=save.selected;renderChars();renderCharInfo();showCollectionTab('fighters');screen('chars')};
+$('training').onclick=()=>{trainingChosen=save.selected;renderTraining();screen('trainingScreen')};
+$('settings').onclick=()=>{renderSettings();screen('settingsScreen')};
+$('updates').onclick=()=>screen('updatesScreen');document.querySelectorAll('.back').forEach(b=>b.onclick=()=>screen('home'));
+$('daily').onclick=()=>{const day=localDay();if(save.dailyClaimDate===day)return toast('Daily reward already claimed today');save.dailyClaimDate=day;save.coins+=250;persist();toast('+250 coins 🪙')};
+$('redeemBtn').onclick=()=>{const input=$('redeemInput'),status=$('redeemStatus'),code=input.value.trim();
+ if(code==='BrandNewDay'){if(save.redeemedBrandNewDay){status.textContent='✓ CODE ALREADY REDEEMED';status.className='redeem-status used';return}save.coins+=5000;save.redeemedBrandNewDay=true;persist();input.value='';status.textContent='✓ +5,000 COINS ADDED';status.className='redeem-status good';toast('+5,000 COINS 🪙');return}
+ if(code==='GODLIKE'){if(save.ownerGodUnlocked){status.textContent='✓ OWNER HERO ALREADY UNLOCKED';status.className='redeem-status used';return}save.ownerGodUnlocked=true;save.owned[OWNER]=true;persist();renderChars();renderTraining();input.value='';status.textContent='✦ OWNER ACCESS GRANTED — THE ONE ABOVE ALL UNLOCKED';status.className='redeem-status god';toast('THE ONE ABOVE ALL UNLOCKED ✦');return}
+ status.textContent='❌ INVALID CODE';status.className='redeem-status bad'
+};$('redeemInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('redeemBtn').click()});
+document.querySelectorAll('[data-setting]').forEach(b=>b.onclick=()=>toggleSetting(b.dataset.setting));
+
+"""
+src=src[:start]+events+src[end:]
+
+# Damage player: add Daredevil counter + Moon Guard
+old=re.search(r"function damagePlayer\(amount,big=false,blockable=true\)\{.*?\}\nfunction attack",src,re.S).group(0)
+new="""function damagePlayer(amount,big=false,blockable=true){if(!F||F.over||F.paused||F.invulnerable)return;let n=Number(amount);if(!Number.isFinite(n)||n<=0)return;if(blockable&&F.hero==='Daredevil'&&F.counter){F.counter=false;$('pF').classList.remove('radar-ready');F.px=clamp(F.px-7,3,F.ex-7);draw();callout('RADAR COUNTER');later(()=>damageEnemy(12,5,true),70);buzz(32);return}if(F.hero===OWNER)n=Math.max(1,Math.round(n*.12));if(F.hero==='Moon Knight'&&F.moonGuard)n=Math.max(1,Math.round(n*.35));if(blockable&&F.block){n=Math.max(1,Math.round(n*.3));blockFx(F.px+3)}F.ph=clamp((Number.isFinite(F.ph)?F.ph:F.pm)-n,0,F.pm);floatDamage(n,'player');buzz(big?40:18);$('pF').classList.add('hurt');later(()=>$('pF')?.classList.remove('hurt'),150);impact(F.px+4);shake(big);draw();if(F.ph<=0)finish(false)}
+function attack"""
+src=src.replace(old,new)
+
+# Hero actions + abilities + special
+start=src.index('function renderHeroActions()')
+end=src.index('function mysterioClone()',start)
+abilities="""function renderHeroActions(){const row=$('heroActions');if(!F){row.innerHTML='';return}const name=F.hero,defs=name==='Spider-Man'?[['🕸 WEB SHOT'],['🧲 WEB PULL'],['↩ WEB DODGE']]:name==='Captain America'?[['🛡 SHIELD THROW'],['💥 SHIELD BASH'],['⭐ GUARD']]:name==='Iron Man'?[['🔴 REPULSOR'],['🚀 MISSILE'],[F.flying?'🔥 LAND':'🔥 FLY']]:name==='Daredevil'?[['🥢 BILLY CLUB'],['🪝 GRAPPLE RUSH'],['🔴 RADAR COUNTER']]:name==='Moon Knight'?[['🌙 CRESCENT DART'],['🦅 CAPE DIVE'],['🛡 MOON GUARD']]:name===OWNER?[['✦ REALITY ERASE'],['☀ DIVINE NOVA'],['∞ OMNIPRESENCE']]:null;if(!defs){row.innerHTML='';return}row.innerHTML=defs.map((d,i)=>{const left=Math.max(0,F.cooldowns[i]-now()),canLand=name==='Iron Man'&&i===2&&F.flying;return `<button data-i="${i}" ${F.paused||left>0&&!canLand?'disabled':''}>${d[0]}<span class="hero-cd">${left>0&&!canLand?left.toFixed(1)+'s':'READY'}</span></button>`}).join('');row.querySelectorAll('button').forEach(b=>b.onpointerdown=()=>heroAbility(+b.dataset.i))}
+function heroAbility(i){if(!F||F.over||F.paused)return;const name=F.hero;if(!cooldownReady(i)&&!(name==='Iron Man'&&i===2&&F.flying))return;
+ if(name==='Spider-Man'){if(i===0){setCd(0,1.6);playerProjectile('webshot',8,4.1,3)}if(i===1){setCd(1,4.2);if(F.ex-F.px<46){damageEnemy(5,0);F.ex=clamp(F.px+11,F.px+8,92);draw();toast('WEB PULL!')}else toast('TOO FAR')}if(i===2){setCd(2,5);F.px=clamp(F.px-12,3,F.ex-7);F.block=true;$('pF').classList.add('blocking');later(()=>{if(F)F.block=false;$('pF')?.classList.remove('blocking')},650);draw()}}
+ else if(name==='Captain America'){if(i===0){setCd(0,2.3);$('pF').classList.add('shield-away');playerProjectile('shieldshot',12,4,4,true,()=>$('pF')?.classList.remove('shield-away'))}if(i===1){setCd(1,3.5);F.px=clamp(Math.min(F.ex-7,F.px+12),3,F.ex-7);draw();later(()=>{if(F&&F.ex-F.px<17)damageEnemy(14,5)},90)}if(i===2){setCd(2,6);F.block=true;$('pF').classList.add('guard','blocking');later(()=>{if(F)F.block=false;$('pF')?.classL
