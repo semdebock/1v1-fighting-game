@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.5.3 Vigilante Line
+      - name: Validate v0.9.5.3.1 Result Flow Polish
         run: |
           node --check build/v094/transform-v094.js
           node --check build/v0941/transform-v0941.js
@@ -32,73 +32,70 @@ jobs:
           node --check build/v0951/transform-v0951.js
           node --check build/v0952/transform-v0952.js
           node --check build/v0953/transform-v0953.js
-          node --check build/v0953/build-check-v0953.js
-          node --check build/v0953/patch-index-v0953.js
-          node --check core-v0953.js
+          node --check build/v09531/transform-v09531.js
+          node --check build/v09531/build-check-v09531.js
+          node --check build/v09531/patch-index-v09531.js
+          node --check core-v09531.js
           node --check device-v092.js
           node --check touch-v0941.js
           node --check stability-v0941.js
-          node --check campaign-v0953.js
-          node --check qa-v0953.js
-          node build/v0953/build-check-v0953.js
-          node --check /tmp/core-v0953-built.js
-          node build/v0953/patch-index-v0953.js
+          node --check campaign-v09531.js
+          node --check qa-v09531.js
+          node build/v09531/build-check-v09531.js
+          node --check /tmp/core-v09531-built.js
+          node build/v09531/patch-index-v09531.js
           test -s index.html
           test -s campaign-v095.css
           test -s neo-v0951.css
           test -s street-v0952.css
           test -s vigilante-v0953.css
+          test -s results-v09531.css
           test -s collection-v0941.css
           test -s touch-v0941.css
-          grep -q "v0.9.5.3" index.html
-          grep -q "PHASE 1 • VIGILANTE LINE" index.html
-          grep -q "vigilante-v0953.css" index.html
+          grep -q "v0.9.5.3.1" index.html
+          grep -q "RESULT FLOW POLISH" index.html
+          grep -q "results-v09531.css" index.html
+          grep -q "campaign-v09531.js" index.html
+          grep -q "core-v09531.js" index.html
+          grep -q "transform-v09531.js" index.html
           grep -q 'id="rematch"' index.html
-          grep -q "campaign-v0953.js" index.html
-          grep -q "core-v0953.js" index.html
-          grep -q "transform-v0953.js" index.html
-          grep -q "version:'0.9.5.3'" /tmp/core-v0953-built.js
-          grep -q "name:'Punisher'" /tmp/core-v0953-built.js
-          grep -q "name:'Taskmaster'" /tmp/core-v0953-built.js
-          grep -q "campaignOnly:true" /tmp/core-v0953-built.js
-          grep -q "punisher-default" /tmp/core-v0953-built.js
-          grep -q "VIGILANTE_INTROS" /tmp/core-v0953-built.js
-          grep -q "introLocked" /tmp/core-v0953-built.js
-          grep -q "punisherRifle" /tmp/core-v0953-built.js
-          grep -q "punisherGrenade" /tmp/core-v0953-built.js
-          grep -q "taskmasterShield" /tmp/core-v0953-built.js
-          grep -q "taskmasterSword" /tmp/core-v0953-built.js
-          grep -q "taskmasterMasterclass" /tmp/core-v0953-built.js
-          grep -q "rematch(){" /tmp/core-v0953-built.js
-          grep -q "FightArenaCampaignControls" /tmp/core-v0953-built.js
-          grep -q "name:'Crossbones'" /tmp/core-v0953-built.js
-          grep -q "name:'Bullseye'" /tmp/core-v0953-built.js
-          grep -q "name:'Ultron'" /tmp/core-v0953-built.js
-          grep -q "name:'Prowler'" /tmp/core-v0953-built.js
-          grep -q "code==='DIAMONDS'" /tmp/core-v0953-built.js
-          grep -q "fighter.punisher" vigilante-v0953.css
-          grep -q "fighter.taskmaster" vigilante-v0953.css
-          grep -q "punisher-warzonefx" vigilante-v0953.css
-          grep -q "taskmaster-masterfx" vigilante-v0953.css
-          grep -q "phase1Order" campaign-v0953.js
-          grep -q "name:'Punisher'.*built:true.*PLAYABLE FIGHTER UNLOCK" campaign-v0953.js
-          grep -q "name:'Taskmaster'.*built:true" campaign-v0953.js
-          grep -q "name:'Kingpin'.*built:true.*boss:true" campaign-v0953.js
-          grep -q "name:'Doctor Octopus'.*boss:true" campaign-v0953.js
-          grep -q "STANDBY=\['Ultron','Prowler'\]" campaign-v0953.js
+          grep -q 'id="continue">NEXT FIGHT' index.html
+          grep -q "version:'0.9.5.3.1'" /tmp/core-v09531-built.js
+          grep -q "punisherUnlockShown" /tmp/core-v09531-built.js
+          grep -q "showPunisherUnlock" /tmp/core-v09531-built.js
+          grep -q "campaignNextName" /tmp/core-v09531-built.js
+          grep -q "screen('results')" /tmp/core-v09531-built.js
+          grep -q "clearFightTouchLock" /tmp/core-v09531-built.js
+          grep -q "punisherFirstUnlock" /tmp/core-v09531-built.js
+          grep -q "next(){" /tmp/core-v09531-built.js
+          grep -q "lastResult(){" /tmp/core-v09531-built.js
+          grep -q "introLocked" /tmp/core-v09531-built.js
+          grep -q "name:'Punisher'" /tmp/core-v09531-built.js
+          grep -q "name:'Taskmaster'" /tmp/core-v09531-built.js
+          grep -q "name:'Crossbones'" /tmp/core-v09531-built.js
+          grep -q "name:'Bullseye'" /tmp/core-v09531-built.js
+          grep -q "name:'Kingpin'" /tmp/core-v09531-built.js
+          grep -q "name:'Ultron'" /tmp/core-v09531-built.js
+          grep -q "name:'Prowler'" /tmp/core-v09531-built.js
+          grep -q "code==='DIAMONDS'" /tmp/core-v09531-built.js
+          grep -q "#results.active" results-v09531.css
+          grep -q "fighter-unlock-reveal" results-v09531.css
+          grep -q "PUNISHER UNLOCKED" build/v09531/transform-v09531.js
+          grep -q "campaign-v0953.js?v=09531" campaign-v09531.js
+          grep -q "FightArenaCampaignV09531" campaign-v09531.js
           grep -q "touchstart" touch-v0941.js
           grep -q "preventDefault" touch-v0941.js
           grep -q "multiTouch:true" touch-v0941.js
           grep -q "device-iphone" device-v092.css
           grep -q "KeyA" device-v092.js
 
-      - name: Persist v0.9.5.3 release index
+      - name: Persist v0.9.5.3.1 release index
         run: |
           if ! git diff --quiet -- index.html; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html
-            git commit -m "Release Fight Arena v0.9.5.3 index [skip ci]"
+            git commit -m "Release Fight Arena v0.9.5.3.1 index [skip ci]"
             git push
           fi
 
