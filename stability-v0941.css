@@ -1,0 +1,29 @@
+/* Fight Arena v0.9.4.1 — Combat Stability & Collection Polish */
+html.device-iphone #fight.active,html.device-tablet #fight.active,
+html.device-iphone #fight.active *,html.device-tablet #fight.active *{
+  touch-action:none!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  -webkit-touch-callout:none!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+html.device-iphone #fight.active,html.device-tablet #fight.active{overscroll-behavior:none;}
+
+/* Cleaner fighter rank hierarchy */
+#charCards.rank-groups{display:block!important;}
+.rank-group{margin:0 0 26px;padding:0;border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:rgba(8,13,27,.72);}
+.rank-group-head{padding:15px 17px!important;background:linear-gradient(90deg,rgba(255,255,255,.075),rgba(255,255,255,.015));border-bottom:1px solid rgba(255,255,255,.08);}
+.rank-group-head>div{display:flex;flex-direction:column;gap:3px}.rank-group-head span{font-size:17px;font-weight:950;letter-spacing:.08em}.rank-group-head small{opacity:.68;letter-spacing:.08em;text-transform:uppercase}.rank-group-head>b{font-size:12px;opacity:.8}
+.rank-fighters-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:14px;}
+.rank-group.rank-s .rank-group-head{box-shadow:inset 4px 0 0 #ff4e65}.rank-group.rank-aplus .rank-group-head{box-shadow:inset 4px 0 0 #b56cff}.rank-group.rank-a .rank-group-head{box-shadow:inset 4px 0 0 #55a8ff}.rank-group.rank-b .rank-group-head{box-shadow:inset 4px 0 0 #c9d1dc}
+
+/* Skins grouped by hero */
+#skinCards.skin-hero-groups{display:block!important;}
+.skin-hero-group{margin:0 0 24px;border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:rgba(8,13,27,.7)}
+.skin-hero-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:linear-gradient(90deg,rgba(44,109,255,.13),rgba(255,255,255,.02));border-bottom:1px solid rgba(255,255,255,.08)}
+.skin-hero-head div{display:flex;flex-direction:column}.skin-hero-head strong{font-size:16px;letter-spacing:.08em}.skin-hero-head small{opacity:.62;text-transform:uppercase;letter-spacing:.08em}.skin-hero-head span{font-size:11px;font-weight:900;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.07)}
+.skin-hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:14px}
+.skin-type-badge{display:inline-flex;align-items:center;justify-content:center;margin:5px auto 0;padding:4px 8px;border-radius:999px;font-size:9px;font-weight:950;letter-spacing:.08em;background:rgba(255,255,255,.08)}
+.ability-variant-card .skin-type-badge{background:rgba(255,196,55,.15);box-shadow:0 0 14px rgba(255,196,55,.14)}
+
+@media(max-width:520px){.rank-fighters-grid,.skin-hero-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:10px}.rank-group-head,.skin-hero-head{padding:12px}.rank-group,.skin-hero-group{border-radius:14px;margin-bottom:18px}}
