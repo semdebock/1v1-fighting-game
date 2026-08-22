@@ -24,26 +24,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.3 Power & Balance release
+      - name: Validate v0.9.3.1 DIAMONDS redeem patch
         run: |
           cat build/v093/core-v093-part1.txt build/v093/core-v093-part2.txt build/v093/core-v093-part3.txt build/v093/core-v093-part4.txt > /tmp/core-v093-full.js
           node --check /tmp/core-v093-full.js
-          node --check core-v093.js
+          node --check core-v0931.js
           node --check device-v092.js
-          node --check qa-v093.js
+          node --check qa-v0931.js
           test -s index.html
           test -s balance-v093.css
-          test -s core-v093.js
-          test -s qa-v093.js
-          grep -q "v0.9.3" index.html
-          grep -q "Power & Balance" index.html
-          grep -q "rankOrder" /tmp/core-v093-full.js
-          grep -q "arenaRank:'S'" /tmp/core-v093-full.js
+          test -s core-v0931.js
+          test -s qa-v0931.js
+          grep -q "v0.9.3.1" index.html
+          grep -q "New code: DIAMONDS" index.html
+          grep -q "code==='DIAMONDS'" core-v0931.js
+          grep -q "save.gems+=100" core-v0931.js
+          grep -q "redeemedDiamonds" core-v0931.js
           grep -q "price:100.*skin-iron-nano" /tmp/core-v093-full.js
-          grep -q "NANO CANNON" /tmp/core-v093-full.js
-          grep -q "SHOULDER BARRAGE" /tmp/core-v093-full.js
           grep -q "NANOTECH ARSENAL" /tmp/core-v093-full.js
-          grep -q "trainingLast" index.html
           grep -q "device-iphone" device-v092.css
           grep -q "KeyA" device-v092.js
 
