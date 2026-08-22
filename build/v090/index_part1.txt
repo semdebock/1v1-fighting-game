@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#070b16">
+<title>Fight Arena v0.9.0 — Cosmetics & Heroes</title>
+<link rel="stylesheet" href="core-v088.css?v=090">
+<link rel="stylesheet" href="owner-v0881.css?v=090">
+<link rel="stylesheet" href="features-v089.css?v=090">
+<link rel="stylesheet" href="revamp-v0892.css?v=090">
+<link rel="stylesheet" href="cosmetics-v090.css?v=090">
+</head>
+<body>
+<main class="app">
+<header class="top"><div><div class="eyebrow">NEO CITY COMBAT LEAGUE</div><div class="brand">FIGHT ARENA <span class="tag">v0.9.0</span></div></div><div class="currency"><span class="pill">LV <b id="lv">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">💎 <b id="gems">0</b></span></div></header>
+
+<section id="home" class="screen active"><div class="home">
+<div class="hero-copy"><span class="tag">COSMETICS & HEROES</span><h1>BUILD YOUR<br>LEGACY</h1><p>Diamonds finally have a purpose. Unlock premium skins, equip your favorite looks and master two brand-new heroes: Daredevil and Moon Knight.</p>
+<div class="buttons">
+<button class="primary" id="play">⚔️ PLAY CAMPAIGN</button>
+<div class="mode-buttons"><button id="training" class="training-launch">🎯 TRAINING MODE</button><button id="settings" class="settings-launch">⚙️ SETTINGS</button></div>
+<button id="gallery">🗂️ COLLECTION</button><button id="daily">🎁 DAILY REWARD</button><button id="updates" class="update-btn">📋 UPDATE LOG • v0.9.0</button>
+</div></div>
+<div class="hero-card"><div class="fighter-preview" id="homePreview"></div><div class="hero-name"><small>SELECTED FIGHTER</small><strong id="selectedName">ROOKIE</strong></div></div>
+<div class="hero-dashboard"><div class="dash-title"><div><small>FIGHTER COMMAND CENTER</small><strong>READY FOR BATTLE</strong></div><span class="live-dot">● CORE ONLINE</span></div><div class="dash-grid">
+<div class="dash-stat"><small>ACTIVE HERO</small><b id="dashHero">ROOKIE</b><span>Current selected fighter</span></div>
+<div class="dash-stat"><small>ROSTER</small><b id="dashRoster">1/7</b><span>Visible fighters unlocked</span></div>
+<div class="dash-stat"><small>NEXT TARGET</small><b id="dashTarget">NIGHTFANG</b><span id="dashLevel">Campaign Level 1</span></div>
+<div class="dash-stat"><small>BALANCE</small><b id="dashCoins">0 🪙</b><span>Character purchase currency</span></div>
+<div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.9.0</b><span>Cosmetics • Daredevil • Moon Knight</span></div>
+</div><div class="build-health"><span>◆ BUILD HEALTH</span><b>MAJOR UPDATE • v0.9.0</b></div></div>
+</div></section>
+
+<section id="updatesScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">WHAT'S NEW</div><h2>UPDATE LOG</h2></div><button class="back">← BACK</button></div><div class="panel">
+<span class="tag">v0.9.0 • COSMETICS & HEROES</span><h2>A NEW ERA FOR FIGHT ARENA.</h2><div class="changelog">
+<div class="log-item"><div class="log-icon">💎</div><div><b>Cosmetics System</b><p>Diamonds can now be spent on permanent skins. Preview, buy, own and equip cosmetics from the new Collection screen. Skins never change combat stats.</p></div></div>
+<div class="log-item"><div class="log-icon">🕷️</div><div><b>Five launch cosmetics</b><p>Symbiote Spider-Man, Nanotech Iron Man, Hydra Captain America, Golden Champion El Primo and Neo City Fighter Rookie are now available.</p></div></div>
+<div class="log-item"><div class="log-icon">😈</div><div><b>Daredevil joins the roster</b><p>A premium technical martial artist with Billy Club Throw, Grapple Rush, Radar Counter and the multi-hit Devil's Combo special.</p></div></div>
+<div class="log-item"><div class="log-icon">🌙</div><div><b>Moon Knight joins the roster</b><p>A premium hybrid vigilante with Crescent Dart, Cape Dive, Moon Guard and the heavy Vengeance of Khonshu special.</p></div></div>
+<div class="log-item"><div class="log-icon">🗂️</div><div><b>Character Gallery becomes Collection</b><p>Fighters and Skins now live together with rarity presentation, animated Legendary cards and large cosmetic previews.</p></div></div>
+<div class="log-item"><div class="log-icon">💾</div><div><b>Safe save migration</b><p>Existing fighters, campaign progress, coins, diamonds, settings and both redeem codes are retained. Cosmetic ownership and equipped skins are now saved too.</p></div></div>
+</div>
+<div class="redeem-card"><div><small>REDEEM CENTER</small><h3>ENTER A GAME CODE</h3><p>Currency and private owner-access codes remain supported.</p></div><div class="redeem-row"><input id="redeemInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Enter code"><button id="redeemBtn">REDEEM</button></div><div id="redeemStatus" class="redeem-status">Waiting for code…</div></div>
+</div></section>
+
+<section id="settingsScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">GAME OPTIONS</div><h2>SETTINGS</h2></div><button class="back">← BACK</button></div><div class="panel"><div class="settings-grid">
+<div class="setting-row"><div><b>FLOATING DAMAGE NUMBERS</b><span>Show exact damage above fighters when attacks connect.</span></div><button data-setting="damageNumbers">ON</button></div>
+<div class="setting-row"><div><b>SCREEN SHAKE</b><span>Allow impact and boss attacks to shake the arena.</span></div><button data-setting="screenShake">ON</button></div>
+<div class="setting-row"><div><b>HAPTICS</b><span>Use vibration feedback on supported devices.</span></div><button data-setting="haptics">ON</button></div>
+</div></div></section>
+
+<section id="trainingScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">PRACTICE LAB</div><h2>TRAINING MODE</h2></div><button class="back">← BACK</button></div>
+<div class="training-header"><div class="training-info"><small>SELECTED TRAINING FIGHTER</small><strong id="trainingHero">ROOKIE</strong><span id="trainingDesc"></span></div><button id="trainingStart" class="primary">START TRAINING</button></div>
+<div class="cards" id="trainingCards"></div>
+</section>
+
+<section id="chars" class="screen"><div class="sectionhead"><div><div class="eyebrow">YOUR COLLECTION</div><h2>COLLECTION</h2></div><button class="back">← BACK</button></div>
+<div class="collection-tabs"><button class="active" data-collection-tab="fighters">🥊 FIGHTERS</button><button data-collection-tab="skins">💎 SKINS</button></div>
+<div id="fightersPane" class="collection-pane">
+<div class="gallery-summary" id="gallerySummary"></div><div class="cards" id="charCards"></div><div class="panel profile"><div class="eyebrow">FIGHTER PROFILE</div><h2 id="charTitle"></h2><p id="charDesc"></p><div class="stats" id="charStats"></div><button class="primary" id="charAction"></button></div>
+</div>
+<div id="skinsPane" class="collection-pane hidden">
+<div class="collection-diamond-note"><b>💎 DIAMONDS = COSMETICS.</b> Skins are visual only and never change health, damage, speed or abilities.</div>
+<div class="cards" id="skinCards"></div>
+<div class="panel skin-profile"><div class="skin-showcase" id="skinPreview"></div><div class="skin-copy"><div class="eyebrow">COSMETIC PREVIEW</div><h2 id="skinTitle">SYMBIOTE SUIT</h2><div class="skin-meta"><span id="skinHero">SPIDER-MAN</span><span id="skinRarity">LEGENDARY</span><span class="skin-price" id="skinPrice">50 💎</span></div><p id="skinDesc"></p><button class="primary" id="skinAction">BUY</button></div></div>
+</div>
+</section>
+
+<section id="levels" class="screen"><div class="sectionhead"><div><div class="eyebrow">STORY PROGRESSION</div><h2>CAMPAIGN</h2></div><button class="back">← BACK</button></div><div class="cards level-cards" id="levelCards"></div><div class="panel profile"><span class="tag" id="diff"></span><h2 id="levelTitle"></h2><p id="levelDesc"></p><div class="stats" id="levelStats"></div><button class="primary" id="start">FIGHT</button></div></section>
+
+<section id="fight" class="screen">
+<div class="sectionhead fighthead"><button id="quit">← QUIT</button><button id="pauseBtn">⏸ PAUSE</button><b id="timer">60</b><span class="tag" id="fightTag"></span></div>
+<div class="hpgrid"><div><div class="hpname"><b id="pname"></b><span>YOU</span></div><div class="bar"><i id="php"></i></div></div><div><div class="hpname"><span>ENEMY</span><b id="ename"></b></div><div class="bar enemybar"><i id="ehp"></i></div></div></div>
+<div id="trainingTools" class="training-tools hidden"><div class="training-live"><span><small>TOTAL DAMAGE</small> <b id="trainingDamage">0</b></span><span><small>HITS</small> <b id="trainingHits">0</b></span><span><small>DUMMY KOs</small> <b id="trainingKos">0</b></span></div><button id="trainingReset">RESET</button><button id="trainingSpecial">FILL SPECIAL</button></div>
+<div class="arena" id="arena"><div class="city"></div><div class="floor"></div><div id="pF" class="fighter player"></div><div id="eF" class="fighter enemy"></div></div>
+<div class="specialrow"><span>⚡ <b id="spText">0%</b></span><div class="bar"><i id="sp"></i></div></div>
+<div class="controls"><div class="stickwrap"><div><div class="stick" id="stick"><div class="knob" id="knob"></div></div><small>MOVE</small></div></div><div class="actionwrap"><div class="actions"><button id="punch">👊 PUNCH</button><button id="kick">🦵 KICK</button><button id="special">⚡ SPECIAL</button><button id="jump">↑ JUMP</button><button id="block">🛡 BLOCK</button><button disabled id="tagfighter"></button></div><div id="heroActions" class="hero-actions"></div></div></div>
+</section>
+
+<section id="results" class="screen result"><div class="eyebrow">MATCH RESULT</div><h1 id="resultTitle"></h1><p id="resultText"></p><div class="cards resultcards"><div class="panel">🪙 <b id="rCoins"></b></div><div class="panel">XP <b id="rXp"></b></div><div class="panel" id="rGemsWrap">💎 <b id="rGems"></b></div></div><h2 id="unlock"></h2><button class="primary" id="continue">CONTINUE</button><button id="menu">MAIN MENU</button></section>
+<div id="toast" class="toast hidden"></div>
+</main>
+
+<div id="pauseOverlay" class="pause-overlay hidden"><div class="pause-card"><div class="eyebrow">FIGHT ARENA</div><h2>PAUSED</h2><div class="pause-actions"><button id="pauseResume" class="primary">▶ RESUME</button><button id="pauseRestart">↻ RESTART</button><button id="pauseSettings">⚙ SETTINGS</button><button id="pauseMenu">⌂ MAIN MENU</button></div>
+<div id="pauseSettingsPanel" class="pause-settings-panel hidden"><div class="settings-grid">
+<div class="setting-row"><div><b>DAMAGE NUMBERS</b></div><button data-setting="damageNumbers">ON</button></div>
+<div class="setting-row"><div><b>SCREEN SHAKE</b></div><button data-setting="screenShake">ON</button></div>
+<div class="setting-row"><div><b>HAPTICS</b></div><button data-setting="haptics">ON</button></div>
+</div></div></div></div>
+
+<script src="core-v090.js?v=090"></script>
+<script src="qa-v089.js?v=090"></script>
+<script src="qa-v090.js?v=090"></script>
+</body>
+</html>
