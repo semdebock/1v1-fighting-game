@@ -28,7 +28,7 @@ jobs:
         run: |
           cat build/v090/core_transform_part1.txt build/v090/core_transform_part2.txt build/v090/core_transform_part3.txt build/v090/core_transform_part4.txt > /tmp/core_transform_v090.py
           python /tmp/core_transform_v090.py
-          cp build/v090/index.html index.html
+          cp build/v090/index_part1.txt index.html
           cp build/v090/cosmetics-v090.css cosmetics-v090.css
           cp build/v090/qa-v090.js qa-v090.js
           node --check core-v090.js
