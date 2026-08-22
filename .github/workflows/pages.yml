@@ -24,22 +24,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build and validate v0.9.0
+      - name: Validate v0.9.1 static release
         run: |
-          cat build/v090/core_transform_part1.txt build/v090/core_transform_part2.txt build/v090/core_transform_part3.txt build/v090/core_transform_part4.txt > /tmp/core_transform_v090.py
-          python /tmp/core_transform_v090.py
-          cp build/v090/index_part1.txt index.html
-          cp build/v090/cosmetics-v090.css cosmetics-v090.css
-          cp build/v090/qa-v090.js qa-v090.js
-          node --check core-v090.js
+          cat build/v091/core-v091-part1.txt build/v091/core-v091-part2.txt build/v091/core-v091-part3.txt build/v091/core-v091-part4.txt > /tmp/core-v091-full.js
+          node --check /tmp/core-v091-full.js
+          node --check core-v091.js
+          node --check qa-v091.js
           test -s index.html
-          test -s core-v090.js
-          test -s cosmetics-v090.css
-          test -s qa-v090.js
-          grep -q "v0.9.0" index.html
-          grep -q "Daredevil" core-v090.js
-          grep -q "Moon Knight" core-v090.js
-          grep -q "spider-symbiote" core-v090.js
+          test -s core-v091.js
+          test -s build/v090/cosmetics-v090.css
+          grep -q "v0.9.1" index.html
+          grep -q "Daredevil" /tmp/core-v091-full.js
+          grep -q "Moon Knight" /tmp/core-v091-full.js
+          grep -q "spider-symbiote" /tmp/core-v091-full.js
+          grep -q "bindClick('gallery'" /tmp/core-v091-full.js
+          grep -q "bindClick('start'" /tmp/core-v091-full.js
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
