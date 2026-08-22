@@ -1,0 +1,14 @@
+const fs=require('fs');
+const path=require('path');
+const transform=require('./transform-v094.js');
+const root=path.resolve(__dirname,'../..');
+const files=['core-v093-part1.txt','core-v093-part2.txt','core-v093-part3.txt','core-v093-part4.txt'];
+let code='';
+for(const file of files)code+=fs.readFileSync(path.join(root,'build/v093',file),'utf8');
+const built=transform(code);
+fs.writeFileSync('/tmp/core-v094-built.js',built);
+if(!built.includes("'Black Panther'"))throw new Error('Black Panther missing');
+if(!built.includes("'Wolverine'"))throw new Error('Wolverine missing');
+if(!built.includes("id:'bp-kinetic'"))throw new Error('Kinetic Panther missing');
+if(!built.includes("code==='DIAMONDS'"))throw new Error('DIAMONDS code missing');
+console.log('v0.9.4 transformed bytes:',Buffer.byteLength(built));
