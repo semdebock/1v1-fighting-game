@@ -1,0 +1,28 @@
+/* Fight Arena v0.9.5.3.1 — centered result flow + one-time fighter unlock reveal */
+#results.active{position:fixed;inset:0;z-index:160;display:flex!important;flex-direction:column;align-items:center;justify-content:center;width:100vw;height:100dvh;min-height:100dvh;overflow:hidden;padding:max(22px,env(safe-area-inset-top)) 18px max(22px,env(safe-area-inset-bottom));background:radial-gradient(circle at 50% 35%,#23345666,transparent 34%),linear-gradient(180deg,#080d17f7,#03050bf9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:resultOverlayIn .28s ease both}
+#results.active>*{position:relative;z-index:2}
+#results.active:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 42%,#ffffff08 48%,transparent 54%);transform:translateX(-120%);animation:resultSweep .9s .18s ease forwards;pointer-events:none}
+#results.active>.eyebrow{font-size:10px}
+#results.active h1{margin:6px 0 4px;font-size:clamp(42px,10vw,72px);line-height:.92;text-shadow:0 8px 28px #000b}
+#results.active>p{margin:4px auto 8px;max-width:560px;color:#bac5d6;font-weight:700}
+#results.active .resultcards{width:min(650px,92vw);grid-template-columns:repeat(3,minmax(0,1fr));margin:12px auto}
+#results.active .resultcards .panel{padding:13px 10px;min-width:0}
+#results.active #unlock{max-width:min(680px,92vw);margin:7px auto 10px;font-size:clamp(13px,2.7vw,18px);line-height:1.35;color:#f3d781}
+#results.active button{width:min(330px,86vw);min-height:50px;margin:5px 0;font-size:13px;letter-spacing:.06em}
+#results.active #continue{background:linear-gradient(135deg,#5c74ff,#465cdf);border-color:#8ea0ff}
+#results.active #rematch{background:linear-gradient(180deg,#202b3e,#111927);border-color:#596980}
+#results.active #menu{background:#090f19;border-color:#303d51}
+html:has(#results.active),body:has(#results.active){overflow:hidden!important;overscroll-behavior:none!important}
+
+.fighter-unlock-reveal{position:fixed!important;inset:0;z-index:220!important;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 50% 45%,#d8d8d82b,transparent 24%),#02040ad9;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);opacity:0;transition:opacity .22s ease;pointer-events:none;overflow:hidden}
+.fighter-unlock-reveal.show{opacity:1}.fighter-unlock-reveal.leaving{opacity:0}
+.fighter-unlock-card{position:relative;width:min(390px,90vw);padding:20px 18px 18px;border:1px solid #9fa7b3;border-radius:24px;background:radial-gradient(circle at 50% 35%,#ffffff13,transparent 31%),linear-gradient(180deg,#151a21,#090c11);box-shadow:0 28px 70px #000c,inset 0 1px #fff2;text-align:center;transform:scale(.72) translateY(18px);opacity:0;animation:unlockCardIn .55s .08s cubic-bezier(.2,.9,.25,1.18) forwards}
+.fighter-unlock-card small{display:block;color:#b9c1cc;letter-spacing:.18em;font-size:9px}
+.fighter-unlock-card strong{display:block;margin-top:5px;font-size:25px;letter-spacing:.025em;color:#fff;text-shadow:0 0 18px #ffffff50}
+.fighter-unlock-card span{display:block;margin:6px auto 12px;max-width:290px;color:#b7c0cc;font-size:12px;line-height:1.45}
+.fighter-unlock-card>b{display:inline-flex;padding:7px 10px;border-radius:999px;border:1px solid #d8dde544;background:#d8dde510;color:#e9edf3;font-size:10px;letter-spacing:.07em}
+.unlock-portrait{height:175px;display:grid;place-items:end center;margin:6px auto 2px}
+.unlock-portrait .fighter{position:relative!important;left:auto!important;bottom:auto!important;transform:scale(.9)!important;transform-origin:bottom center!important;filter:drop-shadow(0 13px 7px #000c) drop-shadow(0 0 14px #fff2)}
+.unlock-sparks{position:absolute;inset:0;pointer-events:none}.unlock-sparks i{position:absolute;left:50%;top:50%;width:7px;height:20px;border-radius:5px;background:#e8edf5;box-shadow:0 0 10px #fff8;opacity:0;animation:unlockSpark .95s .12s ease-out forwards}.unlock-sparks i:nth-child(1){--r:0deg;--d:155px}.unlock-sparks i:nth-child(2){--r:36deg;--d:180px}.unlock-sparks i:nth-child(3){--r:72deg;--d:145px}.unlock-sparks i:nth-child(4){--r:108deg;--d:175px}.unlock-sparks i:nth-child(5){--r:144deg;--d:150px}.unlock-sparks i:nth-child(6){--r:180deg;--d:180px}.unlock-sparks i:nth-child(7){--r:216deg;--d:150px}.unlock-sparks i:nth-child(8){--r:252deg;--d:170px}.unlock-sparks i:nth-child(9){--r:288deg;--d:145px}.unlock-sparks i:nth-child(10){--r:324deg;--d:175px}
+@keyframes resultOverlayIn{from{opacity:0}to{opacity:1}}@keyframes resultSweep{to{transform:translateX(120%)}}@keyframes unlockCardIn{to{transform:scale(1) translateY(0);opacity:1}}@keyframes unlockSpark{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--r)) translateY(0) scale(.4)}22%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--r)) translateY(calc(var(--d) * -1)) scale(1)}}
+@media(max-width:520px){#results.active{padding-left:14px;padding-right:14px}#results.active h1{font-size:45px}#results.active .resultcards{gap:7px}#results.active .resultcards .panel{font-size:12px;padding:10px 5px}.fighter-unlock-card{padding-top:16px}.unlock-portrait{height:155px}.unlock-portrait .fighter{transform:scale(.8)!important}.fighter-unlock-card strong{font-size:22px}}
