@@ -1,0 +1,131 @@
+/* Fight Arena v0.8.8 — unified clean runtime */
+(() => {
+'use strict';
+const $=id=>document.getElementById(id),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),now=()=>performance.now()/1000;
+const SAVE_KEY='fightArenaV08';
+const CHARS={
+  'Rookie':{cls:'rookie',rank:'COMMON • BALANCED',hp:100,power:55,speed:60,price:0,punch:8,kick:13,special:25,specialName:'Arena Burst',desc:'Balanced starter fighter with reliable speed and damage.'},
+  'El Primo':{cls:'primo',rank:'RARE • TANK',hp:140,power:82,speed:42,price:1000,punch:11,kick:16,special:34,specialName:'Primo Smash',desc:'Heavy tank fighter with huge health, stronger hits and slower movement.'},
+  'Spider-Man':{cls:'spiderman',rank:'EPIC • AGILE',hp:90,power:68,speed:88,price:1750,punch:9,kick:14,special:24,specialName:'Web Burst',desc:'Agile web-slinger with the fastest movement, high jumps and a versatile web arsenal.'},
+  'Captain America':{cls:'captain',rank:'A RANK • TACTICAL',hp:115,power:76,speed:58,price:2200,punch:10,kick:14,special:27,specialName:'Avenger Strike',desc:'Tactical shield fighter with Shield Throw, Shield Bash and Guard Stance.'},
+  'Iron Man':{cls:'ironman',rank:'S RANK • TECH / FLIGHT',hp:105,power:88,speed:76,price:3200,punch:10,kick:15,special:30,specialName:'Unibeam',desc:'Premium ranged hero with Repulsor Blast, Micro Missile and temporary Flight.'}
+};
+const LEVELS=[
+  {n:1,name:'Nightfang',cls:'nightfang',diff:'Easy',role:'SHADOW ASSASSIN',hp:100,dmg:1,coins:100,xp:25,gems:0,desc:'Fast but predictable melee fighter. Beat him to unlock Level 2.'},
+  {n:2,name:'Ultron',cls:'ultron',diff:'Normal',role:'ROGUE COMBAT ANDROID',hp:125,dmg:1.1,coins:175,xp:40,gems:0,desc:'Armored combat android with smarter AI and a dangerous ranged Energy Pulse.'},
+  {n:3,name:'Green Goblin',cls:'greengoblin',diff:'Hard',role:'GOBLIN BOMBER',hp:150,dmg:1.18,coins:250,xp:60,gems:0,desc:'Aggressive aerial menace with faster pressure and explosive Pumpkin Bombs.'},
+  {n:4,name:'Mysterio',cls:'mysterio',diff:'Hard+',role:'ILLUSION CONTROLLER',hp:165,dmg:1.22,coins:350,xp:80,gems:0,desc:'Master of misdirection. Mystic Orbs, illusion clones and smoke teleports control the arena.'},
+  {n:5,name:'Kingpin',cls:'kingpin',diff:'BOSS',role:'CRIME LORD • BOSS',hp:250,dmg:1.34,coins:600,xp:150,gems:5,boss:true,desc:'The first true Arena Boss. Heavy Punch, Charge Rush, Ground Smash and a dangerous Rage phase.'},
+  {n:6,name:'Prowler',cls:'prowler',diff:'Expert',role:'STEALTH HUNTER',hp:175,dmg:1.30,coins:450,xp:100,gems:0,desc:'A high-speed stealth hunter with Cloak, Dash Strike, Claw Combo and Tech Shock.'}
+];
+window.FightArena={version:'0.8.8',chars:CHARS,levels:LEVELS};
+
+function loadSave(){
+  let raw={};try{raw=JSON.parse(localStorage.getItem(SAVE_KEY)||'{}')||{}}catch{}
+  const owned={Rookie:true,'El Primo':false,'Spider-Man':false,'Captain America':false,'Iron Man':false,...(raw.owned||{})};
+  const s={coins:1250,gems:50,lv:1,xp:0,selected:'Rookie',unlocked:1,daily:false,redeemedBrandNewDay:false,...raw,owned};
+  s.coins=Number.isFinite(Number(s.coins))?Math.max(0,Math.floor(Number(s.coins))):1250;
+  s.gems=Number.isFinite(Number(s.gems))?Math.max(0,Math.floor(Number(s.gems))):50;
+  s.lv=Number.isFinite(Number(s.lv))?Math.max(1,Math.floor(Number(s.lv))):1;
+  s.xp=Number.isFinite(Number(s.xp))?Math.max(0,Math.floor(Number(s.xp))):0;
+  s.unlocked=clamp(Number.isFinite(Number(s.unlocked))?Math.floor(Number(s.unlocked)):1,1,LEVELS.length);
+  if(!CHARS[s.selected]||!s.owned[s.selected])s.selected='Rookie';s.coreVersion='0.8.8';return s;
+}
+let save=loadSave(),chosen=save.selected,chosenLevel=clamp(save.unlocked,1,LEVELS.length),F=null,rafId=0,clockId=0,uiId=0;
+const timeoutSet=new Set(),intervalSet=new Set();
+function persist(){localStorage.setItem(SAVE_KEY,JSON.stringify(save));hud();refreshDashboard()}
+function screen(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id)?.classList.add('active')}
+function toast(text){const t=$('toast');if(!t)return;t.textContent=text;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),1300)}
+function later(fn,ms){const id=setTimeout(()=>{timeoutSet.delete(id);fn()},ms);timeoutSet.add(id);return id}
+function every(fn,ms){const id=setInterval(fn,ms);intervalSet.add(id);return id}
+function clearTracked(){timeoutSet.forEach(clearTimeout);timeoutSet.clear();intervalSet.forEach(clearInterval);intervalSet.clear()}
+function sprite(){return '<div class="head"><i class="eye l"></i><i class="eye r"></i></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="leg l"></div><div class="leg r"></div>'}
+function classFor(name){return CHARS[name]?.cls||LEVELS.find(l=>l.name===name)?.cls||name.toLowerCase().replace(/[^a-z0-9]+/g,'')}
+function previewMarkup(name){return `<div class="fighter ${classFor(name)} idle" style="position:relative;left:auto;bottom:auto">${sprite()}</div>`}
+function setSprite(el,name,side){if(!el)return;el.className=`fighter ${side} ${classFor(name)} idle`;el.innerHTML=sprite()}
+function hud(){
+  $('coins').textContent=save.coins;$('gems').textContent=save.gems;$('lv').textContent=save.lv;$('selectedName').textContent=save.selected.toUpperCase();$('homePreview').innerHTML=previewMarkup(save.selected);
+}
+function refreshDashboard(){
+  const owned=Object.keys(CHARS).filter(n=>save.owned[n]).length,n=clamp(save.unlocked,1,LEVELS.length),target=LEVELS[n-1];
+  $('dashHero').textContent=save.selected.toUpperCase();$('dashRoster').textContent=`${owned}/${Object.keys(CHARS).length}`;$('dashTarget').textContent=target.name.toUpperCase();$('dashLevel').textContent=`Campaign Level ${target.n}`;$('dashCoins').textContent=`${save.coins} 🪙`;
+}
+function renderChars(){
+  const box=$('charCards');box.innerHTML='';Object.entries(CHARS).forEach(([name,c])=>{const b=document.createElement('button');b.className='card '+(chosen===name?'active ':'')+(!save.owned[name]?'locked':'');b.innerHTML=`<div class="eyebrow">${c.rank}</div><div class="portrait">${previewMarkup(name)}</div><h3>${name.toUpperCase()}</h3><small>${save.owned[name]?(save.selected===name?'✓ SELECTED':'OWNED'):`🪙 ${c.price.toLocaleString()}`}</small>`;b.onclick=()=>{chosen=name;renderChars();renderCharInfo()};box.appendChild(b)});
+  const owned=Object.keys(CHARS).filter(n=>save.owned[n]).length;$('gallerySummary').innerHTML=`<div><b>FIGHTER ROSTER</b><span> ${owned} owned • ${Object.keys(CHARS).length} total</span></div><div class="role-chip">${save.selected.toUpperCase()} SELECTED</div>`;
+}
+function renderCharInfo(){const c=CHARS[chosen];$('charTitle').textContent=chosen.toUpperCase();$('charDesc').textContent=c.desc;$('charStats').innerHTML=`<div><small>HEALTH</small>${c.hp}</div><div><small>POWER</small>${c.power}</div><div><small>SPEED</small>${c.speed}</div><div><small>SPECIAL</small>${c.specialName}</div>`;$('charAction').textContent=!save.owned[chosen]?`BUY • ${c.price.toLocaleString()} 🪙`:save.selected===chosen?'SELECTED':'SELECT';$('charAction').disabled=save.selected===chosen}
+function renderLevels(){const box=$('levelCards');box.innerHTML='';LEVELS.forEach(l=>{const open=l.n<=save.unlocked,b=document.createElement('button');b.className='card '+(chosenLevel===l.n?'active ':'')+(!open?'locked ':'')+(l.boss?'boss-card':'');b.innerHTML=`<div class="eyebrow">LEVEL ${l.n} • ${l.diff} ${l.boss?'<span class="boss-badge">BOSS</span>':''}</div><div class="portrait">${previewMarkup(l.name)}</div><h3>${l.name.toUpperCase()}</h3><div class="level-villain">${l.role}</div><span class="level-reward">${open?`🪙 ${l.coins} • ${l.xp} XP${l.gems?` • 💎 ${l.gems}`:''}`:'🔒 LOCKED'}</span>`;b.onclick=()=>{if(!open)return toast(`Beat Level ${l.n-1} first`);chosenLevel=l.n;renderLevels();renderLevelInfo()};box.appendChild(b)})}
+function renderLevelInfo(){const l=LEVELS[chosenLevel-1];$('diff').textContent=l.boss?'BOSS ENCOUNTER':l.diff.toUpperCase();$('levelTitle').textContent=`LEVEL ${l.n} — ${l.name.toUpperCase()}`;$('levelDesc').textContent=l.desc;$('levelStats').innerHTML=`<div><small>HP</small>${l.hp}</div><div><small>DAMAGE</small>${Math.round(l.dmg*100)}%</div><div><small>REWARD</small>${l.coins} 🪙</div><div><small>${l.gems?'BOSS LOOT':'XP'}</small>${l.gems?`${l.gems} 💎`:l.xp}</div>`}
+
+$('charAction').onclick=()=>{const c=CHARS[chosen];if(!save.owned[chosen]){if(save.coins<c.price)return toast('Not enough coins');save.coins-=c.price;save.owned[chosen]=true}save.selected=chosen;persist();renderChars();renderCharInfo();toast(`${chosen.toUpperCase()} SELECTED`)};
+$('play').onclick=()=>{chosenLevel=clamp(save.unlocked,1,LEVELS.length);renderLevels();renderLevelInfo();screen('levels')};
+$('gallery').onclick=()=>{chosen=save.selected;renderChars();renderCharInfo();screen('chars')};$('updates').onclick=()=>screen('updatesScreen');document.querySelectorAll('.back').forEach(b=>b.onclick=()=>screen('home'));
+$('daily').onclick=()=>{if(save.daily)return toast('Daily reward already claimed');save.daily=true;save.coins+=250;persist();toast('+250 coins 🪙')};
+$('redeemBtn').onclick=()=>{const input=$('redeemInput'),status=$('redeemStatus'),code=input.value.trim();if(code!=='BrandNewDay'){status.textContent='❌ INVALID CODE';status.className='redeem-status bad';return}if(save.redeemedBrandNewDay){status.textContent='✓ CODE ALREADY REDEEMED';status.className='redeem-status used';return}save.coins+=5000;save.redeemedBrandNewDay=true;persist();input.value='';status.textContent='✓ +5,000 COINS ADDED';status.className='redeem-status good';toast('+5,000 COINS 🪙')};$('redeemInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('redeemBtn').click()});
+
+function impact(x,y=48){const d=document.createElement('div');d.className='impact';d.style.left=x+'%';d.style.top=y+'%';$('arena').appendChild(d);later(()=>d.remove(),220)}
+function blockFx(x){const d=document.createElement('div');d.className='blockfx';d.style.left=x+'%';d.style.top='40%';$('arena').appendChild(d);later(()=>d.remove(),200)}
+function shake(big=false){const a=$('arena');a.classList.remove('shake','bigshake');void a.offsetWidth;a.classList.add(big?'bigshake':'shake');later(()=>a.classList.remove('shake','bigshake'),250)}
+function draw(){if(!F)return;$('pF').style.left=F.px+'%';$('eF').style.left=F.ex+'%';$('pF').style.bottom=`calc(14% + ${F.jump}px)`;$('php').style.width=clamp(F.ph/F.pm*100,0,100)+'%';$('ehp').style.width=clamp(F.eh/F.em*100,0,100)+'%';$('sp').style.width=clamp(F.sp,0,100)+'%';$('spText').textContent=Math.floor(clamp(F.sp,0,100))+'%';$('special').disabled=F.sp<100;$('timer').textContent=F.time}
+function damageEnemy(amount,push=2,big=false){if(!F||F.over)return;const n=Number(amount);if(!Number.isFinite(n)||n<=0)return;F.eh=clamp((Number.isFinite(F.eh)?F.eh:F.em)-n,0,F.em);F.ex=clamp(F.ex+push,F.px+7,92);F.sp=clamp(F.sp+n*1.15,0,100);$('eF').classList.add('hurt');later(()=>$('eF')?.classList.remove('hurt'),150);impact((F.px+F.ex)/2);shake(big);draw();if(F.eh<=0)finish(true)}
+function damagePlayer(amount,big=false,blockable=true){if(!F||F.over)return;let n=Number(amount);if(!Number.isFinite(n)||n<=0)return;if(blockable&&F.block){n=Math.max(2,Math.round(n*.3));blockFx(F.px+3)}F.ph=clamp((Number.isFinite(F.ph)?F.ph:F.pm)-n,0,F.pm);$('pF').classList.add('hurt');later(()=>$('pF')?.classList.remove('hurt'),150);impact(F.px+4);shake(big);draw();if(F.ph<=0)finish(false)}
+function attack(kind){if(!F||F.over||F.busy)return;const c=CHARS[save.selected],dmg=kind==='kick'?c.kick:c.punch;F.busy=true;const p=$('pF');p.classList.remove('idle');p.classList.add(kind==='kick'?'kicking':'punching');if(F.ex-F.px<(kind==='kick'?16:15))later(()=>damageEnemy(dmg,kind==='kick'?4:2),70);later(()=>{p?.classList.remove('kicking','punching');p?.classList.add('idle');if(F)F.busy=false},260)}
+function enemyMelee(){if(!F||F.over)return;const e=$('eF');e.classList.remove('idle');e.classList.add('enemy-punch');damagePlayer(Math.round(7*F.level.dmg),false,true);later(()=>{e?.classList.remove('enemy-punch');e?.classList.add('idle')},210)}
+function fx(className,left,top){const e=document.createElement('div');e.className=className;e.style.left=left+'%';e.style.top=top+'%';$('arena').appendChild(e);return e}
+function callout(text){const d=fx('callout',50,0);d.style.left='50%';d.textContent=text;later(()=>d.remove(),850)}
+function playerProjectile(css,damage,speed=4,push=3,returning=false,onDone=null){if(!F)return;let x=F.px+7,dir=1,hit=false;const p=fx(`projectile ${css}`,x,F.flying?32:48);const id=every(()=>{if(!F||F.over){clearInterval(id);intervalSet.delete(id);p.remove();onDone?.();return}x+=speed*dir;p.style.left=x+'%';if(!hit&&Math.abs(x-F.ex)<6){hit=true;damageEnemy(damage,push,false);if(returning)dir=-1;else{clearInterval(id);intervalSet.delete(id);p.remove();onDone?.();return}}if(returning&&hit&&x<=F.px+5){clearInterval(id);intervalSet.delete(id);p.remove();onDone?.()}else if(x>103||x<0){clearInterval(id);intervalSet.delete(id);p.remove();onDone?.()}},22)}
+function enemyProjectile(css,damage,speed=3,top=46){if(!F)return;let x=F.ex-2;const p=fx(`projectile enemyshot ${css}`,x,top),id=every(()=>{if(!F||F.over){clearInterval(id);intervalSet.delete(id);p.remove();return}x-=speed;p.style.left=x+'%';if(Math.abs(x-F.px)<5){clearInterval(id);intervalSet.delete(id);p.remove();damagePlayer(damage,true,true)}else if(x<0){clearInterval(id);intervalSet.delete(id);p.remove()}},25)}
+function cooldownReady(i){return now()>=F.cooldowns[i]}
+function setCd(i,seconds){F.cooldowns[i]=now()+seconds}
+function renderHeroActions(){const row=$('heroActions');if(!F){row.innerHTML='';return}const name=save.selected,defs=name==='Spider-Man'?[['🕸 WEB SHOT',1.6],['🧲 WEB PULL',4.2],['↩ WEB DODGE',5]]:name==='Captain America'?[['🛡 SHIELD THROW',2.3],['💥 SHIELD BASH',3.5],['⭐ GUARD',6]]:name==='Iron Man'?[['🔴 REPULSOR',1.35],['🚀 MISSILE',4.5],[F.flying?'🔥 LAND':'🔥 FLY',7]]:null;if(!defs){row.innerHTML='';return}row.innerHTML=defs.map((d,i)=>{const left=Math.max(0,F.cooldowns[i]-now()),canLand=name==='Iron Man'&&i===2&&F.flying;return `<button data-i="${i}" ${left>0&&!canLand?'disabled':''}>${d[0]}<span class="hero-cd">${left>0&&!canLand?left.toFixed(1)+'s':'READY'}</span></button>`}).join('');row.querySelectorAll('button').forEach(b=>b.onpointerdown=()=>heroAbility(Number(b.dataset.i)))}
+function heroAbility(i){if(!F||F.over)return;const name=save.selected;if(!cooldownReady(i)&&!(name==='Iron Man'&&i===2&&F.flying))return;
+  if(name==='Spider-Man'){
+    if(i===0){setCd(0,1.6);playerProjectile('webshot',8,4.1,3)}
+    if(i===1){setCd(1,4.2);if(F.ex-F.px<46){damageEnemy(5,0,false);F.ex=clamp(F.px+11,F.px+8,92);draw();toast('WEB PULL!')}else toast('TOO FAR')}
+    if(i===2){setCd(2,5);F.px=clamp(F.px-12,3,F.ex-7);F.block=true;$('pF').classList.add('blocking');later(()=>{if(F)F.block=false;$('pF')?.classList.remove('blocking')},650);draw()}
+  } else if(name==='Captain America'){
+    if(i===0){setCd(0,2.3);$('pF').classList.add('shield-away');playerProjectile('shieldshot',12,4,4,true,()=>$('pF')?.classList.remove('shield-away'))}
+    if(i===1){setCd(1,3.5);F.px=clamp(Math.min(F.ex-7,F.px+12),3,F.ex-7);draw();later(()=>{if(F&&F.ex-F.px<17)damageEnemy(14,5,false)},90)}
+    if(i===2){setCd(2,6);F.block=true;$('pF').classList.add('guard','blocking');later(()=>{if(F)F.block=false;$('pF')?.classList.remove('guard','blocking')},1800)}
+  } else if(name==='Iron Man'){
+    if(i===0){setCd(0,1.35);playerProjectile('repulsor',10,4.5,3)}
+    if(i===1){setCd(1,4.5);playerProjectile('missile',17,2.9,6)}
+    if(i===2){if(F.flying){F.flying=false;$('pF').classList.remove('flying');toast('LANDING');return}setCd(2,7);F.flying=true;$('pF').classList.add('flying');later(()=>{if(F){F.flying=false;$('pF')?.classList.remove('flying')}},3000)}
+  }renderHeroActions();
+}
+function useSpecial(){if(!F||F.over||F.sp<100)return;const name=save.selected,c=CHARS[name];F.sp=0;const p=$('pF');p.classList.add('specialing');
+  if(name==='Spider-Man'){const ring=fx('impact',F.px+7,42);ring.style.width='70px';ring.style.height='70px';if(F.ex-F.px<38)damageEnemy(c.special,7,true);toast('WEB BURST!')}
+  else if(name==='Captain America'){F.px=clamp(Math.min(F.ex-8,F.px+18),3,F.ex-7);draw();later(()=>damageEnemy(c.special,10,true),90);toast('AVENGER STRIKE!')}
+  else if(name==='Iron Man'){const beam=fx('beam',F.px+8,42);later(()=>damageEnemy(c.special,9,true),90);later(()=>beam.remove(),500);toast('UNIBEAM!')}
+  else if(F.ex-F.px<24){later(()=>damageEnemy(c.special,8,true),100)}else toast('GET CLOSER');
+  later(()=>p?.classList.remove('specialing'),430);draw();
+}
+function mysterioClone(){if(!F||$('mystClone'))return;callout('ILLUSION CLONE');const c=document.createElement('div');c.id='mystClone';c.className='fighter enemy mysterio illusion';c.innerHTML=sprite();c.style.left=clamp(F.ex-24,8,75)+'%';$('arena').appendChild(c);later(()=>c.remove(),1500)}
+function mysterioTeleport(){if(!F)return;callout('SMOKE TELEPORT');const old=F.ex,s1=fx('smoke',old,38);$('eF').classList.add('cloaked');later(()=>s1.remove(),600);later(()=>{if(!F)return;F.ex=clamp(F.px+18+Math.random()*18,F.px+10,92);$('eF').classList.remove('cloaked');const s2=fx('smoke',F.ex,38);later(()=>s2.remove(),600);draw()},260)}
+function kingpinHeavy(){callout('HEAVY PUNCH');$('eF').classList.add('hurt');later(()=>{if(F&&F.ex-F.px<16)damagePlayer(F.rage?20:17,true,true);$('eF')?.classList.remove('hurt')},280)}
+function kingpinSmash(){callout('GROUND SMASH');const w=fx('wave',F.ex-4,63);later(()=>w.remove(),520);later(()=>{if(F&&F.ex-F.px<25)damagePlayer(F.rage?19:16,true,true)},180)}
+function kingpinCharge(){callout('CHARGE RUSH');const start=F.ex,target=clamp(F.px+8,8,88);let n=0;const id=every(()=>{if(!F||F.over){clearInterval(id);intervalSet.delete(id);return}n++;F.ex=start+(target-start)*(n/8);draw();if(F.ex-F.px<10){clearInterval(id);intervalSet.delete(id);damagePlayer(F.rage?23:20,true,true)}else if(n>=8){clearInterval(id);intervalSet.delete(id)}},32)}
+function prowlerDash(){callout('DASH STRIKE');F.ex=clamp(F.px+8,F.px+7,91);draw();later(()=>{if(F&&F.ex-F.px<12)damagePlayer(15,true,true)},120)}
+function prowlerClaws(){callout('CLAW COMBO');[90,210,330].forEach((ms,i)=>later(()=>{if(F&&F.ex-F.px<14)damagePlayer(i===2?7:5,i===2,true,true)},ms))}
+function prowlerCloak(){if(F.cloaked)return;F.cloaked=true;callout('CLOAK');$('eF').classList.add('cloaked');later(()=>{if(!F)return;F.ex=clamp(F.px+12+Math.random()*18,F.px+8,91);$('eF').classList.remove('cloaked');F.cloaked=false;draw();prowlerDash()},650)}
+function enemyLogic(dt){if(!F||F.over)return;const l=F.level,gap=F.ex-F.px;F.enemyAtk-=dt;F.ai1-=dt;F.ai2-=dt;
+  const approach={1:9,2:8.2,3:10.2,4:8.8,5:7.2,6:11.2}[l.n]||9;if(gap>15&&!F.cloaked)F.ex-=approach*dt;else if(gap<9)F.ex+=6*dt;F.ex=clamp(F.ex,F.px+7,92);
+  if(F.enemyAtk<=0&&gap<(l.n===5?17:14)&&!F.cloaked){enemyMelee();F.enemyAtk=({1:.95,2:.82,3:.7,4:.72,5:F.rage?.55:.82,6:.6}[l.n]||.9)*(1+Math.random()*.35)}
+  if(l.n===2&&F.ai1<=0&&gap>=13){callout('ENERGY PULSE');enemyProjectile('pulse',11,2.7,48);F.ai1=5.5+Math.random()*2.5}
+  if(l.n===3&&F.ai1<=0&&gap>=11){callout('PUMPKIN BOMB');enemyProjectile('pumpkin',14,2.8,43);F.ai1=4.3+Math.random()*2}
+  if(l.n===4){if(F.ai2<=0){mysterioClone();F.ai2=6+Math.random()*2}if(F.ai1<=0){gap<14?mysterioTeleport():(Math.random()<.62?(callout('MYSTIC ORB'),enemyProjectile('mystic',12,3.15,44)):mysterioTeleport());F.ai1=2.4+Math.random()*1.5}}
+  if(l.n===5){if(!F.rage&&F.eh/F.em<=.35){F.rage=true;$('eF').classList.add('rage');callout('KINGPIN RAGE');toast('BOSS PHASE 2 — RAGE!')}if(F.ai1<=0){gap>19?kingpinCharge():(gap<13&&Math.random()<.5?kingpinHeavy():kingpinSmash());F.ai1=(F.rage?2:2.8)+Math.random()*1.1}}
+  if(l.n===6){if(F.ai2<=0){prowlerCloak();F.ai2=6.5+Math.random()*1.8}if(F.ai1<=0&&!F.cloaked){gap>22?(Math.random()<.55?(callout('TECH SHOCK'),enemyProjectile('tech',13,3.65,45)):prowlerDash()):gap<14?prowlerClaws():prowlerDash();F.ai1=1.75+Math.random()}}
+}
+function stopFightTimers(){cancelAnimationFrame(rafId);clearInterval(clockId);clearInterval(uiId);clearTracked();rafId=clockId=uiId=0}
+function startFight(){stopFightTimers();const l=LEVELS[chosenLevel-1],c=CHARS[save.selected];F={level:l,pm:c.hp,ph:c.hp,em:l.hp,eh:l.hp,px:12,ex:80,move:0,sp:0,block:false,jump:0,jv:0,time:60,over:false,busy:false,enemyAtk:.9,ai1:2.5,ai2:5,cooldowns:[0,0,0],flying:false,rage:false,cloaked:false,last:performance.now()};setSprite($('pF'),save.selected,'player');setSprite($('eF'),l.name,'enemy');$('pname').textContent=save.selected.toUpperCase();$('ename').textContent=l.name.toUpperCase();$('fightTag').textContent=`${l.diff.toUpperCase()} • LEVEL ${l.n}`;$('tagfighter').textContent=save.selected.toUpperCase();$('special').textContent=`⚡ ${c.specialName.toUpperCase()}`;$('fight').classList.toggle('boss-mode',!!l.boss);screen('fight');draw();renderHeroActions();if(l.boss){const intro=document.createElement('div');intro.className='boss-intro';intro.innerHTML=`<div><small>LEVEL ${l.n} • BOSS ENCOUNTER</small><strong>${l.name.toUpperCase()}</strong><span>DEFEAT THE BOSS • 💎 ${l.gems}</span></div>`;$('arena').appendChild(intro);later(()=>intro.remove(),1400)}clockId=setInterval(()=>{if(F&&!F.over){F.time--;if(F.time<=0)finish(F.ph/F.pm>=F.eh/F.em);draw()}},1000);uiId=setInterval(renderHeroActions,120);
+  function frame(t){if(!F)return;const dt=Math.min((t-F.last)/1000,.035);F.last=t;if(!F.over){const speed=22+CHARS[save.selected].speed*.18;F.px=clamp(F.px+F.move*speed*dt,3,F.ex-7);enemyLogic(dt);if(F.jump>0||F.jv>0){F.jv-=900*dt;F.jump+=F.jv*dt;if(F.jump<=0){F.jump=0;F.jv=0}}draw()}rafId=requestAnimationFrame(frame)}rafId=requestAnimationFrame(frame)
+}
+function finish(win){if(!F||F.over)return;F.over=true;cancelAnimationFrame(rafId);clearInterval(clockId);clearInterval(uiId);clearTracked();const l=F.level,loser=win?$('eF'):$('pF');loser.classList.remove('idle');loser.classList.add('ko');shake(true);setTimeout(()=>{const coins=win?l.coins:20,xp=win?l.xp:10,gems=win?(l.gems||0):0;save.coins+=coins;save.gems+=gems;save.xp+=xp;while(save.xp>=100){save.xp-=100;save.lv++;save.coins+=150;save.gems+=5}let unlocked=false;if(win&&l.n===save.unlocked&&l.n<LEVELS.length){save.unlocked++;unlocked=true}persist();$('results').className='screen result active '+(win?'victory':'defeat');$('resultTitle').textContent=win?'VICTORY':'DEFEAT';$('resultText').textContent=win?`${l.name} defeated.`:`${l.name} wins this round.`;$('rCoins').textContent='+'+coins;$('rXp').textContent='+'+xp;$('rGems').textContent='+'+gems;$('rGemsWrap').classList.toggle('hidden',gems===0);$('unlock').textContent=(unlocked?`🔓 LEVEL ${save.unlocked} UNLOCKED — ${LEVELS[save.unlocked-1].name.toUpperCase()}!`:'')+(gems?` ${unlocked?'• ':''}💎 +${gems} BOSS DIAMONDS`:'');F=null},560)}
+
+$('start').onclick=startFight;$('quit').onclick=()=>{stopFightTimers();F=null;$('fight').classList.remove('boss-mode');screen('home')};$('punch').onpointerdown=()=>attack('punch');$('kick').onpointerdown=()=>attack('kick');$('special').onpointerdown=useSpecial;$('jump').onpointerdown=()=>{if(F&&F.jump===0)F.jv=save.selected==='El Primo'?350:save.selected==='Spider-Man'?470:390};$('block').onpointerdown=()=>{if(F){F.block=true;$('pF').classList.add('blocking')}};['pointerup','pointercancel','pointerleave'].forEach(ev=>$('block').addEventListener(ev,()=>{if(F){F.block=false;$('pF').classList.remove('blocking')}}));$('continue').onclick=()=>{chosenLevel=clamp(save.unlocked,1,LEVELS.length);renderLevels();renderLevelInfo();screen('levels')};$('menu').onclick=()=>screen('home');
+let sid=null;function stickMove(e){if(!F)return;const r=$('stick').getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),max=r.width*.28,n=clamp(dx/max,-1,1);F.move=Math.abs(n)>.12?n:0;$('knob').style.transform=`translateX(${n*max}px)`}$('stick').onpointerdown=e=>{sid=e.pointerId;$('stick').setPointerCapture(e.pointerId);stickMove(e)};$('stick').onpointermove=e=>{if(e.pointerId===sid)stickMove(e)};function stickUp(e){if(e.pointerId!==sid)return;sid=null;if(F)F.move=0;$('knob').style.transform='translateX(0)'}$('stick').onpointerup=stickUp;$('stick').onpointercancel=stickUp;
+
+persist();hud();refreshDashboard();renderChars();renderCharInfo();renderLevels();renderLevelInfo();
+})();
