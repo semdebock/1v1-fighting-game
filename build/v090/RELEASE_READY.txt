@@ -1,0 +1,22 @@
+Fight Arena v0.9.0 — Cosmetics & Heroes
+Final release validation completed.
+
+Validated systems:
+- Save migration from v0.8.x
+- 7 public fighters + hidden owner fighter
+- Daredevil full ability kit + Devil's Combo
+- Moon Knight full ability kit + Vengeance of Khonshu
+- Collection tabs: Fighters / Skins
+- 12 skin entries
+- Neo City Fighter Rookie
+- Golden Champion El Primo
+- Symbiote Spider-Man
+- Hydra Captain America
+- Nanotech Iron Man
+- Diamond purchase/equip persistence
+- Training Mode skin support
+- BrandNewDay and GODLIKE retained
+- Existing 6-level campaign and Kingpin diamond reward retained
+- JavaScript syntax validation and v0.9.0 QA checks pass
+
+Release marker: final-v090
