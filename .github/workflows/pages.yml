@@ -24,38 +24,42 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.4 Wakanda & Weapon X release
+      - name: Validate v0.9.4.1 Combat Stability & Collection UI
         run: |
           node --check build/v094/transform-v094.js
-          node --check build/v094/build-check-v094.js
-          node --check core-v094.js
+          node --check build/v0941/transform-v0941.js
+          node --check build/v0941/build-check-v0941.js
+          node --check core-v0941.js
           node --check device-v092.js
-          node --check touch-v0932.js
-          node --check qa-v094.js
-          node build/v094/build-check-v094.js
-          node --check /tmp/core-v094-built.js
+          node --check touch-v0941.js
+          node --check stability-v0941.js
+          node --check qa-v0941.js
+          node build/v0941/build-check-v0941.js
+          node --check /tmp/core-v0941-built.js
           test -s index.html
           test -s heroes-v094.css
-          test -s touch-v0932.css
-          grep -q "v0.9.4" index.html
-          grep -q "WAKANDA & WEAPON X" index.html
-          grep -q "trainingHeroStat" index.html
-          grep -q "core-v094.js" index.html
-          grep -q "Black Panther" /tmp/core-v094-built.js
-          grep -q "Wolverine" /tmp/core-v094-built.js
-          grep -q "price:3200" /tmp/core-v094-built.js
-          grep -q "price:4000" /tmp/core-v094-built.js
-          grep -q "id:'bp-kinetic'.*price:80" /tmp/core-v094-built.js
-          grep -q "KINETIC CLAW WAVE" /tmp/core-v094-built.js
-          grep -q "PERFECT ABSORB" /tmp/core-v094-built.js
-          grep -q "ADAMANTIUM SLASH" /tmp/core-v094-built.js
-          grep -q "HEALING SURGE" /tmp/core-v094-built.js
-          grep -q "BERSERKER RAGE" /tmp/core-v094-built.js
-          grep -q "code==='DIAMONDS'" /tmp/core-v094-built.js
-          grep -q "save.gems+=100" /tmp/core-v094-built.js
-          grep -q "skin-bp-kinetic" heroes-v094.css
-          grep -q "wolverine" heroes-v094.css
-          grep -q "gesturestart" touch-v0932.js
+          test -s collection-v0941.css
+          test -s touch-v0941.css
+          grep -q "v0.9.4.1" index.html
+          grep -q "COMBAT STABILITY & COLLECTION UI" index.html
+          grep -q "collection-v0941.css" index.html
+          grep -q "core-v0941.js" index.html
+          grep -q "touch-v0941.js" index.html
+          grep -q "stability-v0941.js" index.html
+          grep -q "cleanupArenaTransient" /tmp/core-v0941-built.js
+          grep -q "#mystClone" /tmp/core-v0941-built.js
+          grep -q "fighterKitPanel" /tmp/core-v0941-built.js
+          grep -q "skin-hero-group" /tmp/core-v0941-built.js
+          grep -q "ABILITY VARIANT" /tmp/core-v0941-built.js
+          grep -q "code==='DIAMONDS'" /tmp/core-v0941-built.js
+          grep -q "save.gems+=100" /tmp/core-v0941-built.js
+          grep -q "touchstart" touch-v0941.js
+          grep -q "touchmove" touch-v0941.js
+          grep -q "preventDefault" touch-v0941.js
+          grep -q "multiTouch:true" touch-v0941.js
+          grep -q "touch-action:none" touch-v0941.css
+          grep -q "skin-hero-group" collection-v0941.css
+          grep -q "fighter-kit-panel" collection-v0941.css
           grep -q "device-iphone" device-v092.css
           grep -q "KeyA" device-v092.js
 
