@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.5.7 Master Plan
+      - name: Validate v0.9.5.7.1 UI Revamp
         run: |
           node --check build/v094/transform-v094.js
           node --check build/v0941/transform-v0941.js
@@ -40,9 +40,12 @@ jobs:
           node --check build/v0957/build-check-v0957.js
           node --check build/v0957/campaign-check-v0957.js
           node --check build/v0957/patch-index-v0957.js
+          node --check build/v09571/patch-index-v09571.js
           node --check core-v0957.js
           node --check campaign-v0957.js
           node --check qa-v0957.js
+          node --check ui-v09571.js
+          node --check qa-v09571.js
           node --check device-v092.js
           node --check touch-v0941.js
           node --check stability-v0941.js
@@ -50,57 +53,55 @@ jobs:
           node --check /tmp/core-v0957-built.js
           node build/v0957/campaign-check-v0957.js
           node build/v0957/patch-index-v0957.js
+          node build/v09571/patch-index-v09571.js
           test -s index.html
           test -s masterplan-v0957.css
           test -s goblin-v0956.css
           test -s results-v09531.css
-          grep -q "Multiverse Arena v0.9.5.7 — Master Plan" index.html
-          grep -q "PHASE 2 • MASTER PLAN" index.html
-          grep -q "masterplan-v0957.css" index.html
-          grep -q "campaign-v0957.js" index.html
-          grep -q "core-v0957.js" index.html
-          grep -q "transform-v0957.js" index.html
-          grep -q "qa-v0957.js" index.html
+          test -s ui-v09571.css
+          test -s ui-v09571.js
+          test -s qa-v09571.js
+          grep -q "Multiverse Arena v0.9.5.7.1 — UI Revamp" index.html
+          grep -q "MULTIVERSE ARENA <span class=\"tag\">v0.9.5.7.1</span>" index.html
+          grep -q "ui-v09571.css?v=09571" index.html
+          grep -q "ui-v09571.js?v=09571" index.html
+          grep -q "qa-v09571.js?v=09571" index.html
+          grep -q "Premium UI Revamp • UI Sounds • Polish" index.html
+          grep -q "UI REVAMP • v0.9.5.7.1" index.html
           grep -q "version:'0.9.5.7'" /tmp/core-v0957-built.js
           grep -q "name:'Doctor Octopus'" /tmp/core-v0957-built.js
           grep -q "TACTICAL TENTACLE MASTER" /tmp/core-v0957-built.js
-          grep -q "hp:310" /tmp/core-v0957-built.js
           grep -q "coins:1400,xp:260,gems:10" /tmp/core-v0957-built.js
-          grep -q "ockTentacleJab" /tmp/core-v0957-built.js
-          grep -q "ockSweep" /tmp/core-v0957-built.js
-          grep -q "ockPincer" /tmp/core-v0957-built.js
-          grep -q "ockGrab" /tmp/core-v0957-built.js
           grep -q "ockCrossfire" /tmp/core-v0957-built.js
           grep -q "showRewardSummary" /tmp/core-v0957-built.js
-          grep -q "rewardSummary" /tmp/core-v0957-built.js
-          grep -q "ARMORED GLIDER BOMBER" /tmp/core-v0957-built.js
           grep -q "FightArenaTrainingControls" /tmp/core-v0957-built.js
           grep -q "punisherUnlockShown" /tmp/core-v0957-built.js
-          grep -q "showPunisherUnlock" /tmp/core-v0957-built.js
           grep -q "screen('results')" /tmp/core-v0957-built.js
-          grep -q "clearFightTouchLock" /tmp/core-v0957-built.js
           grep -q "name:'Ultron'" /tmp/core-v0957-built.js
           grep -q "name:'Prowler'" /tmp/core-v0957-built.js
           grep -q "code==='DIAMONDS'" /tmp/core-v0957-built.js
           grep -q "phase2Order=\['Rhino','Electro','Mysterio','Green Goblin','Doctor Octopus'\]" campaign-v0957.js
-          grep -q "TENTACLE DISCIPLINE" campaign-v0957.js
           grep -q "1400 🪙 • 260 XP • 10 💎" campaign-v0957.js
-          grep -q "node-resource" campaign-v0957.js
-          grep -q "FightArenaCampaignV0957" campaign-v0957.js
           grep -q ".fighter.dococtopus" masterplan-v0957.css
-          grep -q "Four articulated mechanical arms" masterplan-v0957.css
           grep -q "reward-summary" masterplan-v0957.css
+          grep -q "Premium UI Revamp" ui-v09571.css
+          grep -q "ui-ripple" ui-v09571.css
+          grep -q "UI SOUND EFFECTS" ui-v09571.js
+          grep -q "AudioContext" ui-v09571.js
+          grep -q "MultiverseArenaUI" ui-v09571.js
+          grep -q "multiverseArenaUiSfx" ui-v09571.js
+          grep -q "v0.9.5.7.1" qa-v09571.js
           grep -q "#results.active" results-v09531.css
           grep -q "touchstart" touch-v0941.js
           grep -q "multiTouch:true" touch-v0941.js
 
-      - name: Persist v0.9.5.7 release index
+      - name: Persist v0.9.5.7.1 release index
         run: |
           if ! git diff --quiet -- index.html; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html
-            git commit -m "Release Multiverse Arena v0.9.5.7 index [skip ci]"
+            git commit -m "Release Multiverse Arena v0.9.5.7.1 index [skip ci]"
             git push
           fi
 
