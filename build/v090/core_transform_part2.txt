@@ -1,0 +1,33 @@
+d].hidden&&!s.ownerGodUnlocked))s.selected='Rookie';
+ s.coreVersion='0.9.0';return s;
+}
+let save=loadSave(),chosen=save.selected,trainingChosen=save.selected,skinChosen='spider-symbiote',collectionTab='fighters',chosenLevel=clamp(save.unlocked,1,LEVELS.length),F=null,rafId=0,clockId=0,uiId=0,sid=null;"""
+src=re.sub(r"function loadSave\(\)\{.*?\n\}\nlet save=loadSave\(\).*?;\nconst timeoutSet",loadsave+"\nconst timeoutSet",src,flags=re.S)
+
+old="""function previewMarkup(name){return `<div class="fighter ${classFor(name)} idle" style="position:relative;left:auto;bottom:auto">${sprite()}</div>`}
+function setSprite(el,name,side){if(!el)return;el.className=`fighter ${side} ${classFor(name)} idle`;el.innerHTML=sprite()}"""
+new="""function skinById(id){return SKINS.find(s=>s.id===id)||null}
+function skinClassFor(name,skinId=null){if(!CHARS[name])return'';const id=skinId||save.equippedSkins[name]||DEFAULT_SKIN_BY_HERO[name],s=skinById(id);return s&&s.hero===name&&save.skinsOwned[id]?s.cls:''}
+function previewMarkup(name,skinId=null){const skin=skinId&&skinById(skinId)?.hero===name?skinById(skinId)?.cls:skinClassFor(name);return `<div class="fighter ${classFor(name)} ${skin||''} idle" style="position:relative;left:auto;bottom:auto">${sprite()}</div>`}
+function setSprite(el,name,side,skinId=null){if(!el)return;el.className=`fighter ${side} ${classFor(name)} ${skinClassFor(name,skinId)} idle`;el.innerHTML=sprite()}"""
+assert old in src
+src=src.replace(old,new)
+
+start=src.index('function renderChars()')
+end=src.index('function renderLevels()',start)
+collection_funcs="""function renderChars(){const box=$('charCards');box.innerHTML='';visibleChars().forEach(([name,c])=>{const b=document.createElement('button');b.className='card '+(chosen===name?'active ':'')+(!save.owned[name]?'locked ':'')+(name===OWNER?'owner-card ':'');b.innerHTML=`<div class="eyebrow">${c.rank}</div><div class="portrait">${previewMarkup(name)}</div><h3>${name.toUpperCase()}</h3><small>${save.owned[name]?(save.selected===name?'✓ SELECTED':'OWNED'):`🪙 ${c.price.toLocaleString()}`}</small>`;b.onclick=()=>{chosen=name;renderChars();renderCharInfo()};box.appendChild(b)});const vis=visibleChars(),owned=vis.filter(([n])=>save.owned[n]).length;$('gallerySummary').innerHTML=`<div><b>FIGHTER ROSTER</b><span> ${owned} owned • ${vis.length} total</span></div><div class="role-chip">${save.selected.toUpperCase()} SELECTED</div>`}
+function renderCharInfo(){const c=CHARS[chosen];$('charTitle').textContent=chosen.toUpperCase();$('charDesc').textContent=c.desc;$('charStats').innerHTML=`<div><small>HEALTH</small>${c.hp}</div><div><small>POWER</small>${c.power}</div><div><small>SPEED</small>${c.speed}</div><div><small>SPECIAL</small>${c.specialName}</div>`;$('charAction').textContent=!save.owned[chosen]?`BUY • ${c.price.toLocaleString()} 🪙`:save.selected===chosen?'SELECTED':'SELECT';$('charAction').disabled=save.selected===chosen}
+function showCollectionTab(tab='fighters'){collectionTab=tab;document.querySelectorAll('[data-collection-tab]').forEach(b=>b.classList.toggle('active',b.dataset.collectionTab===tab));$('fightersPane')?.classList.toggle('hidden',tab!=='fighters');$('skinsPane')?.classList.toggle('hidden',tab!=='skins');if(tab==='fighters'){renderChars();renderCharInfo()}else{renderSkins();renderSkinInfo()}}
+function renderSkins(){const box=$('skinCards');if(!box)return;box.innerHTML='';SKINS.forEach(s=>{const heroOwned=!!save.owned[s.hero],owned=!!save.skinsOwned[s.id],equipped=save.equippedSkins[s.hero]===s.id,b=document.createElement('button');b.className=`card skin-card rarity-${s.rarity.toLowerCase()} ${skinChosen===s.id?'active ':''}${!heroOwned?'hero-locked ':''}${equipped?'equipped-skin ':''}`;b.innerHTML=`<div class="eyebrow">${s.rarity} • ${s.hero.toUpperCase()}</div><div class="portrait skin-portrait">${previewMarkup(s.hero,s.id)}</div><h3>${s.name.toUpperCase()}</h3><small>${!heroOwned?'🔒 OWN HERO FIRST':equipped?'✓ EQUIPPED':owned?'OWNED':`💎 ${s.price}`}</small>`;b.onclick=()=>{skinChosen=s.id;renderSkins();renderSkinInfo()};box.appendChild(b)})}
+function renderSkinInfo(){const s=skinById(skinChosen)||SKINS[0],heroOwned=!!save.owned[s.hero],owned=!!save.skinsOwned[s.id],equipped=save.equippedSkins[s.hero]===s.id;$('skinTitle').textContent=s.name.toUpperCase();$('skinHero').textContent=s.hero.toUpperCase();$('skinRarity').textContent=s.rarity;$('skinDesc').textContent=s.desc;$('skinPreview').innerHTML=previewMarkup(s.hero,s.id);$('skinPrice').textContent=s.price?`${s.price} 💎`:'INCLUDED';const a=$('skinAction');a.disabled=!heroOwned||equipped;a.textContent=!heroOwned?'OWN HERO FIRST':equipped?'EQUIPPED':owned?'EQUIP':`BUY • ${s.price} 💎`}
+function renderTraining(){const box=$('trainingCards');box.innerHTML='';visibleChars().filter(([n])=>save.owned[n]).forEach(([name,c])=>{const b=document.createElement('button');b.className='card training-card '+(trainingChosen===name?'active ':'')+(name===OWNER?'owner-card ':'');b.innerHTML=`<div class="eyebrow">${c.rank}</div><div class="portrait">${previewMarkup(name)}</div><h3>${name.toUpperCase()}</h3><small>READY TO TRAIN</small>`;b.onclick=()=>{trainingChosen=name;renderTraining();updateTrainingInfo()};box.appendChild(b)});updateTrainingInfo()}
+function updateTrainingInfo(){const c=CHARS[trainingChosen];$('trainingHero').textContent=trainingChosen.toUpperCase();$('trainingDesc').textContent=`${c.specialName} • ${c.hp} HP • ${c.power} Power • ${c.speed} Speed`}
+"""
+src=src[:start]+collection_funcs+src[end:]
+
+# Replace persist so skin page also reflects gem changes if open
+src=src.replace("function persist(){localStorage.setItem(SAVE_KEY,JSON.stringify(save));hud();refreshDashboard();renderSettings()}","function persist(){localStorage.setItem(SAVE_KEY,JSON.stringify(save));hud();refreshDashboard();renderSettings();if(collectionTab==='skins'){renderSkins();renderSkinInfo()}}")
+
+# Replace event handler area charAction through settings click binding
+start=src.index("$('charAction').onclick")
+end
