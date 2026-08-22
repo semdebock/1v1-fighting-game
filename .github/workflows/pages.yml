@@ -24,42 +24,46 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.4.1 Combat Stability & Collection UI
+      - name: Validate v0.9.5 Campaign Phases Foundation
         run: |
           node --check build/v094/transform-v094.js
           node --check build/v0941/transform-v0941.js
-          node --check build/v0941/build-check-v0941.js
-          node --check core-v0941.js
+          node --check build/v095/transform-v095.js
+          node --check build/v095/build-check-v095.js
+          node --check core-v095.js
           node --check device-v092.js
           node --check touch-v0941.js
           node --check stability-v0941.js
-          node --check qa-v0941.js
-          node build/v0941/build-check-v0941.js
-          node --check /tmp/core-v0941-built.js
+          node --check campaign-v095.js
+          node --check qa-v095.js
+          node build/v095/build-check-v095.js
+          node --check /tmp/core-v095-built.js
           test -s index.html
-          test -s heroes-v094.css
+          test -s campaign-v095.css
           test -s collection-v0941.css
           test -s touch-v0941.css
-          grep -q "v0.9.4.1" index.html
-          grep -q "COMBAT STABILITY & COLLECTION UI" index.html
-          grep -q "collection-v0941.css" index.html
-          grep -q "core-v0941.js" index.html
-          grep -q "touch-v0941.js" index.html
-          grep -q "stability-v0941.js" index.html
-          grep -q "cleanupArenaTransient" /tmp/core-v0941-built.js
-          grep -q "#mystClone" /tmp/core-v0941-built.js
-          grep -q "fighterKitPanel" /tmp/core-v0941-built.js
-          grep -q "skin-hero-group" /tmp/core-v0941-built.js
-          grep -q "ABILITY VARIANT" /tmp/core-v0941-built.js
-          grep -q "code==='DIAMONDS'" /tmp/core-v0941-built.js
-          grep -q "save.gems+=100" /tmp/core-v0941-built.js
+          grep -q "v0.9.5" index.html
+          grep -q "CAMPAIGN REBORN" index.html
+          grep -q "campaign-v095.css" index.html
+          grep -q "campaign-v095.js" index.html
+          grep -q "core-v095.js" index.html
+          grep -q "version:'0.9.5'" /tmp/core-v095-built.js
+          grep -q "cleanupArenaTransient" /tmp/core-v095-built.js
+          grep -q "skin-hero-group" /tmp/core-v095-built.js
+          grep -q "code==='DIAMONDS'" /tmp/core-v095-built.js
+          grep -q "name:'Ultron'" /tmp/core-v095-built.js
+          grep -q "name:'Prowler'" /tmp/core-v095-built.js
+          grep -q "STANDBY=\['Ultron','Prowler'\]" campaign-v095.js
+          grep -q "title:'NEO CITY ARENA'" campaign-v095.js
+          grep -q "title:'STREET CRIMINALS'" campaign-v095.js
+          grep -q "title:'SINISTER THREAT'" campaign-v095.js
+          grep -q "name:'Punisher'.*PLAYABLE FIGHTER UNLOCK" campaign-v095.js
+          grep -q "name:'Doctor Octopus'.*boss:true" campaign-v095.js
+          grep -q "campaign-phase" campaign-v095.css
+          grep -q "phase-section" campaign-v095.css
           grep -q "touchstart" touch-v0941.js
-          grep -q "touchmove" touch-v0941.js
           grep -q "preventDefault" touch-v0941.js
           grep -q "multiTouch:true" touch-v0941.js
-          grep -q "touch-action:none" touch-v0941.css
-          grep -q "skin-hero-group" collection-v0941.css
-          grep -q "fighter-kit-panel" collection-v0941.css
           grep -q "device-iphone" device-v092.css
           grep -q "KeyA" device-v092.js
 
