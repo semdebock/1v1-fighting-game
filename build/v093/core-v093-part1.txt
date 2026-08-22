@@ -1,0 +1,82 @@
+/* Fight Arena v0.9.3 — Power & Balance Update */
+(() => {
+'use strict';
+const $=id=>document.getElementById(id),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),now=()=>performance.now()/1000;
+const SAVE_KEY='fightArenaV08',OWNER='The One Above All';
+const CHARS={
+'Rookie':{cls:'rookie',rank:'B RANK • STREET',arenaRank:'B',powerClass:'STREET',role:'BALANCED',hp:100,power:55,speed:60,price:0,punch:8,kick:13,special:25,specialName:'Arena Burst',desc:'Balanced starter fighter. Reliable fundamentals, low entry cost and no extreme strengths or weaknesses.'},
+'El Primo':{cls:'primo',rank:'A RANK • HEAVY',arenaRank:'A',powerClass:'HEAVY',role:'TANK',hp:145,power:82,speed:42,price:2000,punch:11,kick:16,special:34,specialName:'Primo Smash',desc:'Heavy Arena tank with huge health, powerful close-range hits and deliberately slow movement.'},
+'Spider-Man':{cls:'spiderman',rank:'S RANK • SUPERHUMAN',arenaRank:'S',powerClass:'SUPERHUMAN',role:'MOBILITY',hp:95,power:84,speed:92,price:3800,punch:10,kick:15,special:28,specialName:'Web Burst',desc:'Superhuman mobility fighter with restrained strength, elite speed, high jumps and a versatile web arsenal.'},
+'Captain America':{cls:'captain',rank:'A+ RANK • ENHANCED',arenaRank:'A+',powerClass:'ENHANCED',role:'TACTICAL',hp:120,power:80,speed:62,price:2600,punch:10,kick:14,special:27,specialName:'Avenger Strike',desc:'Enhanced tactical all-rounder with strong defense, shield pressure and dependable close-range combat.'},
+'Iron Man':{cls:'ironman',rank:'S RANK • ELITE TECH',arenaRank:'S',powerClass:'ELITE TECH',role:'RANGED',hp:110,power:93,speed:72,price:4500,punch:11,kick:15,special:32,specialName:'Unibeam',desc:'Top-tier armored ranged hero. Heavy tech firepower, flight and the highest raw public power rating in the current roster.'},
+'Daredevil':{cls:'daredevil',rank:'A RANK • STREET',arenaRank:'A',powerClass:'STREET',role:'COUNTER',hp:100,power:66,speed:88,price:1800,punch:9,kick:13,special:32,specialName:"Devil's Combo",desc:'Technical street-level fighter who wins through speed, positioning, billy clubs and perfectly timed counters rather than raw power.'},
+'Moon Knight':{cls:'moonknight',rank:'A+ RANK • ENHANCED / MYSTIC',arenaRank:'A+',powerClass:'ENHANCED / MYSTIC',role:'BRAWLER',hp:120,power:80,speed:74,price:3000,punch:11,kick:16,special:38,specialName:'Vengeance of Khonshu',desc:'Aggressive enhanced/mystic hybrid with crescent weapons, defensive guard and heavy burst damage.'},
+[OWNER]:{cls:'toaa',rank:'∞ RANK • ABSOLUTE',arenaRank:'∞',powerClass:'ABSOLUTE',role:'OWNER',hidden:true,hp:500,power:100,speed:100,price:0,punch:40,kick:60,special:999,specialName:'Absolute Decree',desc:'Owner-only absolute character for testing every villain at extreme power.'}
+};
+const RANK_ORDER=['∞','S','A+','A','B'];
+const RANK_INFO={
+ '∞':{label:'OWNER ACCESS',desc:'Absolute testing tier.'},
+ 'S':{label:'S RANK',desc:'Top-tier fighters with the highest public power and premium kits.'},
+ 'A+':{label:'A+ RANK',desc:'Elite enhanced fighters with strong all-round combat potential.'},
+ 'A':{label:'A RANK',desc:'Skilled specialists with strong identities and lower entry prices.'},
+ 'B':{label:'B RANK',desc:'Accessible fighters built around fundamentals.'}
+};
+const SKINS=[
+{id:'rookie-default',hero:'Rookie',name:'Default Rookie',rarity:'COMMON',price:0,cls:'',desc:'The clean premium Rookie design.'},
+{id:'rookie-neo',hero:'Rookie',name:'Neo City Fighter',rarity:'RARE',price:15,cls:'skin-rookie-neo',desc:'A futuristic Neo City street-combat outfit with cyan tech accents.'},
+{id:'primo-default',hero:'El Primo',name:'Default El Primo',rarity:'COMMON',price:0,cls:'',desc:'The classic premium luchador tank.'},
+{id:'primo-gold',hero:'El Primo',name:'Golden Champion',rarity:'EPIC',price:25,cls:'skin-primo-gold',desc:'A championship gold luchador skin with premium metallic detailing.'},
+{id:'spider-default',hero:'Spider-Man',name:'Classic Suit',rarity:'COMMON',price:0,cls:'',desc:'The classic red-and-blue Spider-Man suit.'},
+{id:'spider-symbiote',hero:'Spider-Man',name:'Symbiote Suit',rarity:'LEGENDARY',price:50,cls:'skin-spider-symbiote',desc:'An all-black symbiote suit with huge white lenses, a white spider emblem and living-suit energy.'},
+{id:'cap-default',hero:'Captain America',name:'Classic Suit',rarity:'COMMON',price:0,cls:'',desc:'Captain America’s classic combat suit and shield.'},
+{id:'cap-hydra',hero:'Captain America',name:'Hydra Suit',rarity:'EPIC',price:35,cls:'skin-cap-hydra',desc:'A dark green-and-black Hydra-inspired tactical suit with red accents and a corrupted shield.'},
+{id:'iron-default',hero:'Iron Man',name:'Classic Armor',rarity:'COMMON',price:0,cls:'',desc:'Iron Man’s classic red-and-gold armor.'},
+{id:'iron-nano',hero:'Iron Man',name:'Nanotech Suit',rarity:'LEGENDARY',price:100,cls:'skin-iron-nano',variant:'ABILITY VARIANT',desc:'A fully weaponized nanotech armor. Equipping it replaces Iron Man’s classic kit with Nano Cannon, Shoulder Barrage, Nano Wings and the Nanotech Arsenal special.'},
+{id:'dd-default',hero:'Daredevil',name:'The Devil of Hell’s Kitchen',rarity:'COMMON',price:0,cls:'',desc:'Daredevil’s premium red armored suit.'},
+{id:'mk-default',hero:'Moon Knight',name:'Avatar of Khonshu',rarity:'COMMON',price:0,cls:'',desc:'Moon Knight’s premium white-and-silver hooded armor.'}
+];
+const DEFAULT_SKIN_BY_HERO={'Rookie':'rookie-default','El Primo':'primo-default','Spider-Man':'spider-default','Captain America':'cap-default','Iron Man':'iron-default','Daredevil':'dd-default','Moon Knight':'mk-default'};
+const LEVELS=[
+{n:1,name:'Nightfang',cls:'nightfang',diff:'Easy',role:'SHADOW ASSASSIN',hp:100,dmg:1,coins:100,xp:25,gems:0,desc:'Fast but predictable melee fighter. Beat him to unlock Level 2.'},
+{n:2,name:'Ultron',cls:'ultron',diff:'Normal',role:'ROGUE COMBAT ANDROID',hp:125,dmg:1.1,coins:175,xp:40,gems:0,desc:'Armored combat android with smarter AI and a dangerous ranged Energy Pulse.'},
+{n:3,name:'Green Goblin',cls:'greengoblin',diff:'Hard',role:'GOBLIN BOMBER',hp:150,dmg:1.18,coins:250,xp:60,gems:0,desc:'Aggressive aerial menace with faster pressure and explosive Pumpkin Bombs.'},
+{n:4,name:'Mysterio',cls:'mysterio',diff:'Hard+',role:'ILLUSION CONTROLLER',hp:165,dmg:1.22,coins:350,xp:80,gems:0,desc:'Master of misdirection. Mystic Orbs, illusion clones and smoke teleports control the arena.'},
+{n:5,name:'Kingpin',cls:'kingpin',diff:'BOSS',role:'CRIME LORD • BOSS',hp:250,dmg:1.34,coins:600,xp:150,gems:5,boss:true,desc:'The first true Arena Boss. Heavy Punch, Charge Rush, Ground Smash and a dangerous Rage phase.'},
+{n:6,name:'Prowler',cls:'prowler',diff:'Expert',role:'STEALTH HUNTER',hp:175,dmg:1.30,coins:450,xp:100,gems:0,desc:'A high-speed stealth hunter with Cloak, Dash Strike, Claw Combo and Tech Shock.'}
+];
+const TRAINING_DUMMY={n:0,name:'Training Dummy',cls:'dummy',diff:'Training',role:'PASSIVE DAMAGE DUMMY',hp:1000,dmg:0,coins:0,xp:0,gems:0,training:true,desc:'Infinite training target.'};
+window.FightArena={version:'0.9.3',chars:CHARS,levels:LEVELS,skins:SKINS,rankOrder:RANK_ORDER};
+
+function localDay(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function loadSave(){
+ let raw={};try{raw=JSON.parse(localStorage.getItem(SAVE_KEY)||'{}')||{}}catch{}
+ const owned={Rookie:true,'El Primo':false,'Spider-Man':false,'Captain America':false,'Iron Man':false,'Daredevil':false,'Moon Knight':false,[OWNER]:false,...(raw.owned||{})};
+ const baseSkinOwned=Object.fromEntries(SKINS.filter(s=>s.price===0).map(s=>[s.id,true]));
+ const s={coins:1250,gems:50,lv:1,xp:0,selected:'Rookie',unlocked:1,dailyClaimDate:null,redeemedBrandNewDay:false,ownerGodUnlocked:false,settings:{damageNumbers:true,screenShake:true,haptics:true},skinsOwned:baseSkinOwned,equippedSkins:{...DEFAULT_SKIN_BY_HERO},...raw,owned};
+ s.settings={damageNumbers:true,screenShake:true,haptics:true,...(raw.settings||{})};
+ s.skinsOwned={...baseSkinOwned,...(raw.skinsOwned||{})};
+ s.equippedSkins={...DEFAULT_SKIN_BY_HERO,...(raw.equippedSkins||{})};
+ s.coins=Number.isFinite(+s.coins)?Math.max(0,Math.floor(+s.coins)):1250;s.gems=Number.isFinite(+s.gems)?Math.max(0,Math.floor(+s.gems)):50;
+ s.lv=Number.isFinite(+s.lv)?Math.max(1,Math.floor(+s.lv)):1;s.xp=Number.isFinite(+s.xp)?Math.max(0,Math.floor(+s.xp)):0;
+ s.unlocked=clamp(Number.isFinite(+s.unlocked)?Math.floor(+s.unlocked):1,1,LEVELS.length);s.ownerGodUnlocked=!!s.ownerGodUnlocked;s.owned[OWNER]=s.ownerGodUnlocked;
+ Object.keys(DEFAULT_SKIN_BY_HERO).forEach(hero=>{const id=s.equippedSkins[hero],skin=SKINS.find(x=>x.id===id&&x.hero===hero);if(!skin||!s.skinsOwned[id])s.equippedSkins[hero]=DEFAULT_SKIN_BY_HERO[hero]});
+ if(!CHARS[s.selected]||!s.owned[s.selected]||(CHARS[s.selected].hidden&&!s.ownerGodUnlocked))s.selected='Rookie';
+ s.coreVersion='0.9.3';return s;
+}
+let save=loadSave(),chosen=save.selected,trainingChosen=save.selected,skinChosen='spider-symbiote',collectionTab='fighters',chosenLevel=clamp(save.unlocked,1,LEVELS.length),F=null,rafId=0,clockId=0,uiId=0,sid=null;
+const timeoutSet=new Set(),intervalSet=new Set();
+const visibleChars=()=>Object.entries(CHARS).filter(([,c])=>!c.hidden||save.ownerGodUnlocked);
+function persist(){localStorage.setItem(SAVE_KEY,JSON.stringify(save));hud();refreshDashboard();renderSettings();if(collectionTab==='skins'){renderSkins();renderSkinInfo()}}
+function screen(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id)?.classList.add('active')}
+function toast(text){const t=$('toast');if(!t)return;t.textContent=text;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),1300)}
+function later(fn,ms){let id;const run=()=>{timeoutSet.delete(id);if(F?.paused){id=setTimeout(run,50);timeoutSet.add(id);return}fn()};id=setTimeout(run,ms);timeoutSet.add(id);return id}
+function every(fn,ms){const id=setInterval(fn,ms);intervalSet.add(id);return id}
+function clearTracked(){timeoutSet.forEach(clearTimeout);timeoutSet.clear();intervalSet.forEach(clearInterval);intervalSet.clear()}
+function buzz(ms=20){if(save.settings.haptics&&navigator.vibrate)navigator.vibrate(ms)}
+function sprite(){return '<div class="head"><i class="eye l"></i><i class="eye r"></i></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="leg l"></div><div class="leg r"></div>'}
+function classFor(name){return CHARS[name]?.cls||LEVELS.find(l=>l.name===name)?.cls||(name==='Training Dummy'?'dummy':name.toLowerCase().replace(/[^a-z0-9]+/g,''))}
+function skinById(id){return SKINS.find(s=>s.id===id)||null}
+function skinClassFor(name,skinId=null){if(!CHARS[name])return'';const id=skinId||save.equippedSkins[name]||DEFAULT_SKIN_BY_HERO[name],s=skinById(id);return s&&s.hero===name&&save.skinsOwned[id]?s.cls:''}
+function previewMarkup(name,skinId=null){const skin=skinId&&skinById(skinId)?.hero===name?skinById(skinId)?.cls:skinClassFor(name);return `<div class="fighter ${classFor(name)} ${skin||''} idle" style="position:relative;left:auto;bottom:auto">${sprite()}</div>`}
+function setSprite(el,name,side,skinId=null){if(!el)return;el.className=`fighter ${side} ${classFor(name)} ${skinClassFor(name,skinId)} idle`;el.innerHTML=sprite()}
+function hud(){$('coins').textContent=save.coins;$('gems').textContent=save.gems;$('lv').textContent=save.lv;$('selectedName').textContent=save.selected.toUpperCase();$('homePreview').innerHTML=previewMarkup(save.selected)}
