@@ -1,4 +1,4 @@
-/* Fight Arena v0.9.5.6 — Smoke & Chaos + Goblin Rework campaign */
+/* Multiverse Arena v0.9.5.6 — Smoke & Chaos + Goblin Rework campaign */
 (async()=>{
 'use strict';
 try{
@@ -16,18 +16,23 @@ try{
  rep("phase.id==='phase2'&&section.name==='RAW POWER'?'<span class=\"raw-power-live\">● NEW • v0.9.5.4</span>':phase.id==='phase1'&&section.name==='VIGILANTE LINE'?","phase.id==='phase2'&&section.name==='RAW POWER'?'<span class=\"raw-power-live\">✓ LIVE</span>':phase.id==='phase2'&&section.name==='SMOKE & CHAOS'?'<span class=\"smoke-chaos-live\">● POLISHED • v0.9.5.6</span>':phase.id==='phase1'&&section.name==='VIGILANTE LINE'?",'section badge');
  rep("!rawPowerComplete()?`Phase 2 • ${phase2Order.indexOf(n)+1}/5`:'Phase 2 • Smoke & Chaos'","!smokeChaosComplete()?`Phase 2 • ${phase2Order.indexOf(n)+1}/5`:'Phase 2 • Master Plan'",'dashboard phase');
  rep("latest.querySelector('b').textContent='v0.9.5.4';latest.querySelector('span').textContent='Rhino • Electro • Raw Power'","latest.querySelector('b').textContent='v0.9.5.6';latest.querySelector('span').textContent='Green Goblin Rework • Training Lab Fix'",'latest update');
- rep("document.title='Fight Arena v0.9.5.4 — Raw Power'","document.title='Fight Arena v0.9.5.6 — Goblin Rework & Training Lab'",'title');
+ rep("document.title='Fight Arena v0.9.5.4 — Raw Power'","document.title='Multiverse Arena v0.9.5.6 — Goblin Rework & Training Lab'",'title');
  rep("x.textContent='v0.9.5.4'","x.textContent='v0.9.5.6'",'brand version');
  rep("hero.querySelector('.tag').textContent='PHASE 2 • RAW POWER';hero.querySelector('h1').innerHTML='THE SINISTER THREAT<br>HITS HARD.';hero.querySelector('p').textContent='Rhino and Electro launch Phase 2 with cinematic armor, living electricity and two radically different combat styles.'","hero.querySelector('.tag').textContent='PHASE 2 • SMOKE & CHAOS';hero.querySelector('h1').innerHTML='THE GOBLIN<br>TAKES FLIGHT.';hero.querySelector('p').textContent='Green Goblin now has a premium armored rebuild, an iconic Goblin Glider and a true aerial combat kit. Training Lab has also received a deeper reliability pass.'",'home hero');
  rep("$('updates').textContent='📋 UPDATE LOG • v0.9.5.4'","$('updates').textContent='📋 UPDATE LOG • v0.9.5.6'",'updates label');
  rep("health.textContent='RAW POWER CORE • v0.9.5.4'","health.textContent='GOBLIN REWORK CORE • v0.9.5.6'",'health label');
- rep("chooser.textContent='FIGHT ARENA v0.9.5.4'","chooser.textContent='FIGHT ARENA v0.9.5.6'",'chooser');
+ rep("chooser.textContent='FIGHT ARENA v0.9.5.4'","chooser.textContent='MULTIVERSE ARENA v0.9.5.6'",'chooser');
  rep("window.FightArenaCampaignV0954={ok:true,phases:PHASES,standby:[...STANDBY],render,prologueComplete,phase1Complete,rawPowerComplete}","window.FightArenaCampaignV0956={ok:true,phases:PHASES,standby:[...STANDBY],render,prologueComplete,phase1Complete,rawPowerComplete,smokeChaosComplete}",'campaign api');
  rep("window.FightArena?.version==='0.9.5.4'","window.FightArena?.version==='0.9.5.6'",'init version');
  code=code.replace("$('diff').textContent='v0.9.5.4 • RAW POWER'","$('diff').textContent='v0.9.5.6 • GOBLIN REWORK'");
  (0,eval)(code);
+ // Public branding only. Internal FightArena APIs/save keys stay untouched for backwards compatibility.
+ document.title='Multiverse Arena v0.9.5.6 — Goblin Rework & Training Lab';
+ const brand=document.querySelector('.brand');if(brand)brand.innerHTML='MULTIVERSE ARENA <span class="tag">v0.9.5.6</span>';
+ const chooser=document.querySelector('#deviceChooser .eyebrow');if(chooser)chooser.textContent='MULTIVERSE ARENA v0.9.5.6';
+ const pause=document.querySelector('#pauseOverlay .eyebrow');if(pause)pause.textContent='MULTIVERSE ARENA';
 }catch(err){
- console.error('[Fight Arena v0.9.5.6 campaign]',err);
+ console.error('[Multiverse Arena v0.9.5.6 campaign]',err);
  const h=document.querySelector('.build-health b');if(h)h.textContent='v0.9.5.6 • CAMPAIGN LOAD ERROR';
 }
 })();
