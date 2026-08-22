@@ -1,0 +1,31 @@
+ist.remove('guard','blocking')},1800)}}
+ else if(name==='Iron Man'){if(i===0){setCd(0,1.35);playerProjectile('repulsor',10,4.5,3)}if(i===1){setCd(1,4.5);playerProjectile('missile',17,2.9,6)}if(i===2){if(F.flying){F.flying=false;$('pF').classList.remove('flying');toast('LANDING');return}setCd(2,7);F.flying=true;$('pF').classList.add('flying');later(()=>{if(F){F.flying=false;$('pF')?.classList.remove('flying')}},3000)}}
+ else if(name==='Daredevil'){if(i===0){setCd(0,2);playerProjectile('billyclub',11,4.25,4,true);toast('BILLY CLUB THROW!')}if(i===1){setCd(1,4.2);if(F.ex-F.px>48)return toast('TOO FAR');const line=fx('dd-grapple',F.px+5,43);line.style.width=Math.max(40,(F.ex-F.px)*7)+'px';F.px=clamp(F.ex-10,3,F.ex-7);$('pF').classList.add('grapple-rush');draw();later(()=>{line.remove();$('pF')?.classList.remove('grapple-rush');if(F&&F.ex-F.px<15)damageEnemy(9,3)},170);toast('GRAPPLE RUSH!')}if(i===2){setCd(2,5.5);F.counter=true;$('pF').classList.add('radar-ready');later(()=>{if(F){F.counter=false;$('pF')?.classList.remove('radar-ready')}},900);toast('RADAR COUNTER READY')}}
+ else if(name==='Moon Knight'){if(i===0){setCd(0,1.8);playerProjectile('crescentdart',10,4.5,3);toast('CRESCENT DART!')}if(i===1){setCd(1,4);if(F.ex-F.px>44)return toast('TOO FAR');F.invulnerable=true;$('pF').classList.add('cape-dive');F.px=clamp(F.ex-9,3,F.ex-7);F.jump=34;draw();later(()=>{if(F){F.jump=0;F.invulnerable=false;if(F.ex-F.px<15)damageEnemy(16,6,true)}$('pF')?.classList.remove('cape-dive')},300);toast('CAPE DIVE!')}if(i===2){setCd(2,6);F.moonGuard=true;$('pF').classList.add('moon-guard','blocking');later(()=>{if(F)F.moonGuard=false;$('pF')?.classList.remove('moon-guard','blocking')},1800);toast('MOON GUARD')}}
+ else if(name===OWNER){if(i===0){setCd(0,1.2);playerProjectile('reality',75,5.6,10);toast('REALITY ERASE!')}if(i===1){setCd(1,3);const nova=fx('divine-nova',F.px+6,38);later(()=>damageEnemy(110,13,true),180);later(()=>nova.remove(),620);toast('DIVINE NOVA!')}if(i===2){setCd(2,4);F.px=clamp(F.ex-9,3,F.ex-7);const heal=F.pm-F.ph;F.ph=F.pm;if(heal>0)floatDamage(heal,'player',true);F.invulnerable=true;$('pF').classList.add('godshift');const w=fx('omni-warp',F.px,34);draw();later(()=>{if(F)F.invulnerable=false;$('pF')?.classList.remove('godshift');w.remove()},1200);toast('OMNIPRESENCE!')}}
+ renderHeroActions()
+}
+function useSpecial(){if(!F||F.over||F.paused||F.sp<100)return;const name=F.hero,c=CHARS[name];F.sp=0;const p=$('pF');p.classList.add('specialing');
+ if(name==='Spider-Man'){const ring=fx('impact',F.px+7,42);ring.style.width='70px';ring.style.height='70px';if(F.ex-F.px<38)damageEnemy(c.special,7,true);toast('WEB BURST!')}
+ else if(name==='Captain America'){F.px=clamp(Math.min(F.ex-8,F.px+18),3,F.ex-7);draw();later(()=>damageEnemy(c.special,10,true),90);toast('AVENGER STRIKE!')}
+ else if(name==='Iron Man'){const beam=fx('beam',F.px+8,42);later(()=>damageEnemy(c.special,9,true),90);later(()=>beam.remove(),500);toast('UNIBEAM!')}
+ else if(name==='Daredevil'){if(F.ex-F.px>34){F.px=clamp(F.ex-12,3,F.ex-7);draw()}const burst=fx('devil-combo',F.px+5,39);[70,145,220,320].forEach((ms,i)=>later(()=>{if(F&&F.ex-F.px<17)damageEnemy(i===3?14:6,i===3?8:1,i===3)},ms));later(()=>burst.remove(),620);toast("DEVIL'S COMBO!")}
+ else if(name==='Moon Knight'){const moon=fx('khonshu-flash',0,0);if(F.ex-F.px>38){F.px=clamp(F.ex-12,3,F.ex-7);draw()}[120,230,380].forEach((ms,i)=>later(()=>{if(F&&F.ex-F.px<19)damageEnemy(i===2?20:i===1?10:8,i===2?9:2,i===2)},ms));later(()=>moon.remove(),760);toast('VENGEANCE OF KHONSHU!')}
+ else if(name===OWNER){const decree=fx('absolute-decree',0,0);later(()=>damageEnemy(9999,18,true),180);later(()=>decree.remove(),760);toast('ABSOLUTE DECREE!')}
+ else if(F.ex-F.px<24)later(()=>damageEnemy(c.special,8,true),100);else toast('GET CLOSER');later(()=>p?.classList.remove('specialing'),520);draw()
+}
+"""
+src=src[:start]+abilities+src[end:]
+
+# startFight F fields and skin application
+src=src.replace("cooldowns:[0,0,0],flying:false,rage:false,cloaked:false,invulnerable:false,totalDamage:0", "cooldowns:[0,0,0],flying:false,rage:false,cloaked:false,invulnerable:false,counter:false,moonGuard:false,totalDamage:0")
+src=src.replace("setSprite($('pF'),h,'player');setSprite($('eF'),l.name,'enemy');", "setSprite($('pF'),h,'player',save.equippedSkins[h]);setSprite($('eF'),l.name,'enemy');")
+# jump handling with new heroes; old heroes unchanged
+src=src.replace("$('jump').onpointerdown=()=>{if(F&&!F.paused&&F.jump===0)F.jv=F.hero==='El Primo'?350:F.hero==='Spider-Man'?470:F.hero===OWNER?520:390};", "$('jump').onpointerdown=()=>{if(F&&!F.paused&&F.jump===0)F.jv=F.hero==='El Primo'?350:F.hero==='Spider-Man'?470:F.hero==='Daredevil'?450:F.hero==='Moon Knight'?410:F.hero===OWNER?520:390};")
+# final init
+src=src.replace("persist();hud();refreshDashboard();renderChars();renderCharInfo();renderTraining();renderLevels();renderLevelInfo();renderSettings();", "persist();hud();refreshDashboard();renderChars();renderCharInfo();renderSkins();renderSkinInfo();renderTraining();renderLevels();renderLevelInfo();renderSettings();showCollectionTab('fighters');")
+# header version comment
+src=src.replace('/* Fight Arena v0.8.9 — Training, Pause, Settings & Combat Quality */','/* Fight Arena v0.9.0 — Cosmetics & Heroes */')
+
+Path('core-v090.js').write_text(src)
+print('wrote',len(src),'bytes')
