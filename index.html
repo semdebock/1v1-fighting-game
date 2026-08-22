@@ -4,25 +4,80 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#070b16">
-<title>Fight Arena v0.8.9 — Training & Settings</title>
-<link rel="stylesheet" href="core-v088.css?v=0891">
-<link rel="stylesheet" href="owner-v0881.css?v=0891">
-<link rel="stylesheet" href="features-v089.css?v=0891">
+<title>Fight Arena v0.8.9.1 — Character Revamp</title>
+<link rel="stylesheet" href="core-v088.css?v=08911">
+<link rel="stylesheet" href="owner-v0881.css?v=08911">
+<link rel="stylesheet" href="features-v089.css?v=08911">
+<link rel="stylesheet" href="revamp-v0891.css?v=08911">
 </head>
 <body>
 <main class="app">
-<header class="top"><div><div class="eyebrow">NEO CITY COMBAT LEAGUE</div><div class="brand">FIGHT ARENA <span class="tag">v0.8.9</span></div></div><div class="currency"><span class="pill">LV <b id="lv">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">💎 <b id="gems">0</b></span></div></header>
-<section id="home" class="screen active"><div class="home"><div class="hero-copy"><span class="tag">TRAINING & SETTINGS UPDATE</span><h1>ENTER THE<br>ARENA</h1><p>Train every unlocked fighter, pause and restart battles, tune combat feedback and prepare for the Cosmetics era.</p><div class="buttons"><button class="primary" id="play">⚔️ PLAY CAMPAIGN</button><div class="mode-buttons"><button id="training" class="training-launch">🎯 TRAINING MODE</button><button id="settings" class="settings-launch">⚙️ SETTINGS</button></div><button id="gallery">👥 CHARACTER GALLERY</button><button id="daily">🎁 DAILY REWARD</button><button id="updates" class="update-btn">📋 UPDATE LOG • v0.8.9</button></div></div><div class="hero-card"><div class="fighter-preview" id="homePreview"></div><div class="hero-name"><small>SELECTED FIGHTER</small><strong id="selectedName">ROOKIE</strong></div></div><div class="hero-dashboard"><div class="dash-title"><div><small>FIGHTER COMMAND CENTER</small><strong>READY FOR BATTLE</strong></div><span class="live-dot">● CORE ONLINE</span></div><div class="dash-grid"><div class="dash-stat"><small>ACTIVE HERO</small><b id="dashHero">ROOKIE</b><span>Current selected fighter</span></div><div class="dash-stat"><small>ROSTER</small><b id="dashRoster">1/5</b><span>Visible fighters unlocked</span></div><div class="dash-stat"><small>NEXT TARGET</small><b id="dashTarget">NIGHTFANG</b><span id="dashLevel">Campaign Level 1</span></div><div class="dash-stat"><small>BALANCE</small><b id="dashCoins">0 🪙</b><span>Character purchase currency</span></div><div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.8.9</b><span>Training • Pause • Settings</span></div></div><div class="build-health"><span>◆ BUILD HEALTH</span><b>CLEAN CORE • v0.8.9</b></div></div></div></section>
-<section id="updatesScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">WHAT'S NEW</div><h2>UPDATE LOG</h2></div><button class="back">← BACK</button></div><div class="panel"><span class="tag">v0.8.9 • TRAINING & SETTINGS</span><h2>LEARN THE FIGHT. CONTROL THE GAME.</h2><div class="changelog"><div class="log-item"><div class="log-icon">🎯</div><div><b>Training Mode</b><p>Choose any unlocked fighter and practice against an infinite training dummy with total damage, hit and KO tracking, instant special meter and reset tools.</p></div></div><div class="log-item"><div class="log-icon">⏸️</div><div><b>Real Pause Menu</b><p>Campaign and Training fights can now be paused, resumed, restarted or exited without combat continuing behind the menu.</p></div></div><div class="log-item"><div class="log-icon">⚙️</div><div><b>Combat Settings</b><p>Toggle floating damage numbers, screen shake and supported-device haptics. Settings are saved automatically.</p></div></div><div class="log-item"><div class="log-icon">💥</div><div><b>Combat Quality</b><p>New damage readouts, stronger KO presentation and cleaner feedback make attacks easier to understand while testing.</p></div></div><div class="log-item"><div class="log-icon">🧰</div><div><b>Core maintenance</b><p>Daily Rewards now reset by calendar day, paused projectiles stop correctly, fight cleanup is safer and Training gives no accidental rewards.</p></div></div></div><div class="redeem-card"><div><small>REDEEM CENTER</small><h3>ENTER A GAME CODE</h3><p>Currency and private owner-access codes remain supported.</p></div><div class="redeem-row"><input id="redeemInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Enter code"><button id="redeemBtn">REDEEM</button></div><div id="redeemStatus" class="redeem-status">Waiting for code…</div></div></div></section>
-<section id="settingsScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">GAME OPTIONS</div><h2>SETTINGS</h2></div><button class="back">← BACK</button></div><div class="panel"><div class="settings-grid"><div class="setting-row"><div><b>FLOATING DAMAGE NUMBERS</b><span>Show exact damage above fighters when attacks connect.</span></div><button data-setting="damageNumbers">ON</button></div><div class="setting-row"><div><b>SCREEN SHAKE</b><span>Allow impact and boss attacks to shake the arena.</span></div><button data-setting="screenShake">ON</button></div><div class="setting-row"><div><b>HAPTICS</b><span>Use vibration feedback on supported devices.</span></div><button data-setting="haptics">ON</button></div></div></div></section>
-<section id="trainingScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">PRACTICE LAB</div><h2>TRAINING MODE</h2></div><button class="back">← BACK</button></div><div class="training-header"><div class="training-info"><small>SELECTED TRAINING FIGHTER</small><strong id="trainingHero">ROOKIE</strong><span id="trainingDesc"></span></div><button id="trainingStart" class="primary">START TRAINING</button></div><div class="cards" id="trainingCards"></div></section>
+<header class="top"><div><div class="eyebrow">NEO CITY COMBAT LEAGUE</div><div class="brand">FIGHT ARENA <span class="tag">v0.8.9.1</span></div></div><div class="currency"><span class="pill">LV <b id="lv">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">💎 <b id="gems">0</b></span></div></header>
+
+<section id="home" class="screen active"><div class="home">
+<div class="hero-copy"><span class="tag">CHARACTER REVAMP UPDATE</span><h1>ENTER THE<br>ARENA</h1><p>Rookie, El Primo and Spider-Man have been rebuilt visually with more detailed premium pixel designs — with zero combat or balance changes.</p>
+<div class="buttons">
+<button class="primary" id="play">⚔️ PLAY CAMPAIGN</button>
+<div class="mode-buttons"><button id="training" class="training-launch">🎯 TRAINING MODE</button><button id="settings" class="settings-launch">⚙️ SETTINGS</button></div>
+<button id="gallery">👥 CHARACTER GALLERY</button><button id="daily">🎁 DAILY REWARD</button><button id="updates" class="update-btn">📋 UPDATE LOG • v0.8.9.1</button>
+</div></div>
+<div class="hero-card"><div class="fighter-preview" id="homePreview"></div><div class="hero-name"><small>SELECTED FIGHTER</small><strong id="selectedName">ROOKIE</strong></div></div>
+<div class="hero-dashboard"><div class="dash-title"><div><small>FIGHTER COMMAND CENTER</small><strong>READY FOR BATTLE</strong></div><span class="live-dot">● CORE ONLINE</span></div><div class="dash-grid">
+<div class="dash-stat"><small>ACTIVE HERO</small><b id="dashHero">ROOKIE</b><span>Current selected fighter</span></div>
+<div class="dash-stat"><small>ROSTER</small><b id="dashRoster">1/5</b><span>Visible fighters unlocked</span></div>
+<div class="dash-stat"><small>NEXT TARGET</small><b id="dashTarget">NIGHTFANG</b><span id="dashLevel">Campaign Level 1</span></div>
+<div class="dash-stat"><small>BALANCE</small><b id="dashCoins">0 🪙</b><span>Character purchase currency</span></div>
+<div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.8.9.1</b><span>Character Revamp • Visual Upgrade</span></div>
+</div><div class="build-health"><span>◆ BUILD HEALTH</span><b>CLEAN CORE • v0.8.9.1</b></div></div>
+</div></section>
+
+<section id="updatesScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">WHAT'S NEW</div><h2>UPDATE LOG</h2></div><button class="back">← BACK</button></div><div class="panel">
+<span class="tag">v0.8.9.1 • CHARACTER REVAMP</span><h2>THREE FIGHTERS. PREMIUM NEW LOOKS.</h2><div class="changelog">
+<div class="log-item"><div class="log-icon">🥊</div><div><b>Rookie rebuilt</b><p>A cleaner street-fighter silhouette with improved hair, face, jacket details, belt accents and shoes.</p></div></div>
+<div class="log-item"><div class="log-icon">⭐</div><div><b>El Primo rebuilt</b><p>A stronger premium luchador look with a sharper mask, star details, championship-style belt and heavier tank silhouette.</p></div></div>
+<div class="log-item"><div class="log-icon">🕷️</div><div><b>Spider-Man rebuilt</b><p>Sharper white eye lenses, cleaner red-and-blue suit separation, web detailing and a clearer chest spider emblem.</p></div></div>
+<div class="log-item"><div class="log-icon">🛡️</div><div><b>Visual-only update</b><p>Stats, movement, hitboxes, punch and kick damage, specials and every existing ability remain unchanged.</p></div></div>
+<div class="log-item"><div class="log-icon">🎯</div><div><b>v0.8.9 systems retained</b><p>Training Mode, Pause, Settings, damage numbers, Daily Rewards, owner access and all campaign content remain intact.</p></div></div>
+</div>
+<div class="redeem-card"><div><small>REDEEM CENTER</small><h3>ENTER A GAME CODE</h3><p>Currency and private owner-access codes remain supported.</p></div><div class="redeem-row"><input id="redeemInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Enter code"><button id="redeemBtn">REDEEM</button></div><div id="redeemStatus" class="redeem-status">Waiting for code…</div></div>
+</div></section>
+
+<section id="settingsScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">GAME OPTIONS</div><h2>SETTINGS</h2></div><button class="back">← BACK</button></div><div class="panel"><div class="settings-grid">
+<div class="setting-row"><div><b>FLOATING DAMAGE NUMBERS</b><span>Show exact damage above fighters when attacks connect.</span></div><button data-setting="damageNumbers">ON</button></div>
+<div class="setting-row"><div><b>SCREEN SHAKE</b><span>Allow impact and boss attacks to shake the arena.</span></div><button data-setting="screenShake">ON</button></div>
+<div class="setting-row"><div><b>HAPTICS</b><span>Use vibration feedback on supported devices.</span></div><button data-setting="haptics">ON</button></div>
+</div></div></section>
+
+<section id="trainingScreen" class="screen"><div class="sectionhead"><div><div class="eyebrow">PRACTICE LAB</div><h2>TRAINING MODE</h2></div><button class="back">← BACK</button></div>
+<div class="training-header"><div class="training-info"><small>SELECTED TRAINING FIGHTER</small><strong id="trainingHero">ROOKIE</strong><span id="trainingDesc"></span></div><button id="trainingStart" class="primary">START TRAINING</button></div>
+<div class="cards" id="trainingCards"></div>
+</section>
+
 <section id="chars" class="screen"><div class="sectionhead"><div><div class="eyebrow">YOUR ROSTER</div><h2>CHARACTER GALLERY</h2></div><button class="back">← BACK</button></div><div class="gallery-summary" id="gallerySummary"></div><div class="cards" id="charCards"></div><div class="panel profile"><div class="eyebrow">FIGHTER PROFILE</div><h2 id="charTitle"></h2><p id="charDesc"></p><div class="stats" id="charStats"></div><button class="primary" id="charAction"></button></div></section>
+
 <section id="levels" class="screen"><div class="sectionhead"><div><div class="eyebrow">STORY PROGRESSION</div><h2>CAMPAIGN</h2></div><button class="back">← BACK</button></div><div class="cards level-cards" id="levelCards"></div><div class="panel profile"><span class="tag" id="diff"></span><h2 id="levelTitle"></h2><p id="levelDesc"></p><div class="stats" id="levelStats"></div><button class="primary" id="start">FIGHT</button></div></section>
-<section id="fight" class="screen"><div class="sectionhead fighthead"><button id="quit">← QUIT</button><button id="pauseBtn">⏸ PAUSE</button><b id="timer">60</b><span class="tag" id="fightTag"></span></div><div class="hpgrid"><div><div class="hpname"><b id="pname"></b><span>YOU</span></div><div class="bar"><i id="php"></i></div></div><div><div class="hpname"><span>ENEMY</span><b id="ename"></b></div><div class="bar enemybar"><i id="ehp"></i></div></div></div><div id="trainingTools" class="training-tools hidden"><div class="training-live"><span><small>TOTAL DAMAGE</small> <b id="trainingDamage">0</b></span><span><small>HITS</small> <b id="trainingHits">0</b></span><span><small>DUMMY KOs</small> <b id="trainingKos">0</b></span></div><button id="trainingReset">RESET</button><button id="trainingSpecial">FILL SPECIAL</button></div><div class="arena" id="arena"><div class="city"></div><div class="floor"></div><div id="pF" class="fighter player"></div><div id="eF" class="fighter enemy"></div></div><div class="specialrow"><span>⚡ <b id="spText">0%</b></span><div class="bar"><i id="sp"></i></div></div><div class="controls"><div class="stickwrap"><div><div class="stick" id="stick"><div class="knob" id="knob"></div></div><small>MOVE</small></div></div><div class="actionwrap"><div class="actions"><button id="punch">👊 PUNCH</button><button id="kick">🦵 KICK</button><button id="special">⚡ SPECIAL</button><button id="jump">↑ JUMP</button><button id="block">🛡 BLOCK</button><button disabled id="tagfighter"></button></div><div id="heroActions" class="hero-actions"></div></div></div></section>
-<section id="results" class="screen result"><div class="eyebrow">MATCH RESULT</div><h1 id="resultTitle"></h1><p id="resultText"></p><div class="cards resultcards"><div class="panel">🪙 <b id="rCoins"></b></div><div class="panel">XP <b id="rXp"></b></div><div class="panel" id="rGemsWrap">💎 <b id="rGems"></b></div></div><h2 id="unlock"></h2><button class="primary" id="continue">CONTINUE</button><button id="menu">MAIN MENU</button></section><div id="toast" class="toast hidden"></div>
+
+<section id="fight" class="screen">
+<div class="sectionhead fighthead"><button id="quit">← QUIT</button><button id="pauseBtn">⏸ PAUSE</button><b id="timer">60</b><span class="tag" id="fightTag"></span></div>
+<div class="hpgrid"><div><div class="hpname"><b id="pname"></b><span>YOU</span></div><div class="bar"><i id="php"></i></div></div><div><div class="hpname"><span>ENEMY</span><b id="ename"></b></div><div class="bar enemybar"><i id="ehp"></i></div></div></div>
+<div id="trainingTools" class="training-tools hidden"><div class="training-live"><span><small>TOTAL DAMAGE</small> <b id="trainingDamage">0</b></span><span><small>HITS</small> <b id="trainingHits">0</b></span><span><small>DUMMY KOs</small> <b id="trainingKos">0</b></span></div><button id="trainingReset">RESET</button><button id="trainingSpecial">FILL SPECIAL</button></div>
+<div class="arena" id="arena"><div class="city"></div><div class="floor"></div><div id="pF" class="fighter player"></div><div id="eF" class="fighter enemy"></div></div>
+<div class="specialrow"><span>⚡ <b id="spText">0%</b></span><div class="bar"><i id="sp"></i></div></div>
+<div class="controls"><div class="stickwrap"><div><div class="stick" id="stick"><div class="knob" id="knob"></div></div><small>MOVE</small></div></div><div class="actionwrap"><div class="actions"><button id="punch">👊 PUNCH</button><button id="kick">🦵 KICK</button><button id="special">⚡ SPECIAL</button><button id="jump">↑ JUMP</button><button id="block">🛡 BLOCK</button><button disabled id="tagfighter"></button></div><div id="heroActions" class="hero-actions"></div></div></div>
+</section>
+
+<section id="results" class="screen result"><div class="eyebrow">MATCH RESULT</div><h1 id="resultTitle"></h1><p id="resultText"></p><div class="cards resultcards"><div class="panel">🪙 <b id="rCoins"></b></div><div class="panel">XP <b id="rXp"></b></div><div class="panel" id="rGemsWrap">💎 <b id="rGems"></b></div></div><h2 id="unlock"></h2><button class="primary" id="continue">CONTINUE</button><button id="menu">MAIN MENU</button></section>
+<div id="toast" class="toast hidden"></div>
 </main>
-<div id="pauseOverlay" class="pause-overlay hidden"><div class="pause-card"><div class="eyebrow">FIGHT ARENA</div><h2>PAUSED</h2><div class="pause-actions"><button id="pauseResume" class="primary">▶ RESUME</button><button id="pauseRestart">↻ RESTART</button><button id="pauseSettings">⚙ SETTINGS</button><button id="pauseMenu">⌂ MAIN MENU</button></div><div id="pauseSettingsPanel" class="pause-settings-panel hidden"><div class="settings-grid"><div class="setting-row"><div><b>DAMAGE NUMBERS</b></div><button data-setting="damageNumbers">ON</button></div><div class="setting-row"><div><b>SCREEN SHAKE</b></div><button data-setting="screenShake">ON</button></div><div class="setting-row"><div><b>HAPTICS</b></div><button data-setting="haptics">ON</button></div></div></div></div></div>
-<script src="core-v089.js?v=0891"></script>
-<script src="qa-v089.js?v=0891"></script>
+
+<div id="pauseOverlay" class="pause-overlay hidden"><div class="pause-card"><div class="eyebrow">FIGHT ARENA</div><h2>PAUSED</h2><div class="pause-actions"><button id="pauseResume" class="primary">▶ RESUME</button><button id="pauseRestart">↻ RESTART</button><button id="pauseSettings">⚙ SETTINGS</button><button id="pauseMenu">⌂ MAIN MENU</button></div>
+<div id="pauseSettingsPanel" class="pause-settings-panel hidden"><div class="settings-grid">
+<div class="setting-row"><div><b>DAMAGE NUMBERS</b></div><button data-setting="damageNumbers">ON</button></div>
+<div class="setting-row"><div><b>SCREEN SHAKE</b></div><button data-setting="screenShake">ON</button></div>
+<div class="setting-row"><div><b>HAPTICS</b></div><button data-setting="haptics">ON</button></div>
+</div></div></div></div>
+
+<script src="core-v089.js?v=08911"></script>
+<script src="qa-v089.js?v=08911"></script>
 </body>
 </html>
