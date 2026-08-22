@@ -1,0 +1,16 @@
+const fs=require('fs');
+const path=require('path');
+const t94=require('../v094/transform-v094.js');
+const t941=require('../v0941/transform-v0941.js');
+const t95=require('../v095/transform-v095.js');
+const t951=require('../v0951/transform-v0951.js');
+const t952=require('../v0952/transform-v0952.js');
+const t953=require('../v0953/transform-v0953.js');
+const t9531=require('./transform-v09531.js');
+const root=path.resolve(__dirname,'../..');
+const files=['core-v093-part1.txt','core-v093-part2.txt','core-v093-part3.txt','core-v093-part4.txt'];
+let code='';for(const file of files)code+=fs.readFileSync(path.join(root,'build/v093',file),'utf8');
+const built=t9531(t953(t952(t951(t95(t941(t94(code)))))));
+fs.writeFileSync('/tmp/core-v09531-built.js',built);
+for(const marker of ["version:'0.9.5.3.1'",'punisherUnlockShown','showPunisherUnlock','campaignNextName',"screen('results')",'clearFightTouchLock','punisherFirstUnlock','next(){','lastResult(){','introLocked',"name:'Punisher'","name:'Taskmaster'",'rematch(){','campaignOnly:true','FightArenaCampaignControls',"name:'Crossbones'","name:'Bullseye'","name:'Ultron'","name:'Prowler'","code==='DIAMONDS'"])if(!built.includes(marker))throw new Error('v0.9.5.3.1 marker missing: '+marker);
+console.log('v0.9.5.3.1 transformed bytes:',Buffer.byteLength(built));
