@@ -1,0 +1,51 @@
+/* Fight Arena v0.8.9.1 — Rookie / El Primo / Spider-Man visual revamp
+   Visual-only patch. Does not change gameplay, stats, hitboxes or abilities. */
+
+.fighter.rookie,.fighter.primo,.fighter.spiderman{image-rendering:pixelated;filter:drop-shadow(0 10px 5px rgba(0,0,0,.42)) drop-shadow(0 0 12px rgba(255,255,255,.06))}
+.fighter.rookie .head,.fighter.primo .head,.fighter.spiderman .head,.fighter.rookie .body,.fighter.primo .body,.fighter.spiderman .body,.fighter.rookie .arm,.fighter.primo .arm,.fighter.spiderman .arm,.fighter.rookie .leg,.fighter.primo .leg,.fighter.spiderman .leg{overflow:visible}
+
+/* ROOKIE — cleaner street hero */
+.fighter.rookie{transform:scale(1.04)}
+.fighter.rookie::before{content:"";position:absolute;left:8px;top:34px;width:68px;height:42px;background:linear-gradient(180deg,#2a3341 0%,#171d26 100%);border:4px solid #0d1118;border-bottom:none;border-radius:28px 28px 10px 10px;z-index:0}
+.fighter.rookie .head{background:linear-gradient(180deg,#efc18e 0%,#d89f67 100%);border-radius:16px 16px 14px 14px;box-shadow:inset 0 -5px 0 rgba(0,0,0,.12)}
+.fighter.rookie .head::before{content:"";position:absolute;left:-4px;right:-4px;top:-12px;height:22px;background:#6b3519;border:4px solid #0d1118;clip-path:polygon(0 85%,8% 28%,18% 58%,28% 12%,40% 48%,53% 0,65% 43%,78% 14%,89% 52%,100% 26%,100% 100%,0 100%)}
+.fighter.rookie .head::after{content:"";position:absolute;left:10px;right:10px;bottom:8px;height:5px;background:linear-gradient(90deg,transparent 0 10%,#6a4022 10% 90%,transparent 90%);opacity:.8}
+.fighter.rookie .eye{width:8px;height:8px;border-radius:2px;top:18px;background:#111820;box-shadow:0 0 0 2px #f8e8d8}
+.fighter.rookie .body{background:linear-gradient(180deg,#202937 0%,#121924 100%);border-radius:18px 18px 10px 10px}
+.fighter.rookie .body::before{content:"";position:absolute;left:50%;top:8px;transform:translateX(-50%);width:16px;height:48px;background:linear-gradient(180deg,#eef2f7 0%,#cfd9e4 100%);border-left:4px solid #0f141b;border-right:4px solid #0f141b}
+.fighter.rookie .body::after{content:"";position:absolute;left:8px;right:8px;bottom:-4px;height:12px;background:linear-gradient(180deg,#eb5149 0%,#b82422 100%);border:4px solid #0d1118;border-radius:4px}
+.fighter.rookie .arm{background:linear-gradient(180deg,#e8ae75 0 38%,#2b3442 38% 76%,#d9985f 76% 100%);border-radius:12px}
+.fighter.rookie .arm::after{content:"";position:absolute;left:-2px;right:-2px;top:31px;height:8px;background:#7b8798;border-top:3px solid #0d1118;border-bottom:3px solid #0d1118}
+.fighter.rookie .leg{background:linear-gradient(180deg,#1c2330 0%,#0f141c 100%)}
+.fighter.rookie .leg::after{content:"";position:absolute;left:-3px;right:-3px;bottom:-7px;height:16px;background:linear-gradient(180deg,#f5f7fa 0%,#c7d2dc 100%);border:4px solid #0d1118;border-radius:8px 8px 4px 4px}
+
+/* EL PRIMO — premium luchador tank */
+.fighter.primo{transform:scale(1.13)}
+.fighter.primo .head{background:linear-gradient(180deg,#2277e1 0%,#134fa8 100%);border-radius:18px 18px 14px 14px}
+.fighter.primo .head::before{content:"★";position:absolute;left:50%;top:-8px;transform:translateX(-50%);color:#ffd54f;font-size:17px;text-shadow:0 0 4px rgba(255,220,90,.35)}
+.fighter.primo .head::after{content:"";position:absolute;left:7px;right:7px;top:14px;height:18px;background:#f6f8fb;border:4px solid #12161d;clip-path:polygon(0 0,50% 34%,100% 0,86% 100%,50% 68%,14% 100%)}
+.fighter.primo .eye{top:20px;width:8px;height:8px;background:#111;box-shadow:0 0 0 2px #fff}
+.fighter.primo .body{background:linear-gradient(180deg,#c8864e 0%,#a56130 100%);border-radius:20px 20px 10px 10px}
+.fighter.primo .body::before{content:"";position:absolute;left:10px;right:10px;top:7px;height:20px;background:linear-gradient(180deg,rgba(255,224,194,.55),rgba(180,103,54,0));border-radius:12px}
+.fighter.primo .body::after{content:"";position:absolute;left:4px;right:4px;bottom:-5px;height:14px;background:linear-gradient(180deg,#d73830 0%,#a31a17 100%);border:4px solid #12161d;border-radius:8px}
+.fighter.primo::after{content:"★";position:absolute;left:50%;top:104px;transform:translateX(-50%);width:22px;height:22px;display:grid;place-items:center;color:#ffe36b;background:#d08c18;border:4px solid #12161d;border-radius:50%;z-index:8;font-size:13px;line-height:1}
+.fighter.primo .arm{background:linear-gradient(180deg,#c9864d 0%,#b36d3d 100%);border-radius:14px}
+.fighter.primo .arm::before{content:"";position:absolute;left:-2px;right:-2px;bottom:14px;height:10px;background:#f0d1b0;border-top:3px solid #12161d;border-bottom:3px solid #12161d;opacity:.45}
+.fighter.primo .arm::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-7px;height:18px;background:#a55b2d;border:4px solid #12161d;border-radius:6px}
+.fighter.primo .leg{background:linear-gradient(180deg,#2268ca 0%,#174d9b 100%)}
+.fighter.primo .leg::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-8px;height:16px;background:#f7f7fb;border:4px solid #12161d;border-radius:7px}
+
+/* SPIDER-MAN — cleaner iconic suit */
+.fighter.spiderman{transform:scale(1.07)}
+.fighter.spiderman .head{background:radial-gradient(circle at 35% 38%,#fff 0 7px,transparent 7.5px),radial-gradient(circle at 65% 38%,#fff 0 7px,transparent 7.5px),linear-gradient(180deg,#df1d23 0%,#b31117 100%);border-radius:16px 16px 14px 14px}
+.fighter.spiderman .head::before{content:"";position:absolute;inset:2px;background:linear-gradient(90deg,transparent 0 47%,#131821 47% 53%,transparent 53% 100%),linear-gradient(180deg,transparent 0 26%,#131821 26% 30%,transparent 30% 56%,#131821 56% 60%,transparent 60% 100%);opacity:.82;pointer-events:none}
+.fighter.spiderman .head::after{content:"";position:absolute;left:10px;top:16px;width:38px;height:12px;background:transparent;border-top:3px solid #141922;border-radius:50%;box-shadow:0 9px 0 -1px #141922}
+.fighter.spiderman .eye{top:18px;width:12px;height:10px;background:#fff;border-radius:10px 10px 7px 7px;box-shadow:0 0 0 3px #11161f}
+.fighter.spiderman .eye.l{left:10px;transform:skewX(-22deg)}.fighter.spiderman .eye.r{right:10px;transform:skewX(22deg)}
+.fighter.spiderman .body{background:linear-gradient(180deg,#db2027 0 34%,#1e53b8 34% 100%);border-radius:18px 18px 10px 10px}
+.fighter.spiderman .body::before{content:"";position:absolute;inset:2px 2px auto 2px;height:26px;background:linear-gradient(90deg,transparent 0 47%,#11161f 47% 53%,transparent 53% 100%),linear-gradient(180deg,transparent 0 36%,#11161f 36% 40%,transparent 40% 100%);opacity:.78}
+.fighter.spiderman .body::after{content:"";position:absolute;left:50%;top:20px;transform:translateX(-50%);width:14px;height:18px;background:#11161f;clip-path:polygon(50% 0,70% 16%,88% 16%,72% 36%,82% 72%,58% 50%,58% 100%,50% 76%,42% 100%,42% 50%,18% 72%,28% 36%,12% 16%,30% 16%)}
+.fighter.spiderman .arm{background:linear-gradient(180deg,#d81d24 0 42%,#2055b8 42% 100%)}
+.fighter.spiderman .arm::before,.fighter.spiderman .leg::before{content:"";position:absolute;inset:3px;background:linear-gradient(90deg,transparent 0 47%,rgba(17,22,31,.9) 47% 53%,transparent 53% 100%);opacity:.75}
+.fighter.spiderman .leg{background:linear-gradient(180deg,#245ac3 0 72%,#d71b23 72% 100%)}
+.fighter.spiderman .leg::after{content:"";position:absolute;left:-3px;right:-3px;bottom:-7px;height:14px;background:#d81d24;border:4px solid #12161d;border-radius:7px}
