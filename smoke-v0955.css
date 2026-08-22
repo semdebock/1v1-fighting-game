@@ -1,0 +1,6 @@
+/* Fight Arena v0.9.5.5 — Smoke & Chaos UI polish */
+.smoke-chaos-live{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;border:1px solid #9d72ff66;background:linear-gradient(135deg,#3b1f58aa,#183e2eaa);color:#e8d9ff;font-size:9px;font-weight:1000;letter-spacing:.08em;box-shadow:0 0 14px #8d55e033}
+.phase-sinister .phase-section:nth-of-type(3){background:radial-gradient(circle at 85% 20%,#7d3bcf18,transparent 28%),radial-gradient(circle at 10% 80%,#39c77b12,transparent 25%)}
+#trainingTools #trainingSpecial{position:relative;overflow:hidden}
+#trainingTools #trainingSpecial:active:after{content:"";position:absolute;inset:0;background:#ffffff1f;animation:trainingFillFlash .25s ease both}
+@keyframes trainingFillFlash{from{opacity:1}to{opacity:0}}
