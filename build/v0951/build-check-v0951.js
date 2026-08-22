@@ -1,0 +1,13 @@
+const fs=require('fs');
+const path=require('path');
+const t94=require('../v094/transform-v094.js');
+const t941=require('../v0941/transform-v0941.js');
+const t95=require('../v095/transform-v095.js');
+const t951=require('./transform-v0951.js');
+const root=path.resolve(__dirname,'../..');
+const files=['core-v093-part1.txt','core-v093-part2.txt','core-v093-part3.txt','core-v093-part4.txt'];
+let code='';for(const file of files)code+=fs.readFileSync(path.join(root,'build/v093',file),'utf8');
+const built=t951(t95(t941(t94(code))));
+fs.writeFileSync('/tmp/core-v0951-built.js',built);
+for(const marker of ["version:'0.9.5.1'","name:'Voltage'","name:'Razor'","name:'Titan'","name:'Arena Champion'",'NEO_INTROS','voltageShot','razorTwin','titanGround','championCrown','FightArenaCampaignControls','campaignWins','campaignPhaseRewards',"name:'Ultron'","name:'Prowler'","code==='DIAMONDS'"])if(!built.includes(marker))throw new Error('v0.9.5.1 marker missing: '+marker);
+console.log('v0.9.5.1 transformed bytes:',Buffer.byteLength(built));
