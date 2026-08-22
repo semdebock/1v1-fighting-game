@@ -1,0 +1,12 @@
+/* Fight Arena v0.9.3.2 — Safari touch / zoom guard */
+html,body{-webkit-text-size-adjust:100%}
+button,.stick{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#fight .actions button,#fight #heroActions button,#fight #punch,#fight #kick,#fight #special,#fight #jump,#fight #block,#fight #stick,#fight #knob,#fight #trainingReset,#fight #trainingSpecial{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+#fight .controls,#fight .actionwrap,#fight .actions,#fight .hero-actions,#fight .stickwrap{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+html.device-iphone #fight.active,html.device-tablet #fight.active{overscroll-behavior:none}
+
+/* Fight Arena v0.9.4.1 — strict Safari combat touch zone */
+#fight.active{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#fight.active #arena,#fight.active .controls,#fight.active .controls *,#fight.active .specialrow,#fight.active .specialrow *,#fight.active #trainingTools,#fight.active #trainingTools *{touch-action:none!important;-ms-touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important;-webkit-tap-highlight-color:transparent!important}
+#fight.active .actions button,#fight.active #heroActions button,#fight.active #stick{touch-action:none!important}
+html.fight-touch-lock,body.fight-touch-lock{overscroll-behavior:none}
