@@ -24,27 +24,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.2 device release
+      - name: Validate v0.9.3 Power & Balance release
         run: |
-          cat build/v091/core-v091-part1.txt build/v091/core-v091-part2.txt build/v091/core-v091-part3.txt build/v091/core-v091-part4.txt > /tmp/core-v091-full.js
-          node --check /tmp/core-v091-full.js
-          node --check core-v092.js
+          cat build/v093/core-v093-part1.txt build/v093/core-v093-part2.txt build/v093/core-v093-part3.txt build/v093/core-v093-part4.txt > /tmp/core-v093-full.js
+          node --check /tmp/core-v093-full.js
+          node --check core-v093.js
           node --check device-v092.js
-          node --check qa-v092.js
+          node --check qa-v093.js
           test -s index.html
-          test -s core-v092.js
-          test -s device-v092.js
-          test -s device-v092.css
-          test -s qa-v092.js
-          test -s build/v090/cosmetics-v090.css
-          grep -q "v0.9.2" index.html
-          grep -q "deviceChooser" index.html
-          grep -q "deviceModeBtn" index.html
-          grep -q "core-v092.js" index.html
-          grep -q "FightArenaControls" core-v092.js
-          grep -q "KeyA" device-v092.js
+          test -s balance-v093.css
+          test -s core-v093.js
+          test -s qa-v093.js
+          grep -q "v0.9.3" index.html
+          grep -q "Power & Balance" index.html
+          grep -q "rankOrder" /tmp/core-v093-full.js
+          grep -q "arenaRank:'S'" /tmp/core-v093-full.js
+          grep -q "price:100.*skin-iron-nano" /tmp/core-v093-full.js
+          grep -q "NANO CANNON" /tmp/core-v093-full.js
+          grep -q "SHOULDER BARRAGE" /tmp/core-v093-full.js
+          grep -q "NANOTECH ARSENAL" /tmp/core-v093-full.js
+          grep -q "trainingLast" index.html
           grep -q "device-iphone" device-v092.css
-          grep -q "iPhone Portrait Mode" index.html
+          grep -q "KeyA" device-v092.js
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
