@@ -1,0 +1,73 @@
+/* Fight Arena v0.9.5.1 — Neo City Arena villain models + VFX */
+.neo-intro{position:absolute;left:50%;top:10%;z-index:40;transform:translateX(-50%);width:min(84%,520px);padding:14px 16px;border:1px solid #5a6a82;border-radius:16px;background:linear-gradient(180deg,#0b1423f5,#070c15f4);box-shadow:0 18px 40px #0009,inset 0 1px #ffffff12;text-align:center;pointer-events:none;animation:neoIntroIn .2s ease both}.neo-intro small{display:block;color:#8ea3bd;font-weight:900;letter-spacing:.12em;font-size:9px}.neo-intro strong{display:block;margin:4px 0 5px;color:#fff;font-size:19px;letter-spacing:.04em}.neo-intro span{display:block;color:#c5d1df;font-size:11px;line-height:1.45}@keyframes neoIntroIn{from{opacity:0;transform:translate(-50%,-8px) scale(.97)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+
+/* VOLTAGE — lean black street-tech suit with cyan capacitor hardware */
+.fighter.voltage{filter:drop-shadow(0 9px 4px #000b) drop-shadow(0 0 12px #22e8ff45)}
+.voltage .head{left:20px;top:5px;width:44px;height:42px;border-radius:14px 14px 11px 11px;background:linear-gradient(180deg,#111a25,#05090f);border-color:#07121a}
+.voltage .head:before{content:"";position:absolute;left:5px;right:5px;top:10px;height:12px;border-radius:8px;background:linear-gradient(90deg,#103e50,#61efff,#103e50);border:2px solid #07141d;box-shadow:0 0 10px #54ecff}
+.voltage .head:after{content:"";position:absolute;left:16px;top:-8px;width:12px;height:11px;border:3px solid #122937;border-bottom:0;transform:skewX(-18deg)}
+.voltage .eye{display:none}
+.voltage .body{left:15px;top:45px;width:54px;height:64px;border-radius:12px 12px 8px 8px;background:linear-gradient(90deg,#08111a 0 18%,#142738 18% 82%,#08111a 82%);border-color:#061017;box-shadow:inset 0 0 0 2px #1de4ff1d}
+.voltage .body:before{content:"";position:absolute;left:21px;top:7px;width:12px;height:36px;background:linear-gradient(#8af7ff,#1c9fc2);clip-path:polygon(45% 0,100% 0,62% 42%,95% 42%,28% 100%,43% 56%,12% 56%);filter:drop-shadow(0 0 5px #50edff)}
+.voltage .body:after{content:"";position:absolute;left:6px;right:6px;bottom:8px;height:7px;border:2px solid #164f64;border-radius:6px;background:#06151e;box-shadow:0 0 8px #30dfff38}
+.voltage .arm{top:50px;width:20px;height:58px;border-radius:7px;background:linear-gradient(180deg,#122535 0 60%,#123f51 60% 74%,#1ce3fa 74% 80%,#101922 80%);border-color:#061017}
+.voltage .arm.l{left:2px}.voltage .arm.r{right:2px}.voltage .arm:after{content:"";position:absolute;left:3px;right:3px;bottom:8px;height:12px;border-radius:5px;background:#0d2834;box-shadow:0 0 8px #48ecff}
+.voltage .leg{top:104px;width:24px;height:46px;background:linear-gradient(180deg,#132535,#071018);border-color:#061017}.voltage .leg.l{left:17px}.voltage .leg.r{right:17px}.voltage .leg:after{content:"";position:absolute;left:-2px;right:-2px;bottom:-5px;height:12px;border-radius:5px;background:#102d3b;border:4px solid #061017;box-shadow:inset 0 2px #24d8ec55}
+.voltage:before,.voltage:after{content:"";position:absolute;top:51px;width:9px;height:27px;border:2px solid #0c5b70;border-radius:5px;background:#0a1c25;box-shadow:0 0 8px #2be9ff55;z-index:4}.voltage:before{left:7px}.voltage:after{right:7px}
+.voltage.voltage-dash{animation:voltageDash .18s ease}.voltage.voltage-dash:after{box-shadow:0 0 22px #5bf1ff}
+@keyframes voltageDash{50%{filter:drop-shadow(-20px 0 5px #28eaffaa) drop-shadow(0 0 18px #2deaff)}}
+
+/* RAZOR — crimson twin-blade underground duelist */
+.fighter.razor{filter:drop-shadow(0 9px 4px #000b) drop-shadow(0 0 11px #ff314e40)}
+.razor .head{left:20px;top:5px;width:44px;height:42px;border-radius:13px 13px 9px 9px;background:linear-gradient(180deg,#53101a,#17070b);border-color:#0e0709}
+.razor .head:before{content:"";position:absolute;inset:-7px 4px auto;height:20px;background:linear-gradient(90deg,#1b090d,#7f1725,#1b090d);clip-path:polygon(0 100%,13% 8%,39% 42%,50% 0,61% 42%,87% 8%,100% 100%);z-index:-1}
+.razor .eye{top:15px;width:10px;height:5px;background:#ffd9d9;box-shadow:0 0 6px #ff5167}.razor .eye.l{left:6px}.razor .eye.r{right:6px}
+.razor .body{left:15px;top:45px;width:54px;height:63px;border-radius:11px 11px 7px 7px;background:linear-gradient(135deg,#1b0a0e 0 32%,#8f1727 33% 50%,#250b10 51% 100%);border-color:#100609}
+.razor .body:before{content:"";position:absolute;left:9px;top:8px;width:34px;height:40px;border-top:4px solid #c83a4e;border-right:5px solid #391017;transform:skewX(-12deg);opacity:.9}
+.razor .body:after{content:"";position:absolute;left:6px;right:6px;bottom:7px;height:8px;background:#0b080a;border:3px solid #321018;border-radius:5px}
+.razor .arm{top:50px;width:20px;height:58px;border-radius:7px;background:linear-gradient(180deg,#6f1220,#1a090d 68%,#8a1725 69%);border-color:#100609}.razor .arm.l{left:2px}.razor .arm.r{right:2px}
+.razor .arm:after{content:"";position:absolute;width:6px;height:42px;bottom:-25px;left:7px;border-radius:4px 4px 1px 1px;background:linear-gradient(180deg,#fff,#cfd5dc 28%,#7f8c98 75%,#15191e);box-shadow:0 0 7px #ff52655e;transform:rotate(5deg);transform-origin:top}.razor .arm.r:after{transform:rotate(-5deg)}
+.razor .leg{top:103px;width:24px;height:47px;background:linear-gradient(180deg,#321017,#0e080a);border-color:#100609}.razor .leg.l{left:17px}.razor .leg.r{right:17px}.razor .leg:after{content:"";position:absolute;left:-2px;right:-2px;bottom:-5px;height:12px;background:#3a1018;border:4px solid #100609;border-radius:5px}
+.razor.razor-combo .arm.l{animation:razorArmL .32s ease}.razor.razor-combo .arm.r{animation:razorArmR .32s ease}.razor.razor-leap{animation:razorLeap .34s ease}
+@keyframes razorArmL{50%{transform:rotate(-58deg) translateY(-5px)}}@keyframes razorArmR{50%{transform:rotate(58deg) translateY(-5px)}}@keyframes razorLeap{50%{transform:translateY(-18px) rotate(-5deg)}}
+
+/* TITAN — oversized armored bruiser with industrial gauntlets */
+.fighter.titan{filter:drop-shadow(0 10px 5px #000c) drop-shadow(0 0 12px #ff9c2d2f)}
+.titan .head{left:18px;top:8px;width:48px;height:40px;border-radius:10px 10px 8px 8px;background:linear-gradient(180deg,#65727e,#242d36);border-color:#11171d}
+.titan .head:before{content:"";position:absolute;left:4px;right:4px;top:9px;height:10px;background:#111923;border:2px solid #8696a4;border-radius:3px;box-shadow:inset 0 0 0 2px #ff9b3233}
+.titan .eye{top:13px;width:8px;height:4px;background:#ffb454;box-shadow:0 0 5px #ff9a33}.titan .eye.l{left:9px}.titan .eye.r{right:9px}
+.titan .body{left:10px;top:45px;width:64px;height:68px;border-radius:14px 14px 8px 8px;background:linear-gradient(90deg,#222e38 0 16%,#566773 16% 84%,#222e38 84%);border-color:#121920;box-shadow:inset 0 6px #8a9ba73b}
+.titan .body:before{content:"";position:absolute;left:10px;right:10px;top:7px;height:28px;background:linear-gradient(135deg,#788792,#303d47);clip-path:polygon(0 0,50% 22%,100% 0,85% 100%,15% 100%);border-bottom:3px solid #ff8f2b}
+.titan .body:after{content:"T";position:absolute;left:50%;top:12px;transform:translateX(-50%);font-size:17px;font-weight:1000;color:#d8e1e7;text-shadow:0 0 5px #ff9d31}
+.titan .arm{top:48px;width:27px;height:62px;border-radius:9px;background:linear-gradient(180deg,#566775 0 45%,#27343e 45% 61%,#bd6920 62% 69%,#4d5962 70%);border-color:#121920}.titan .arm.l{left:-7px}.titan .arm.r{right:-7px}.titan .arm:after{content:"";position:absolute;left:-4px;right:-4px;bottom:-3px;height:24px;border-radius:8px;background:linear-gradient(#8b969d,#3a444b);border:4px solid #161c21;box-shadow:inset 0 4px #ff9a2f44}
+.titan .leg{top:108px;width:28px;height:44px;background:linear-gradient(180deg,#313e48,#151c22);border-color:#121920}.titan .leg.l{left:13px}.titan .leg.r{right:13px}.titan .leg:after{content:"";position:absolute;left:-4px;right:-4px;bottom:-6px;height:14px;background:#3f4b53;border:4px solid #121920;border-radius:5px}
+.titan:before,.titan:after{content:"";position:absolute;top:41px;width:24px;height:18px;border-radius:8px;background:linear-gradient(#8a99a4,#343f47);border:4px solid #11181d;z-index:3}.titan:before{left:-5px;transform:rotate(-12deg)}.titan:after{right:-5px;transform:rotate(12deg)}
+.titan.titan-smash .arm.r{animation:titanSmash .44s ease}.titan.titan-charge{animation:titanCharge .34s linear}
+@keyframes titanSmash{40%{transform:rotate(-65deg) translateY(-15px)}80%{transform:rotate(32deg) translateY(8px)}}@keyframes titanCharge{50%{filter:drop-shadow(-14px 0 6px #ff9a3244) drop-shadow(0 10px 5px #000)}}
+
+/* ARENA CHAMPION — gold/black/white ceremonial combat armor */
+.fighter.arenachampion{filter:drop-shadow(0 10px 5px #000c) drop-shadow(0 0 14px #ffd25a52)}
+.arenachampion:before{content:"";position:absolute;left:5px;right:5px;top:38px;height:94px;background:linear-gradient(160deg,#efe9d8,#7f641e 50%,#16140e);border:4px solid #17140d;clip-path:polygon(7% 0,93% 0,100% 86%,69% 74%,50% 100%,31% 74%,0 86%);z-index:0;opacity:.66}
+.arenachampion .head{left:20px;top:5px;width:44px;height:42px;border-radius:12px 12px 10px 10px;background:linear-gradient(180deg,#f1cf65,#6b4d12);border-color:#171309;z-index:5}
+.arenachampion .head:before{content:"";position:absolute;left:2px;right:2px;top:-12px;height:18px;background:linear-gradient(90deg,#5f4511,#ffd86a,#5f4511);clip-path:polygon(0 100%,8% 20%,29% 62%,50% 0,71% 62%,92% 20%,100% 100%)}
+.arenachampion .head:after{content:"";position:absolute;left:5px;right:5px;top:8px;height:17px;border-radius:9px;background:#15181d;border:2px solid #e8c75d}
+.arenachampion .eye{top:15px;width:9px;height:5px;background:#fff9d5;box-shadow:0 0 7px #ffd75b;z-index:7}.arenachampion .eye.l{left:8px}.arenachampion .eye.r{right:8px}
+.arenachampion .body{left:14px;top:45px;width:56px;height:66px;border-radius:13px 13px 8px 8px;background:linear-gradient(90deg,#111318 0 17%,#e6c45d 17% 35%,#f1eee3 35% 65%,#e6c45d 65% 83%,#111318 83%);border-color:#17140c;z-index:4}
+.arenachampion .body:before{content:"★";position:absolute;left:50%;top:7px;transform:translateX(-50%);font-size:21px;color:#1c1c19;text-shadow:0 1px #fff1a6}
+.arenachampion .body:after{content:"";position:absolute;left:6px;right:6px;bottom:7px;height:8px;border-radius:5px;background:#13151a;border:3px solid #8f6f1c;box-shadow:0 0 8px #f0c95833}
+.arenachampion .arm{top:50px;width:21px;height:59px;border-radius:7px;background:linear-gradient(180deg,#dfc05d 0 40%,#f0ede1 40% 68%,#16181d 68%);border-color:#17140c;z-index:3}.arenachampion .arm.l{left:1px}.arenachampion .arm.r{right:1px}.arenachampion .arm:after{content:"";position:absolute;left:-1px;right:-1px;bottom:4px;height:18px;border-radius:6px;background:#c89b2d;border:3px solid #17140c}
+.arenachampion .leg{top:106px;width:25px;height:46px;background:linear-gradient(180deg,#1a1c22 0 52%,#d8b443 53%);border-color:#17140c;z-index:3}.arenachampion .leg.l{left:16px}.arenachampion .leg.r{right:16px}.arenachampion .leg:after{content:"";position:absolute;left:-3px;right:-3px;bottom:-5px;height:13px;background:#ede9db;border:4px solid #17140c;border-radius:5px}
+.arenachampion.champion-mode{filter:drop-shadow(0 10px 5px #000c) drop-shadow(0 0 20px #ffe27f) saturate(1.18);animation:championAura .65s ease-in-out infinite alternate}.arenachampion.champion-mode .body{box-shadow:0 0 16px #ffd75a66,inset 0 0 12px #fff4b24c}
+@keyframes championAura{to{filter:drop-shadow(0 10px 5px #000c) drop-shadow(0 0 29px #ffe687) saturate(1.25)}}
+.arenachampion.champion-strike .arm.r{animation:champStrike .36s ease}.arenachampion.champion-rush{animation:champRush .28s ease}@keyframes champStrike{50%{transform:rotate(-58deg) translateY(-9px)}}@keyframes champRush{50%{filter:drop-shadow(-18px 0 8px #ffe27499) drop-shadow(0 0 14px #ffd25a)}}
+
+/* Enemy ability VFX */
+.projectile.voltage-bolt{width:28px;height:12px;border-radius:50%;background:linear-gradient(90deg,#fff,#65f4ff 40%,#0faac7);box-shadow:0 0 8px #65f4ff,0 0 18px #16dffb;transform:skewX(-18deg)}
+.voltage-pulse{width:58px;height:58px;border:5px solid #43eeff;border-radius:50%;box-shadow:0 0 15px #48efff,inset 0 0 13px #28dfffa8;animation:neoPulse .42s ease-out forwards}
+.razor-slashfx,.razor-spinfx{width:70px;height:48px;border:0;background:linear-gradient(130deg,transparent 42%,#fff 43% 46%,#ff314f 47% 52%,transparent 53%);filter:drop-shadow(0 0 6px #ff304f);animation:razorFx .34s ease-out forwards}.razor-spinfx{width:80px;height:80px;border-radius:50%;background:conic-gradient(transparent 0 35%,#ff4860 36% 39%,transparent 40% 72%,#fff 73% 75%,transparent 76%);animation:razorSpin .4s linear forwards}
+.titan-wave{width:95px;height:22px;border-bottom:8px solid #bd702d;border-radius:50%;box-shadow:0 7px 10px #ff973659;animation:titanWave .54s ease-out forwards}
+.projectile.champion-wave{width:34px;height:18px;border-radius:50%;background:linear-gradient(90deg,#fff9cf,#ffd558,#9b6c0d);box-shadow:0 0 9px #fff0a1,0 0 18px #ffcf42;transform:skewX(-20deg)}
+.champion-crown{width:94px;height:72px;border:5px solid #ffe277;border-radius:50%;box-shadow:0 0 18px #ffe07a,inset 0 0 24px #f9cb4e55;animation:crownBurst .64s ease-out forwards}.champion-crown:before{content:"★";position:absolute;inset:0;display:grid;place-items:center;color:#fff5c0;font-size:38px;text-shadow:0 0 15px #ffd445}
+@keyframes neoPulse{to{transform:scale(1.8);opacity:0}}@keyframes razorFx{to{transform:translateX(-24px) scale(1.25);opacity:0}}@keyframes razorSpin{to{transform:rotate(-290deg) scale(1.25);opacity:0}}@keyframes titanWave{to{transform:translateX(-44px) scaleX(1.7);opacity:0}}@keyframes crownBurst{to{transform:scale(1.55);opacity:0}}
+
+@media(max-width:560px){.neo-intro{top:8%;width:88%;padding:10px 12px}.neo-intro strong{font-size:16px}.neo-intro span{font-size:10px}}
