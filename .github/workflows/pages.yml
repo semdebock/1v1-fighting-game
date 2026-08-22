@@ -24,31 +24,38 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.3.2 touch controls hotfix
+      - name: Validate v0.9.4 Wakanda & Weapon X release
         run: |
-          cat build/v093/core-v093-part1.txt build/v093/core-v093-part2.txt build/v093/core-v093-part3.txt build/v093/core-v093-part4.txt > /tmp/core-v093-full.js
-          node --check /tmp/core-v093-full.js
-          node --check core-v0932.js
+          node --check build/v094/transform-v094.js
+          node --check build/v094/build-check-v094.js
+          node --check core-v094.js
           node --check device-v092.js
           node --check touch-v0932.js
-          node --check qa-v0932.js
+          node --check qa-v094.js
+          node build/v094/build-check-v094.js
+          node --check /tmp/core-v094-built.js
           test -s index.html
-          test -s balance-v093.css
+          test -s heroes-v094.css
           test -s touch-v0932.css
-          test -s touch-v0932.js
-          test -s core-v0932.js
-          test -s qa-v0932.js
-          grep -q "v0.9.3.2" index.html
-          grep -q "Touch Controls Hotfix" index.html
-          grep -q "touch-v0932.css" index.html
-          grep -q "touch-v0932.js" index.html
-          grep -q "touch-action:none" touch-v0932.css
+          grep -q "v0.9.4" index.html
+          grep -q "WAKANDA & WEAPON X" index.html
+          grep -q "trainingHeroStat" index.html
+          grep -q "core-v094.js" index.html
+          grep -q "Black Panther" /tmp/core-v094-built.js
+          grep -q "Wolverine" /tmp/core-v094-built.js
+          grep -q "price:3200" /tmp/core-v094-built.js
+          grep -q "price:4000" /tmp/core-v094-built.js
+          grep -q "id:'bp-kinetic'.*price:80" /tmp/core-v094-built.js
+          grep -q "KINETIC CLAW WAVE" /tmp/core-v094-built.js
+          grep -q "PERFECT ABSORB" /tmp/core-v094-built.js
+          grep -q "ADAMANTIUM SLASH" /tmp/core-v094-built.js
+          grep -q "HEALING SURGE" /tmp/core-v094-built.js
+          grep -q "BERSERKER RAGE" /tmp/core-v094-built.js
+          grep -q "code==='DIAMONDS'" /tmp/core-v094-built.js
+          grep -q "save.gems+=100" /tmp/core-v094-built.js
+          grep -q "skin-bp-kinetic" heroes-v094.css
+          grep -q "wolverine" heroes-v094.css
           grep -q "gesturestart" touch-v0932.js
-          grep -q "lastTouchEnd" touch-v0932.js
-          grep -q "code==='DIAMONDS'" core-v0932.js
-          grep -q "save.gems+=100" core-v0932.js
-          grep -q "price:100.*skin-iron-nano" /tmp/core-v093-full.js
-          grep -q "NANOTECH ARSENAL" /tmp/core-v093-full.js
           grep -q "device-iphone" device-v092.css
           grep -q "KeyA" device-v092.js
 
