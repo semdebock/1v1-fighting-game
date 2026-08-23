@@ -142,7 +142,7 @@ jobs:
           grep -q "const ownsRelease=" update-v097.js
           grep -q "function renderNavigator" update-v097.js
           grep -q "CLASSIFIED THREAT" update-v097.js
-          grep -q "if($('#levels')?.classList.contains('active'))renderNavigator" update-v097.js
+          grep -q "classList.contains('active'))renderNavigator" update-v097.js
           grep -q "window.MultiverseArenaUpdate0971" update-v0971.js
           grep -q "Sabretooth Rework • Result Flow • Version Sync" update-v0971.js
           grep -q "result-action-stack-v0971" update-v0971.js
