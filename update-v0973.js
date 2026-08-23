@@ -3,9 +3,11 @@
 'use strict';
 const BUILD='0.9.7.3',ASSET='0973';
 const $=(s,r=document)=>r.querySelector(s);
+const ownsRelease=()=>!window.MultiverseArenaRuntime||window.MultiverseArenaRuntime.version===BUILD;
 let wired=false,dailyTimer=0;
 function style(){if($('#update0973Style'))return;const l=document.createElement('link');l.id='update0973Style';l.rel='stylesheet';l.href=`update-v0973.css?v=${ASSET}`;document.head.appendChild(l)}
 function brand(){
+ if(!ownsRelease())return;
  document.title='Multiverse Arena v0.9.7.3 — Collection UX + Daily Reward';
  document.querySelectorAll('.brand .tag').forEach(x=>x.textContent='v0.9.7.3');
  const updates=$('#updates');if(updates)updates.textContent='UPDATE LOG  •  v0.9.7.3';
@@ -34,6 +36,7 @@ function updateDaily(){
 }
 function tickDaily(){clearTimeout(dailyTimer);updateDaily();dailyTimer=setTimeout(tickDaily,document.hidden?5000:1000)}
 function cleanUpdateLog(){
+ if(!ownsRelease())return;
  const box=$('#updatesScreen .changelog');if(!box)return;
  const releases=[
   ['🗂️','v0.9.7.3 — Collection Quick View','Every fighter card now shows HP, Power and Speed directly, so comparing your roster no longer requires scrolling into the detail panel.'],
