@@ -1,0 +1,29 @@
+/* Multiverse Arena v0.9.7.3 — Collection UX + Daily Reward */
+
+/* Fighter cards: surface the important numbers immediately. */
+#charCards .fighter-card-v0973{display:flex!important;flex-direction:column!important;min-height:0!important;overflow:hidden!important}
+#charCards .fighter-card-v0973 .portrait{margin-bottom:5px!important}
+.fighter-quick-stats-v0973{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;width:100%;margin:8px 0 7px}
+.fighter-quick-stats-v0973>span{display:block;padding:7px 4px 6px;border:1px solid #31445d;border-radius:10px;background:#07101c;text-align:center;min-width:0}
+.fighter-quick-stats-v0973 small{display:block!important;margin:0 0 2px!important;color:#8293aa!important;font-size:7px!important;font-weight:1000!important;letter-spacing:.08em!important}
+.fighter-quick-stats-v0973 b{display:block;color:#f3f6fb;font-size:12px;line-height:1}
+.fighter-quick-action-v0973{display:flex;align-items:center;justify-content:center;width:100%;min-height:38px;margin-top:7px;padding:8px 7px;border:1px solid #667de3;border-radius:11px;background:linear-gradient(135deg,#536cff,#354fc9);box-shadow:0 7px 16px #263b9b38;color:#fff;font-size:9px;font-weight:1000;letter-spacing:.055em;text-align:center;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.fighter-quick-action-v0973.buy{border-color:#a97c38;background:linear-gradient(135deg,#8d642d,#5f421d);box-shadow:0 7px 16px #6d481b35}
+.fighter-quick-action-v0973.equipped{border-color:#355248;background:#11231e;color:#9bd9c2;box-shadow:none;opacity:.78}
+.fighter-card-v0973.locked .fighter-quick-stats-v0973{opacity:.62}
+.fighter-card-v0973 .fighter-role{min-height:20px}
+
+/* Daily reward: one clear claim state or one clear countdown state. */
+#daily.daily-v0973{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important;min-height:54px!important;line-height:1.08!important}
+#daily.daily-v0973>span{display:block;font-size:11px;font-weight:1000;letter-spacing:.055em}
+#daily.daily-v0973>small{display:block;color:#c5d0e1;font-size:8px;font-weight:900;letter-spacing:.055em}
+#daily.daily-v0973.daily-ready{border-color:#b9964a!important;background:linear-gradient(135deg,#8b662a,#5b431d)!important;box-shadow:0 8px 22px #9c72283a!important}
+#daily.daily-v0973.daily-ready>small{color:#ffe3a0}
+#daily.daily-v0973.daily-cooldown{opacity:1!important;border-color:#34465f!important;background:linear-gradient(180deg,#101927,#0a111c)!important;color:#c4cfde!important;box-shadow:none!important;cursor:default!important}
+#daily.daily-v0973.daily-cooldown>small{font-variant-numeric:tabular-nums;color:#8fa2bb}
+
+@media(max-width:560px){
+ .fighter-quick-stats-v0973{gap:4px;margin-top:6px}.fighter-quick-stats-v0973>span{padding:6px 2px}.fighter-quick-action-v0973{min-height:36px;font-size:8px}
+ #daily.daily-v0973{min-height:50px!important}
+}
+@media(prefers-reduced-motion:reduce){.fighter-quick-action-v0973,#daily.daily-v0973{transition:none!important}}

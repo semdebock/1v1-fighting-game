@@ -3,13 +3,15 @@
 'use strict';
 const BUILD='0.9.7.2',ASSET='0972';
 const $=(s,r=document)=>r.querySelector(s);
+const ownsRelease=()=>{const v=window.MultiverseArenaRuntime?.version;return !v||v===BUILD};
 const BALANCE={
  buffs:{Rookie:'105 HP • 9/14 basics • 28 Special',CaptainAmerica:'82 Power • 68 Speed • 11/15 basics • stronger shield kit',Daredevil:'70 Power • 90 Speed • stronger counter/billy club/combo'},
  nerfs:{Juggernaut:'345 HP • lighter armor • slower special cadence',Deadpool:'270 HP • 78 max regen • 36 HP Last Stand • slower Maximum Effort',Magneto:'365 HP • lower burst • shorter shield • slower final-phase storm'}
 };
 let wired=false;
-function style(){if($('#update0972Style'))return;const l=document.createElement('link');l.id='update0972Style';l.rel='stylesheet';l.href=`update-v0972.css?v=${ASSET}`;document.head.appendChild(l)}
+function style(){if($('#update0972Style'))return;const l=document.createElement('link');l.id='update0972Style';l.rel='stylesheet';l.href=`update-v0972.css?v=${window.MultiverseArenaRuntime?.asset||ASSET}`;document.head.appendChild(l)}
 function brand(){
+ if(!ownsRelease())return;
  document.title='Multiverse Arena v0.9.7.2 — Combat Balance + Phase 3 Polish';
  document.querySelectorAll('.brand .tag').forEach(x=>x.textContent='v0.9.7.2');
  const updates=$('#updates');if(updates)updates.textContent='UPDATE LOG  •  v0.9.7.2';
@@ -22,6 +24,7 @@ function brand(){
  if(window.MultiverseArenaRuntime){window.MultiverseArenaRuntime.version=BUILD;window.MultiverseArenaRuntime.asset=ASSET}
 }
 function cleanUpdateLog(){
+ if(!ownsRelease())return;
  const box=$('#updatesScreen .changelog');if(!box)return;
  const releases=[
   ['⚖️','v0.9.7.2 — Combat Balance Pass','Targeted tuning improves weaker public fighters and removes unnecessary Phase 3 sponge/spam without deleting any signature mechanics.'],
