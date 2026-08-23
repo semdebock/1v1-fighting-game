@@ -1,15 +1,19 @@
 name: Deploy Multiverse Arena to GitHub Pages
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: write
   pages: write
   id-token: write
+
 concurrency:
   group: pages
   cancel-in-progress: true
+
 jobs:
   deploy:
     environment:
@@ -19,14 +23,50 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate v0.9.7.4 Hulkbuster
+
+      - name: Validate v0.9.7.4 Hulkbuster Premium Variant
         run: |
+          node --check build/v094/transform-v094.js
+          node --check build/v0941/transform-v0941.js
+          node --check build/v095/transform-v095.js
+          node --check build/v0951/transform-v0951.js
+          node --check build/v0952/transform-v0952.js
+          node --check build/v0953/transform-v0953.js
+          node --check build/v09531/transform-v09531.js
+          node --check build/v0954/transform-v0954.js
+          node --check build/v0955/transform-v0955.js
+          node --check build/v0956/transform-v0956.js
+          node --check build/v0957/transform-v0957.js
+          node --check build/v0962/transform-v0962.js
+          node --check build/v097/transform-v097.js
+          node --check build/v0972/transform-v0972.js
+          node --check build/v0973/transform-v0973.js
           node --check build/v0974/transform-v0974.js
-          node --check build/v0974/release-check-v0974.js
           node --check build/v0958/build-core-v0958.js
+          node --check build/v0958/cleanup-check-v0958.js
+          node --check build/v096/presentation-check-v096.js
+          node --check build/v096/final-check-v096.js
           node --check build/v096/patch-index-v096.js
+          node --check build/v0964/release-check-v0964.js
+          node --check build/v0966/release-check-v0966.js
+          node --check build/v097/release-check-v097.js
+          node --check build/v0971/release-check-v0971.js
+          node --check build/v0972/release-check-v0972.js
+          node --check build/v0973/release-check-v0973.js
+          node --check build/v0974/release-check-v0974.js
           node --check app/core/bootstrap-v096.js
+          node --check update-v097.js
+          node --check update-v0971.js
+          node --check update-v0972.js
+          node --check update-v0973.js
           node --check update-v0974.js
+          node --check campaign-v097.js
+          node --check ui-v09571.js
+          node --check polish-v09572.js
+          node --check device-v092.js
+          node --check touch-v0941.js
+          node --check stability-v0941.js
+
           node build/v0957/build-check-v0957.js
           node build/v0957/campaign-check-v0957.js
           node build/v095722/stability-check-v095722.js
@@ -43,25 +83,84 @@ jobs:
           node build/v0973/release-check-v0973.js
           node build/v0974/release-check-v0974.js
           node build/v096/patch-index-v096.js
+          node build/v096/patch-index-v096.js
+
+          test -s index.html
+          test -s app/core/bootstrap-v096.js
+          test -s app/core/core-runtime-v0958.js
+          test -s update-v0973.js
+          test -s update-v0973.css
           test -s update-v0974.js
           test -s update-v0974.css
-          grep -q "Multiverse Arena v0.9.7.4 — Hulkbuster" index.html
+          test -s build/v0973/transform-v0973.js
+          test -s build/v0974/transform-v0974.js
+          test -s build/v0973/release-check-v0973.js
+          test -s build/v0974/release-check-v0974.js
+
+          grep -q "Multiverse Arena v0.9.7.4 — Hulkbuster Premium Variant" index.html
+          grep -q "UPDATE LOG  •  v0.9.7.4" index.html
+          grep -q "MYTHIC ARMOR • HULKBUSTER" index.html
+          grep -q "BUILT TO<br>BREAK GIANTS." index.html
+          grep -q "premium-v096.css?v=0974" index.html
           grep -q "app/core/bootstrap-v096.js?v=0974" index.html
+
           grep -q "const BUILD='0.9.7.4'" app/core/bootstrap-v096.js
+          grep -q "const ASSET='0974'" app/core/bootstrap-v096.js
+          grep -q "const SAVE_KEY='fightArenaV08'" app/core/bootstrap-v096.js
+          grep -q "update-v0973.js" app/core/bootstrap-v096.js
           grep -q "update-v0974.js" app/core/bootstrap-v096.js
+
           grep -q "id:'iron-hulkbuster'" app/core/core-runtime-v0958.js
-          grep -q "VERONICA CRASHDOWN" app/core/core-runtime-v0958.js
+          grep -q "rarity:'MYTHIC',price:250" app/core/core-runtime-v0958.js
+          grep -q "hp:175,power:98,speed:48,punch:16,kick:23,special:68" app/core/core-runtime-v0958.js
+          grep -q "HEAVY ARMOR • 18% DAMAGE REDUCTION" app/core/core-runtime-v0958.js
+          grep -q "Math.round(n\*.82)" app/core/core-runtime-v0958.js
+          grep -q "HULKBUSTER SLAM" app/core/core-runtime-v0958.js
+          grep -q "MICRO MISSILE SWARM" app/core/core-runtime-v0958.js
+          grep -q "REPULSOR BARRAGE" app/core/core-runtime-v0958.js
+          grep -q "VERONICA CRASHDOWN!" app/core/core-runtime-v0958.js
+          grep -q "activeStats:name=>activeFighterStats(name)" app/core/core-runtime-v0958.js
+
           grep -q "DAILY_REWARD_COINS=1250" app/core/core-runtime-v0958.js
+          grep -q "DAILY_COOLDOWN_MS=24\*60\*60\*1000" app/core/core-runtime-v0958.js
+          grep -q "FightArenaDailyControls" app/core/core-runtime-v0958.js
+          grep -q "hp:105,power:60,speed:64" app/core/core-runtime-v0958.js
+          grep -q "hp:345,dmg:1.47" app/core/core-runtime-v0958.js
+          grep -q "F.deadpoolRecovered<78" app/core/core-runtime-v0958.js
+          grep -q "mystiqueTransform" app/core/core-runtime-v0958.js
+          grep -q "deadpoolLastStand" app/core/core-runtime-v0958.js
+          grep -q "magnetoMaster" app/core/core-runtime-v0958.js
+          grep -q "primo-super-leap" app/core/core-runtime-v0958.js
+          grep -q "name:'Doctor Octopus'" app/core/core-runtime-v0958.js
+          grep -q "FightArenaTrainingControls" app/core/core-runtime-v0958.js
+          grep -q "punisherUnlockShown" app/core/core-runtime-v0958.js
           grep -q "multiTouch:true" touch-v0941.js
+
+          grep -q "const ownsRelease=" premium-v096.js
+          grep -q "const ownsRelease=" update-v097.js
+          grep -q "const ownsRelease=" update-v0971.js
+          grep -q "const ownsRelease=" update-v0972.js
+          grep -q "const ownsRelease=" update-v0973.js
+          grep -q "window.MultiverseArenaUpdate0974" update-v0974.js
+          grep -q "BUY & EQUIP • 250 💎" update-v0974.js
+          grep -q ".fighter.ironman.skin-iron-hulkbuster" update-v0974.css
+          grep -q "veronica-crashfx" update-v0974.css
+          ! grep -q "\.fight \.fighter\.player\.skin-iron-hulkbuster{transform" update-v0974.css
+          ! grep -q "new MutationObserver" update-v0974.js
+          ! grep -q "requestAnimationFrame(loop)" update-v0974.js
+          ! grep -q "setInterval(" update-v0974.js
+          ! grep -q "localStorage.removeItem('fightArenaV08')" build/v0974/transform-v0974.js
+
       - name: Persist v0.9.7.4 release artifacts
         run: |
           if [ -n "$(git status --porcelain -- index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json
-            git commit -m "Release Multiverse Arena v0.9.7.4 Hulkbuster + Veronica Crashdown [skip ci]"
+            git commit -m "Release Multiverse Arena v0.9.7.4 Hulkbuster Premium Variant [skip ci]"
             git push
           fi
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
