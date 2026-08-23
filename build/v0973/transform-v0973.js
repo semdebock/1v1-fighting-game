@@ -10,7 +10,7 @@ return function transformV0973(code){
 
  /* Save migration: retain the legacy calendar field, but move enforcement to a real timestamp. */
  rep('dailyClaimDate:null,redeemedBrandNewDay:false','dailyClaimDate:null,dailyClaimAt:0,redeemedBrandNewDay:false','daily timestamp save field');
- rep("s.unlocked=clamp(Number.isFinite(+s.unlocked)?Math.floor(+s.unlocked):1,1,LEVELS.length);s.ownerGodUnlocked=!!s.ownerGodUnlocked;", "s.dailyClaimAt=Number.isFinite(+s.dailyClaimAt)?Math.max(0,Math.floor(+s.dailyClaimAt)):0;if(!s.dailyClaimAt&&s.dailyClaimDate===localDay())s.dailyClaimAt=Date.now();s.unlocked=clamp(Number.isFinite(+s.unlocked)?Math.floor(+s.unlocked):1,1,LEVELS.length);s.ownerGodUnlocked=!!s.ownerGodUnlocked;", 'legacy daily migration');
+ rep("s.unlocked=clamp(Number.isFinite(+s.unlocked)?Math.floor(+s.unlocked):1,1,LEVELS.length);s.ownerGodUnlocked=!!s.ownerGodUnlocked;", "s.dailyClaimAt=Number.isFinite(+s.dailyClaimAt)?Math.max(0,Math.floor(+s.dailyClaimAt)):0;if(!s.dailyClaimAt&&s.dailyClaimDate===localDay()){s.dailyClaimAt=Date.now();try{localStorage.setItem(SAVE_KEY,JSON.stringify({...raw,dailyClaimAt:s.dailyClaimAt}))}catch{}}s.unlocked=clamp(Number.isFinite(+s.unlocked)?Math.floor(+s.unlocked):1,1,LEVELS.length);s.ownerGodUnlocked=!!s.ownerGodUnlocked;", 'legacy daily migration');
 
  const dailyHelpers=`
 const DAILY_REWARD_COINS=1250,DAILY_COOLDOWN_MS=24*60*60*1000;
