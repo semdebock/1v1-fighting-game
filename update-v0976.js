@@ -4,7 +4,7 @@
 const BUILD='0.9.7.6',ASSET='0976';
 const $=(s,r=document)=>r.querySelector(s);
 const ownsRelease=()=>{const v=window.MultiverseArenaRuntime?.version;return !v||v===BUILD};
-let wired=false,fighterFilter='all',skinFilter='all';
+let wired=false,fighterFilter='all',skinFilter='all',gauntletTimer=0;
 const BOSS_REWARDS={
  'Arena Champion':'500 🪙 • 100 XP • 5 💎',
  Kingpin:'600 🪙 • 150 XP • 5 💎',
@@ -67,7 +67,7 @@ function wire(){if(wired)return;wired=true;
  $('#gallery')?.addEventListener('click',()=>setTimeout(()=>{decorateCollection();brand()},150));
  document.querySelectorAll('[data-collection-tab]').forEach(b=>b.addEventListener('click',()=>setTimeout(decorateCollection,90)));
  $('#charCards')?.addEventListener('click',()=>setTimeout(decorateCollection,100));$('#skinCards')?.addEventListener('click',()=>setTimeout(decorateCollection,100));$('#charAction')?.addEventListener('click',()=>setTimeout(decorateCollection,120));$('#skinAction')?.addEventListener('click',()=>setTimeout(decorateCollection,120));
- $('#play')?.addEventListener('click',()=>setTimeout(decorateGauntlet,160));$('#continue')?.addEventListener('click',()=>setTimeout(decorateGauntlet,180));$('#levelCards')?.addEventListener('click',()=>setTimeout(decorateGauntlet,80));
+ $('#play')?.addEventListener('click',()=>setTimeout(decorateGauntlet,160));$('#continue')?.addEventListener('click',()=>setTimeout(decorateGauntlet,180));$('#levelCards')?.addEventListener('click',()=>setTimeout(decorateGauntlet,80));$('#levelCards')?.addEventListener('scroll',()=>{clearTimeout(gauntletTimer);gauntletTimer=setTimeout(decorateGauntlet,150)},true);
  $('#updates')?.addEventListener('click',()=>setTimeout(()=>{brand();cleanUpdateLog()},40));
  addEventListener('pageshow',()=>setTimeout(audit,0));document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(audit,0)});
 }
