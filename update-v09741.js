@@ -3,9 +3,11 @@
 'use strict';
 const BUILD='0.9.7.4.1',ASSET='09741';
 const $=(s,r=document)=>r.querySelector(s);
+const ownsRelease=()=>{const v=window.MultiverseArenaRuntime?.version;return !v||v===BUILD};
 let wired=false;
-function style(){if($('#update09741Style'))return;const l=document.createElement('link');l.id='update09741Style';l.rel='stylesheet';l.href=`update-v09741.css?v=${ASSET}`;document.head.appendChild(l)}
+function style(){if($('#update09741Style'))return;const l=document.createElement('link');l.id='update09741Style';l.rel='stylesheet';l.href=`update-v09741.css?v=${window.MultiverseArenaRuntime?.asset||ASSET}`;document.head.appendChild(l)}
 function brand(){
+ if(!ownsRelease())return;
  document.title='Multiverse Arena v0.9.7.4.1 — Hulkbuster Rework + Rematch Fix';
  document.querySelectorAll('.brand .tag').forEach(x=>x.textContent='v0.9.7.4.1');
  const u=$('#updates');if(u)u.textContent='UPDATE LOG  •  v0.9.7.4.1';
@@ -37,6 +39,7 @@ function restoreRematch(){
  return true;
 }
 function cleanUpdateLog(){
+ if(!ownsRelease())return;
  const box=$('#updatesScreen .changelog');if(!box)return;
  const releases=[
   ['🦾','v0.9.7.4.1 — Hulkbuster Heavy Mech Rework','Hulkbuster now has a smaller recessed helmet, much wider layered chest, giant shoulder pods, oversized gauntlets, heavier legs and a brighter compact arc reactor for a true heavy-mech silhouette.'],
