@@ -4,8 +4,11 @@
 const BUILD='0.9.7.1',ASSET='0971';
 const $=(s,r=document)=>r.querySelector(s);
 let wired=false;
-function style(){if($('#mutant0971Style'))return;const l=document.createElement('link');l.id='mutant0971Style';l.rel='stylesheet';l.href=`mutant-v0971.css?v=${ASSET}`;document.head.appendChild(l)}
+const ownsRelease=()=>{const v=window.MultiverseArenaRuntime?.version;return !v||v===BUILD};
+const asset=()=>window.MultiverseArenaRuntime?.asset||ASSET;
+function style(){if($('#mutant0971Style'))return;const l=document.createElement('link');l.id='mutant0971Style';l.rel='stylesheet';l.href=`mutant-v0971.css?v=${asset()}`;document.head.appendChild(l)}
 function brand(){
+ if(!ownsRelease())return;
  document.title='Multiverse Arena v0.9.7.1 — Sabretooth Rework + Stability';
  document.querySelectorAll('.brand .tag').forEach(x=>x.textContent='v0.9.7.1');
  const updates=$('#updates');if(updates)updates.textContent='UPDATE LOG  •  v0.9.7.1';
@@ -17,6 +20,7 @@ function brand(){
  if(window.MultiverseArenaRuntime){window.MultiverseArenaRuntime.version=BUILD;window.MultiverseArenaRuntime.asset=ASSET}
 }
 function cleanUpdateLog(){
+ if(!ownsRelease())return;
  const box=$('#updatesScreen .changelog');if(!box)return;
  const releases=[
   ['🐾','v0.9.7.1 — Sabretooth Visual Rework','Sabretooth now has a sharper classic feral silhouette with a huge blond mane, fanged face, fur collar, gold-brown suit and oversized clawed hands.'],
