@@ -1,0 +1,10 @@
+/* Multiverse Arena v0.9.5.7.2.2 — Fight Stability overrides */
+/* Hit feedback is CSS-driven: no fighter class is ever mutated by the polish layer. */
+.fighter.hurt{animation:safeHit95722 .14s ease-out!important}
+@keyframes safeHit95722{0%{filter:brightness(1)}35%{filter:brightness(1.45)}100%{filter:none}}
+/* Keep atmosphere lightweight on Safari/iOS. */
+.arena-atmosphere{contain:paint;will-change:auto}
+.arena-atmosphere .amb{animation-duration:10s!important;box-shadow:0 0 10px rgba(124,207,255,.45)!important}
+.arena-haze{filter:none!important;animation-duration:10s!important;opacity:.38!important}
+@media(max-width:1024px){.arena-atmosphere .amb{animation-duration:14s!important;opacity:.18!important}.arena-haze{animation:none!important;opacity:.22!important}.boss-phase-hud{backdrop-filter:none!important}}
+@media(prefers-reduced-motion:reduce){.arena-atmosphere .amb,.arena-haze,.fighter.hurt{animation:none!important}}
