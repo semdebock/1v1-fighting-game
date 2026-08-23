@@ -13,8 +13,6 @@ return function transformV09751(code){
  rep("$('selectedName').textContent=save.selected.toUpperCase()", "$('selectedName').textContent=fighterDisplayName(save.selected).toUpperCase()", 'home selected skin name');
  rep("$('dashHero').textContent=save.selected.toUpperCase()", "$('dashHero').textContent=fighterDisplayName(save.selected).toUpperCase()", 'dashboard selected skin name');
  rep("${save.selected.toUpperCase()} SELECTED", "${fighterDisplayName(save.selected).toUpperCase()} SELECTED", 'Collection selected skin label');
- rep("fighters.sort((a,b)=>b[1].price-a[1].price).forEach(([name,c])=>{const b=document.createElement('button');b.className=", "fighters.sort((a,b)=>b[1].price-a[1].price).forEach(([name,c])=>{const b=document.createElement('button');b.dataset.fighterName=name;b.className=", 'fighter card base hero id');
- rep("<h3>${name.toUpperCase()}</h3><div class=\"fighter-role\">", "<h3>${fighterDisplayName(name).toUpperCase()}</h3><div class=\"fighter-role\">", 'fighter card equipped skin name');
  rep("$('charTitle').textContent=chosen.toUpperCase();", "$('charTitle').textContent=fighterDisplayName(chosen).toUpperCase();", 'fighter profile equipped skin name');
  rep("<h3>${name.toUpperCase()}</h3><small>READY TO TRAIN</small>", "<h3>${fighterDisplayName(name).toUpperCase()}</h3><small>READY TO TRAIN</small>", 'training card equipped skin name');
  rep("$('trainingHero').textContent=trainingChosen.toUpperCase()", "$('trainingHero').textContent=fighterDisplayName(trainingChosen).toUpperCase()", 'training selected skin name');
