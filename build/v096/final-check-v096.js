@@ -10,6 +10,7 @@ const update63=fs.readFileSync(path.join(root,'update-v0963.js'),'utf8');
 const update64=fs.readFileSync(path.join(root,'update-v0964.js'),'utf8');
 const update97=fs.readFileSync(path.join(root,'update-v097.js'),'utf8');
 const update971=fs.readFileSync(path.join(root,'update-v0971.js'),'utf8');
+const update972=fs.readFileSync(path.join(root,'update-v0972.js'),'utf8');
 const campaign97=fs.readFileSync(path.join(root,'campaign-v097.js'),'utf8');
 
 for(const marker of ["const BUILD='0.9.6'","const FINAL_STYLE='premium-v096-final.css?v=096f2'","if(!s||s.dataset.premiumLabel)continue",'Final Stability Pass','window.MultiverseArenaPremium={version:BUILD,refresh}','const ownsRelease='])if(!premium.includes(marker))throw new Error('v0.9.6 premium marker missing: '+marker);
@@ -19,10 +20,11 @@ if(!ui.includes("dataset.uiMotion='css'"))throw new Error('CSS screen-motion mar
 const observerCount=(ui.match(/new MutationObserver/g)||[]).length;if(observerCount!==1)throw new Error('UI observer count must stay at one narrow results observer, got '+observerCount);
 for(const marker of ['Touch devices should never keep a translated desktop hover state','.buttons #training{grid-column:3!important}','.buttons #settings{grid-column:1!important}','.device-tablet .buttons #training','@media (hover:none),(pointer:coarse)','@media (prefers-reduced-motion:reduce)'])if(!css.includes(marker))throw new Error('premium CSS marker missing: '+marker);
 for(const forbidden of ['#fight .fighter{','#fight.active .fighter{','animation: safeHit','requestAnimationFrame','.device-tablet .buttons>#training','.device-tablet .buttons>#settings'])if(css.includes(forbidden))throw new Error('premium CSS contains unsafe or ineffective selector: '+forbidden);
-for(const legacy of [update62,update63,update64,update97])if(!legacy.includes('const ownsRelease='))throw new Error('legacy release layer can overwrite newer branding');
-for(const stable of ["const BUILD='0.9.7.1'","const ASSET='0971'","const SAVE_KEY='fightArenaV08'","'touch-v0941.js'","'stability-v0941.js'","'campaign-v097.js'","'polish-v09572.js'","'premium-v096.js'","'update-v0962.js'","'update-v0963.js'","'update-v0964.js'","'update-v097.js'","'update-v0971.js'"])if(!boot.includes(stable))throw new Error('v0.9.7.1 stable bootstrap marker missing: '+stable);
-for(const forbidden of ["'campaign-v0957.js'","'update-v0965.js'","'update-v0966.js'"])if(boot.includes(forbidden))throw new Error('legacy campaign/navigation runtime double-loaded under v0.9.7.1: '+forbidden);
+for(const legacy of [update62,update63,update64,update97,update971])if(!legacy.includes('const ownsRelease='))throw new Error('legacy release layer can overwrite newer branding');
+for(const stable of ["const BUILD='0.9.7.2'","const ASSET='0972'","const SAVE_KEY='fightArenaV08'","'touch-v0941.js'","'stability-v0941.js'","'campaign-v097.js'","'polish-v09572.js'","'premium-v096.js'","'update-v0962.js'","'update-v0963.js'","'update-v0964.js'","'update-v097.js'","'update-v0971.js'","'update-v0972.js'"])if(!boot.includes(stable))throw new Error('v0.9.7.2 stable bootstrap marker missing: '+stable);
+for(const forbidden of ["'campaign-v0957.js'","'update-v0965.js'","'update-v0966.js'"])if(boot.includes(forbidden))throw new Error('legacy campaign/navigation runtime double-loaded under v0.9.7.2: '+forbidden);
 for(const marker of ['window.MultiverseArenaUpdate097','function renderNavigator'])if(!update97.includes(marker))throw new Error('v0.9.7 campaign navigator marker missing: '+marker);
-for(const marker of ['window.MultiverseArenaUpdate0971','Sabretooth Rework • Result Flow • Version Sync','stabilizeResultActions'])if(!update971.includes(marker))throw new Error('v0.9.7.1 release UI marker missing: '+marker);
+for(const marker of ['window.MultiverseArenaUpdate0971','stabilizeResultActions','const ownsRelease='])if(!update971.includes(marker))throw new Error('v0.9.7.1 compatibility marker missing: '+marker);
+for(const marker of ['window.MultiverseArenaUpdate0972','Fighter Buffs • Phase 3 Nerfs • Combat Polish','balance:BALANCE'])if(!update972.includes(marker))throw new Error('v0.9.7.2 release UI marker missing: '+marker);
 for(const marker of ['window.FightArenaCampaignV097','window.FightArenaCampaignV0957=api','MUTANT UPRISING','Sabretooth','Mystique','Juggernaut','Deadpool','Magneto'])if(!campaign97.includes(marker))throw new Error('v0.9.7 campaign marker missing: '+marker);
-console.log('v0.9.7.1 premium compatibility checks passed');
+console.log('v0.9.7.2 premium compatibility checks passed');
