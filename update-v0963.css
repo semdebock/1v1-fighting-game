@@ -1,0 +1,37 @@
+/* Multiverse Arena v0.9.6.3 — Combat Header + Log Cleanup */
+
+/* QUIT + PAUSE are physically moved out of .fighthead by update-v0963.js. */
+.fight-control-row-v0963{display:flex;align-items:center;gap:8px;position:relative;z-index:55;margin:0 0 5px;padding:0}
+.fight-control-row-v0963 #quit,.fight-control-row-v0963 #pauseBtn{min-height:40px!important;padding:8px 14px!important;margin:0!important;position:relative!important;inset:auto!important;transform:none!important;flex:0 0 auto}
+.fight-control-label-v0963{margin-left:auto;color:rgba(216,192,135,.42);font-size:7px;font-weight:900;letter-spacing:.22em;pointer-events:none}
+#fight .fighthead{position:relative!important;top:auto!important;inset:auto!important;transform:none!important;z-index:30!important}
+#fight .fighthead #timer,#fight .fighthead #fightTag{position:relative!important;inset:auto!important;transform:none!important}
+
+/* Recent log only: fewer cards, easier to scan. */
+#updatesScreen .changelog[data-cleaned0963="1"]{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))!important;gap:10px!important}
+#updatesScreen .recent-release-v0963{min-height:112px}
+
+/* iPad/tablet: top controls get their own row, health bars sit completely below it. */
+html.device-tablet #fight.active .fight-control-row-v0963{flex:0 0 38px!important;min-height:38px!important;margin:0 0 3px!important;padding:0 2px!important}
+html.device-tablet #fight.active .fight-control-row-v0963 #quit,html.device-tablet #fight.active .fight-control-row-v0963 #pauseBtn{min-height:36px!important;height:36px!important;padding:6px 12px!important;font-size:10px!important;border-radius:9px!important}
+html.device-tablet #fight.active .fighthead{flex:0 0 34px!important;min-height:34px!important;margin:0 0 3px!important;padding:4px 9px!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;overflow:visible!important}
+html.device-tablet #fight.active .fighthead:before{display:none!important}
+html.device-tablet #fight.active .fighthead #timer{font-size:18px!important;line-height:1!important;margin:0!important}
+html.device-tablet #fight.active .fighthead #fightTag{min-height:25px!important;padding:4px 8px!important;font-size:8px!important;margin:0!important}
+html.device-tablet #fight.active .hpgrid{flex:0 0 34px!important;min-height:34px!important;margin:0 0 4px!important;padding:0 2px!important;position:relative!important;z-index:20!important}
+html.device-tablet #fight.active .hpname{height:15px!important;line-height:15px!important;margin:0 0 2px!important;font-size:9px!important}
+html.device-tablet #fight.active .hpgrid .bar{height:9px!important;margin:0!important}
+html.device-tablet #fight.active .arena{min-height:245px!important}
+html.device-tablet #fight.active .specialrow{flex-basis:30px!important;min-height:30px!important;margin-top:4px!important;padding:3px 8px!important}
+html.device-tablet #fight.active .controls{flex-basis:120px!important;min-height:120px!important;margin-top:4px!important}
+html.device-tablet #fight.active .stick{width:96px!important;height:96px!important}
+html.device-tablet #fight.active .knob{width:42px!important;height:42px!important;left:26px!important;top:26px!important}
+html.device-tablet #fight.active .actions button,html.device-tablet #fight.active .hero-actions button{min-height:40px!important}
+
+/* Phone layouts receive the same no-overlap structure without forcing tablet sizing. */
+@media(max-width:700px){
+ .fight-control-row-v0963{margin-bottom:4px}
+ .fight-control-row-v0963 #quit,.fight-control-row-v0963 #pauseBtn{min-height:36px!important;padding:6px 10px!important;font-size:9px!important}
+ #fight .fighthead{margin-top:0!important}
+ .fight-control-label-v0963{display:none}
+}
