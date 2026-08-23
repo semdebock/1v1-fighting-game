@@ -3,8 +3,10 @@
 'use strict';
 const BUILD='0.9.6.3',ASSET='0963';
 const $=(s,r=document)=>r.querySelector(s);
+const ownsRelease=()=>{const v=window.MultiverseArenaRuntime?.version;return !v||v===BUILD};
 function style(){if($('#update0963Style'))return;const l=document.createElement('link');l.id='update0963Style';l.rel='stylesheet';l.href=`update-v0963.css?v=${ASSET}`;document.head.appendChild(l)}
 function brand(){
+ if(!ownsRelease())return;
  document.title='Multiverse Arena v0.9.6.3 — Combat Header + Log Cleanup';
  document.querySelectorAll('.brand .tag').forEach(x=>x.textContent='v0.9.6.3');
  const updates=$('#updates');if(updates)updates.textContent='UPDATE LOG  •  v0.9.6.3';
@@ -23,6 +25,7 @@ function relocateFightControls(){
  if(!row.querySelector('.fight-control-label-v0963')){const label=document.createElement('span');label.className='fight-control-label-v0963';label.textContent='LIVE COMBAT';row.appendChild(label)}
 }
 function cleanUpdateLog(){
+ if(!ownsRelease())return;
  const box=$('#updatesScreen .changelog');if(!box)return;
  const alreadyClean=box.dataset.cleaned0963==='1'&&[...box.children].length===6&&[...box.children].every(x=>x.classList.contains('recent-release-v0963'));
  if(alreadyClean)return;
@@ -39,7 +42,7 @@ function cleanUpdateLog(){
  const tag=$('#updatesScreen .panel>.tag');if(tag)tag.textContent='v0.9.6.3 • RECENT RELEASES';
  const title=$('#updatesScreen .panel>h2');if(title)title.textContent='CLEAN HISTORY. CLEANER COMBAT.';
 }
-function refresh(){style();brand();relocateFightControls();cleanUpdateLog()}
+function refresh(){style();relocateFightControls();brand();cleanUpdateLog()}
 function init(){refresh();window.MultiverseArenaUpdate0963={version:BUILD,refresh,relocateFightControls,cleanUpdateLog}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 addEventListener('fightarena-ready',()=>setTimeout(refresh,120),{once:true});
