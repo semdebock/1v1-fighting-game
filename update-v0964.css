@@ -1,0 +1,71 @@
+/* Multiverse Arena v0.9.6.4 — iPad Control Fit + Centered Showcase */
+
+/* MAIN MENU — center the actual fighter, not just its preview container. */
+#home .fighter-preview{display:flex!important;align-items:flex-end!important;justify-content:center!important}
+.device-tablet #home .hero-card{position:relative!important}
+.device-tablet #home .fighter-preview{position:absolute!important;left:50%!important;top:46%!important;width:150px!important;height:230px!important;margin:0!important;transform:translate(-50%,-50%) scale(2.12)!important;transform-origin:50% 50%!important;z-index:3!important}
+.device-tablet #home .fighter-preview .fighter{flex:0 0 auto!important;margin:0!important}
+.device-iphone #home .fighter-preview{display:flex!important;align-items:flex-end!important;justify-content:center!important}
+
+/* FIGHT TOP BAR — one compact row for Quit/Pause + status, no duplicate LIVE COMBAT labels. */
+#fight[data-premium-label]:before{display:none!important}
+#fight .fighthead.fighthead-emptied-v0964{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}
+.fight-control-row-v0964{display:grid!important;grid-template-columns:auto minmax(80px,1fr) auto!important;align-items:center!important;gap:10px!important;position:relative!important;z-index:58!important;margin:0 0 4px!important;padding:0 2px!important}
+.fight-controls-left-v0964,.fight-status-v0964{display:flex!important;align-items:center!important;gap:7px!important;min-width:0!important}
+.fight-control-label-v0964{text-align:center;color:rgba(216,192,135,.5)!important;font-size:7px!important;font-weight:900!important;letter-spacing:.22em!important;white-space:nowrap!important;pointer-events:none!important}
+.fight-status-v0964{justify-content:flex-end!important}
+.fight-status-v0964 #timer{font-variant-numeric:tabular-nums!important;font-weight:950!important;line-height:1!important}
+
+/* Safari/iPad viewport fitting. --fight-viewport-v0964 is set from visualViewport by update-v0964.js. */
+html.device-tablet body:has(#fight.active){overflow:hidden!important;height:100dvh!important}
+html.device-tablet body:has(#fight.active) .app{height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;padding-bottom:max(3px,env(safe-area-inset-bottom))!important}
+html.device-tablet body:has(#fight.active) .top{flex:0 0 auto!important;min-height:43px!important;margin-bottom:3px!important;padding:4px clamp(16px,2.5vw,40px)!important}
+html.device-tablet body:has(#fight.active) .top .eyebrow{font-size:6px!important}
+html.device-tablet body:has(#fight.active) .brand{font-size:17px!important}
+html.device-tablet body:has(#fight.active) .pill{min-height:28px!important;padding:0 8px!important;font-size:10px!important}
+html.device-tablet #fight.active{height:var(--fight-viewport-v0964,calc(100dvh - 52px))!important;max-height:var(--fight-viewport-v0964,calc(100dvh - 52px))!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;padding-bottom:0!important}
+html.device-tablet #fight.active .fight-control-row-v0964{flex:0 0 34px!important;min-height:34px!important;margin-bottom:3px!important}
+html.device-tablet #fight.active .fight-controls-left-v0964 #quit,html.device-tablet #fight.active .fight-controls-left-v0964 #pauseBtn{height:32px!important;min-height:32px!important;padding:4px 10px!important;margin:0!important;border-radius:8px!important;font-size:9px!important}
+html.device-tablet #fight.active .fight-status-v0964 #timer{font-size:17px!important;margin:0!important}
+html.device-tablet #fight.active .fight-status-v0964 #fightTag{min-height:24px!important;padding:3px 8px!important;margin:0!important;font-size:8px!important;white-space:nowrap!important}
+html.device-tablet #fight.active .hpgrid{flex:0 0 31px!important;min-height:31px!important;margin:0 0 3px!important;padding:0 2px!important;gap:22px!important}
+html.device-tablet #fight.active .hpname{height:14px!important;line-height:14px!important;margin:0 0 2px!important;font-size:8px!important}
+html.device-tablet #fight.active .hpgrid .bar{height:8px!important;margin:0!important}
+html.device-tablet #fight.active .training-tools{flex:0 0 auto!important;margin:2px 0 3px!important;padding:4px 6px!important;gap:5px!important;min-height:0!important}
+html.device-tablet #fight.active .training-tools .training-live{gap:6px!important}
+html.device-tablet #fight.active .training-tools small{font-size:6px!important}
+html.device-tablet #fight.active .training-tools b{font-size:9px!important}
+html.device-tablet #fight.active .training-tools button{min-height:29px!important;padding:3px 7px!important;font-size:8px!important}
+html.device-tablet #fight.active .arena{flex:1 1 0!important;height:auto!important;min-height:205px!important;max-height:none!important;margin:0!important;border-radius:17px!important}
+html.device-tablet #fight.active .specialrow{flex:0 0 27px!important;min-height:27px!important;margin-top:3px!important;padding:2px 7px!important;font-size:10px!important}
+html.device-tablet #fight.active .specialrow .bar{height:8px!important}
+html.device-tablet #fight.active .controls{flex:0 0 124px!important;min-height:124px!important;max-height:124px!important;margin-top:3px!important;grid-template-columns:102px minmax(0,1fr)!important;gap:10px!important;align-items:flex-start!important;overflow:visible!important}
+html.device-tablet #fight.active .stickwrap{align-self:flex-start!important;padding-top:1px!important}
+html.device-tablet #fight.active .stick{width:90px!important;height:90px!important}
+html.device-tablet #fight.active .knob{width:40px!important;height:40px!important;left:24px!important;top:24px!important}
+html.device-tablet #fight.active .stickwrap small{font-size:7px!important;margin-top:2px!important}
+html.device-tablet #fight.active .actionwrap{min-height:0!important;height:124px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;gap:4px!important}
+html.device-tablet #fight.active .actions,html.device-tablet #fight.active .hero-actions{gap:4px!important;margin:0!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+html.device-tablet #fight.active .hero-actions{margin-top:0!important}
+html.device-tablet #fight.active .actions button,html.device-tablet #fight.active .hero-actions button{height:37px!important;min-height:37px!important;max-height:37px!important;padding:3px 3px!important;font-size:9px!important;line-height:1.05!important;border-radius:8px!important}
+html.device-tablet #fight.active .hero-cd{font-size:6px!important;line-height:1!important;margin-top:1px!important}
+html.device-tablet #fight.active .boss-phase-hud{top:8px!important;right:10px!important;width:162px!important;padding:5px 8px!important}
+
+/* Short iPad/Safari visual viewports reserve controls first and let the arena shrink. */
+@media (max-height:760px){
+ html.device-tablet #fight.active .arena{min-height:175px!important}
+ html.device-tablet #fight.active .controls{flex-basis:116px!important;min-height:116px!important;max-height:116px!important}
+ html.device-tablet #fight.active .actionwrap{height:116px!important}
+ html.device-tablet #fight.active .actions button,html.device-tablet #fight.active .hero-actions button{height:34px!important;min-height:34px!important;max-height:34px!important}
+ html.device-tablet #fight.active .stick{width:84px!important;height:84px!important}
+ html.device-tablet #fight.active .knob{width:36px!important;height:36px!important;left:23px!important;top:23px!important}
+}
+
+@media(max-width:700px){
+ #home .fighter-preview{justify-content:center!important}
+ .fight-control-row-v0964{grid-template-columns:auto 1fr auto!important;gap:5px!important}
+ .fight-control-label-v0964{display:none!important}
+ .fight-controls-left-v0964 #quit,.fight-controls-left-v0964 #pauseBtn{min-height:34px!important;padding:5px 9px!important;font-size:9px!important}
+ .fight-status-v0964 #timer{font-size:16px!important}
+ .fight-status-v0964 #fightTag{font-size:7px!important;padding:3px 6px!important}
+}
