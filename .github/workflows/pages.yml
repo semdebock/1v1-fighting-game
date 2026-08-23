@@ -78,6 +78,8 @@ jobs:
           test -s update-v0962.js
           test -s CORE_ARCHITECTURE.md
           grep -q "Multiverse Arena v0.9.6.2 — Fullscreen Fight + Primo Super" index.html
+          grep -q "UPDATE LOG  •  v0.9.6.2" index.html
+          ! grep -Eq "v0\.9\.6\.2\.[0-9]" index.html
           grep -q "premium-v096.css?v=0962" index.html
           grep -q "app/core/bootstrap-v096.js?v=0962" index.html
           grep -q "VILLAIN GAUNTLET" index.html
