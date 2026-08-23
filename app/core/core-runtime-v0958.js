@@ -1,4 +1,4 @@
-/* GENERATED FILE — Multiverse Arena canonical combat core + v0.9.7.2 balance/polish patch. Do not hand-edit. */
+/* GENERATED FILE — Multiverse Arena canonical combat core + v0.9.7.3 Collection/Daily patch. Do not hand-edit. */
 /* Multiverse Arena v0.9.5.7 — Master Plan */
 (() => {
 'use strict';
@@ -94,13 +94,13 @@ function loadSave(){
  let raw={};try{raw=JSON.parse(localStorage.getItem(SAVE_KEY)||'{}')||{}}catch{}
  const owned={Rookie:true,'El Primo':false,'Spider-Man':false,'Captain America':false,'Iron Man':false,'Daredevil':false,'Moon Knight':false,'Black Panther':false,'Wolverine':false,'Punisher':false,[OWNER]:false,...(raw.owned||{})};
  const baseSkinOwned=Object.fromEntries(SKINS.filter(s=>s.price===0).map(s=>[s.id,true]));
- const s={coins:1250,gems:50,lv:1,xp:0,selected:'Rookie',unlocked:1,dailyClaimDate:null,redeemedBrandNewDay:false,redeemedDiamonds:false,campaignWins:{},campaignPhaseRewards:{prologue:false},punisherUnlockShown:false,ownerGodUnlocked:false,settings:{damageNumbers:true,screenShake:true,haptics:true},skinsOwned:baseSkinOwned,equippedSkins:{...DEFAULT_SKIN_BY_HERO},...raw,owned};
+ const s={coins:1250,gems:50,lv:1,xp:0,selected:'Rookie',unlocked:1,dailyClaimDate:null,dailyClaimAt:0,redeemedBrandNewDay:false,redeemedDiamonds:false,campaignWins:{},campaignPhaseRewards:{prologue:false},punisherUnlockShown:false,ownerGodUnlocked:false,settings:{damageNumbers:true,screenShake:true,haptics:true},skinsOwned:baseSkinOwned,equippedSkins:{...DEFAULT_SKIN_BY_HERO},...raw,owned};
  s.settings={damageNumbers:true,screenShake:true,haptics:true,...(raw.settings||{})};
  s.skinsOwned={...baseSkinOwned,...(raw.skinsOwned||{})};
  s.equippedSkins={...DEFAULT_SKIN_BY_HERO,...(raw.equippedSkins||{})};s.campaignWins={...(raw.campaignWins||{})};s.campaignPhaseRewards={prologue:false,...(raw.campaignPhaseRewards||{})};if((+raw.unlocked||1)>1)s.campaignWins.Nightfang=true;if(s.campaignWins.Punisher){s.owned.Punisher=true;s.skinsOwned['punisher-default']=true;s.equippedSkins.Punisher='punisher-default'}if((raw.campaignWins?.Punisher||raw.owned?.Punisher)&&raw.punisherUnlockShown===undefined)s.punisherUnlockShown=true
  s.coins=Number.isFinite(+s.coins)?Math.max(0,Math.floor(+s.coins)):1250;s.gems=Number.isFinite(+s.gems)?Math.max(0,Math.floor(+s.gems)):50;
  s.lv=Number.isFinite(+s.lv)?Math.max(1,Math.floor(+s.lv)):1;s.xp=Number.isFinite(+s.xp)?Math.max(0,Math.floor(+s.xp)):0;
- s.unlocked=clamp(Number.isFinite(+s.unlocked)?Math.floor(+s.unlocked):1,1,LEVELS.length);s.ownerGodUnlocked=!!s.ownerGodUnlocked;s.owned[OWNER]=s.ownerGodUnlocked;
+ s.dailyClaimAt=Number.isFinite(+s.dailyClaimAt)?Math.max(0,Math.floor(+s.dailyClaimAt)):0;if(!s.dailyClaimAt&&s.dailyClaimDate===localDay()){s.dailyClaimAt=Date.now();try{localStorage.setItem(SAVE_KEY,JSON.stringify({...raw,dailyClaimAt:s.dailyClaimAt}))}catch{}}s.unlocked=clamp(Number.isFinite(+s.unlocked)?Math.floor(+s.unlocked):1,1,LEVELS.length);s.ownerGodUnlocked=!!s.ownerGodUnlocked;s.owned[OWNER]=s.ownerGodUnlocked;
  Object.keys(DEFAULT_SKIN_BY_HERO).forEach(hero=>{const id=s.equippedSkins[hero],skin=SKINS.find(x=>x.id===id&&x.hero===hero);if(!skin||!s.skinsOwned[id])s.equippedSkins[hero]=DEFAULT_SKIN_BY_HERO[hero]});
  if(!CHARS[s.selected]||!s.owned[s.selected]||(CHARS[s.selected].hidden&&!s.ownerGodUnlocked))s.selected='Rookie';
  s.coreVersion='0.9.5.7';return s;
@@ -168,6 +168,11 @@ function updateTrainingInfo(){const c=CHARS[trainingChosen],special=trainingChos
 function renderLevels(){const box=$('levelCards');box.innerHTML='';LEVELS.forEach(l=>{const open=l.n<=save.unlocked,b=document.createElement('button');b.className='card '+(chosenLevel===l.n?'active ':'')+(!open?'locked ':'')+(l.boss?'boss-card':'');b.innerHTML=`<div class="eyebrow">LEVEL ${l.n} • ${l.diff} ${l.boss?'<span class="boss-badge">BOSS</span>':''}</div><div class="portrait">${previewMarkup(l.name)}</div><h3>${l.name.toUpperCase()}</h3><div class="level-villain">${l.role}</div><span class="level-reward">${open?`🪙 ${l.coins} • ${l.xp} XP${l.gems?` • 💎 ${l.gems}`:''}`:'🔒 LOCKED'}</span>`;b.onclick=()=>{if(!open)return toast(`Beat Level ${l.n-1} first`);chosenLevel=l.n;renderLevels();renderLevelInfo()};box.appendChild(b)})}
 function renderLevelInfo(){const l=LEVELS[chosenLevel-1];$('diff').textContent=l.boss?'BOSS ENCOUNTER':l.diff.toUpperCase();$('levelTitle').textContent=`LEVEL ${l.n} — ${l.name.toUpperCase()}`;$('levelDesc').textContent=l.desc;$('levelStats').innerHTML=`<div><small>HP</small>${l.hp}</div><div><small>DAMAGE</small>${Math.round(l.dmg*100)}%</div><div><small>REWARD</small>${l.coins} 🪙</div><div><small>${l.gems?'BOSS LOOT':'XP'}</small>${l.gems?`${l.gems} 💎`:l.xp}</div>`}
 function renderSettings(){document.querySelectorAll('[data-setting]').forEach(b=>{const k=b.dataset.setting,on=!!save.settings[k];b.textContent=on?'ON':'OFF';b.classList.toggle('setting-on',on)})}
+
+const DAILY_REWARD_COINS=1250,DAILY_COOLDOWN_MS=24*60*60*1000;
+function dailyRemainingMs(){const stamp=Number(save.dailyClaimAt)||0;return stamp?Math.max(0,DAILY_COOLDOWN_MS-(Date.now()-stamp)):0}
+function dailyTimeText(ms){const total=Math.max(0,Math.ceil(ms/1000)),h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function claimDailyReward(){const left=dailyRemainingMs();if(left>0)return toast('DAILY REWARD READY IN '+dailyTimeText(left));save.dailyClaimAt=Date.now();save.dailyClaimDate=localDay();save.coins+=DAILY_REWARD_COINS;persist();window.dispatchEvent(new Event('fightarena-daily-updated'));toast('+1,250 COINS 🪙 • NEXT IN 24H')}
 function bindClick(id,fn){const el=$(id);if(!el){console.warn('[v0.9.1] missing button',id);return}el.onclick=fn}
 function toggleSetting(k){save.settings[k]=!save.settings[k];persist();toast(`${k==='damageNumbers'?'DAMAGE NUMBERS':k==='screenShake'?'SCREEN SHAKE':'HAPTICS'} ${save.settings[k]?'ON':'OFF'}`)}
 function floatDamage(n,target='enemy',heal=false){if(!save.settings.damageNumbers)return;const d=document.createElement('div');d.className='damage-number '+(target==='player'?'player-damage ':'')+(heal?'heal-number':'');d.textContent=heal?`+${Math.round(n)}`:`-${Math.round(n)}`;d.style.left=(target==='enemy'?F?.ex:F?.px)+'%';d.style.top=target==='enemy'?'39%':'43%';$('arena')?.appendChild(d);later(()=>d.remove(),700)}
@@ -184,7 +189,7 @@ bindClick('gallery',()=>{chosen=save.selected;renderChars();renderCharInfo();sho
 bindClick('training',()=>{trainingChosen=save.selected;renderTraining();screen('trainingScreen')});
 bindClick('settings',()=>{renderSettings();screen('settingsScreen')});
 $('updates').onclick=()=>screen('updatesScreen');document.querySelectorAll('.back').forEach(b=>b.onclick=()=>screen('home'));
-$('daily').onclick=()=>{const day=localDay();if(save.dailyClaimDate===day)return toast('Daily reward already claimed today');save.dailyClaimDate=day;save.coins+=250;persist();toast('+250 coins 🪙')};
+$('daily').onclick=claimDailyReward;
 $('redeemBtn').onclick=()=>{const input=$('redeemInput'),status=$('redeemStatus'),code=input.value.trim();
  if(code==='BrandNewDay'){if(save.redeemedBrandNewDay){status.textContent='✓ CODE ALREADY REDEEMED';status.className='redeem-status used';return}save.coins+=5000;save.redeemedBrandNewDay=true;persist();input.value='';status.textContent='✓ +5,000 COINS ADDED';status.className='redeem-status good';toast('+5,000 COINS 🪙');return}
  if(code==='DIAMONDS'){if(save.redeemedDiamonds){status.textContent='✓ CODE ALREADY REDEEMED';status.className='redeem-status used';return}save.gems+=100;save.redeemedDiamonds=true;persist();input.value='';status.textContent='✓ +100 DIAMONDS ADDED';status.className='redeem-status good';toast('+100 DIAMONDS 💎');return}
@@ -429,6 +434,7 @@ $('continue').onclick=()=>{const moved=window.__FightArenaLastResult?.win&&windo
 function stickMove(e){if(!F||F.paused)return;const r=$('stick').getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),max=r.width*.28,n=clamp(dx/max,-1,1);F.move=Math.abs(n)>.12?n:0;$('knob').style.transform=`translateX(${n*max}px)`}
 $('stick').onpointerdown=e=>{if(!F||F.paused)return;sid=e.pointerId;$('stick').setPointerCapture(e.pointerId);stickMove(e)};$('stick').onpointermove=e=>{if(e.pointerId===sid)stickMove(e)};function stickUp(e){if(e.pointerId!==sid)return;sid=null;if(F)F.move=0;$('knob').style.transform='translateX(0)'}$('stick').onpointerup=stickUp;$('stick').onpointercancel=stickUp;
 
+window.FightArenaDailyControls={reward:DAILY_REWARD_COINS,cooldownMs:DAILY_COOLDOWN_MS,snapshot(){const remainingMs=dailyRemainingMs();return{reward:DAILY_REWARD_COINS,cooldownMs:DAILY_COOLDOWN_MS,remainingMs,ready:remainingMs<=0,lastClaimAt:Number(save.dailyClaimAt)||0,nextClaimAt:(Number(save.dailyClaimAt)||0)+DAILY_COOLDOWN_MS,timeText:dailyTimeText(remainingMs)}}};
 window.FightArenaTrainingControls={
  fill(){return fillTrainingSpecial()},
  reset(){return resetTrainingLab()},
