@@ -1,0 +1,13 @@
+const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'../..');
+const boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8');
+const js=fs.readFileSync(path.join(root,'update-v0961.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'update-v0961.css'),'utf8');
+const core=fs.readFileSync(path.join(root,'app/core/core-runtime-v0958.js'),'utf8');
+for(const marker of ["const ASSET='0961'","'update-v0961.js'","version:'0.9.6.1'",'window.MultiverseArenaUpdate0961'])if(!boot.includes(marker)&&!js.includes(marker))throw new Error('v0.9.6.1 marker missing: '+marker);
+for(const marker of ['v0961-primo-smash','primo-smash-v0961','boss-phase-hud','#home .fighter-preview','El Primo Smash Animation','Cleaner Boss Phase HUD','Larger Main Menu Fighter'])if(!js.includes(marker)&&!css.includes(marker))throw new Error('v0.9.6.1 feature marker missing: '+marker);
+for(const forbidden of ['new MutationObserver','setInterval(','requestAnimationFrame(loop)'])if(js.includes(forbidden))throw new Error('v0.9.6.1 runtime contains risky loop: '+forbidden);
+if(css.includes('#fight .fighter{')||css.includes('#fight.active .fighter{'))throw new Error('v0.9.6.1 must not globally rewrite combat fighter transforms');
+for(const stable of ["const SAVE_KEY='fightArenaV08'","version:'0.9.5.7'","name:'Doctor Octopus'",'FightArenaTrainingControls'])if(!boot.includes(stable)&&!core.includes(stable))throw new Error('protected core marker missing: '+stable);
+console.log('v0.9.6.1 release checks passed');
