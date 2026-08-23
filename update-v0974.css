@@ -9,7 +9,7 @@
 .ironman.skin-iron-hulkbuster .eye.l{left:5px}.ironman.skin-iron-hulkbuster .eye.r{right:5px;transform:scaleX(-1)}
 
 .ironman.skin-iron-hulkbuster .body{left:24px;top:42px;width:84px;height:84px;border:6px solid #471416;border-radius:20px 20px 14px 14px;background:linear-gradient(90deg,#7a1b1a 0 12%,#b9342e 13% 28%,#d09943 29% 39%,#8f211f 40% 60%,#d09943 61% 71%,#b9342e 72% 87%,#711817 88%);box-shadow:inset 0 6px 0 #e55a43,inset 0 -12px 0 #581617,inset 0 0 18px #ffba4c26;z-index:5}
-.ironman.skin-iron-hulkbuster .body:before{content:"";position:absolute;left:28px;top:19px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle,#f5ffff 0 22%,#7ceeff 23% 48%,#21485a 49% 65%,#c79852 66% 77%,#531b1a 78%);box-shadow:0 0 8px #78e9ff,0 0 19px #4ad7ff,inset 0 0 4px #fff;z-index:4}
+.ironman.skin-iron-hulkbuster .body:before{content:"";position:absolute;left:28px;top:19px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle,#f5ffff 0 22%,#7ceeff 23% 48%,#21485a 49% 65%,#c79852 66% 77%,#531b1a 78%);box-shadow:0 0 8px #78e9ff,0 0 19px #4ad7ff,inset 0 0 4px #fff;z-index:4;animation:hulkbusterReactorPulse 2.2s ease-in-out infinite}
 .ironman.skin-iron-hulkbuster .body:after{content:"";position:absolute;left:6px;right:6px;top:4px;height:50px;background:linear-gradient(135deg,#dca74d 0 16%,transparent 17% 39%,#e6ba62 40% 48%,transparent 49% 61%,#dca74d 62% 78%,transparent 79%);clip-path:polygon(0 0,33% 0,45% 22%,55% 22%,67% 0,100% 0,89% 74%,66% 61%,50% 100%,34% 61%,11% 74%);opacity:.75;pointer-events:none}
 
 .ironman.skin-iron-hulkbuster .arm{top:43px;width:38px;height:91px;border:5px solid #461416;border-radius:16px 16px 13px 13px;background:linear-gradient(180deg,#a72b25 0 17%,#cf4636 18% 38%,#8d211e 39% 63%,#d49d48 64% 76%,#8a211f 77%);box-shadow:inset 0 5px 0 #ed7055,inset 0 -8px 0 #581517;z-index:4}
@@ -22,9 +22,8 @@
 .ironman.skin-iron-hulkbuster .leg:before{content:"";position:absolute;left:8px;right:8px;top:12px;height:18px;background:radial-gradient(circle,#eaffff 0 21%,#67e7ff 22% 42%,#2d4c56 43% 58%,#ba8b43 59% 75%,transparent 76%);filter:drop-shadow(0 0 5px #53dfff)}
 .ironman.skin-iron-hulkbuster .leg:after{content:"";position:absolute;left:-6px;right:-6px;bottom:-9px;height:20px;background:linear-gradient(180deg,#a72c27,#641719);border:5px solid #451315;border-radius:8px 8px 12px 12px;box-shadow:inset 0 3px 0 #d75a43}
 
-/* Premium reactor and armor presence without a costly DOM loop. */
-.ironman.skin-iron-hulkbuster{animation:hulkbusterReactorPulse 2.2s ease-in-out infinite}
-@keyframes hulkbusterReactorPulse{50%{filter:drop-shadow(0 13px 6px #000c) drop-shadow(0 0 25px #ffb33f77)}}
+/* Reactor pulses independently, leaving normal punch/kick/idle animations untouched. */
+@keyframes hulkbusterReactorPulse{50%{box-shadow:0 0 11px #b8f8ff,0 0 28px #50dcff,inset 0 0 5px #fff}}
 
 /* Ability VFX */
 .hulkbuster-slamfx{position:absolute;width:92px;height:34px;border:5px solid #ffc562;border-radius:50%;z-index:18;pointer-events:none;box-shadow:0 0 18px #ff9b39,0 0 36px #ef5528,inset 0 0 15px #ffe4a0;animation:hulkbusterShock .56s ease-out forwards}
@@ -58,4 +57,4 @@
 .hulkbuster-detail-v0974{border-color:#a36d37!important;background:linear-gradient(180deg,#25170f,#0b111b)!important}.hulkbuster-detail-v0974 b{color:#ffdf93}
 
 @media(max-width:760px){.fighter.ironman.skin-iron-hulkbuster{width:124px;height:182px}.hulkbuster-card-v0974 .portrait{min-height:195px!important}.hulkbuster-card-v0974 .skin-iron-hulkbuster{transform:scale(.88)}}
-@media(prefers-reduced-motion:reduce){.ironman.skin-iron-hulkbuster,.fighter.skin-iron-hulkbuster.hulkbuster-slam,.fighter.skin-iron-hulkbuster.veronica-crashdown{animation:none!important}.hulkbuster-slamfx,.veronica-target,.veronica-crashfx{animation-duration:.01ms!important}}
+@media(prefers-reduced-motion:reduce){.ironman.skin-iron-hulkbuster .body:before,.fighter.skin-iron-hulkbuster.hulkbuster-slam,.fighter.skin-iron-hulkbuster.veronica-crashdown{animation:none!important}.hulkbuster-slamfx,.veronica-target,.veronica-crashfx{animation-duration:.01ms!important}}
