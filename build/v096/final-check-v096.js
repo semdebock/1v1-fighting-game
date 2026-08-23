@@ -18,8 +18,10 @@ for(const forbidden of ['new MutationObserver','setInterval(','requestAnimationF
 if(ui.includes('function screenWatch'))throw new Error('redundant broad UI screen observer returned');
 if(!ui.includes("dataset.uiMotion='css'"))throw new Error('CSS screen-motion marker missing');
 const observerCount=(ui.match(/new MutationObserver/g)||[]).length;if(observerCount!==1)throw new Error('UI observer count must stay at one narrow results observer, got '+observerCount);
-for(const legacy of [update62,update63,update64,update97,update971,update972])if(!legacy.includes('const ownsRelease='))throw new Error('legacy release layer can overwrite newer branding');
-for(const stable of ["const BUILD='0.9.7.3'","const ASSET='0973'","const SAVE_KEY='fightArenaV08'","'campaign-v097.js'","'update-v097.js'","'update-v0971.js'","'update-v0972.js'","'update-v0973.js'"])if(!boot.includes(stable))throw new Error('v0.9.7.3 bootstrap marker missing: '+stable);
-for(const marker of ['window.MultiverseArenaUpdate0973','Quick Fighter Stats • One-Tap Equip • 24H Daily Reward','decorateCards','updateDaily'])if(!update973.includes(marker))throw new Error('v0.9.7.3 release UI marker missing: '+marker);
+for(const legacy of [update62,update63,update64,update97,update971,update972,update973])if(!legacy.includes('const ownsRelease='))throw new Error('legacy release layer can overwrite newer branding');
+for(const stable of ["const SAVE_KEY='fightArenaV08'","'campaign-v097.js'","'update-v097.js'","'update-v0971.js'","'update-v0972.js'","'update-v0973.js'"])if(!boot.includes(stable))throw new Error('current bootstrap compatibility marker missing: '+stable);
+if(!/const BUILD='0\.9\.7\.(?:3|[4-9]|\d{2,})'/.test(boot))throw new Error('current bootstrap must remain v0.9.7.3+');
+if(!/const ASSET='097(?:3|[4-9]|\d{2,})'/.test(boot))throw new Error('current asset must remain 0973+');
+for(const marker of ['window.MultiverseArenaUpdate0973','Quick Fighter Stats • One-Tap Equip • 24H Daily Reward','decorateCards','updateDaily','const ownsRelease='])if(!update973.includes(marker))throw new Error('v0.9.7.3 release UI compatibility marker missing: '+marker);
 for(const marker of ['window.FightArenaCampaignV097','MUTANT UPRISING','Sabretooth','Mystique','Juggernaut','Deadpool','Magneto'])if(!campaign97.includes(marker))throw new Error('campaign marker missing: '+marker);
-console.log('v0.9.7.3 premium compatibility checks passed');
+console.log('premium compatibility checks passed inside current v0.9.7.3+ release');
