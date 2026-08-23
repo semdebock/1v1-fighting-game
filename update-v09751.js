@@ -3,9 +3,11 @@
 'use strict';
 const BUILD='0.9.7.5.1',ASSET='09751';
 const $=(s,r=document)=>r.querySelector(s);
+const ownsRelease=()=>{const v=window.MultiverseArenaRuntime?.version;return !v||v===BUILD};
 let wired=false;
-function style(){if($('#update09751Style'))return;const l=document.createElement('link');l.id='update09751Style';l.rel='stylesheet';l.href=`update-v09751.css?v=${ASSET}`;document.head.appendChild(l)}
+function style(){if($('#update09751Style'))return;const l=document.createElement('link');l.id='update09751Style';l.rel='stylesheet';l.href=`update-v09751.css?v=${window.MultiverseArenaRuntime?.asset||ASSET}`;document.head.appendChild(l)}
 function brand(){
+ if(!ownsRelease())return;
  document.title='Multiverse Arena v0.9.7.5.1 — Skin Identity + Boss Rewards';
  document.querySelectorAll('.brand .tag').forEach(x=>x.textContent='v0.9.7.5.1');
  const u=$('#updates');if(u)u.textContent='UPDATE LOG  •  v0.9.7.5.1';
@@ -22,6 +24,7 @@ function polishCollection(){
  document.querySelectorAll('.skin-card').forEach(card=>{const title=$('h3',card)?.textContent?.trim();if(title==='HULKBUSTER')card.classList.add('hulkbuster-frame-fixed-v09751')});
 }
 function cleanUpdateLog(){
+ if(!ownsRelease())return;
  const box=$('#updatesScreen .changelog');if(!box)return;
  const releases=[
   ['🌙','v0.9.7.5.1 — Moon Knight Revamp','Moon Knight now has a stronger hooded silhouette, shadowed mask, glowing eyes, crescent chest mark, layered white armor and a fuller cape so he reads much more clearly as Moon Knight.'],
