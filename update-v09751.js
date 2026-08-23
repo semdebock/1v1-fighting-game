@@ -18,8 +18,14 @@ function brand(){
  document.documentElement.dataset.multiverseRelease=BUILD;
  if(window.MultiverseArenaRuntime){window.MultiverseArenaRuntime.version=BUILD;window.MultiverseArenaRuntime.asset=ASSET}
 }
+function syncFighterCards(){
+ const names=window.FightArenaNameControls;if(!names)return;
+ window.MultiverseArenaUpdate0973?.decorateCards?.();
+ document.querySelectorAll('#charCards .rank-fighters-grid>.card').forEach(card=>{const hero=card.dataset.fighterName;if(!hero)return;const title=$('h3',card),display=names.display?.(hero)||hero,stats=names.stats?.(hero);if(title)title.textContent=String(display).toUpperCase();if(stats){const vals=card.querySelectorAll('.fighter-quick-stats-v0973 b');if(vals[0])vals[0].textContent=stats.hp;if(vals[1])vals[1].textContent=stats.power;if(vals[2])vals[2].textContent=stats.speed}})
+}
 function polishCollection(){
  $('#chars')?.classList.add('collection-audit-v09751');
+ syncFighterCards();
  const note=$('.collection-diamond-note');if(note)note.innerHTML='<b>💎 PREMIUM CURRENCY.</b> Skins and Ability Variants use Diamonds. Fight rewards now drop Diamonds from <b>BOSS FIGHTS ONLY</b>.';
  document.querySelectorAll('.skin-card').forEach(card=>{const title=$('h3',card)?.textContent?.trim();if(title==='HULKBUSTER')card.classList.add('hulkbuster-frame-fixed-v09751')});
 }
@@ -30,7 +36,7 @@ function cleanUpdateLog(){
   ['🌙','v0.9.7.5.1 — Moon Knight Revamp','Moon Knight now has a stronger hooded silhouette, shadowed mask, glowing eyes, crescent chest mark, layered white armor and a fuller cape so he reads much more clearly as Moon Knight.'],
   ['🦾','v0.9.7.5.1 — Hulkbuster Framing','Hulkbuster’s arc reactor is locked to the true center of his chest and his Collection, skin-preview, training and purchase-confirmation scales are reduced so the full heavy armor stays inside its frame.'],
   ['💎','v0.9.7.5.1 — True Boss Rewards','Diamonds are now fight rewards from bosses only. Non-boss encounters give coins and XP, and normal level-ups no longer create extra Diamonds.'],
-  ['🏷️','v0.9.7.5.1 — Skin Identity System','When a non-default skin is equipped, active-fighter labels use the skin name — for example HULKBUSTER, NANOTECH SUIT or SYMBIOTE SUIT — instead of the base hero name.'],
+  ['🏷️','v0.9.7.5.1 — Skin Identity System','When a non-default skin is equipped, active-fighter labels use the skin name — for example HULKBUSTER, NANOTECH SUIT or SYMBIOTE SUIT — instead of the base hero name. Fighter cards also show the equipped variant’s true stats.'],
   ['📱','v0.9.7.5.1 — iPhone Collection Audit','Fixed long fighter names and power-class chips forcing horizontal Collection scrolling on narrow iPhone layouts.'],
   ['🛒','v0.9.7.5 — Collection Shop','Direct fighter/skin shopping and mandatory CONFIRM / CANCEL purchase safety remain intact.'],
   ['↻','v0.9.7.4.1 — Hulkbuster + Rematch','Heavy-mech Hulkbuster and the restored Results REMATCH flow remain protected.']
@@ -38,9 +44,9 @@ function cleanUpdateLog(){
  box.innerHTML=releases.map(([icon,title,text])=>`<div class="log-item recent-release-v09751"><div class="log-icon">${icon}</div><div><b>${title}</b><p>${text}</p></div></div>`).join('');
  const tag=$('#updatesScreen .panel>.tag');if(tag)tag.textContent='v0.9.7.5.1 • SKIN IDENTITY + BOSS REWARDS';const title=$('#updatesScreen .panel>h2');if(title)title.textContent='BETTER IDENTITIES. CLEANER REWARDS.';
 }
-function wire(){if(wired)return;wired=true;$('#gallery')?.addEventListener('click',()=>setTimeout(()=>{brand();polishCollection()},100));document.querySelectorAll('[data-collection-tab]').forEach(b=>b.addEventListener('click',()=>setTimeout(polishCollection,70)));$('#updates')?.addEventListener('click',()=>setTimeout(()=>{brand();cleanUpdateLog()},30));addEventListener('pageshow',()=>setTimeout(refresh,0));document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(refresh,0)})}
+function wire(){if(wired)return;wired=true;$('#gallery')?.addEventListener('click',()=>setTimeout(()=>{brand();polishCollection()},120));document.querySelectorAll('[data-collection-tab]').forEach(b=>b.addEventListener('click',()=>setTimeout(polishCollection,120)));$('#charCards')?.addEventListener('click',()=>setTimeout(syncFighterCards,110));$('#charAction')?.addEventListener('click',()=>setTimeout(syncFighterCards,130));$('#skinAction')?.addEventListener('click',()=>setTimeout(syncFighterCards,160));$('#updates')?.addEventListener('click',()=>setTimeout(()=>{brand();cleanUpdateLog()},30));addEventListener('pageshow',()=>setTimeout(refresh,0));document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(refresh,0)})}
 function refresh(){style();brand();polishCollection();cleanUpdateLog();wire()}
-function init(){refresh();window.MultiverseArenaUpdate09751={version:BUILD,refresh,brand,polishCollection,cleanUpdateLog}}
+function init(){refresh();window.MultiverseArenaUpdate09751={version:BUILD,refresh,brand,polishCollection,syncFighterCards,cleanUpdateLog}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 addEventListener('fightarena-ready',()=>setTimeout(refresh,560),{once:true});
 })();
