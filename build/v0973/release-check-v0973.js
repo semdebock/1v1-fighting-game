@@ -1,0 +1,16 @@
+const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'../..');
+const boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8');
+const core=fs.readFileSync(path.join(root,'app/core/core-runtime-v0958.js'),'utf8');
+const transform=fs.readFileSync(path.join(root,'build/v0973/transform-v0973.js'),'utf8');
+const update=fs.readFileSync(path.join(root,'update-v0973.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'update-v0973.css'),'utf8');
+for(const marker of ["const BUILD='0.9.7.3'","const ASSET='0973'","const SAVE_KEY='fightArenaV08'","'update-v0973.js'",'core-runtime-v0958.js'])if(!boot.includes(marker))throw new Error('v0.9.7.3 bootstrap marker missing: '+marker);
+for(const marker of ['DAILY_REWARD_COINS=1250','DAILY_COOLDOWN_MS=24*60*60*1000','dailyClaimAt:0','claimDailyReward','FightArenaDailyControls','dailyTimeText','fightarena-daily-updated'])if(!core.includes(marker))throw new Error('daily reward marker missing from generated core: '+marker);
+for(const marker of ['legacy daily migration','24 hour daily claim handler','daily public control bridge'])if(!transform.includes(marker))throw new Error('v0.9.7.3 transform marker missing: '+marker);
+for(const marker of ['window.MultiverseArenaUpdate0973','fighter-quick-stats-v0973','fighter-quick-action-v0973','decorateCards','quickEquip','tickDaily','Quick Fighter Stats • One-Tap Equip • 24H Daily Reward'])if(!update.includes(marker))throw new Error('Collection/Daily UI marker missing: '+marker);
+for(const marker of ['fighter-quick-stats-v0973','fighter-quick-action-v0973','#daily.daily-v0973','daily-ready','daily-cooldown','font-variant-numeric:tabular-nums','prefers-reduced-motion'])if(!css.includes(marker))throw new Error('v0.9.7.3 CSS marker missing: '+marker);
+for(const stable of ["version:'0.9.5.7'","name:'Doctor Octopus'",'FightArenaTrainingControls','punisherUnlockShown','primo-super-leap','PRIMO SMASH!','mystiqueTransform','sabreApex','deadpoolLastStand','magnetoMaster',"hp:105,power:60,speed:64",'hp:345,dmg:1.47','F.deadpoolRecovered<78'])if(!core.includes(stable))throw new Error('protected gameplay marker missing: '+stable);
+for(const forbidden of ['localStorage.removeItem(\'fightArenaV08\')','fightArenaV0973','new MutationObserver','requestAnimationFrame(loop)'])if(update.includes(forbidden)||transform.includes(forbidden))throw new Error('unsafe v0.9.7.3 marker: '+forbidden);
+console.log('v0.9.7.3 Collection UX + 24H Daily Reward checks passed');
