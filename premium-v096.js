@@ -2,7 +2,7 @@
 (()=>{
 'use strict';
 const BUILD='0.9.6';
-const FINAL_STYLE='premium-v096-final.css?v=096f';
+const FINAL_STYLE='premium-v096-final.css?v=096f2';
 const $=(s,r=document)=>r.querySelector(s);
 const all=(s,r=document)=>[...r.querySelectorAll(s)];
 
