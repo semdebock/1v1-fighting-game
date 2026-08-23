@@ -43,6 +43,7 @@ jobs:
           node --check build/v0958/build-core-v0958.js
           node --check build/v0958/cleanup-check-v0958.js
           node --check build/v096/presentation-check-v096.js
+          node --check build/v096/final-check-v096.js
           node --check build/v096/patch-index-v096.js
           node --check app/core/bootstrap-v096.js
           node --check premium-v096.js
@@ -60,11 +61,13 @@ jobs:
           node --check app/core/core-runtime-v0958.js
           node build/v0958/cleanup-check-v0958.js
           node build/v096/presentation-check-v096.js
+          node build/v096/final-check-v096.js
           node build/v096/patch-index-v096.js
           test -s index.html
           test -s app/core/bootstrap-v096.js
           test -s app/core/core-runtime-v0958.js
           test -s premium-v096.css
+          test -s premium-v096-final.css
           test -s premium-v096.js
           test -s CORE_ARCHITECTURE.md
           grep -q "Multiverse Arena v0.9.6 — Premium Presentation" index.html
@@ -77,9 +80,13 @@ jobs:
           grep -q "premium-v096.js" app/core/bootstrap-v096.js
           grep -q "window.MultiverseArenaPremium" premium-v096.js
           grep -q "PREMIUM PRESENTATION" premium-v096.js
+          grep -q "premium-v096-final.css?v=096f" premium-v096.js
           grep -q "premium-environment" premium-v096.css
           grep -q "boss-phase-hud" premium-v096.css
           grep -q "versus-sequence" premium-v096.css
+          grep -q "device-tablet #fight" premium-v096-final.css
+          grep -q "dataset.uiMotion='css'" ui-v09571.js
+          ! grep -q "function screenWatch" ui-v09571.js
           ! grep -q "new MutationObserver" premium-v096.js
           ! grep -q "setInterval(" premium-v096.js
           ! grep -q "requestAnimationFrame(loop)" premium-v096.js
