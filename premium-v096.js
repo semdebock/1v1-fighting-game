@@ -2,9 +2,16 @@
 (()=>{
 'use strict';
 const BUILD='0.9.6';
+const FINAL_STYLE='premium-v096-final.css?v=096f';
 const $=(s,r=document)=>r.querySelector(s);
 const all=(s,r=document)=>[...r.querySelectorAll(s)];
 
+function finalStyle(){
+ if($('#premium096FinalStyle'))return;
+ const link=document.createElement('link');
+ link.id='premium096FinalStyle';link.rel='stylesheet';link.href=FINAL_STYLE;
+ document.head.appendChild(link);
+}
 function environment(){
  if($('.premium-environment'))return;
  const d=document.createElement('div');
@@ -27,7 +34,7 @@ function homeDetails(){
 }
 function screenLabels(){
  const labels={updatesScreen:'LIVE SERVICE ARCHIVE',settingsScreen:'SYSTEM CONFIGURATION',trainingScreen:'COMBAT SIMULATION',chars:'FIGHTER ARCHIVE',levels:'THREAT NETWORK',fight:'LIVE COMBAT',results:'MATCH RESOLUTION'};
- for(const [id,label] of Object.entries(labels)){const s=$('#'+id);if(!s||s.dataset.premiumLabel)return;s.dataset.premiumLabel=label}
+ for(const [id,label] of Object.entries(labels)){const s=$('#'+id);if(!s||s.dataset.premiumLabel)continue;s.dataset.premiumLabel=label}
 }
 function updateLog(){
  const box=$('#updatesScreen .changelog');if(!box||box.querySelector('.premium-096'))return;
@@ -39,7 +46,8 @@ function updateLog(){
   ['▣','Villain Gauntlet Refit','Phase panels, fight nodes, rewards, boss states and selected encounters now read as a unified threat-network interface.'],
   ['✦','Victory & Rewards','Results, reward summaries, unlock moments and continuation buttons now receive a more cinematic premium finish.'],
   ['⌘','Settings & Training','Utility screens now match the rest of the game instead of feeling like secondary menus.'],
-  ['◎','Performance-Safe Polish','The presentation pass is CSS-first and introduces no fight-path observers, animation loops or combat-state rewrites.']
+  ['◎','Performance-Safe Polish','The presentation pass is CSS-first and introduces no fight-path observers, animation loops or combat-state rewrites.'],
+  ['✓','Final Stability Pass','Touch hover movement, tablet combat blur and redundant screen-observer work were reduced for a cleaner iPad and mobile experience.']
  ];
  for(const [icon,title,text] of items.reverse()){const d=document.createElement('div');d.className='log-item premium-096';d.innerHTML=`<div class="log-icon">${icon}</div><div><b>${title}</b><p>${text}</p></div>`;box.prepend(d)}
  const tag=$('#updatesScreen .panel>.tag');if(tag)tag.textContent='v0.9.6 • PREMIUM PRESENTATION';
@@ -50,12 +58,13 @@ function brand(){
  document.title='Multiverse Arena v0.9.6 — Premium Presentation';
  all('.brand .tag').forEach(x=>x.textContent='v0.9.6');
  const updates=$('#updates');if(updates)updates.textContent='UPDATE LOG  •  v0.9.6';
- const latest=$('.latest-stat');if(latest){const b=$('b',latest),s=$('span',latest);if(b)b.textContent='v0.9.6';if(s)s.textContent='Premium Presentation • Full Interface Refit'}
- const health=$('.build-health b');if(health)health.textContent='PREMIUM PRESENTATION • v0.9.6';
+ const latest=$('.latest-stat');if(latest){const b=$('b',latest),s=$('span',latest);if(b)b.textContent='v0.9.6';if(s)s.textContent='Premium Presentation • Final Stability Pass'}
+ const health=$('.build-health b');if(health)health.textContent='PREMIUM PRESENTATION • v0.9.6 • STABLE';
  const chooser=$('#deviceChooser .eyebrow');if(chooser)chooser.textContent='MULTIVERSE ARENA • v0.9.6';
  const pause=$('#pauseOverlay .eyebrow');if(pause)pause.textContent='MULTIVERSE ARENA';
 }
-function init(){environment();brand();roles();homeDetails();screenLabels();updateLog();window.MultiverseArenaPremium={version:BUILD,refresh(){brand();roles();homeDetails();screenLabels()}}}
+function refresh(){finalStyle();brand();roles();homeDetails();screenLabels();updateLog()}
+function init(){environment();refresh();window.MultiverseArenaPremium={version:BUILD,refresh}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 addEventListener('fightarena-ready',()=>setTimeout(()=>window.MultiverseArenaPremium?.refresh(),80),{once:true});
 })();
