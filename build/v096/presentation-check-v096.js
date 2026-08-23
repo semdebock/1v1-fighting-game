@@ -1,0 +1,12 @@
+const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'../..');
+const boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8');
+const ui=fs.readFileSync(path.join(root,'premium-v096.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'premium-v096.css'),'utf8');
+for(const marker of ["const BUILD='0.9.6'","const CORE='app/core/core-runtime-v0958.js'","'premium-v096.js'",'window.MultiverseArenaPremium'])if(!boot.includes(marker)&&!ui.includes(marker))throw new Error('v0.9.6 marker missing: '+marker);
+for(const marker of ['PREMIUM PRESENTATION','Premium Design System','premium-environment','fighter-detail-grid','boss-phase-hud','versus-sequence','#results.active'])if(!ui.includes(marker)&&!css.includes(marker))throw new Error('v0.9.6 presentation marker missing: '+marker);
+for(const forbidden of ['new MutationObserver','setInterval(','requestAnimationFrame(loop)',"classList.add('impact-pop')"])if(ui.includes(forbidden))throw new Error('v0.9.6 premium runtime contains forbidden fight-risk pattern: '+forbidden);
+if(css.includes('#fight .fighter{')||css.includes('#fight.active .fighter{'))throw new Error('v0.9.6 presentation must not rewrite fighter transforms');
+for(const stable of ["'touch-v0941.js'","'stability-v0941.js'","'campaign-v0957.js'","'polish-v09572.js'"])if(!boot.includes(stable))throw new Error('v0.9.6 stable runtime missing: '+stable);
+console.log('v0.9.6 premium presentation checks passed');
