@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.6.6 Gauntlet Navigator
+      - name: Validate v0.9.7 Mutant Uprising
         run: |
           node --check build/v094/transform-v094.js
           node --check build/v0941/transform-v0941.js
@@ -38,6 +38,7 @@ jobs:
           node --check build/v0956/transform-v0956.js
           node --check build/v0957/transform-v0957.js
           node --check build/v0962/transform-v0962.js
+          node --check build/v097/transform-v097.js
           node --check build/v0957/build-check-v0957.js
           node --check build/v0957/campaign-check-v0957.js
           node --check build/v095722/stability-check-v095722.js
@@ -51,19 +52,22 @@ jobs:
           node --check build/v0964/release-check-v0964.js
           node --check build/v0965/release-check-v0965.js
           node --check build/v0966/release-check-v0966.js
+          node --check build/v097/release-check-v097.js
           node --check app/core/bootstrap-v096.js
           node --check premium-v096.js
           node --check update-v0962.js
           node --check update-v0963.js
           node --check update-v0964.js
-          node --check update-v0965.js
           node --check update-v0966.js
+          node --check update-v097.js
           node --check campaign-v0957.js
+          node --check campaign-v097.js
           node --check ui-v09571.js
           node --check polish-v09572.js
           node --check device-v092.js
           node --check touch-v0941.js
           node --check stability-v0941.js
+
           node build/v0957/build-check-v0957.js
           node --check /tmp/core-v0957-built.js
           node build/v0957/campaign-check-v0957.js
@@ -75,8 +79,10 @@ jobs:
           node build/v096/final-check-v096.js
           node build/v0964/release-check-v0964.js
           node build/v0966/release-check-v0966.js
+          node build/v097/release-check-v097.js
           node build/v096/patch-index-v096.js
           node build/v096/patch-index-v096.js
+
           test -s index.html
           test -s app/core/bootstrap-v096.js
           test -s app/core/core-runtime-v0958.js
@@ -89,65 +95,94 @@ jobs:
           test -s update-v0963.js
           test -s update-v0964.css
           test -s update-v0964.js
-          test -s update-v0965.css
-          test -s update-v0965.js
           test -s update-v0966.css
           test -s update-v0966.js
+          test -s update-v097.js
+          test -s campaign-v097.js
+          test -s mutant-v097.css
+          test -s build/v097/transform-v097.js
+          test -s build/v097/release-check-v097.js
           test -s CORE_ARCHITECTURE.md
-          grep -q "Multiverse Arena v0.9.6.6 — Gauntlet Navigator" index.html
-          grep -q "UPDATE LOG  •  v0.9.6.6" index.html
-          ! grep -Eq "v0\.9\.6\.6\.[0-9]" index.html
-          grep -q "premium-v096.css?v=0966" index.html
-          grep -q "app/core/bootstrap-v096.js?v=0966" index.html
+
+          grep -q "Multiverse Arena v0.9.7 — Mutant Uprising" index.html
+          grep -q "UPDATE LOG  •  v0.9.7" index.html
+          grep -q "PHASE 3 • MUTANT UPRISING" index.html
+          grep -q "THE MUTANTS<br>HAVE ARRIVED." index.html
+          ! grep -Eq "v0\.9\.7\.[0-9]" index.html
+          grep -q "premium-v096.css?v=097" index.html
+          grep -q "app/core/bootstrap-v096.js?v=097" index.html
           grep -q "VILLAIN GAUNTLET" index.html
-          grep -q "const BUILD='0.9.6.6'" app/core/bootstrap-v096.js
-          grep -q "const ASSET='0966'" app/core/bootstrap-v096.js
+
+          grep -q "const BUILD='0.9.7'" app/core/bootstrap-v096.js
+          grep -q "const ASSET='097'" app/core/bootstrap-v096.js
           grep -q "const SAVE_KEY='fightArenaV08'" app/core/bootstrap-v096.js
           grep -q "core-runtime-v0958.js" app/core/bootstrap-v096.js
-          grep -q "update-v0962.js" app/core/bootstrap-v096.js
-          grep -q "update-v0963.js" app/core/bootstrap-v096.js
-          grep -q "update-v0964.js" app/core/bootstrap-v096.js
-          grep -q "update-v0966.js" app/core/bootstrap-v096.js
-          ! grep -q "'update-v0965.js'" app/core/bootstrap-v096.js
-          grep -q "window.MultiverseArenaUpdate0966" update-v0966.js
-          grep -q "function renderNavigator" update-v0966.js
-          grep -q "function phaseAccessible" update-v0966.js
-          grep -q "SWIPE TO CHOOSE" update-v0966.js
-          grep -q "CLASSIFIED THREAT" update-v0966.js
-          grep -q "Phase Tabs • Swipe Villains • Smart Target Focus" update-v0966.js
-          grep -q "gauntlet-phase-tabs-v0966" update-v0966.css
+          grep -q "campaign-v097.js" app/core/bootstrap-v096.js
+          grep -q "update-v097.js" app/core/bootstrap-v096.js
+          ! grep -q "'campaign-v0957.js'" app/core/bootstrap-v096.js
+          ! grep -q "'update-v0966.js'" app/core/bootstrap-v096.js
+
+          grep -q "window.FightArenaCampaignV097" campaign-v097.js
+          grep -q "id:'phase3'" campaign-v097.js
+          grep -q "MUTANT UPRISING" campaign-v097.js
+          grep -q "Sabretooth" campaign-v097.js
+          grep -q "Mystique" campaign-v097.js
+          grep -q "Juggernaut" campaign-v097.js
+          grep -q "Deadpool" campaign-v097.js
+          grep -q "Magneto" campaign-v097.js
+
+          grep -q "window.MultiverseArenaUpdate097" update-v097.js
+          grep -q "function renderNavigator" update-v097.js
+          grep -q "CLASSIFIED THREAT" update-v097.js
+          grep -q "Phase 3 • Mutant Uprising • 5 New Villains" update-v097.js
           grep -q "gauntlet-carousel-v0966" update-v0966.css
           grep -q "scroll-snap-type:x mandatory" update-v0966.css
-          grep -q "prefers-reduced-motion" update-v0966.css
-          grep -q "const ownsRelease=" premium-v096.js
-          grep -q "const ownsRelease=" update-v0962.js
-          grep -q "const ownsRelease=" update-v0963.js
-          grep -q "const ownsRelease=" update-v0964.js
-          ! grep -q "new MutationObserver" premium-v096.js
-          ! grep -q "new MutationObserver" update-v0966.js
-          ! grep -q "setInterval(" update-v0966.js
-          ! grep -q "requestAnimationFrame(loop)" update-v0966.js
+          grep -q "fighter.juggernaut{width:148px;height:206px" mutant-v097.css
+          grep -q "mystique-morphed" mutant-v097.css
+          grep -q "mag-stormfx" mutant-v097.css
+          grep -q "prefers-reduced-motion" mutant-v097.css
+
+          grep -q "name:'Sabretooth'" app/core/core-runtime-v0958.js
+          grep -q "name:'Mystique'" app/core/core-runtime-v0958.js
+          grep -q "name:'Juggernaut'" app/core/core-runtime-v0958.js
+          grep -q "name:'Deadpool'" app/core/core-runtime-v0958.js
+          grep -q "name:'Magneto'" app/core/core-runtime-v0958.js
+          grep -q "sabreApex" app/core/core-runtime-v0958.js
+          grep -q "mystiqueTransform" app/core/core-runtime-v0958.js
+          grep -q "mystiqueMirrorSpecial" app/core/core-runtime-v0958.js
+          grep -q "juggUnstoppable" app/core/core-runtime-v0958.js
+          grep -q "deadpoolLastStand" app/core/core-runtime-v0958.js
+          grep -q "magnetoMaster" app/core/core-runtime-v0958.js
+          grep -q "MUTANT_UPRISING_INTROS" app/core/core-runtime-v0958.js
+
           grep -q "primo-super-leap" app/core/core-runtime-v0958.js
           grep -q "PRIMO SMASH!" app/core/core-runtime-v0958.js
-          grep -q "primo-smash-impact" app/core/core-runtime-v0958.js
-          ! grep -q "new MutationObserver" polish-v09572.js
-          ! grep -q "classList.add('impact-pop')" polish-v09572.js
           grep -q "version:'0.9.5.7'" app/core/core-runtime-v0958.js
           grep -q "name:'Doctor Octopus'" app/core/core-runtime-v0958.js
           grep -q "FightArenaTrainingControls" app/core/core-runtime-v0958.js
           grep -q "punisherUnlockShown" app/core/core-runtime-v0958.js
           grep -q "screen('results')" app/core/core-runtime-v0958.js
-          grep -q "phase2Order=\['Rhino','Electro','Mysterio','Green Goblin','Doctor Octopus'\]" campaign-v0957.js
           grep -q "touchstart" touch-v0941.js
           grep -q "multiTouch:true" touch-v0941.js
 
-      - name: Persist v0.9.6.6 release artifacts
+          grep -q "const ownsRelease=" premium-v096.js
+          grep -q "const ownsRelease=" update-v0962.js
+          grep -q "const ownsRelease=" update-v0963.js
+          grep -q "const ownsRelease=" update-v0964.js
+          ! grep -q "new MutationObserver" premium-v096.js
+          ! grep -q "new MutationObserver" update-v097.js
+          ! grep -q "new MutationObserver" campaign-v097.js
+          ! grep -q "requestAnimationFrame(loop)" update-v097.js
+          ! grep -q "new MutationObserver" polish-v09572.js
+          ! grep -q "classList.add('impact-pop')" polish-v09572.js
+
+      - name: Persist v0.9.7 release artifacts
         run: |
           if [ -n "$(git status --porcelain -- index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json)" ]; then
             git config user.name "github-actions[bot]"
-            git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json
-            git commit -m "Release Multiverse Arena v0.9.6.6 Gauntlet Navigator [skip ci]"
+            git commit -m "Release Multiverse Arena v0.9.7 Mutant Uprising [skip ci]"
             git push
           fi
 
