@@ -23,7 +23,9 @@ function relocateFightControls(){
  if(!row.querySelector('.fight-control-label-v0963')){const label=document.createElement('span');label.className='fight-control-label-v0963';label.textContent='LIVE COMBAT';row.appendChild(label)}
 }
 function cleanUpdateLog(){
- const box=$('#updatesScreen .changelog');if(!box||box.dataset.cleaned0963==='1')return;
+ const box=$('#updatesScreen .changelog');if(!box)return;
+ const alreadyClean=box.dataset.cleaned0963==='1'&&[...box.children].length===6&&[...box.children].every(x=>x.classList.contains('recent-release-v0963'));
+ if(alreadyClean)return;
  box.dataset.cleaned0963='1';
  const releases=[
   ['🧭','v0.9.6.3 — Combat Header Cleanup','QUIT and PAUSE now live in their own top control row above the combat HUD, so they can never cover fighter names or health bars on iPad.'],
@@ -40,5 +42,5 @@ function cleanUpdateLog(){
 function refresh(){style();brand();relocateFightControls();cleanUpdateLog()}
 function init(){refresh();window.MultiverseArenaUpdate0963={version:BUILD,refresh,relocateFightControls,cleanUpdateLog}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
-addEventListener('fightarena-ready',()=>setTimeout(refresh,100),{once:true});
+addEventListener('fightarena-ready',()=>setTimeout(refresh,120),{once:true});
 })();
