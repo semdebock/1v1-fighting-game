@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.5.7.2.2 Fight Stability Hotfix
+      - name: Validate v0.9.5.8 Core Cleanup
         run: |
           node --check build/v094/transform-v094.js
           node --check build/v0941/transform-v0941.js
@@ -40,12 +40,13 @@ jobs:
           node --check build/v0957/build-check-v0957.js
           node --check build/v0957/campaign-check-v0957.js
           node --check build/v095722/stability-check-v095722.js
-          node --check build/v095722/patch-index-v095722.js
+          node --check build/v0958/cleanup-check-v0958.js
+          node --check build/v0958/patch-index-v0958.js
+          node --check app/core/bootstrap-v0958.js
           node --check core-v0957.js
           node --check campaign-v0957.js
           node --check ui-v09571.js
           node --check polish-v09572.js
-          node --check qa-v095722.js
           node --check device-v092.js
           node --check touch-v0941.js
           node --check stability-v0941.js
@@ -53,37 +54,44 @@ jobs:
           node --check /tmp/core-v0957-built.js
           node build/v0957/campaign-check-v0957.js
           node build/v095722/stability-check-v095722.js
-          node build/v095722/patch-index-v095722.js
+          node build/v0958/cleanup-check-v0958.js
+          node build/v0958/patch-index-v0958.js
           test -s index.html
-          test -s polish-v09572.js
-          test -s polish-v09572.css
-          test -s stability-v095722.css
-          test -s qa-v095722.js
-          grep -q "Multiverse Arena v0.9.5.7.2.2 — Fight Stability Hotfix" index.html
-          grep -q "polish-v09572.js?v=095722" index.html
-          grep -q "stability-v095722.css?v=095722" index.html
-          grep -q "qa-v095722.js?v=095722" index.html
+          test -s app/core/bootstrap-v0958.js
+          test -s CORE_ARCHITECTURE.md
+          grep -q "Multiverse Arena v0.9.5.8 — Core Cleanup" index.html
+          grep -q "app/core/bootstrap-v0958.js?v=0958" index.html
           grep -q "VILLAIN GAUNTLET" index.html
-          grep -q "const BUILD='0.9.5.7.2.2'" polish-v09572.js
-          grep -q "setInterval(tick,150)" polish-v09572.js
+          grep -q "const BUILD='0.9.5.8'" app/core/bootstrap-v0958.js
+          grep -q "const SAVE_KEY='fightArenaV08'" app/core/bootstrap-v0958.js
+          grep -q "core-v0957.js" app/core/bootstrap-v0958.js
+          grep -q "touch-v0941.js" app/core/bootstrap-v0958.js
+          grep -q "polish-v09572.js" app/core/bootstrap-v0958.js
+          ! grep -q "qa-v095722.js" app/core/bootstrap-v0958.js
+          ! grep -q "build/v094/transform-v094.js?v=0958" index.html
+          ! grep -q "qa-v0957.js?v=0958" index.html
+          ! grep -q "qa-v09571.js?v=0958" index.html
+          ! grep -q "qa-v095722.js?v=0958" index.html
           ! grep -q "new MutationObserver" polish-v09572.js
-          ! grep -q "requestAnimationFrame(loop)" polish-v09572.js
           ! grep -q "classList.add('impact-pop')" polish-v09572.js
-          grep -q ".fighter.hurt" stability-v095722.css
           grep -q "version:'0.9.5.7'" /tmp/core-v0957-built.js
           grep -q "name:'Doctor Octopus'" /tmp/core-v0957-built.js
+          grep -q "coins:1400,xp:260,gems:10" /tmp/core-v0957-built.js
+          grep -q "showRewardSummary" /tmp/core-v0957-built.js
+          grep -q "FightArenaTrainingControls" /tmp/core-v0957-built.js
+          grep -q "punisherUnlockShown" /tmp/core-v0957-built.js
           grep -q "screen('results')" /tmp/core-v0957-built.js
           grep -q "phase2Order=\['Rhino','Electro','Mysterio','Green Goblin','Doctor Octopus'\]" campaign-v0957.js
           grep -q "touchstart" touch-v0941.js
           grep -q "multiTouch:true" touch-v0941.js
 
-      - name: Persist v0.9.5.7.2.2 stability index
+      - name: Persist v0.9.5.8 clean core index
         run: |
           if ! git diff --quiet -- index.html; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html
-            git commit -m "Release Multiverse Arena v0.9.5.7.2.2 stability index [skip ci]"
+            git commit -m "Release Multiverse Arena v0.9.5.8 core cleanup index [skip ci]"
             git push
           fi
 
