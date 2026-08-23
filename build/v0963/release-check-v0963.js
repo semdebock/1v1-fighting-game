@@ -1,0 +1,13 @@
+const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'../..');
+const boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8');
+const js=fs.readFileSync(path.join(root,'update-v0963.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'update-v0963.css'),'utf8');
+const core=fs.readFileSync(path.join(root,'app/core/core-runtime-v0958.js'),'utf8');
+for(const marker of ["const BUILD='0.9.6.3'","const ASSET='0963'","const SAVE_KEY='fightArenaV08'","'update-v0962.js'","'update-v0963.js'",'window.MultiverseArenaUpdate0963'])if(!boot.includes(marker)&&!js.includes(marker))throw new Error('v0.9.6.3 marker missing: '+marker);
+for(const marker of ['relocateFightControls','fight-control-row-v0963','cleanUpdateLog','v0.9.6.3 — Combat Header Cleanup','v0.9.6.2 — Fullscreen Fight + True Primo Super','RECENT RELEASES'])if(!js.includes(marker)&&!css.includes(marker))throw new Error('v0.9.6.3 UI marker missing: '+marker);
+for(const marker of ['#fight .fighthead{position:relative!important','html.device-tablet #fight.active .fight-control-row-v0963','html.device-tablet #fight.active .hpgrid','recent-release-v0963'])if(!css.includes(marker))throw new Error('v0.9.6.3 layout marker missing: '+marker);
+for(const forbidden of ['new MutationObserver','setInterval(','requestAnimationFrame(loop)'])if(js.includes(forbidden))throw new Error('v0.9.6.3 runtime contains forbidden observer/loop pattern: '+forbidden);
+for(const stable of ["version:'0.9.5.7'","name:'Doctor Octopus'",'FightArenaTrainingControls','punisherUnlockShown','primo-super-leap','PRIMO SMASH!'])if(!core.includes(stable))throw new Error('protected combat marker missing after v0.9.6.3: '+stable);
+console.log('v0.9.6.3 combat header + log cleanup checks passed');
