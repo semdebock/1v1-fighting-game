@@ -63,6 +63,7 @@ jobs:
           node build/v096/presentation-check-v096.js
           node build/v096/final-check-v096.js
           node build/v096/patch-index-v096.js
+          node build/v096/patch-index-v096.js
           test -s index.html
           test -s app/core/bootstrap-v096.js
           test -s app/core/core-runtime-v0958.js
@@ -71,16 +72,17 @@ jobs:
           test -s premium-v096.js
           test -s CORE_ARCHITECTURE.md
           grep -q "Multiverse Arena v0.9.6 — Premium Presentation" index.html
-          grep -q "premium-v096.css?v=096" index.html
-          grep -q "app/core/bootstrap-v096.js?v=096" index.html
+          grep -q "premium-v096.css?v=096f2" index.html
+          grep -q "app/core/bootstrap-v096.js?v=096f2" index.html
           grep -q "VILLAIN GAUNTLET" index.html
           grep -q "const BUILD='0.9.6'" app/core/bootstrap-v096.js
+          grep -q "const ASSET='096f2'" app/core/bootstrap-v096.js
           grep -q "const SAVE_KEY='fightArenaV08'" app/core/bootstrap-v096.js
           grep -q "core-runtime-v0958.js" app/core/bootstrap-v096.js
           grep -q "premium-v096.js" app/core/bootstrap-v096.js
           grep -q "window.MultiverseArenaPremium" premium-v096.js
           grep -q "PREMIUM PRESENTATION" premium-v096.js
-          grep -q "premium-v096-final.css?v=096f" premium-v096.js
+          grep -q "premium-v096-final.css?v=096f2" premium-v096.js
           grep -q "premium-environment" premium-v096.css
           grep -q "boss-phase-hud" premium-v096.css
           grep -q "versus-sequence" premium-v096.css
@@ -90,9 +92,10 @@ jobs:
           ! grep -q "new MutationObserver" premium-v096.js
           ! grep -q "setInterval(" premium-v096.js
           ! grep -q "requestAnimationFrame(loop)" premium-v096.js
-          ! grep -q "app/core/bootstrap-v0958.js?v=096" index.html
-          ! grep -q "build/v094/transform-v094.js?v=096" index.html
-          ! grep -q "qa-v095722.js?v=096" index.html
+          ! grep -q "096f2f2" index.html
+          ! grep -q "app/core/bootstrap-v0958.js?v=096f2" index.html
+          ! grep -q "build/v094/transform-v094.js?v=096f2" index.html
+          ! grep -q "qa-v095722.js?v=096f2" index.html
           ! grep -q "new MutationObserver" polish-v09572.js
           ! grep -q "classList.add('impact-pop')" polish-v09572.js
           grep -q "version:'0.9.5.7'" app/core/core-runtime-v0958.js
