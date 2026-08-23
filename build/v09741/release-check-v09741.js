@@ -1,0 +1,16 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'../..');
+const boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8');
+const core=fs.readFileSync(path.join(root,'app/core/core-runtime-v0958.js'),'utf8');
+const update=fs.readFileSync(path.join(root,'update-v09741.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'update-v09741.css'),'utf8');
+const oldUpdate=fs.readFileSync(path.join(root,'update-v0974.js'),'utf8');
+for(const m of ["const BUILD='0.9.7.4.1'","const ASSET='09741'","const SAVE_KEY='fightArenaV08'","'update-v09741.js'",'core-runtime-v0958.js'])if(!boot.includes(m))throw new Error('v0.9.7.4.1 bootstrap marker missing '+m);
+for(const m of ['window.MultiverseArenaUpdate09741','restoreRematch','rematchWired09741','FightArenaCampaignControls','Hulkbuster Heavy Mech Rework • Rematch Restored'])if(!update.includes(m))throw new Error('v0.9.7.4.1 runtime marker missing '+m);
+for(const m of ['width:156px','Hulkbuster Heavy Mech Rework','hulkbusterCore09741','arm:before','leg:before','rematch-fixed-v09741'])if(!css.includes(m))throw new Error('v0.9.7.4.1 CSS marker missing '+m);
+for(const m of ['rematch(){','startFight(false,save.selected)','lastResult()'])if(!core.includes(m))throw new Error('protected rematch controller marker missing '+m);
+for(const m of ["id:'iron-hulkbuster'","price:250","hp:175,power:98,speed:48",'HEAVY ARMOR • 18% DAMAGE REDUCTION','HULKBUSTER SLAM','MICRO MISSILE SWARM','REPULSOR BARRAGE','VERONICA CRASHDOWN'])if(!core.includes(m))throw new Error('protected Hulkbuster gameplay marker missing '+m);
+for(const stable of ['DAILY_REWARD_COINS=1250','DAILY_COOLDOWN_MS=24*60*60*1000','mystiqueTransform','deadpoolLastStand','magnetoMaster','primo-super-leap','punisherUnlockShown'])if(!core.includes(stable))throw new Error('protected gameplay marker missing '+stable);
+if(!oldUpdate.includes('const ownsRelease='))throw new Error('v0.9.7.4 presentation can overwrite 7.4.1');
+for(const forbidden of ['new MutationObserver','requestAnimationFrame(loop)','localStorage.removeItem(\'fightArenaV08\')'])if(update.includes(forbidden))throw new Error('unsafe v0.9.7.4.1 runtime marker '+forbidden);
+console.log('v0.9.7.4.1 Hulkbuster rework + Rematch checks passed');

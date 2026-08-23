@@ -1,0 +1,33 @@
+/* Multiverse Arena v0.9.7.4.1 — Hulkbuster Heavy Mech Rework */
+/* Visual-only override: preserves every v0.9.7.4 Hulkbuster combat ability/stat. */
+.fighter.ironman.skin-iron-hulkbuster{width:156px;height:204px;transform-origin:50% 100%;filter:drop-shadow(0 16px 7px #000d) drop-shadow(0 0 18px #ff9f3c42) drop-shadow(0 0 9px #59e8ff3f)}
+
+/* Smaller helmet buried into a much larger shoulder/chest frame. */
+.ironman.skin-iron-hulkbuster .head{left:55px;top:11px;width:46px;height:42px;border:5px solid #46100f;border-radius:15px 15px 11px 11px;background:linear-gradient(155deg,#7b1816 0 15%,#c38a38 16% 73%,#6a1413 74%);box-shadow:inset 0 0 0 3px #efc56e,inset 0 -8px 8px #63201a,0 3px 0 #2e0b0b;z-index:12}
+.ironman.skin-iron-hulkbuster .head:before{content:"";position:absolute;left:5px;right:5px;top:6px;height:27px;background:linear-gradient(180deg,#e2ad4e,#9b6428 72%,#6d201a 73%);clip-path:polygon(10% 0,90% 0,100% 28%,91% 74%,70% 100%,30% 100%,9% 74%,0 28%);box-shadow:inset 0 2px 0 #ffe09a}
+.ironman.skin-iron-hulkbuster .head:after{content:"";position:absolute;left:9px;right:9px;bottom:-5px;height:10px;border:3px solid #49100f;border-radius:2px 2px 7px 7px;background:linear-gradient(180deg,#8f211d,#581210);z-index:4}
+.ironman.skin-iron-hulkbuster .eye{top:19px;width:12px;height:4px;background:#efffff;border:1px solid #baffff;box-shadow:0 0 7px #7bf4ff,0 0 13px #35cbe6;z-index:5}.ironman.skin-iron-hulkbuster .eye.l{left:7px}.ironman.skin-iron-hulkbuster .eye.r{right:7px}
+
+/* Wide, layered chest — the core silhouette of the rework. */
+.ironman.skin-iron-hulkbuster .body{left:24px;top:47px;width:108px;height:94px;border:7px solid #3b0c0d;border-radius:25px 25px 15px 15px;background:linear-gradient(90deg,#6d1515 0 10%,#b72d26 11% 25%,#d29a42 26% 34%,#85201e 35% 65%,#d29a42 66% 74%,#b72d26 75% 89%,#681313 90%);box-shadow:inset 0 6px 0 #e25743,inset 0 -13px 0 #571112,inset 0 0 0 3px #861f1c,inset 0 0 25px #f1a6422b;z-index:6}
+.ironman.skin-iron-hulkbuster .body:before{content:"";position:absolute;left:43px;top:24px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle,#fff 0 20%,#bafaff 21% 43%,#52dced 44% 57%,#274b57 58% 68%,#d5a350 69% 82%,#4a1212 83%);box-shadow:0 0 10px #96f6ff,0 0 24px #42d8ed,0 0 34px #3fc5e866;z-index:5;animation:hulkbusterCore09741 1.9s ease-in-out infinite}
+.ironman.skin-iron-hulkbuster .body:after{content:"";position:absolute;inset:7px 8px 12px;background:linear-gradient(135deg,#e3aa4e 0 8%,transparent 9% 28%,#c8903b 29% 35%,transparent 36% 64%,#c8903b 65% 71%,transparent 72% 91%,#e3aa4e 92%);clip-path:polygon(0 0,27% 0,36% 15%,64% 15%,73% 0,100% 0,93% 67%,72% 61%,61% 100%,39% 100%,28% 61%,7% 67%);opacity:.68;pointer-events:none}
+@keyframes hulkbusterCore09741{50%{box-shadow:0 0 13px #d9ffff,0 0 29px #60eaff,0 0 43px #36cbe999}}
+
+/* Huge shoulder pods, heavy upper arms and oversized gauntlets. */
+.ironman.skin-iron-hulkbuster .arm{top:54px;width:45px;height:94px;border:6px solid #3d0c0c;border-radius:17px 17px 14px 14px;background:linear-gradient(180deg,#bd352b 0 24%,#811a18 25% 51%,#d19b44 52% 64%,#8a1d1a 65% 79%,#b82e27 80%);box-shadow:inset 0 5px 0 #ef6950,inset 0 -8px 0 #5b1111;z-index:5}.ironman.skin-iron-hulkbuster .arm.l{left:-7px;transform:rotate(3deg)}.ironman.skin-iron-hulkbuster .arm.r{right:-7px;transform:rotate(-3deg)}
+.ironman.skin-iron-hulkbuster .arm:before{content:"";position:absolute;left:-12px;top:-15px;width:57px;height:39px;border:6px solid #3d0c0c;border-radius:23px 23px 9px 9px;background:linear-gradient(145deg,#e1533e 0 10%,#b52d27 11% 51%,#7b1716 52% 73%,#d49d45 74%);box-shadow:inset 0 5px 0 #ed7659,inset 0 -6px 0 #671515;z-index:2}
+.ironman.skin-iron-hulkbuster .arm:after{content:"";position:absolute;left:-8px;right:-8px;bottom:-11px;height:37px;border:6px solid #390b0b;border-radius:11px 11px 18px 18px;background:linear-gradient(180deg,#c13b30 0 42%,#d6a24c 43% 57%,#741515 58%);box-shadow:inset 0 4px 0 #f06b50,inset 0 -6px 0 #531010}
+
+/* Thick thighs, knee armor and broad armored boots. */
+.ironman.skin-iron-hulkbuster .leg{top:136px;width:51px;height:68px;border:6px solid #3a0b0b;border-radius:12px 12px 10px 10px;background:linear-gradient(180deg,#ae2b25 0 25%,#d39b43 26% 39%,#7b1716 40% 66%,#bd352c 67% 84%,#661313 85%);box-shadow:inset 0 4px 0 #e95f49}.ironman.skin-iron-hulkbuster .leg.l{left:23px}.ironman.skin-iron-hulkbuster .leg.r{right:23px}
+.ironman.skin-iron-hulkbuster .leg:before{content:"";position:absolute;left:7px;right:7px;top:8px;height:25px;border:3px solid #641515;border-radius:7px;background:linear-gradient(135deg,#d4a04b,#8b1d1a 48%,#b92f28 49%);box-shadow:inset 0 2px 0 #f4c66d}
+.ironman.skin-iron-hulkbuster .leg:after{content:"";position:absolute;left:-8px;right:-8px;bottom:-9px;height:25px;border:6px solid #370a0a;border-radius:9px 9px 13px 13px;background:linear-gradient(180deg,#a82a24,#641212);box-shadow:inset 0 4px 0 #d84b3b}
+
+/* Premium framing across Collection, home preview and combat. */
+.skin-showcase .fighter.skin-iron-hulkbuster{transform:scale(1.52)!important;transform-origin:50% 100%!important}.portrait .fighter.skin-iron-hulkbuster{transform:scale(.76)!important;transform-origin:50% 100%!important}.home-preview .fighter.skin-iron-hulkbuster{transform:scale(1.36)!important;transform-origin:50% 100%!important}.fight .fighter.player.skin-iron-hulkbuster{transform:scale(1.25);transform-origin:50% 100%}
+.skin-card.hulkbuster-premium-card,.skin-card:has(.skin-iron-hulkbuster){border-color:#c6893e!important;background:radial-gradient(circle at 50% 7%,#67e8ff18,transparent 23%),radial-gradient(circle at 50% 23%,#ffad4326,transparent 38%),linear-gradient(180deg,#291416,#0b0f18 75%)!important;box-shadow:inset 0 0 0 1px #f0bf6650,0 18px 40px #0009,0 0 28px #e1773230!important}
+
+#rematch.rematch-fixed-v09741{border-color:#8fc7bd;box-shadow:inset 0 1px 0 #ffffff12,0 0 0 1px #6ad7c21a}#rematch.rematch-fixed-v09741:disabled{opacity:.55;cursor:wait}
+@media(max-width:900px){.fighter.ironman.skin-iron-hulkbuster{width:148px;height:198px}.skin-showcase .fighter.skin-iron-hulkbuster{transform:scale(1.42)!important}.fight .fighter.player.skin-iron-hulkbuster{transform:scale(1.17)}}
+@media(prefers-reduced-motion:reduce){.ironman.skin-iron-hulkbuster .body:before{animation:none!important}}
