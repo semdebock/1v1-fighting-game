@@ -1,0 +1,20 @@
+/* Multiverse Arena v0.9.7.2 — Combat Balance + Phase 3 Polish */
+
+/* Keep combat information readable without adding more HUD clutter. */
+#fight .hero-cd{font-variant-numeric:tabular-nums;min-width:38px;text-align:right}
+#fight .callout{max-width:min(72vw,340px);white-space:normal;text-wrap:balance;line-height:1.12;padding-inline:12px}
+#fight .actions button,#fight .hero-actions button{transition:opacity .12s ease,filter .12s ease,transform .12s ease}
+#fight .actions button:disabled,#fight .hero-actions button:disabled{opacity:.5;filter:saturate(.72)}
+#fight.boss-mode #fightTag{font-variant-numeric:tabular-nums;letter-spacing:.055em}
+#fight .hpbar>i,#fight .specialbar>i{transition:width .11s linear}
+
+/* Result actions remain easy to reach after the 7.1 stability pass. */
+#results.active .result-action-stack-v0971{scroll-margin-bottom:max(12px,env(safe-area-inset-bottom))}
+
+@media(max-height:760px){
+ #fight .callout{font-size:10px;max-width:66vw;padding-inline:9px}
+ #fight .hero-cd{min-width:34px}
+}
+@media(prefers-reduced-motion:reduce){
+ #fight .actions button,#fight .hero-actions button,#fight .hpbar>i,#fight .specialbar>i{transition:none!important}
+}
