@@ -1,0 +1,63 @@
+/* Multiverse Arena v0.9.6.2 — Fullscreen Fight + Primo Super */
+
+/* Bigger selected-fighter showcase. Presentation only; combat fighters are untouched here. */
+#home .fighter-preview{transform:scale(1.5)!important;transform-origin:50% 100%!important}
+.device-tablet #home .fighter-preview{transform:scale(1.85)!important;transform-origin:50% 100%!important;margin-bottom:70px!important}
+.device-iphone #home .fighter-preview{transform:scale(1.24)!important;transform-origin:50% 100%!important;margin-bottom:56px!important}
+
+/* iPad/tablet fight layout: one viewport, no page scrolling required. */
+html.device-tablet body:has(#fight.active){overflow:hidden!important;height:100dvh!important}
+html.device-tablet body:has(#fight.active) .app{height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;padding-top:max(4px,env(safe-area-inset-top))!important;padding-bottom:max(5px,env(safe-area-inset-bottom))!important}
+html.device-tablet body:has(#fight.active) .top{flex:0 0 auto!important;margin-bottom:5px!important;padding:5px clamp(16px,2.5vw,40px)!important;min-height:48px!important}
+html.device-tablet body:has(#fight.active) .top .eyebrow{font-size:7px!important}
+html.device-tablet body:has(#fight.active) .brand{font-size:18px!important}
+html.device-tablet body:has(#fight.active) .pill{min-height:30px!important;padding:0 9px!important;font-size:11px!important}
+html.device-tablet #fight.active{height:calc(100dvh - 60px)!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;padding-bottom:0!important}
+html.device-tablet #fight.active .fighthead{flex:0 0 auto!important;min-height:50px!important;margin:0 0 5px!important;padding:6px 12px!important}
+html.device-tablet #fight.active .hpgrid{margin:4px 0!important;gap:18px!important}
+html.device-tablet #fight.active .hpname{margin-bottom:3px!important;font-size:10px!important}
+html.device-tablet #fight.active .bar{height:9px!important}
+html.device-tablet #fight.active .fighthead #timer{font-size:20px!important}
+html.device-tablet #fight.active .arena{flex:1 1 auto!important;height:auto!important;min-height:275px!important;max-height:none!important;margin:0!important;border-radius:18px!important}
+html.device-tablet #fight.active .specialrow{flex:0 0 34px!important;min-height:34px!important;margin-top:5px!important;padding:4px 8px!important}
+html.device-tablet #fight.active .specialrow .bar{height:9px!important}
+html.device-tablet #fight.active .controls{flex:0 0 132px!important;min-height:132px!important;margin-top:5px!important;grid-template-columns:116px minmax(0,1fr)!important;gap:12px!important;align-items:center!important}
+html.device-tablet #fight.active .stick{width:104px!important;height:104px!important}
+html.device-tablet #fight.active .knob{width:44px!important;height:44px!important;left:29px!important;top:29px!important}
+html.device-tablet #fight.active .actions,html.device-tablet #fight.active .hero-actions{gap:5px!important}
+html.device-tablet #fight.active .actions button,html.device-tablet #fight.active .hero-actions button{min-height:44px!important;padding:6px 4px!important;font-size:10px!important}
+html.device-tablet #fight.active .hero-actions{margin-top:5px!important}
+html.device-tablet #fight.active .hero-cd{font-size:7px!important;margin-top:1px!important}
+
+/* Boss information becomes a small corner chip instead of a center obstruction. */
+html.device-tablet #fight.active .boss-phase-hud{top:58px!important;right:14px!important;left:auto!important;transform:none!important;width:178px!important;min-width:0!important;padding:6px 9px!important;border-radius:10px!important;text-align:right!important;background:rgba(5,8,18,.84)!important;box-shadow:0 6px 16px rgba(0,0,0,.25)!important;opacity:.88!important}
+html.device-tablet #fight.active .boss-phase-hud small{font-size:6px!important;letter-spacing:.13em!important}
+html.device-tablet #fight.active .boss-phase-hud strong{font-size:9px!important;margin-top:1px!important}
+html.device-tablet #fight.active .boss-phase-hud span{display:none!important}
+html.device-tablet #fight.active .boss-phase-track{margin:4px 0 0!important;gap:2px!important}
+html.device-tablet #fight.active .boss-phase-track i{height:2px!important}
+
+/* El Primo's actual v0.9.6.2 super: leap across the arena and slam down on the opponent. */
+#pF.primo.primo-super-leap{z-index:40!important;animation:primoSuperLeap0962 .65s cubic-bezier(.18,.74,.18,1) both!important;filter:drop-shadow(0 14px 5px rgba(0,0,0,.72)) drop-shadow(0 0 18px rgba(255,207,92,.6))!important}
+@keyframes primoSuperLeap0962{
+ 0%{transform:translate3d(0,0,0) rotate(0) scale(1)}
+ 18%{transform:translate3d(0,-34px,0) rotate(-5deg) scale(1.04)}
+ 52%{transform:translate3d(var(--primo-smash-x),-145px,0) rotate(10deg) scale(1.1)}
+ 68%{transform:translate3d(var(--primo-smash-x),-24px,0) rotate(2deg) scale(1.13,.94)}
+ 76%{transform:translate3d(var(--primo-smash-x),8px,0) rotate(0) scale(1.2,.82)}
+ 100%{transform:translate3d(var(--primo-smash-x),0,0) rotate(0) scale(1)}
+}
+#pF.primo.primo-super-leap .arm.l{animation:primoSuperArmL0962 .65s ease both!important}
+#pF.primo.primo-super-leap .arm.r{animation:primoSuperArmR0962 .65s ease both!important}
+@keyframes primoSuperArmL0962{0%,12%{transform:rotate(9deg)}34%,58%{transform:translate(-7px,-22px) rotate(-70deg)}76%{transform:translate(15px,20px) rotate(68deg)}100%{transform:rotate(9deg)}}
+@keyframes primoSuperArmR0962{0%,12%{transform:rotate(-13deg)}34%,58%{transform:translate(7px,-22px) rotate(70deg)}76%{transform:translate(-15px,20px) rotate(-68deg)}100%{transform:rotate(-13deg)}}
+.primo-smash-impact{position:absolute;z-index:38;width:104px;height:38px;border-radius:50%;border:5px solid rgba(255,220,126,.94);background:radial-gradient(ellipse,rgba(255,245,195,.62),rgba(255,190,55,.18) 42%,transparent 72%);box-shadow:0 0 30px rgba(255,208,90,.72),inset 0 0 20px rgba(255,235,161,.52);pointer-events:none;animation:primoImpact0962 .5s ease-out forwards}
+.primo-smash-impact:before,.primo-smash-impact:after{content:"";position:absolute;left:50%;top:50%;width:8px;height:54px;background:linear-gradient(#fff1ae,#d99a28);box-shadow:0 0 12px rgba(255,215,112,.7);transform-origin:50% 100%}
+.primo-smash-impact:before{transform:translate(-50%,-95%) rotate(-58deg)}
+.primo-smash-impact:after{transform:translate(-50%,-95%) rotate(58deg)}
+@keyframes primoImpact0962{0%{opacity:0;transform:scale(.25)}22%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.05)}}
+#arena.primo-super-impact{animation:primoArenaImpact0962 .28s linear!important}
+@keyframes primoArenaImpact0962{20%{transform:translate3d(-5px,2px,0);filter:brightness(1.18)}45%{transform:translate3d(5px,-2px,0)}70%{transform:translate3d(-3px,1px,0)}100%{transform:none;filter:none}}
+
+@media(max-width:700px){#home .fighter-preview{transform:scale(1.28)!important}.boss-phase-hud{width:155px!important;right:8px!important;left:auto!important;transform:none!important}.boss-phase-hud span{display:none!important}}
+@media(prefers-reduced-motion:reduce){#pF.primo.primo-super-leap{animation-duration:.28s!important}.primo-smash-impact,#arena.primo-super-impact{animation-duration:.2s!important}}

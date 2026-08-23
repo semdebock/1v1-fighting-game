@@ -1,0 +1,16 @@
+const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'../..');
+const boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8');
+const core=fs.readFileSync(path.join(root,'app/core/core-runtime-v0958.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'update-v0962.css'),'utf8');
+const ui=fs.readFileSync(path.join(root,'update-v0962.js'),'utf8');
+const transform=fs.readFileSync(path.join(root,'build/v0962/transform-v0962.js'),'utf8');
+for(const marker of ["const BUILD='0.9.6.2'","const ASSET='0962'","const SAVE_KEY='fightArenaV08'","'update-v0962.js'"])if(!boot.includes(marker))throw new Error('v0.9.6.2 bootstrap marker missing: '+marker);
+for(const marker of ['primo-super-leap','PRIMO SMASH!','primo-smash-impact',"name==='El Primo'"])if(!core.includes(marker))throw new Error('v0.9.6.2 Primo core marker missing: '+marker);
+for(const marker of ['body:has(#fight.active)','#fight.active{height:calc(100dvh - 60px)','primoSuperLeap0962','transform:scale(1.85)','boss-phase-hud'])if(!css.includes(marker))throw new Error('v0.9.6.2 CSS marker missing: '+marker);
+for(const marker of ['v0.9.6.2','Full Fight Fits On One Screen','True Primo Smash Super','Much Larger Fighter Preview'])if(!ui.includes(marker))throw new Error('v0.9.6.2 update log marker missing: '+marker);
+for(const marker of ['El Primo super branch','Primo impact cleanup','Primo leap cleanup'])if(!transform.includes(marker))throw new Error('v0.9.6.2 transform marker missing: '+marker);
+for(const forbidden of ["localStorage.removeItem('fightArenaV08')",'fightArenaV0962'])if(core.includes(forbidden)||ui.includes(forbidden))throw new Error('save compatibility regression: '+forbidden);
+for(const stable of ["name:'Doctor Octopus'",'FightArenaTrainingControls','punisherUnlockShown',"name:'Ultron'", "name:'Prowler'"])if(!core.includes(stable))throw new Error('protected combat marker missing: '+stable);
+console.log('v0.9.6.2 fullscreen + Primo super checks passed');

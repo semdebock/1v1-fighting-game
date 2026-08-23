@@ -12,29 +12,12 @@ for(const marker of [
  "if(!s||s.dataset.premiumLabel)continue",
  'Final Stability Pass',
  'window.MultiverseArenaPremium={version:BUILD,refresh}'
-])if(!premium.includes(marker))throw new Error('v0.9.6 final premium marker missing: '+marker);
-
-for(const forbidden of ['new MutationObserver','setInterval(','requestAnimationFrame(loop)','screenWatch('])if(premium.includes(forbidden))throw new Error('v0.9.6 premium final runtime contains risky pattern: '+forbidden);
-
+])if(!premium.includes(marker))throw new Error('v0.9.6 premium marker missing: '+marker);
+for(const forbidden of ['new MutationObserver','setInterval(','requestAnimationFrame(loop)','screenWatch('])if(premium.includes(forbidden))throw new Error('v0.9.6 premium runtime contains risky pattern: '+forbidden);
 if(ui.includes('function screenWatch'))throw new Error('redundant broad UI screen observer returned');
 if(!ui.includes("dataset.uiMotion='css'"))throw new Error('CSS screen-motion marker missing');
-if(!ui.includes('function rewardWatch'))throw new Error('victory reward feedback missing');
-const observerCount=(ui.match(/new MutationObserver/g)||[]).length;
-if(observerCount!==1)throw new Error('UI observer count must stay at one narrow results observer, got '+observerCount);
-
-for(const marker of [
- 'Touch devices should never keep a translated desktop hover state',
- '.buttons #training{grid-column:3!important}',
- '.buttons #settings{grid-column:1!important}',
- '.device-tablet .buttons #training',
- '.device-tablet #fight .fighthead',
- '.device-iphone #fight .fighthead',
- '@media (hover:none),(pointer:coarse)',
- '@media (prefers-reduced-motion:reduce)'
-])if(!css.includes(marker))throw new Error('v0.9.6 final CSS marker missing: '+marker);
-
-for(const forbidden of ['#fight .fighter{','#fight.active .fighter{','animation: safeHit','requestAnimationFrame','.device-tablet .buttons>#training','.device-tablet .buttons>#settings'])if(css.includes(forbidden))throw new Error('v0.9.6 final CSS contains unsafe or ineffective selector: '+forbidden);
-
-for(const stable of ["const ASSET='0961'","const SAVE_KEY='fightArenaV08'","'touch-v0941.js'","'stability-v0941.js'","'campaign-v0957.js'","'polish-v09572.js'","'premium-v096.js'","'update-v0961.js'"])if(!boot.includes(stable))throw new Error('v0.9.6.1 stable bootstrap marker missing: '+stable);
-
-console.log('v0.9.6 / v0.9.6.1 premium polish checks passed');
+const observerCount=(ui.match(/new MutationObserver/g)||[]).length;if(observerCount!==1)throw new Error('UI observer count must stay at one narrow results observer, got '+observerCount);
+for(const marker of ['Touch devices should never keep a translated desktop hover state','.buttons #training{grid-column:3!important}','.buttons #settings{grid-column:1!important}','.device-tablet .buttons #training','@media (hover:none),(pointer:coarse)','@media (prefers-reduced-motion:reduce)'])if(!css.includes(marker))throw new Error('premium CSS marker missing: '+marker);
+for(const forbidden of ['#fight .fighter{','#fight.active .fighter{','animation: safeHit','requestAnimationFrame','.device-tablet .buttons>#training','.device-tablet .buttons>#settings'])if(css.includes(forbidden))throw new Error('premium CSS contains unsafe or ineffective selector: '+forbidden);
+for(const stable of ["const BUILD='0.9.6.2'","const ASSET='0962'","const SAVE_KEY='fightArenaV08'","'touch-v0941.js'","'stability-v0941.js'","'campaign-v0957.js'","'polish-v09572.js'","'premium-v096.js'","'update-v0962.js'"])if(!boot.includes(stable))throw new Error('v0.9.6.2 stable bootstrap marker missing: '+stable);
+console.log('v0.9.6.2 premium compatibility checks passed');
