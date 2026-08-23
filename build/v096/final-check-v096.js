@@ -8,7 +8,7 @@ const boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8');
 
 for(const marker of [
  "const BUILD='0.9.6'",
- "const FINAL_STYLE='premium-v096-final.css?v=096f'",
+ "const FINAL_STYLE='premium-v096-final.css?v=096f2'",
  "if(!s||s.dataset.premiumLabel)continue",
  'Final Stability Pass',
  'window.MultiverseArenaPremium={version:BUILD,refresh}'
@@ -35,6 +35,6 @@ for(const marker of [
 
 for(const forbidden of ['#fight .fighter{','#fight.active .fighter{','animation: safeHit','requestAnimationFrame','.device-tablet .buttons>#training','.device-tablet .buttons>#settings'])if(css.includes(forbidden))throw new Error('v0.9.6 final CSS contains unsafe or ineffective selector: '+forbidden);
 
-for(const stable of ["const SAVE_KEY='fightArenaV08'","'touch-v0941.js'","'stability-v0941.js'","'campaign-v0957.js'","'polish-v09572.js'","'premium-v096.js'"])if(!boot.includes(stable))throw new Error('v0.9.6 stable bootstrap marker missing: '+stable);
+for(const stable of ["const ASSET='096f2'","const SAVE_KEY='fightArenaV08'","'touch-v0941.js'","'stability-v0941.js'","'campaign-v0957.js'","'polish-v09572.js'","'premium-v096.js'"])if(!boot.includes(stable))throw new Error('v0.9.6 stable bootstrap marker missing: '+stable);
 
 console.log('v0.9.6 final premium polish checks passed');

@@ -2,7 +2,7 @@
 (()=>{
 'use strict';
 const BUILD='0.9.6';
-const ASSET='096';
+const ASSET='096f2';
 const SAVE_KEY='fightArenaV08';
 const CORE='app/core/core-runtime-v0958.js';
 const RUNTIME=['device-v092.js','touch-v0941.js','stability-v0941.js','campaign-v0957.js','ui-v09571.js','polish-v09572.js','premium-v096.js'];
