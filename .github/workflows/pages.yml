@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.6.5 Villain Gauntlet Focus
+      - name: Validate v0.9.6.6 Gauntlet Navigator
         run: |
           node --check build/v094/transform-v094.js
           node --check build/v0941/transform-v0941.js
@@ -50,12 +50,14 @@ jobs:
           node --check build/v0963/release-check-v0963.js
           node --check build/v0964/release-check-v0964.js
           node --check build/v0965/release-check-v0965.js
+          node --check build/v0966/release-check-v0966.js
           node --check app/core/bootstrap-v096.js
           node --check premium-v096.js
           node --check update-v0962.js
           node --check update-v0963.js
           node --check update-v0964.js
           node --check update-v0965.js
+          node --check update-v0966.js
           node --check campaign-v0957.js
           node --check ui-v09571.js
           node --check polish-v09572.js
@@ -72,7 +74,7 @@ jobs:
           node build/v096/presentation-check-v096.js
           node build/v096/final-check-v096.js
           node build/v0964/release-check-v0964.js
-          node build/v0965/release-check-v0965.js
+          node build/v0966/release-check-v0966.js
           node build/v096/patch-index-v096.js
           node build/v096/patch-index-v096.js
           test -s index.html
@@ -89,38 +91,42 @@ jobs:
           test -s update-v0964.js
           test -s update-v0965.css
           test -s update-v0965.js
+          test -s update-v0966.css
+          test -s update-v0966.js
           test -s CORE_ARCHITECTURE.md
-          grep -q "Multiverse Arena v0.9.6.5 — Villain Gauntlet Focus" index.html
-          grep -q "UPDATE LOG  •  v0.9.6.5" index.html
-          ! grep -Eq "v0\.9\.6\.5\.[0-9]" index.html
-          grep -q "premium-v096.css?v=0965" index.html
-          grep -q "app/core/bootstrap-v096.js?v=0965" index.html
+          grep -q "Multiverse Arena v0.9.6.6 — Gauntlet Navigator" index.html
+          grep -q "UPDATE LOG  •  v0.9.6.6" index.html
+          ! grep -Eq "v0\.9\.6\.6\.[0-9]" index.html
+          grep -q "premium-v096.css?v=0966" index.html
+          grep -q "app/core/bootstrap-v096.js?v=0966" index.html
           grep -q "VILLAIN GAUNTLET" index.html
-          grep -q "const BUILD='0.9.6.5'" app/core/bootstrap-v096.js
-          grep -q "const ASSET='0965'" app/core/bootstrap-v096.js
+          grep -q "const BUILD='0.9.6.6'" app/core/bootstrap-v096.js
+          grep -q "const ASSET='0966'" app/core/bootstrap-v096.js
           grep -q "const SAVE_KEY='fightArenaV08'" app/core/bootstrap-v096.js
           grep -q "core-runtime-v0958.js" app/core/bootstrap-v096.js
           grep -q "update-v0962.js" app/core/bootstrap-v096.js
           grep -q "update-v0963.js" app/core/bootstrap-v096.js
           grep -q "update-v0964.js" app/core/bootstrap-v096.js
-          grep -q "update-v0965.js" app/core/bootstrap-v096.js
-          grep -q "window.MultiverseArenaUpdate0965" update-v0965.js
-          grep -q "function renderFocus" update-v0965.js
-          grep -q "ONE THREAT AT A TIME" update-v0965.js
-          grep -q "CLASSIFIED" update-v0965.js
-          grep -q "Gauntlet Focus • Camera Slides • Classified Threats" update-v0965.js
-          grep -q "gauntlet-current-v0965" update-v0965.css
-          grep -q "gauntlet-next-v0965" update-v0965.css
-          grep -q "gauntletCameraForward0965" update-v0965.css
-          grep -q "prefers-reduced-motion" update-v0965.css
+          grep -q "update-v0966.js" app/core/bootstrap-v096.js
+          ! grep -q "'update-v0965.js'" app/core/bootstrap-v096.js
+          grep -q "window.MultiverseArenaUpdate0966" update-v0966.js
+          grep -q "function renderNavigator" update-v0966.js
+          grep -q "function phaseAccessible" update-v0966.js
+          grep -q "SWIPE TO CHOOSE" update-v0966.js
+          grep -q "CLASSIFIED THREAT" update-v0966.js
+          grep -q "Phase Tabs • Swipe Villains • Smart Target Focus" update-v0966.js
+          grep -q "gauntlet-phase-tabs-v0966" update-v0966.css
+          grep -q "gauntlet-carousel-v0966" update-v0966.css
+          grep -q "scroll-snap-type:x mandatory" update-v0966.css
+          grep -q "prefers-reduced-motion" update-v0966.css
           grep -q "const ownsRelease=" premium-v096.js
           grep -q "const ownsRelease=" update-v0962.js
           grep -q "const ownsRelease=" update-v0963.js
           grep -q "const ownsRelease=" update-v0964.js
           ! grep -q "new MutationObserver" premium-v096.js
-          ! grep -q "new MutationObserver" update-v0965.js
-          ! grep -q "setInterval(" update-v0965.js
-          ! grep -q "requestAnimationFrame(loop)" update-v0965.js
+          ! grep -q "new MutationObserver" update-v0966.js
+          ! grep -q "setInterval(" update-v0966.js
+          ! grep -q "requestAnimationFrame(loop)" update-v0966.js
           grep -q "primo-super-leap" app/core/core-runtime-v0958.js
           grep -q "PRIMO SMASH!" app/core/core-runtime-v0958.js
           grep -q "primo-smash-impact" app/core/core-runtime-v0958.js
@@ -135,13 +141,13 @@ jobs:
           grep -q "touchstart" touch-v0941.js
           grep -q "multiTouch:true" touch-v0941.js
 
-      - name: Persist v0.9.6.5 release artifacts
+      - name: Persist v0.9.6.6 release artifacts
         run: |
           if [ -n "$(git status --porcelain -- index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json)" ]; then
             git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
             git add index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json
-            git commit -m "Release Multiverse Arena v0.9.6.5 Villain Gauntlet Focus [skip ci]"
+            git commit -m "Release Multiverse Arena v0.9.6.6 Gauntlet Navigator [skip ci]"
             git push
           fi
 
