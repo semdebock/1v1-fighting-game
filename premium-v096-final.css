@@ -8,6 +8,11 @@ html[data-presentation="premium-v096"]{color-scheme:dark}
 button:focus-visible,input:focus-visible{outline:2px solid var(--p-gold2)!important;outline-offset:3px!important}
 button:disabled{transform:none!important}
 
+/* The TRAINING / SETTINGS buttons live inside a display:contents wrapper.
+   Target descendants rather than direct children so their grid placement actually applies. */
+.buttons #training{grid-column:3!important}
+.buttons #settings{grid-column:1!important}
+
 /* Touch devices should never keep a translated desktop hover state after a tap. */
 @media (hover:none),(pointer:coarse){
  button:not(:disabled):hover,.primary:hover,button.primary:hover,.card:hover,.skin-card:hover,.campaign-node:hover{transform:none!important}
@@ -23,7 +28,7 @@ button:disabled{transform:none!important}
 .device-tablet .latest-stat{grid-column:span 2}
 .device-tablet .buttons{grid-template-columns:1.35fr 1fr!important}
 .device-tablet .buttons>.primary,.device-tablet .buttons>#updates{grid-column:1/-1!important}
-.device-tablet .buttons>#training,.device-tablet .buttons>#settings,.device-tablet .buttons>#gallery,.device-tablet .buttons>#daily{grid-column:auto!important}
+.device-tablet .buttons #training,.device-tablet .buttons #settings,.device-tablet .buttons>#gallery,.device-tablet .buttons>#daily{grid-column:auto!important}
 
 .device-tablet #fight .fighthead,.device-tablet #fight .fighttop,.device-tablet #fight .specialrow,.device-tablet #fight .boss-phase-hud,.device-tablet #fight .actions button,.device-tablet #fight .hero-actions button{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 .device-tablet #fight .arena{height:min(43vw,440px)!important;box-shadow:0 20px 48px rgba(0,0,0,.44),inset 0 1px rgba(255,255,255,.035)!important}
@@ -44,6 +49,10 @@ button:disabled{transform:none!important}
  .changelog{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 
+@media (max-width:900px){
+ .buttons #training,.buttons #settings{grid-column:auto!important}
+}
+
 /* Compact phone finish. */
 @media (max-width:700px){
  .premium-environment{background:linear-gradient(180deg,#06080d,#030407)!important}
@@ -51,6 +60,10 @@ button:disabled{transform:none!important}
  .premium-orb{opacity:.18!important}
  .hero-dashboard{box-shadow:0 14px 36px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.035)!important}
  .result-actions button,#results>button{width:100%!important;min-width:0!important}
+}
+
+@media (max-width:470px){
+ .buttons #training,.buttons #settings{grid-column:1!important}
 }
 
 @media (prefers-reduced-motion:reduce){
