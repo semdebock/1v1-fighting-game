@@ -6,6 +6,7 @@ const builder=fs.readFileSync(path.join(root,'build/v0958/build-core-v0958.js'),
 const transform=fs.readFileSync(path.join(root,'build/v09751/transform-v09751.js'),'utf8');
 const update=fs.readFileSync(path.join(root,'update-v09751.js'),'utf8');
 const update973=fs.readFileSync(path.join(root,'update-v0973.js'),'utf8');
+const update975=fs.readFileSync(path.join(root,'update-v0975.js'),'utf8');
 const css=fs.readFileSync(path.join(root,'update-v09751.css'),'utf8');
 const campaign=fs.readFileSync(path.join(root,'campaign-v097.js'),'utf8');
 for(const m of ["const BUILD='0.9.7.5.1'","const ASSET='09751'","const SAVE_KEY='fightArenaV08'","'update-v09751.js'",'core-runtime-v0958.js'])if(!boot.includes(m))throw new Error('v0.9.7.5.1 bootstrap marker missing '+m);
@@ -15,6 +16,7 @@ for(const m of ['fighterDisplayName','FightArenaNameControls','equippedDisplaySk
 if(core.includes('while(save.xp>=100){save.xp-=100;save.lv++;save.coins+=150;save.gems+=5}'))throw new Error('old level-up Diamond grant returned');
 for(const m of ['card?.dataset?.fighterName','FightArenaNameControls?.stats?.(name)','quick.innerHTML=`<span><small>HP</small><b>${stats.hp}</b>'])if(!update973.includes(m))throw new Error('equipped variant quick-stat compatibility marker missing '+m);
 for(const m of ['syncFighterCards','card.dataset.fighterName','names.display?.(hero)','names.stats?.(hero)','vals[0].textContent=stats.hp','vals[1].textContent=stats.power','vals[2].textContent=stats.speed'])if(!update.includes(m))throw new Error('v0.9.7.5.1 fighter-card identity/stat marker missing '+m);
+for(const m of ['baseName=card.dataset.fighterName||visibleName','chars[baseName]?[baseName,chars[baseName]]','card.dataset.fighterName=hero'])if(!update975.includes(m))throw new Error('shop skin-name compatibility marker missing '+m);
 for(const m of ["Sabretooth:{lesson:'SURVIVE THE HUNT'", "reward:'950 🪙 • 185 XP'", "reward:'1100 🪙 • 210 XP'", "reward:'1300 🪙 • 240 XP'", "reward:'1450 🪙 • 260 XP'", "reward:'1900 🪙 • 340 XP • 15 💎'", "reward:'1400 🪙 • 260 XP • 10 💎'", "reward:'600 🪙 • 150 XP • 5 💎'", "reward:'500 🪙 • 100 XP • 5 💎'"])if(!campaign.includes(m))throw new Error('boss-only campaign reward marker missing '+m);
 for(const forbidden of ["reward:'950 🪙 • 185 XP • 3 💎'","reward:'1100 🪙 • 210 XP • 4 💎'","reward:'1300 🪙 • 240 XP • 5 💎'","reward:'1450 🪙 • 260 XP • 6 💎'"])if(campaign.includes(forbidden))throw new Error('non-boss campaign Diamond reward remains '+forbidden);
 for(const m of ['.fighter.moonknight','content:"☾"','shadowed mask','left:50%!important','purchase-confirm-preview-v0975 .fighter.ironman.skin-iron-hulkbuster','.device-iphone #chars','overflow-x:hidden!important','grid-template-columns:1fr!important'])if(!css.includes(m))throw new Error('v0.9.7.5.1 visual/audit CSS marker missing '+m);
