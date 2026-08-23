@@ -41,7 +41,7 @@ function stabilizeResultActions(){
 function releaseTransitionLock(){const next=$('#continue');if(!next)return;delete next.dataset.transitioning;if(!$('#results')?.classList.contains('active'))next.disabled=false}
 function wire(){
  if(wired)return;wired=true;stabilizeResultActions();
- $('#continue')?.addEventListener('click',()=>{const next=$('#continue');if(next)next.dataset.transitioning='1';setTimeout(()=>{releaseTransitionLock();if($('#levels')?.classList.contains('active'))window.MultiverseArenaUpdate097?.renderNavigator?.({autoTarget:true});brand();cleanUpdateLog()},460)});
+ $('#continue')?.addEventListener('click',()=>{const next=$('#continue');if(next)next.dataset.transitioning='1';setTimeout(()=>{releaseTransitionLock();brand();cleanUpdateLog()},460)});
  $('#rematch')?.addEventListener('click',()=>setTimeout(()=>{releaseTransitionLock();brand()},380));
  $('#menu')?.addEventListener('click',()=>setTimeout(()=>{releaseTransitionLock();brand()},80));
  $('#play')?.addEventListener('click',()=>setTimeout(()=>{brand();cleanUpdateLog()},180));
