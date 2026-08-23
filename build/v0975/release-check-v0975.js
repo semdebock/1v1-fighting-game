@@ -6,7 +6,9 @@ const update=fs.readFileSync(path.join(root,'update-v0975.js'),'utf8');
 const css=fs.readFileSync(path.join(root,'update-v0975.css'),'utf8');
 const update973=fs.readFileSync(path.join(root,'update-v0973.js'),'utf8');
 const update9741=fs.readFileSync(path.join(root,'update-v09741.js'),'utf8');
-for(const m of ["const BUILD='0.9.7.5'","const ASSET='0975'","const SAVE_KEY='fightArenaV08'","'update-v0975.js'",'core-runtime-v0958.js'])if(!boot.includes(m))throw new Error('v0.9.7.5 bootstrap marker missing '+m);
+for(const m of ["const SAVE_KEY='fightArenaV08'","'update-v0975.js'",'core-runtime-v0958.js'])if(!boot.includes(m))throw new Error('v0.9.7.5 compatibility bootstrap marker missing '+m);
+if(!/const BUILD='0\.9\.7\.(?:5(?:\.\d+)*|[6-9](?:\.\d+)*|\d{2,}(?:\.\d+)*)'/.test(boot))throw new Error('v0.9.7.5 compatibility requires current 0.9.7.5+ bootstrap');
+if(!/const ASSET='097(?:5\d*|[6-9]\d*)'/.test(boot))throw new Error('v0.9.7.5 compatibility requires current 0975+ asset');
 for(const m of ['window.MultiverseArenaUpdate0975','fighter-shop-action-v0975','skin-shop-action-v0975','purchase-confirm-v0975','openConfirm','interceptLegacyPurchase','runUnderlying','Every currency purchase now requires a clear confirmation','const ownsRelease='])if(!update.includes(m))throw new Error('v0.9.7.5 shop runtime marker missing '+m);
 for(const m of ['shop-toolbar-v0975','fighter-shop-action-v0975','skin-shop-action-v0975','purchase-confirm-v0975','purchase-confirm-card-v0975','purchase-price-v0975','purchase-actions-v0975','purchase-open-v0975','prefers-reduced-motion'])if(!css.includes(m))throw new Error('v0.9.7.5 shop CSS marker missing '+m);
 for(const m of ['#charAction','#skinAction','BUY\\s*•','purchaseBypass','stopImmediatePropagation'])if(!update.includes(m))throw new Error('purchase confirmation interception marker missing '+m);
@@ -14,4 +16,4 @@ for(const m of ['fighter-quick-action-v0973','decorateCards','quickEquip'])if(!u
 for(const m of ['restoreRematch','rematchWired09741','const ownsRelease='])if(!update9741.includes(m))throw new Error('protected v0.9.7.4.1 Rematch marker missing '+m);
 for(const m of ['DAILY_REWARD_COINS=1250','DAILY_COOLDOWN_MS=24*60*60*1000',"id:'iron-hulkbuster'",'VERONICA CRASHDOWN','mystiqueTransform','deadpoolLastStand','magnetoMaster','primo-super-leap','punisherUnlockShown'])if(!core.includes(m))throw new Error('protected gameplay marker missing '+m);
 for(const forbidden of ['localStorage.removeItem(\'fightArenaV08\')','fightArenaV0975','new MutationObserver','requestAnimationFrame(loop)','setInterval('])if(update.includes(forbidden))throw new Error('unsafe v0.9.7.5 runtime marker '+forbidden);
-console.log('v0.9.7.5 Collection Shop + Purchase Confirmation checks passed');
+console.log('v0.9.7.5 Collection Shop + Purchase Confirmation compatibility checks passed');
