@@ -5,6 +5,7 @@ const BUILD='0.9.6';
 const FINAL_STYLE='premium-v096-final.css?v=096f2';
 const $=(s,r=document)=>r.querySelector(s);
 const all=(s,r=document)=>[...r.querySelectorAll(s)];
+const ownsRelease=()=>{const v=window.MultiverseArenaRuntime?.version;return !v||v===BUILD};
 
 function finalStyle(){
  if($('#premium096FinalStyle'))return;
@@ -37,6 +38,7 @@ function screenLabels(){
  for(const [id,label] of Object.entries(labels)){const s=$('#'+id);if(!s||s.dataset.premiumLabel)continue;s.dataset.premiumLabel=label}
 }
 function updateLog(){
+ if(!ownsRelease())return;
  const box=$('#updatesScreen .changelog');if(!box||box.querySelector('.premium-096'))return;
  const items=[
   ['◈','Premium Design System','Every major screen now shares one cinematic design language: obsidian surfaces, champagne-metal accents, sharper hierarchy and consistent spacing.'],
@@ -54,7 +56,7 @@ function updateLog(){
  const title=$('#updatesScreen .panel>h2');if(title)title.textContent='BUILT TO FEEL EXPENSIVE.';
 }
 function brand(){
- document.documentElement.dataset.presentation='premium-v096';
+ if(!ownsRelease())return;
  document.title='Multiverse Arena v0.9.6 — Premium Presentation';
  all('.brand .tag').forEach(x=>x.textContent='v0.9.6');
  const updates=$('#updates');if(updates)updates.textContent='UPDATE LOG  •  v0.9.6';
@@ -63,7 +65,7 @@ function brand(){
  const chooser=$('#deviceChooser .eyebrow');if(chooser)chooser.textContent='MULTIVERSE ARENA • v0.9.6';
  const pause=$('#pauseOverlay .eyebrow');if(pause)pause.textContent='MULTIVERSE ARENA';
 }
-function refresh(){finalStyle();brand();roles();homeDetails();screenLabels();updateLog()}
+function refresh(){document.documentElement.dataset.presentation='premium-v096';finalStyle();roles();homeDetails();screenLabels();brand();updateLog()}
 function init(){environment();refresh();window.MultiverseArenaPremium={version:BUILD,refresh}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 addEventListener('fightarena-ready',()=>setTimeout(()=>window.MultiverseArenaPremium?.refresh(),80),{once:true});
