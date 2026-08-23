@@ -6,9 +6,9 @@ const core=fs.readFileSync(path.join(root,'app/core/core-runtime-v0958.js'),'utf
 const transform=fs.readFileSync(path.join(root,'build/v0973/transform-v0973.js'),'utf8');
 const update=fs.readFileSync(path.join(root,'update-v0973.js'),'utf8');
 const css=fs.readFileSync(path.join(root,'update-v0973.css'),'utf8');
-/* v0.9.7.3 is retained as Collection + 24H Daily compatibility inside newer releases. */
+/* v0.9.7.3 is retained as Collection + 24H Daily compatibility inside newer releases, including nested hotfix versions. */
 for(const marker of ["const SAVE_KEY='fightArenaV08'","'update-v0973.js'",'core-runtime-v0958.js'])if(!boot.includes(marker))throw new Error('v0.9.7.3 compatibility bootstrap marker missing: '+marker);
-if(!/const BUILD='0\.9\.7\.(?:3|[4-9]|\d{2,})'/.test(boot))throw new Error('v0.9.7.3 compatibility requires current 0.9.7.3+ bootstrap');
+if(!/const BUILD='0\.9\.7\.(?:3|[4-9]|\d{2,})(?:\.\d+)*'/.test(boot))throw new Error('v0.9.7.3 compatibility requires current 0.9.7.3+ bootstrap');
 if(!/const ASSET='097(?:3|[4-9]|\d{2,})'/.test(boot))throw new Error('v0.9.7.3 compatibility requires current 0973+ asset token');
 for(const marker of ['DAILY_REWARD_COINS=1250','DAILY_COOLDOWN_MS=24*60*60*1000','dailyClaimAt:0','claimDailyReward','FightArenaDailyControls','dailyTimeText','fightarena-daily-updated'])if(!core.includes(marker))throw new Error('daily reward marker missing from generated core: '+marker);
 for(const marker of ['legacy daily migration','24 hour daily claim handler','daily public control bridge'])if(!transform.includes(marker))throw new Error('v0.9.7.3 transform marker missing: '+marker);
