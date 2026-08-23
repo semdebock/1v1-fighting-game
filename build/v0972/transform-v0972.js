@@ -27,8 +27,8 @@ return function transformV0972(code){
  rep("F.eh=42;deadpoolLastStand();", "F.eh=36;deadpoolLastStand();", 'Deadpool Last Stand health');
  rep("toast('DEADPOOL • LAST STAND • 42 HP')", "toast('DEADPOOL • LAST STAND • 36 HP')", 'Deadpool Last Stand label');
 
- rep("damagePlayer(22,true,true)", "damagePlayer(20,true,true)", 'Juggernaut Helmet Bash damage');
- rep("damagePlayer(24,true,true)", "damagePlayer(22,true,true)", 'Juggernaut Ground Breaker damage');
+ rep("later(()=>{if(F&&F.ex-F.px<19)damagePlayer(22,true,true)},260)", "later(()=>{if(F&&F.ex-F.px<19)damagePlayer(20,true,true)},260)", 'Juggernaut Helmet Bash damage');
+ rep("later(()=>{if(F&&F.ex-F.px<43&&F.jump<22)damagePlayer(24,true,true)},430)", "later(()=>{if(F&&F.ex-F.px<43&&F.jump<22)damagePlayer(22,true,true)},430)", 'Juggernaut Ground Breaker damage');
  rep("function juggCharge(power=29,label='UNSTOPPABLE CHARGE')", "function juggCharge(power=27,label='UNSTOPPABLE CHARGE')", 'Juggernaut charge damage');
  rep("juggCharge(34,'I’M THE JUGGERNAUT')", "juggCharge(31,'I’M THE JUGGERNAUT')", 'Juggernaut super charge');
  rep("if(F.ex-F.px<28&&F.jump<20)damagePlayer(12,true,true)", "if(F.ex-F.px<28&&F.jump<20)damagePlayer(10,true,true)", 'Juggernaut super quake');
