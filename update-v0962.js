@@ -3,8 +3,10 @@
 'use strict';
 const BUILD='0.9.6.2',ASSET='0962';
 const $=(s,r=document)=>r.querySelector(s);
+const ownsRelease=()=>{const v=window.MultiverseArenaRuntime?.version;return !v||v===BUILD};
 function style(){if($('#update0962Style'))return;const l=document.createElement('link');l.id='update0962Style';l.rel='stylesheet';l.href=`update-v0962.css?v=${ASSET}`;document.head.appendChild(l)}
 function brand(){
+ if(!ownsRelease())return;
  document.title='Multiverse Arena v0.9.6.2 — Fullscreen Fight + Primo Super';
  document.querySelectorAll('.brand .tag').forEach(x=>x.textContent='v0.9.6.2');
  const updates=$('#updates');if(updates)updates.textContent='UPDATE LOG  •  v0.9.6.2';
@@ -15,6 +17,7 @@ function brand(){
 }
 function addLogItem(box,cls,icon,title,text){if(box.querySelector('.'+cls))return;const d=document.createElement('div');d.className='log-item '+cls;d.innerHTML=`<div class="log-icon">${icon}</div><div><b>${title}</b><p>${text}</p></div>`;box.prepend(d)}
 function updateLog(){
+ if(!ownsRelease())return;
  const box=$('#updatesScreen .changelog');if(!box)return;
  addLogItem(box,'update-0962-preview','👤','Much Larger Fighter Preview','The selected fighter on the home screen is significantly larger, especially on iPad, so the character finally fills the showcase card properly.');
  addLogItem(box,'update-0962-fit','📱','Full Fight Fits On One Screen','The iPad combat layout now compresses the header, HUD, special meter and controls so the entire fight stays inside one viewport without scrolling down for buttons.');
