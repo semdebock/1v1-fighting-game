@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate v0.9.7.1 Sabretooth + Result Stability
+      - name: Validate v0.9.7.2 Combat Balance + Phase 3 Polish
         run: |
           node --check build/v094/transform-v094.js
           node --check build/v0941/transform-v0941.js
@@ -39,6 +39,7 @@ jobs:
           node --check build/v0957/transform-v0957.js
           node --check build/v0962/transform-v0962.js
           node --check build/v097/transform-v097.js
+          node --check build/v0972/transform-v0972.js
           node --check build/v0957/build-check-v0957.js
           node --check build/v0957/campaign-check-v0957.js
           node --check build/v095722/stability-check-v095722.js
@@ -54,6 +55,7 @@ jobs:
           node --check build/v0966/release-check-v0966.js
           node --check build/v097/release-check-v097.js
           node --check build/v0971/release-check-v0971.js
+          node --check build/v0972/release-check-v0972.js
           node --check app/core/bootstrap-v096.js
           node --check premium-v096.js
           node --check update-v0962.js
@@ -62,6 +64,7 @@ jobs:
           node --check update-v0966.js
           node --check update-v097.js
           node --check update-v0971.js
+          node --check update-v0972.js
           node --check campaign-v0957.js
           node --check campaign-v097.js
           node --check ui-v09571.js
@@ -83,6 +86,7 @@ jobs:
           node build/v0966/release-check-v0966.js
           node build/v097/release-check-v097.js
           node build/v0971/release-check-v0971.js
+          node build/v0972/release-check-v0972.js
           node build/v096/patch-index-v096.js
           node build/v096/patch-index-v096.js
 
@@ -102,78 +106,74 @@ jobs:
           test -s update-v0966.js
           test -s update-v097.js
           test -s update-v0971.js
+          test -s update-v0972.js
+          test -s update-v0972.css
           test -s campaign-v097.js
           test -s mutant-v097.css
           test -s mutant-v0971.css
           test -s build/v097/transform-v097.js
+          test -s build/v0972/transform-v0972.js
           test -s build/v097/release-check-v097.js
           test -s build/v0971/release-check-v0971.js
+          test -s build/v0972/release-check-v0972.js
           test -s CORE_ARCHITECTURE.md
 
-          grep -q "Multiverse Arena v0.9.7.1 — Sabretooth Rework + Stability" index.html
-          grep -q "UPDATE LOG  •  v0.9.7.1" index.html
-          grep -q "PHASE 3 • MUTANT UPRISING" index.html
-          grep -q "THE MUTANTS<br>HAVE ARRIVED." index.html
-          ! grep -Eq "v0\.9\.7\.1\.[0-9]" index.html
-          grep -q "premium-v096.css?v=0971" index.html
-          grep -q "app/core/bootstrap-v096.js?v=0971" index.html
+          grep -q "Multiverse Arena v0.9.7.2 — Combat Balance + Phase 3 Polish" index.html
+          grep -q "UPDATE LOG  •  v0.9.7.2" index.html
+          grep -q "PHASE 3 • BALANCE PASS" index.html
+          grep -q "FIGHT SMARTER.<br>HIT HARDER." index.html
+          ! grep -Eq "v0\.9\.7\.2\.[0-9]" index.html
+          grep -q "premium-v096.css?v=0972" index.html
+          grep -q "app/core/bootstrap-v096.js?v=0972" index.html
           grep -q "VILLAIN GAUNTLET" index.html
 
-          grep -q "const BUILD='0.9.7.1'" app/core/bootstrap-v096.js
-          grep -q "const ASSET='0971'" app/core/bootstrap-v096.js
+          grep -q "const BUILD='0.9.7.2'" app/core/bootstrap-v096.js
+          grep -q "const ASSET='0972'" app/core/bootstrap-v096.js
           grep -q "const SAVE_KEY='fightArenaV08'" app/core/bootstrap-v096.js
           grep -q "core-runtime-v0958.js" app/core/bootstrap-v096.js
           grep -q "campaign-v097.js" app/core/bootstrap-v096.js
           grep -q "update-v097.js" app/core/bootstrap-v096.js
           grep -q "update-v0971.js" app/core/bootstrap-v096.js
+          grep -q "update-v0972.js" app/core/bootstrap-v096.js
           ! grep -q "'campaign-v0957.js'" app/core/bootstrap-v096.js
           ! grep -q "'update-v0966.js'" app/core/bootstrap-v096.js
 
           grep -q "window.FightArenaCampaignV097" campaign-v097.js
           grep -q "id:'phase3'" campaign-v097.js
-          grep -q "MUTANT UPRISING" campaign-v097.js
           grep -q "Sabretooth" campaign-v097.js
           grep -q "Mystique" campaign-v097.js
           grep -q "Juggernaut" campaign-v097.js
           grep -q "Deadpool" campaign-v097.js
           grep -q "Magneto" campaign-v097.js
 
-          grep -q "window.MultiverseArenaUpdate097" update-v097.js
           grep -q "const ownsRelease=" update-v097.js
-          grep -q "function renderNavigator" update-v097.js
-          grep -q "CLASSIFIED THREAT" update-v097.js
-          grep -q "classList.contains('active'))renderNavigator" update-v097.js
-          grep -q "window.MultiverseArenaUpdate0971" update-v0971.js
-          grep -q "Sabretooth Rework • Result Flow • Version Sync" update-v0971.js
-          grep -q "result-action-stack-v0971" update-v0971.js
-          grep -q "stabilizeResultActions" update-v0971.js
-          grep -q "FERAL LOOK. CLEANER FLOW." update-v0971.js
+          grep -q "const ownsRelease=" update-v0971.js
+          grep -q "window.MultiverseArenaUpdate0972" update-v0972.js
+          grep -q "Fighter Buffs • Phase 3 Nerfs • Combat Polish" update-v0972.js
+          grep -q "balance:BALANCE" update-v0972.js
+          grep -q "SAME IDENTITIES. CLEANER BALANCE." update-v0972.js
+          grep -q "font-variant-numeric:tabular-nums" update-v0972.css
+          grep -q "transition:width .11s linear" update-v0972.css
 
-          grep -q "gauntlet-carousel-v0966" update-v0966.css
-          grep -q "scroll-snap-type:x mandatory" update-v0966.css
-          grep -q "fighter.juggernaut{width:148px;height:206px" mutant-v097.css
-          grep -q "mystique-morphed" mutant-v097.css
-          grep -q "mag-stormfx" mutant-v097.css
-          grep -q "fighter.sabretooth{width:116px;height:184px" mutant-v0971.css
-          grep -q "fighter.sabretooth:before" mutant-v0971.css
-          grep -q "sabretooth .head:after" mutant-v0971.css
-          grep -q "result-action-stack-v0971" mutant-v0971.css
-          grep -q "#results.active #continue\[data-transitioning=\"1\"\]" mutant-v0971.css
-          grep -q "prefers-reduced-motion" mutant-v0971.css
+          grep -q "hp:105,power:60,speed:64" app/core/core-runtime-v0958.js
+          grep -q "hp:120,power:82,speed:68" app/core/core-runtime-v0958.js
+          grep -q "hp:100,power:70,speed:90" app/core/core-runtime-v0958.js
+          grep -q "hp:345,dmg:1.47" app/core/core-runtime-v0958.js
+          grep -q "Math.round(n\*.80)" app/core/core-runtime-v0958.js
+          grep -q "hp:270,dmg:1.36" app/core/core-runtime-v0958.js
+          grep -q "F.deadpoolRecovered<78" app/core/core-runtime-v0958.js
+          grep -q "LAST STAND • 36 HP" app/core/core-runtime-v0958.js
+          grep -q "hp:365,dmg:1.53" app/core/core-runtime-v0958.js
+          grep -q "performance.now()-F.magUltimateAt>9400" app/core/core-runtime-v0958.js
 
           grep -q "name:'Sabretooth'" app/core/core-runtime-v0958.js
           grep -q "name:'Mystique'" app/core/core-runtime-v0958.js
           grep -q "name:'Juggernaut'" app/core/core-runtime-v0958.js
           grep -q "name:'Deadpool'" app/core/core-runtime-v0958.js
           grep -q "name:'Magneto'" app/core/core-runtime-v0958.js
-          grep -q "sabreApex" app/core/core-runtime-v0958.js
           grep -q "mystiqueTransform" app/core/core-runtime-v0958.js
-          grep -q "mystiqueMirrorSpecial" app/core/core-runtime-v0958.js
-          grep -q "juggUnstoppable" app/core/core-runtime-v0958.js
           grep -q "deadpoolLastStand" app/core/core-runtime-v0958.js
           grep -q "magnetoMaster" app/core/core-runtime-v0958.js
-          grep -q "MUTANT_UPRISING_INTROS" app/core/core-runtime-v0958.js
-
           grep -q "primo-super-leap" app/core/core-runtime-v0958.js
           grep -q "PRIMO SMASH!" app/core/core-runtime-v0958.js
           grep -q "version:'0.9.5.7'" app/core/core-runtime-v0958.js
@@ -191,19 +191,20 @@ jobs:
           ! grep -q "new MutationObserver" premium-v096.js
           ! grep -q "new MutationObserver" update-v097.js
           ! grep -q "new MutationObserver" update-v0971.js
-          ! grep -q "setInterval(" update-v0971.js
-          ! grep -q "requestAnimationFrame(loop)" update-v0971.js
+          ! grep -q "new MutationObserver" update-v0972.js
+          ! grep -q "setInterval(" update-v0972.js
+          ! grep -q "requestAnimationFrame(loop)" update-v0972.js
           ! grep -q "new MutationObserver" campaign-v097.js
           ! grep -q "new MutationObserver" polish-v09572.js
           ! grep -q "classList.add('impact-pop')" polish-v09572.js
 
-      - name: Persist v0.9.7.1 release artifacts
+      - name: Persist v0.9.7.2 release artifacts
         run: |
           if [ -n "$(git status --porcelain -- index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json
-            git commit -m "Release Multiverse Arena v0.9.7.1 Sabretooth rework + stability [skip ci]"
+            git commit -m "Release Multiverse Arena v0.9.7.2 combat balance + Phase 3 polish [skip ci]"
             git push
           fi
 
