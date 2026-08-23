@@ -1,0 +1,17 @@
+const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'../..');
+const boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8');
+const core=fs.readFileSync(path.join(root,'app/core/core-runtime-v0958.js'),'utf8');
+const campaign=fs.readFileSync(path.join(root,'campaign-v0957.js'),'utf8');
+const ui=fs.readFileSync(path.join(root,'update-v0965.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'update-v0965.css'),'utf8');
+const update64=fs.readFileSync(path.join(root,'update-v0964.js'),'utf8');
+for(const marker of ["const BUILD='0.9.6.5'","const ASSET='0965'","const SAVE_KEY='fightArenaV08'","'update-v0965.js'"])if(!boot.includes(marker))throw new Error('v0.9.6.5 bootstrap marker missing: '+marker);
+for(const marker of ['function progression()','function renderFocus','ONE THREAT AT A TIME','CLASSIFIED','???','cameraDirection','Gauntlet Focus • Camera Slides • Classified Threats','window.MultiverseArenaUpdate0965'])if(!ui.includes(marker))throw new Error('v0.9.6.5 runtime marker missing: '+marker);
+for(const marker of ['gauntlet-camera-v0965','gauntlet-current-v0965','gauntlet-next-v0965','gauntletCameraForward0965','prefers-reduced-motion','grid-template-columns:minmax(145px,.72fr) minmax(320px,1.65fr) minmax(145px,.72fr)'])if(!css.includes(marker))throw new Error('v0.9.6.5 CSS marker missing: '+marker);
+for(const forbidden of ['new MutationObserver','setInterval(','requestAnimationFrame(loop)','localStorage.removeItem(\'fightArenaV08\')','fightArenaV0965'])if(ui.includes(forbidden)||css.includes(forbidden))throw new Error('v0.9.6.5 unsafe marker: '+forbidden);
+if(!update64.includes('const ownsRelease='))throw new Error('v0.9.6.4 can overwrite newer release branding');
+for(const stable of ["name:'Doctor Octopus'",'FightArenaTrainingControls','punisherUnlockShown',"name:'Ultron'", "name:'Prowler'",'primo-super-leap','PRIMO SMASH!'])if(!core.includes(stable))throw new Error('protected combat marker missing: '+stable);
+for(const stable of ["phase2Order=['Rhino','Electro','Mysterio','Green Goblin','Doctor Octopus']",'phase2Complete'])if(!campaign.includes(stable))throw new Error('protected campaign progression missing: '+stable);
+console.log('v0.9.6.5 focused Gauntlet checks passed');

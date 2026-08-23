@@ -3,9 +3,11 @@
 'use strict';
 const BUILD='0.9.6.4',ASSET='0964';
 const $=(s,r=document)=>r.querySelector(s);
+const ownsRelease=()=>{const v=window.MultiverseArenaRuntime?.version;return !v||v===BUILD};
 let wired=false,fitTimer=0;
 function style(){if($('#update0964Style'))return;const l=document.createElement('link');l.id='update0964Style';l.rel='stylesheet';l.href=`update-v0964.css?v=${ASSET}`;document.head.appendChild(l)}
 function brand(){
+ if(!ownsRelease())return;
  document.title='Multiverse Arena v0.9.6.4 — iPad Control Fit + UI Audit';
  document.querySelectorAll('.brand .tag').forEach(x=>x.textContent='v0.9.6.4');
  const updates=$('#updates');if(updates)updates.textContent='UPDATE LOG  •  v0.9.6.4';
@@ -47,6 +49,7 @@ function wireFit(){
  document.querySelectorAll('[data-device-mode]').forEach(b=>b.addEventListener('click',()=>queueFit(80),{passive:true}));
 }
 function cleanUpdateLog(){
+ if(!ownsRelease())return;
  const box=$('#updatesScreen .changelog');if(!box)return;
  const releases=[
   ['📐','v0.9.6.4 — Controls Above The Fold','Safari visual-viewport sizing now reserves space for every combat button first. The arena shrinks when needed, so hero abilities no longer fall below the iPad screen.'],

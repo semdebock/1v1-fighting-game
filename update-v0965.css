@@ -1,0 +1,65 @@
+/* Multiverse Arena v0.9.6.5 — Focused Villain Gauntlet */
+
+/* The campaign becomes a calm, zoomed-in three-slot view: previous / current / classified next. */
+#levelCards.gauntlet-focus-v0965{display:block!important;margin:0!important}
+.gauntlet-shell-v0965{position:relative;overflow:hidden;border:1px solid rgba(206,184,126,.22);border-radius:26px;background:linear-gradient(180deg,rgba(13,18,29,.96),rgba(7,10,17,.98));box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 22px 55px rgba(0,0,0,.28);padding:18px}
+.gauntlet-head-v0965{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:12px}
+.gauntlet-head-v0965>div:first-child>span{display:block;color:rgba(215,191,131,.72);font-size:8px;font-weight:950;letter-spacing:.19em}
+.gauntlet-head-v0965 h3{margin:5px 0 0;font-size:clamp(22px,3vw,34px);letter-spacing:-.025em}
+.gauntlet-phase-state-v0965{text-align:right}.gauntlet-phase-state-v0965 b,.gauntlet-phase-state-v0965 small{display:block}.gauntlet-phase-state-v0965 b{font-size:10px;letter-spacing:.12em;color:#e9d9aa}.gauntlet-phase-state-v0965 small{margin-top:4px;color:#8e98aa;font-size:8px;letter-spacing:.08em}
+.gauntlet-progress-v0965{height:5px;border-radius:999px;overflow:hidden;background:#080b11;border:1px solid rgba(255,255,255,.06);margin-bottom:17px}.gauntlet-progress-v0965 i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#9d874e,#d7c180);transition:width .28s ease}
+.gauntlet-camera-window-v0965{overflow:hidden;padding:7px 2px 9px}
+.gauntlet-camera-v0965{display:grid;grid-template-columns:minmax(145px,.72fr) minmax(320px,1.65fr) minmax(145px,.72fr);align-items:stretch;gap:14px;transform:translateZ(0)}
+.gauntlet-threat-v0965{position:relative;min-width:0;min-height:210px;margin:0!important;padding:18px!important;border-radius:20px!important;text-align:left!important;overflow:hidden!important;box-shadow:none!important;transform:none!important}
+.gauntlet-threat-v0965:hover{transform:none!important}
+.gauntlet-threat-v0965 strong,.gauntlet-threat-v0965 small,.gauntlet-threat-v0965 p,.gauntlet-threat-v0965 span{position:relative;z-index:2}
+.gauntlet-threat-v0965 strong{display:block;margin-top:15px;font-size:clamp(20px,2.5vw,31px);line-height:.96;letter-spacing:-.03em}
+.gauntlet-threat-v0965 small{display:block;margin-top:8px;color:#8e99aa;font-size:8px;font-weight:900;letter-spacing:.12em}
+.gauntlet-threat-v0965 p{margin:18px 0 0;color:#a7afbc;font-size:10px;line-height:1.55}
+.gauntlet-role-v0965{display:inline-flex;padding:5px 8px;border-radius:999px;border:1px solid rgba(211,190,132,.26);background:rgba(211,190,132,.06);color:#ddc889;font-size:7px;font-weight:1000;letter-spacing:.14em}
+.gauntlet-current-v0965{min-height:270px!important;border-color:rgba(220,197,137,.58)!important;background:radial-gradient(circle at 50% 18%,rgba(216,192,135,.12),transparent 42%),linear-gradient(180deg,#151923,#0b0f16)!important;box-shadow:inset 0 0 0 1px rgba(216,192,135,.08),0 18px 42px rgba(0,0,0,.28)!important}
+.gauntlet-current-v0965:before{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 0 68%,rgba(216,192,135,.035) 68% 69%,transparent 69%);pointer-events:none}
+.gauntlet-current-v0965 .gauntlet-reward-v0965{display:block;margin-top:18px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);color:#e4ce90;font-size:9px;font-weight:900;letter-spacing:.04em}
+.gauntlet-previous-v0965{align-self:center;min-height:190px!important;opacity:.68;border-color:#2e3745!important;background:linear-gradient(180deg,#0e131c,#090c12)!important}
+.gauntlet-previous-v0965 strong{font-size:18px}.gauntlet-previous-v0965 p{margin-top:14px;color:#8eb69c}.gauntlet-replay-v0965{display:block;margin-top:14px;color:#7d8796;font-size:7px;font-weight:900;letter-spacing:.1em}
+.gauntlet-next-v0965{align-self:center;min-height:190px!important;opacity:.54;border-style:dashed!important;border-color:#343c49!important;background:linear-gradient(180deg,#0c1017,#070a0f)!important;cursor:default!important}
+.gauntlet-next-v0965:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 18px,rgba(255,255,255,.018) 18px 19px);pointer-events:none}
+.gauntlet-next-v0965 strong{font-size:42px;letter-spacing:.08em;color:#707784}.gauntlet-next-v0965 p{color:#707887}.gauntlet-lock-v0965{display:block;margin-top:17px;color:#737c8a;font-size:7px;font-weight:900;letter-spacing:.12em}
+.gauntlet-finish-v0965{align-self:center;display:flex;flex-direction:column;justify-content:center;min-height:190px;border:1px solid rgba(124,179,143,.26);background:linear-gradient(180deg,rgba(20,44,31,.46),rgba(8,16,12,.65));opacity:.75}.gauntlet-finish-v0965 strong{color:#a9dfb9}
+.gauntlet-empty-v0965{visibility:hidden;pointer-events:none}
+.gauntlet-guidance-v0965{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px;margin-top:9px;padding-top:13px;border-top:1px solid rgba(255,255,255,.06)}
+.gauntlet-guidance-v0965 span{color:#d3bd80;font-size:7px;font-weight:1000;letter-spacing:.15em}.gauntlet-guidance-v0965 p{margin:0;color:#7f8998;font-size:9px;line-height:1.45}
+
+/* Camera language: one restrained slide when progression advances. No looping motion. */
+.gauntlet-shell-v0965[data-camera="forward"] .gauntlet-camera-v0965{animation:gauntletCameraForward0965 .42s cubic-bezier(.2,.8,.2,1) both}
+.gauntlet-shell-v0965[data-camera="back"] .gauntlet-camera-v0965{animation:gauntletCameraBack0965 .34s cubic-bezier(.2,.8,.2,1) both}
+@keyframes gauntletCameraForward0965{from{opacity:.62;transform:translateX(34px)}to{opacity:1;transform:translateX(0)}}
+@keyframes gauntletCameraBack0965{from{opacity:.62;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
+
+/* Existing detail panel stays useful, but secondary to the current target. */
+.gauntlet-focus-active-v0965 #levels .campaign-foundation-banner{display:none!important}
+.gauntlet-focus-active-v0965 #levels .profile{max-width:900px;margin:13px auto 0!important}
+.gauntlet-focus-active-v0965 #levels #levelStats{gap:7px!important}
+.gauntlet-focus-active-v0965 #levels #campaignLessonPanel{opacity:.78}
+
+html.device-tablet #levelCards.gauntlet-focus-v0965{max-width:1080px;margin:0 auto!important}
+html.device-tablet .gauntlet-shell-v0965{padding:16px 18px}
+html.device-tablet .gauntlet-camera-v0965{grid-template-columns:minmax(130px,.62fr) minmax(360px,1.75fr) minmax(130px,.62fr);gap:12px}
+html.device-tablet .gauntlet-current-v0965{min-height:285px!important;padding:22px!important}
+html.device-tablet .gauntlet-current-v0965 strong{font-size:34px}
+
+@media(max-width:760px){
+ .gauntlet-shell-v0965{padding:13px;border-radius:20px}
+ .gauntlet-head-v0965{align-items:flex-start}.gauntlet-phase-state-v0965{text-align:right}
+ .gauntlet-camera-v0965{grid-template-columns:72px minmax(0,1fr) 72px;gap:7px}
+ .gauntlet-threat-v0965{padding:12px!important;border-radius:15px!important}
+ .gauntlet-current-v0965{min-height:230px!important}.gauntlet-current-v0965 strong{font-size:24px}
+ .gauntlet-previous-v0965,.gauntlet-next-v0965,.gauntlet-finish-v0965{min-height:160px!important;padding:9px!important}
+ .gauntlet-previous-v0965 strong{font-size:11px;writing-mode:vertical-rl;transform:rotate(180deg);margin:10px auto}.gauntlet-previous-v0965 small,.gauntlet-previous-v0965 p,.gauntlet-replay-v0965{display:none!important}
+ .gauntlet-next-v0965 strong{font-size:24px;text-align:center}.gauntlet-next-v0965 small,.gauntlet-next-v0965 p,.gauntlet-lock-v0965{display:none!important}
+ .gauntlet-guidance-v0965{grid-template-columns:1fr;gap:4px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ .gauntlet-camera-v0965,.gauntlet-progress-v0965 i{animation:none!important;transition:none!important}
+}
