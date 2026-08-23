@@ -24,13 +24,16 @@ if(observerCount!==1)throw new Error('UI observer count must stay at one narrow 
 
 for(const marker of [
  'Touch devices should never keep a translated desktop hover state',
+ '.buttons #training{grid-column:3!important}',
+ '.buttons #settings{grid-column:1!important}',
+ '.device-tablet .buttons #training',
  '.device-tablet #fight .fighthead',
  '.device-iphone #fight .fighthead',
  '@media (hover:none),(pointer:coarse)',
  '@media (prefers-reduced-motion:reduce)'
 ])if(!css.includes(marker))throw new Error('v0.9.6 final CSS marker missing: '+marker);
 
-for(const forbidden of ['#fight .fighter{','#fight.active .fighter{','animation: safeHit','requestAnimationFrame'])if(css.includes(forbidden))throw new Error('v0.9.6 final CSS must stay presentation-only: '+forbidden);
+for(const forbidden of ['#fight .fighter{','#fight.active .fighter{','animation: safeHit','requestAnimationFrame','.device-tablet .buttons>#training','.device-tablet .buttons>#settings'])if(css.includes(forbidden))throw new Error('v0.9.6 final CSS contains unsafe or ineffective selector: '+forbidden);
 
 for(const stable of ["const SAVE_KEY='fightArenaV08'","'touch-v0941.js'","'stability-v0941.js'","'campaign-v0957.js'","'polish-v09572.js'","'premium-v096.js'"])if(!boot.includes(stable))throw new Error('v0.9.6 stable bootstrap marker missing: '+stable);
 
