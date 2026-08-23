@@ -18,7 +18,7 @@ const update975=fs.readFileSync(path.join(root,'update-v0975.js'),'utf8');
 const update9751=fs.readFileSync(path.join(root,'update-v09751.js'),'utf8');
 const update976=fs.readFileSync(path.join(root,'update-v0976.js'),'utf8');
 const campaign97=fs.readFileSync(path.join(root,'campaign-v097.js'),'utf8');
-for(const marker of ["const BUILD='0.9.6'","const FINAL_STYLE='premium-v096-final.css?v=096f2'","if(!s||s.dataset.premiumLabel)continue",'Final Stability Pass','window.MultiverseArenaPremium={version:BUILD,refresh)','const ownsRelease='])if(!premium.includes(marker))throw new Error('v0.9.6 premium marker missing: '+marker);
+for(const marker of ["const BUILD='0.9.6'","const FINAL_STYLE='premium-v096-final.css?v=096f2'","if(!s||s.dataset.premiumLabel)continue",'Final Stability Pass','window.MultiverseArenaPremium={version:BUILD,refresh}','const ownsRelease='])if(!premium.includes(marker))throw new Error('v0.9.6 premium marker missing: '+marker);
 for(const forbidden of ['new MutationObserver','setInterval(','requestAnimationFrame(loop)','screenWatch('])if(premium.includes(forbidden))throw new Error('v0.9.6 premium runtime contains risky pattern: '+forbidden);
 if(ui.includes('function screenWatch'))throw new Error('redundant broad UI screen observer returned');
 if(!ui.includes("dataset.uiMotion='css'"))throw new Error('CSS screen-motion marker missing');
