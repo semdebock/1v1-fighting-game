@@ -25,6 +25,7 @@ jobs:
           node --check build/v09772/release-check-v09772.js
           node --check app/core/bootstrap-v096.js
           node --check update-v09772.js
+          node --check owner-devtools-v09772.js
           node --check update-v09771.js
           node build/v0958/build-core-v0958.js
           node --check app/core/core-runtime-v0958.js
@@ -38,16 +39,17 @@ jobs:
           grep -q "campaignUnlockName=win?campaignNextName(l.name):null" app/core/core-runtime-v0958.js
           grep -q "CODE='OWNERBOARD'" update-v09772.js
           grep -q "OWNER COMMAND CENTER" update-v09772.js
+          grep -q "FIGHT LAUNCHER" owner-devtools-v09772.js
           grep -q "app/core/bootstrap-v096.js?v=09772" index.html
-          grep -q "UPDATE LOG  •  v0.9.7.7.1" index.html
-          ! grep -q "Owner Board • Local Admin Controls" index.html
+          grep -q "UPDATE LOG  •  v0.9.7.7.2" index.html
+          grep -q "Owner Board Rework • Dev Tools • Repo Cleanup" index.html
       - name: Persist v0.9.7.7.2 release artifacts
         run: |
           if [ -n "$(git status --porcelain -- index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json
-            git commit -m "Release Multiverse Arena v0.9.7.7.2 [skip ci]"
+            git commit -m "Release visible Multiverse Arena v0.9.7.7.2 [skip ci]"
             git push
           fi
       - name: Configure Pages
@@ -61,4 +63,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      # Explicit production redeploy trigger: v0.9.7.7.2-ownerboard
+      # Explicit production redeploy trigger: v0.9.7.7.2-visible-ownerboard
