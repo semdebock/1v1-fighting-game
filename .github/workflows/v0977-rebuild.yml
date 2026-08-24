@@ -2,8 +2,7 @@ name: Validate v0.9.7.7 Rebuild
 on:
   push:
     branches: [release/v0.9.7.7-rebuild]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
