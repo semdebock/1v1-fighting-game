@@ -19,77 +19,47 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate v0.9.7.6.1 Interface Repair & Code Cleanup
+      - name: Validate v0.9.7.7 Hero Update + Bug Fixes
         run: |
-          node --check build/v0974/transform-v0974.js
-          node --check build/v09751/transform-v09751.js
-          node --check build/v0976/transform-v0976.js
-          node --check build/v09761/transform-v09761.js
-          node --check build/v0974/release-check-v0974.js
-          node --check build/v09741/release-check-v09741.js
-          node --check build/v0975/release-check-v0975.js
-          node --check build/v09751/release-check-v09751.js
-          node --check build/v0976/release-check-v0976.js
-          node --check build/v09761/release-check-v09761.js
+          node --check build/v0977/transform-v0977.js
+          node --check build/v0977/cleanup-transform-v0977.js
+          node --check build/v0977/patch-index-v0977.js
+          node --check build/v0977/release-check-v0977.js
           node --check build/v0958/build-core-v0958.js
-          node --check build/v096/patch-index-v096.js
           node --check app/core/bootstrap-v096.js
-          node --check update-v0974.js
-          node --check update-v09741.js
-          node --check update-v0975.js
-          node --check update-v09751.js
-          node --check update-v0976.js
-          node --check update-v09761.js
-          node build/v0957/build-check-v0957.js
-          node build/v0957/campaign-check-v0957.js
-          node build/v095722/stability-check-v095722.js
+          node --check update-v0977.js
           node build/v0958/build-core-v0958.js
           node --check app/core/core-runtime-v0958.js
-          node build/v0958/cleanup-check-v0958.js
-          node build/v096/presentation-check-v096.js
-          node build/v096/final-check-v096.js
-          node build/v0964/release-check-v0964.js
-          node build/v0966/release-check-v0966.js
-          node build/v097/release-check-v097.js
-          node build/v0971/release-check-v0971.js
-          node build/v0972/release-check-v0972.js
-          node build/v0973/release-check-v0973.js
-          node build/v0974/release-check-v0974.js
-          node build/v09741/release-check-v09741.js
-          node build/v0975/release-check-v0975.js
-          node build/v09751/release-check-v09751.js
-          node build/v0976/release-check-v0976.js
-          node build/v09761/release-check-v09761.js
-          node build/v096/patch-index-v096.js
-          test -s update-v09761.js
-          test -s update-v09761.css
-          test -s build/v09761/transform-v09761.js
-          test -s build/v09761/release-check-v09761.js
-          grep -q "Multiverse Arena v0.9.7.6.1 — Interface Repair & Code Cleanup" index.html
-          grep -q "app/core/bootstrap-v096.js?v=09761" index.html
-          grep -q "const BUILD='0.9.7.6.1'" app/core/bootstrap-v096.js
-          grep -q "const ASSET='09761'" app/core/bootstrap-v096.js
-          grep -q "update-v09761.js" app/core/bootstrap-v096.js
-          grep -q "boss-protocol-v09761" update-v09761.js
-          grep -q "boss-phase-indicator-v0976{display:none" update-v09761.css
-          grep -q "fighter.captain:after{display:none" update-v09761.css
-          grep -q "rank-fighters-grid" update-v09761.css
-          grep -q "campaignUnlockName=win?campaignNextName(l.name):null" app/core/core-runtime-v0958.js
-          grep -q "NEXT FIGHT UNLOCKED" app/core/core-runtime-v0958.js
+          node build/v0977/patch-index-v0977.js
+          node build/v0977/release-check-v0977.js
+          grep -q "'Thor':{cls:'thor'" app/core/core-runtime-v0958.js
+          grep -q "'Doctor Strange':{cls:'doctorstrange'" app/core/core-runtime-v0958.js
+          grep -q "'Star-Lord':{cls:'starlord'" app/core/core-runtime-v0958.js
+          grep -q "MJOLNIR THROW" app/core/core-runtime-v0958.js
+          grep -q "GOD OF THUNDER" app/core/core-runtime-v0958.js
+          grep -q "ELDRITCH BOLTS" app/core/core-runtime-v0958.js
+          grep -q "MIRROR DIMENSION" app/core/core-runtime-v0958.js
+          grep -q "ELEMENT BLASTER" app/core/core-runtime-v0958.js
+          grep -q "LEGENDARY OUTLAW" app/core/core-runtime-v0958.js
+          grep -q "FightArenaTrainingControls" app/core/core-runtime-v0958.js
+          grep -q "DAILY_REWARD_COINS=1250" app/core/core-runtime-v0958.js
+          grep -q "VERONICA CRASHDOWN" app/core/core-runtime-v0958.js
+          grep -q "mystiqueTransform" app/core/core-runtime-v0958.js
+          grep -q "deadpoolLastStand" app/core/core-runtime-v0958.js
+          grep -q "magnetoMaster" app/core/core-runtime-v0958.js
           grep -Fq "gems=win&&l.boss?(l.gems||0):0" app/core/core-runtime-v0958.js
+          grep -q "campaignUnlockName=win?campaignNextName(l.name):null" app/core/core-runtime-v0958.js
           grep -q "purchase-confirm-v0975" update-v0975.js
           grep -q "restoreRematch" update-v09741.js
-          grep -q "id:'iron-hulkbuster'" app/core/core-runtime-v0958.js
-          grep -q "VERONICA CRASHDOWN" app/core/core-runtime-v0958.js
-          grep -q "DAILY_REWARD_COINS=1250" app/core/core-runtime-v0958.js
           grep -q "multiTouch:true" touch-v0941.js
-      - name: Persist v0.9.7.6.1 release artifacts
+          grep -q "app/core/bootstrap-v096.js?v=0977" index.html
+      - name: Persist v0.9.7.7 release artifacts
         run: |
           if [ -n "$(git status --porcelain -- index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json
-            git commit -m "Release Multiverse Arena v0.9.7.6.1 Interface Repair + Code Cleanup [skip ci]"
+            git commit -m "Release Multiverse Arena v0.9.7.7 Hero Update + Bug Fixes [skip ci]"
             git push
           fi
       - name: Configure Pages
