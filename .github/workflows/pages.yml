@@ -39,6 +39,8 @@ jobs:
           grep -q "campaignUnlockName=win?campaignNextName(l.name):null" app/core/core-runtime-v0958.js
           grep -q "CODE='OWNERBOARD'" update-v09772.js
           grep -q "OWNER COMMAND CENTER" update-v09772.js
+          grep -q "ownerBoardMinimize" update-v09772.js
+          grep -q "ownerBoardDock" update-v09772.js
           grep -q "FIGHT LAUNCHER" owner-devtools-v09772.js
           grep -q "app/core/bootstrap-v096.js?v=09772" index.html
           grep -q "UPDATE LOG  •  v0.9.7.7.2" index.html
@@ -63,4 +65,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      # Explicit production redeploy trigger: v0.9.7.7.2-visible-ownerboard
+      # Explicit production redeploy trigger: v0.9.7.7.2-ownerboard-polish-final
