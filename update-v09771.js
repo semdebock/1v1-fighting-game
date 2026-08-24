@@ -1,0 +1,18 @@
+/* Multiverse Arena v0.9.7.7.1 — Hero Revamp + Training Repair */
+(()=>{
+'use strict';
+const BUILD='0.9.7.7.1',ASSET='09771',$=(s,r=document)=>r.querySelector(s);
+function style(){if($('#update09771Style'))return;const l=document.createElement('link');l.id='update09771Style';l.rel='stylesheet';l.href=`update-v09771.css?v=${ASSET}`;document.head.appendChild(l)}
+function brand(){document.title='Multiverse Arena v0.9.7.7.1 — Hero Revamp';document.querySelectorAll('.brand .tag').forEach(x=>x.textContent='v0.9.7.7.1');const u=$('#updates');if(u)u.textContent='UPDATE LOG  •  v0.9.7.7.1';const latest=$('.latest-stat');if(latest){$('b',latest).textContent='v0.9.7.7.1';$('span',latest).textContent='Hero Visual Revamp • Training Repair • Mjolnir Fix'}const h=$('.build-health b');if(h)h.textContent='v0.9.7.7.1 • HERO REVAMP • STABLE'}
+function replaceButton(id,handler){const old=$('#'+id);if(!old)return null;const fresh=old.cloneNode(true);old.replaceWith(fresh);fresh.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();handler(fresh)});return fresh}
+function flash(btn,text,good=true){if(!btn)return;const original=btn.dataset.originalLabel||btn.textContent;btn.dataset.originalLabel=original;btn.textContent=text;btn.classList.toggle('training-control-ok',good);btn.classList.toggle('training-control-fail',!good);setTimeout(()=>{if(!btn.isConnected)return;btn.textContent=btn.dataset.originalLabel;btn.classList.remove('training-control-ok','training-control-fail')},700)}
+function repairTraining(){
+ const fill=replaceButton('trainingSpecial',btn=>{const api=window.FightArenaTrainingControls;if(!api?.active?.()){flash(btn,'START TRAINING FIRST',false);return}const ok=api.fill?.()===true;requestAnimationFrame(()=>{const s=api.snapshot?.();const valid=ok&&s&&Math.round(s.special)>=100;flash(btn,valid?'✓ SPECIAL 100%':'RETRY',!!valid)})});
+ const reset=replaceButton('trainingReset',btn=>{const api=window.FightArenaTrainingControls;if(!api?.active?.()){flash(btn,'START TRAINING FIRST',false);return}const ok=api.reset?.()===true;requestAnimationFrame(()=>{const s=api.snapshot?.();const valid=ok&&s&&Math.round(s.hp)===Math.round(s.maxHp)&&Math.round(s.special)===0&&s.cooldowns?.every(v=>v===0);flash(btn,valid?'✓ RESET':'RETRY',!!valid)})});
+ return !!(fill&&reset)
+}
+function updateLog(){const box=$('#updatesScreen .changelog');if(!box)return;const rows=[['⚡','Thor full visual rebuild','Rebuilt proportions, layered armor, fitted cape, helmet silhouette and a cleaner Mjolnir. Mjolnir now physically leaves his hand during the throw and returns before reappearing.'],['🔮','Doctor Strange full visual rebuild','Cloak now wraps the shoulders instead of covering the body as a block. Added cleaner robes, amulet, facial silhouette and mystic detailing.'],['🚀','Star-Lord full visual rebuild','Fitted Ravager-style coat, stronger helmet silhouette, twin blaster gauntlets and jet-boot detailing replace the old boxy model.'],['🎯','Training controls hard repair','RESET and FILL SPECIAL now use fresh Safari-safe button nodes connected directly to the canonical Training API and verify the resulting state after every press.']];box.innerHTML=rows.map(([i,t,p])=>`<div class="log-item"><div class="log-icon">${i}</div><div><b>${t}</b><p>${p}</p></div></div>`).join('')}
+function audit(){style();brand();repairTraining()}
+function init(){audit();updateLog();window.MultiverseArenaUpdate09771={version:BUILD,audit,repairTraining}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();addEventListener('fightarena-ready',()=>setTimeout(init,550),{once:true});
+})();

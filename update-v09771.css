@@ -1,0 +1,53 @@
+/* Multiverse Arena v0.9.7.7.1 — Hero Visual Revamp */
+/* Shared polish */
+.fighter.thor,.fighter.doctorstrange,.fighter.starlord{transform-origin:50% 100%;filter:drop-shadow(0 10px 12px #000a)}
+
+/* THOR — layered classic Asgardian armor, readable cape, proper Mjolnir */
+.fighter.thor{width:80px;height:140px}
+.fighter.thor .head{width:35px;height:33px;left:22px;top:4px;border-radius:46% 46% 40% 40%;background:linear-gradient(90deg,#d8aa82 0 66%,#e9e4d8 67% 100%);border:2px solid #8994a1;box-shadow:inset 0 -7px 0 #c58d69}
+.fighter.thor .head:before,.fighter.thor .head:after{content:"";position:absolute;top:-2px;width:10px;height:23px;background:linear-gradient(#f2f4f6,#8e98a3);clip-path:polygon(48% 0,100% 100%,38% 75%,0 100%)}
+.fighter.thor .head:before{left:-10px;transform:rotate(-16deg)}.fighter.thor .head:after{right:-10px;transform:scaleX(-1) rotate(-16deg)}
+.fighter.thor .body{width:49px;height:62px;left:15px;top:37px;border-radius:12px 12px 8px 8px;background:linear-gradient(90deg,#141b25 0 18%,#596574 19% 42%,#202b37 43% 58%,#596574 59% 82%,#141b25 83%);border:2px solid #a7b0ba;box-shadow:inset 0 0 0 3px #0b1119,inset 0 -16px 0 #2e3945}
+.fighter.thor .body:after{content:"";position:absolute;inset:6px 5px 9px;background:radial-gradient(circle at 18% 18%,#e7edf2 0 4px,#6d7985 5px 7px,transparent 8px),radial-gradient(circle at 82% 18%,#e7edf2 0 4px,#6d7985 5px 7px,transparent 8px),radial-gradient(circle at 18% 70%,#e7edf2 0 4px,#6d7985 5px 7px,transparent 8px),radial-gradient(circle at 82% 70%,#e7edf2 0 4px,#6d7985 5px 7px,transparent 8px)}
+.fighter.thor .body:before{content:"";position:absolute;z-index:-3;left:-13px;top:-3px;width:75px;height:74px;background:linear-gradient(145deg,#c31b31,#8a0f22 56%,#4b0611);clip-path:polygon(12% 0,88% 0,100% 18%,82% 100%,60% 86%,50% 100%,40% 86%,18% 100%,0 18%);filter:drop-shadow(0 4px 4px #0008)}
+.fighter.thor .arm{width:16px;height:56px;top:43px;border-radius:8px;background:linear-gradient(#8d1c2a 0 24%,#657282 25% 61%,#202a35 62%);border:2px solid #8e99a5}.fighter.thor .arm.l{left:2px}.fighter.thor .arm.r{right:1px}
+.fighter.thor .arm.r:after{content:"";position:absolute;width:22px;height:26px;left:-2px;top:34px;border-radius:4px 4px 5px 5px;background:linear-gradient(145deg,#e0e5ea,#838e98 55%,#56606a);border:2px solid #f2f4f6;box-shadow:inset 0 0 0 2px #444d57,0 2px 3px #0007;transform:rotate(-5deg);transition:opacity .08s ease,transform .12s ease}
+.fighter.thor .arm.r:before{content:"";position:absolute;width:7px;height:27px;left:7px;top:56px;background:linear-gradient(90deg,#4b2d1e,#7a5235,#3c2418);border-radius:4px;transform:rotate(-6deg);transition:opacity .08s ease}
+.fighter.thor.mjolnir-away .arm.r:after,.fighter.thor.mjolnir-away .arm.r:before{opacity:0!important}
+.fighter.thor .leg{width:18px;height:43px;top:96px;background:linear-gradient(#303c49,#121923);border:2px solid #66727e}.fighter.thor .leg.l{left:19px}.fighter.thor .leg.r{right:18px}
+.fighter.thor .leg:after{content:"";position:absolute;left:-2px;bottom:-1px;width:20px;height:14px;border-radius:3px;background:linear-gradient(#6f7a84,#303942);border-top:2px solid #9ba5ae}
+
+/* DOCTOR STRANGE — cloak wraps shoulders instead of forming a rectangle */
+.fighter.doctorstrange{width:78px;height:138px}
+.fighter.doctorstrange .head{width:31px;height:33px;left:23px;top:5px;border-radius:48%;background:linear-gradient(90deg,#251c1b 0 18%,#b87758 19% 80%,#251c1b 81%);border:2px solid #181b22;box-shadow:inset 0 -6px 0 #8e5b44}
+.fighter.doctorstrange .head:before{content:"";position:absolute;left:8px;bottom:2px;width:14px;height:7px;background:#2a1a18;clip-path:polygon(0 40%,50% 100%,100% 40%,80% 70%,50% 58%,20% 70%)}
+.fighter.doctorstrange .head:after{content:"";position:absolute;left:4px;top:-1px;width:23px;height:9px;border-radius:50% 50% 20% 20%;background:#2a211f;transform:rotate(-5deg)}
+.fighter.doctorstrange .body{width:45px;height:64px;left:16px;top:38px;border-radius:9px;background:linear-gradient(90deg,#11233e,#254a70 46%,#10223d);border:2px solid #526f8e;box-shadow:inset 0 0 0 3px #081421,inset 0 -18px 0 #0c1b31}
+.fighter.doctorstrange .body:before{content:"";position:absolute;z-index:-3;left:-15px;top:-8px;width:75px;height:76px;background:linear-gradient(145deg,#cf1838,#8f0d28 55%,#580918);clip-path:polygon(0 9%,19% 0,50% 8%,81% 0,100% 9%,88% 34%,80% 100%,58% 83%,50% 100%,42% 83%,20% 100%,12% 34%);filter:drop-shadow(0 4px 4px #0008)}
+.fighter.doctorstrange .body:after{content:"✦";position:absolute;left:14px;top:5px;width:16px;height:16px;display:grid;place-items:center;border-radius:50%;border:2px solid #e2b34e;color:#ffd76d;background:#493216;box-shadow:0 0 9px #f4b53a99;font-size:10px}
+.fighter.doctorstrange .arm{width:15px;height:54px;top:44px;border-radius:8px;background:linear-gradient(#234c75,#102b50);border:2px solid #577a9d}.fighter.doctorstrange .arm.l{left:3px;transform:rotate(5deg)}.fighter.doctorstrange .arm.r{right:2px;transform:rotate(-5deg)}
+.fighter.doctorstrange .arm:after{content:"";position:absolute;left:2px;bottom:2px;width:9px;height:11px;border-radius:50%;background:#c07e5c;box-shadow:0 0 0 2px #e6a46344}
+.fighter.doctorstrange .leg{width:18px;height:42px;top:98px;background:linear-gradient(#132742,#0a1627);border:2px solid #3f5d7c}.fighter.doctorstrange .leg.l{left:19px}.fighter.doctorstrange .leg.r{right:18px}
+
+/* STAR-LORD — fitted coat, helmet panels, twin blasters, jet boots */
+.fighter.starlord{width:76px;height:136px}
+.fighter.starlord .head{width:34px;height:34px;left:21px;top:5px;border-radius:42% 42% 38% 38%;background:linear-gradient(90deg,#7e8791 0 15%,#222b34 16% 44%,#4d5863 45% 55%,#222b34 56% 84%,#7e8791 85%);border:2px solid #aeb5bc;box-shadow:inset 0 -8px 0 #7a2230}
+.fighter.starlord .head:before,.fighter.starlord .head:after{content:"";position:absolute;top:11px;width:8px;height:6px;border-radius:45%;background:#ff4a5e;box-shadow:0 0 8px #ff3348}.fighter.starlord .head:before{left:5px}.fighter.starlord .head:after{right:5px}
+.fighter.starlord .body{width:43px;height:61px;left:16px;top:40px;border-radius:9px;background:linear-gradient(90deg,#42171f,#7a2630 45%,#4a1820);border:2px solid #94404a;box-shadow:inset 0 0 0 3px #1c1518}
+.fighter.starlord .body:before{content:"";position:absolute;z-index:-2;left:-5px;top:5px;width:53px;height:69px;background:linear-gradient(90deg,#611d28,#8e2b36 48%,#561822);clip-path:polygon(7% 0,93% 0,100% 18%,87% 100%,66% 86%,50% 100%,34% 86%,13% 100%,0 18%);filter:drop-shadow(0 4px 4px #0007)}
+.fighter.starlord .body:after{content:"";position:absolute;left:18px;top:8px;width:6px;height:35px;border-radius:3px;background:linear-gradient(#b55660,#5e222a);box-shadow:-11px 0 0 -2px #2b1a1e,11px 0 0 -2px #2b1a1e}
+.fighter.starlord .arm{width:14px;height:52px;top:46px;border-radius:7px;background:linear-gradient(#6d2630 0 46%,#2d2226 47%);border:2px solid #75444d}.fighter.starlord .arm.l{left:3px;transform:rotate(3deg)}.fighter.starlord .arm.r{right:2px;transform:rotate(-3deg)}
+.fighter.starlord .arm:after{content:"";position:absolute;left:1px;bottom:-5px;width:10px;height:20px;border-radius:3px;background:linear-gradient(#c8d0d7,#707b84 55%,#343c44);border:1px solid #e4e8eb;box-shadow:inset 0 -4px 0 #303840}
+.fighter.starlord .leg{width:17px;height:42px;top:98px;background:linear-gradient(#2b262a,#15171b);border:2px solid #4a5057}.fighter.starlord .leg.l{left:19px}.fighter.starlord .leg.r{right:18px}
+.fighter.starlord .leg:after{content:"";position:absolute;left:3px;bottom:-3px;width:9px;height:9px;background:#63c7ed;border-radius:2px;box-shadow:0 5px 9px #37bafa}
+
+/* Mjolnir projectile now reads as the same hammer that leaves Thor's hand */
+.mjolnir-projectile{width:27px!important;height:18px!important;border-radius:4px!important;background:linear-gradient(145deg,#e8edf1,#8d98a1 55%,#59636b)!important;border:2px solid #f5f7f9!important;box-shadow:inset 0 0 0 2px #4b555f,0 0 13px #8bdcff!important;transform-origin:50% 50%;animation:mjolnirSpin .18s linear infinite!important}
+.mjolnir-projectile:after{content:""!important;position:absolute!important;width:16px!important;height:6px!important;right:-13px!important;top:4px!important;background:linear-gradient(90deg,#4b2c1e,#7b5235,#3d2418)!important;border-radius:3px!important}
+@keyframes mjolnirSpin{to{transform:rotate(360deg)}}
+
+/* Card-specific scale: keep silhouettes fully inside portrait frame */
+#charCards .fighter.thor,#charCards .fighter.doctorstrange,#charCards .fighter.starlord{transform:scale(.9);transform-origin:50% 100%}
+#homePreview .fighter.thor,#homePreview .fighter.doctorstrange,#homePreview .fighter.starlord{transform:scale(1.02);transform-origin:50% 100%}
+
+@media(max-width:700px){#charCards .fighter.thor,#charCards .fighter.doctorstrange,#charCards .fighter.starlord{transform:scale(.84)}}
