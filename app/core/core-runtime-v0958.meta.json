@@ -1,8 +1,8 @@
 {
   "release": "0.9.5.8",
   "sourceCore": "0.9.5.7",
-  "patch": "0.9.7.7",
-  "bytes": 123655,
-  "sha256": "a28935af1e9ee9490abf0ef18f4bfb3593b36c7046d525c6902346ee7202a784",
+  "patch": "0.9.7.7.1",
+  "bytes": 123689,
+  "sha256": "27930a9f5679fc6c145914f2a959d2cbe2bab0fc4d3054f9060ae9f1b5f4fb1f",
   "generated": true
 }
