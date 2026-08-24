@@ -1,0 +1,47 @@
+name: Deploy Multiverse Arena Dev Preview
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy-dev:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}dev/
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+      - name: Checkout dev preview
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          path: site/dev
+      - name: Validate dev modules
+        run: |
+          node --check site/dev/app/core/bootstrap-v096.js
+          node --check site/dev/app/owner/storage.js
+          node --check site/dev/app/owner/commands.js
+          node --check site/dev/app/ui/ownerboard.js
+          test -f site/dev/index.html
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload production + dev site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
