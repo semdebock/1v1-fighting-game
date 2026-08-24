@@ -1,0 +1,11 @@
+const fs=require('fs'),path=require('path');const root=path.resolve(__dirname,'../..');
+const boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8'),core=fs.readFileSync(path.join(root,'app/core/core-runtime-v0958.js'),'utf8'),builder=fs.readFileSync(path.join(root,'build/v0958/build-core-v0958.js'),'utf8'),update=fs.readFileSync(path.join(root,'update-v0977.js'),'utf8'),css=fs.readFileSync(path.join(root,'update-v0977.css'),'utf8'),index=fs.readFileSync(path.join(root,'index.html'),'utf8');
+for(const m of ["const BUILD='0.9.7.7'","const ASSET='0977'","const SAVE_KEY='fightArenaV08'","'update-v0977.js'"])if(!boot.includes(m))throw new Error('v0977 bootstrap marker missing '+m);
+for(const m of ['t977','transform-v0977.js'])if(!builder.includes(m))throw new Error('v0977 builder marker missing '+m);
+for(const m of ["'Thor':{cls:'thor'","'Doctor Strange':{cls:'doctorstrange'","'Star-Lord':{cls:'starlord'",'MJOLNIR THROW','LIGHTNING STRIKE','THUNDER RUSH','GOD OF THUNDER','ELDRITCH BOLTS','PORTAL STRIKE','SERAPHIM SHIELD','MIRROR DIMENSION','ELEMENT BLASTER','JET BOOT DASH','GRAVITY MINE','LEGENDARY OUTLAW'])if(!core.includes(m))throw new Error('v0977 hero marker missing '+m);
+for(const m of ['repairFilters','trainingRepair','phaseRepair','collection-locked-v0977','OWNED','LOCKED'])if(!update.includes(m)&&!css.includes(m))throw new Error('v0977 UX marker missing '+m);
+for(const m of ['.fighter.thor','.fighter.doctorstrange','.fighter.starlord','.thor-lightningfx','.strange-portalfx','.starlord-jetfx','@media(max-width:700px)'])if(!css.includes(m))throw new Error('v0977 visual marker missing '+m);
+for(const m of ['v0.9.7.7','0977','app/core/bootstrap-v096.js?v=0977'])if(!index.includes(m))throw new Error('v0977 index marker missing '+m);
+for(const stable of ['DAILY_REWARD_COINS=1250','FightArenaTrainingControls','FightArenaNameControls',"id:'iron-hulkbuster'",'VERONICA CRASHDOWN','mystiqueTransform','deadpoolLastStand','magnetoMaster','primo-super-leap','punisherUnlockShown','rematch(){','gems=win&&l.boss?(l.gems||0):0'])if(!core.includes(stable))throw new Error('protected gameplay marker missing '+stable);
+if(update.includes("localStorage.removeItem('fightArenaV08')"))throw new Error('save reset forbidden');
+console.log('v0.9.7.7 Hero Update + Bug Fixes checks passed');
