@@ -1,0 +1,10 @@
+const fs=require('fs'),path=require('path');const root=path.resolve(__dirname,'../..');
+const core=fs.readFileSync(path.join(root,'app/core/core-runtime-v0958.js'),'utf8'),boot=fs.readFileSync(path.join(root,'app/core/bootstrap-v096.js'),'utf8'),ui=fs.readFileSync(path.join(root,'update-v0977.js'),'utf8'),css=fs.readFileSync(path.join(root,'update-v0977.css'),'utf8'),index=fs.readFileSync(path.join(root,'index.html'),'utf8');
+for(const m of ["'Thor':{cls:'thor'","'Doctor Strange':{cls:'doctorstrange'","'Star-Lord':{cls:'starlord'",'MJOLNIR THROW','LIGHTNING STRIKE','THUNDER RUSH','GOD OF THUNDER','ELDRITCH BOLTS','PORTAL STRIKE','SERAPHIM SHIELD','MIRROR DIMENSION','ELEMENT BLASTER','JET BOOT DASH','GRAVITY MINE','LEGENDARY OUTLAW'])if(!core.includes(m))throw new Error('hero core marker missing '+m);
+for(const m of ["const BUILD='0.9.7.7'","const ASSET='0977'","const SAVE_KEY='fightArenaV08'","'update-v0977.js'",'Thor','Doctor Strange','Star-Lord'])if(!boot.includes(m))throw new Error('bootstrap marker missing '+m);
+for(const m of ['repairFilters','trainingRepair','phaseRepair','readOwned','fightArenaV08'])if(!ui.includes(m))throw new Error('7.7 UI marker missing '+m);
+for(const m of ['.fighter.thor','.fighter.doctorstrange','.fighter.starlord','collection-locked-v0977','@media(max-width:700px)'])if(!css.includes(m))throw new Error('7.7 CSS marker missing '+m);
+for(const m of ['v0.9.7.7','app/core/bootstrap-v096.js?v=0977'])if(!index.includes(m))throw new Error('index marker missing '+m);
+for(const m of ['FightArenaTrainingControls','DAILY_REWARD_COINS=1250','VERONICA CRASHDOWN','mystiqueTransform','deadpoolLastStand','magnetoMaster','campaignUnlockName=win?campaignNextName(l.name):null','gems=win&&l.boss?(l.gems||0):0','rematch(){'])if(!core.includes(m))throw new Error('protected system missing '+m);
+if(core.includes('LEVEL ${save.unlocked} UNLOCKED — ${LEVELS[save.unlocked-1].name.toUpperCase()}'))throw new Error('legacy Ultron result path returned');
+console.log('v0.9.7.7 rebuild release checks passed');
