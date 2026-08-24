@@ -34,12 +34,15 @@ const duplicates=runtime.filter((item,i)=>runtime.indexOf(item)!==i);
 if(duplicates.length)fail('Duplicate production runtime entries: '+[...new Set(duplicates)].join(', '));
 
 if(!boot.includes(`const BUILD='${EXPECTED_BUILD}'`))fail('Bootstrap BUILD is not '+EXPECTED_BUILD);
-if(!boot.includes(`const ASSET='${EXPECTED_ASSET}'`))fail('Bootstrap ASSET is not '+EXPECTED_ASSET);
-if(!index.includes(`app/core/bootstrap-v096.js?v=${EXPECTED_ASSET}`))fail('index.html is not pointing at the current bootstrap asset version');
+const supportsStableAsset=boot.includes(`:'${EXPECTED_ASSET}'`)||boot.includes(`const ASSET='${EXPECTED_ASSET}'`);
+const supportsDevBust=boot.includes('Date.now()')&&boot.includes('IS_DEV');
+if(!supportsStableAsset)fail('Bootstrap no longer preserves stable production asset '+EXPECTED_ASSET);
+if(!supportsDevBust)fail('Bootstrap dev cache-busting is missing');
+if(!index.includes(`app/core/bootstrap-v096.js?v=${EXPECTED_ASSET}`))fail('index.html is not pointing at the current production bootstrap asset version');
 if(index.includes('app/core/bootstrap-v0958.js'))fail('index.html still references the historical bootstrap');
 if((index.match(/app\/core\/bootstrap-v096\.js/g)||[]).length!==1)fail('index.html must load exactly one production bootstrap');
 
 const directRuntime=runtime.filter(file=>index.includes(`src="${file}`)||index.includes(`src='${file}`));
 if(directRuntime.length)fail('index.html directly loads runtime files owned by the bootstrap: '+directRuntime.join(', '));
 
-if(!process.exitCode)console.log(`Repo audit OK: ${required.length} runtime JS files present, centralized load order valid, one bootstrap entry, no duplicate runtime loads.`);
+if(!process.exitCode)console.log(`Repo audit OK: ${required.length} runtime JS files present, centralized load order valid, production asset preserved, dev cache-busting enabled.`);
