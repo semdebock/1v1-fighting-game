@@ -1,0 +1,59 @@
+/* Multiverse Arena v0.9.7.6.1 — Interface Repair & Code Cleanup */
+
+/* One clean boss HUD: protocol sits in document flow, never over the arena/fighters. */
+#fight .boss-phase-indicator-v0976{display:none!important}
+#fight .boss-phase-hud.boss-protocol-v09761{position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;width:100%!important;max-width:none!important;min-height:0!important;margin:7px 0 9px!important;padding:8px 11px!important;display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-rows:auto auto!important;align-items:center!important;gap:2px 10px!important;border:1px solid #d5ad5850!important;border-radius:11px!important;background:linear-gradient(90deg,#0b0d12f5,#12100bf0,#0b0d12f5)!important;box-shadow:inset 0 1px 0 #fff08,0 7px 18px #0005!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;z-index:20!important;pointer-events:none!important}
+#fight .boss-phase-hud.boss-protocol-v09761 small{grid-column:1;grid-row:1/-1;margin:0!important;color:#9c8c6e!important;font-size:7px!important;letter-spacing:.16em!important;writing-mode:vertical-rl;transform:rotate(180deg)}
+#fight .boss-phase-hud.boss-protocol-v09761 strong{grid-column:2;grid-row:1;margin:0!important;font-size:12px!important;line-height:1.05!important;color:#fff1c6!important;letter-spacing:.09em!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#fight .boss-phase-hud.boss-protocol-v09761 .boss-phase-track{grid-column:2;grid-row:2;display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:5px!important;width:100%!important;margin:3px 0 0!important}
+#fight .boss-phase-hud.boss-protocol-v09761 .boss-phase-track i{height:4px!important;border-radius:99px!important;background:#252932!important;border:0!important}
+#fight .boss-phase-hud.boss-protocol-v09761 .boss-phase-track i.active{background:linear-gradient(90deg,#b54a58,#ec826a,#d4ad5e)!important;box-shadow:0 0 7px #d46a5840!important}
+#fight .boss-phase-hud.boss-protocol-v09761>span{grid-column:3;grid-row:1/-1;justify-self:end!important;margin:0!important;padding:5px 7px!important;border:1px solid #d5ad5845!important;border-radius:7px!important;background:#17130d!important;color:#e9d294!important;font-size:8px!important;font-weight:950!important;letter-spacing:.07em!important;white-space:nowrap}
+#fight .boss-phase-hud.boss-protocol-v09761[data-static-boss="1"] .boss-phase-track{grid-template-columns:1fr!important}
+#fight .boss-phase-hud.boss-protocol-v09761[data-static-boss="1"] .boss-phase-track i:nth-child(n+2){display:none!important}
+
+/* Collection hierarchy repair: title first, navigation second. */
+#chars .sectionhead{position:relative!important;top:auto!important;z-index:20!important;margin-bottom:10px!important;padding-top:5px!important;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+#chars .collection-tabs{position:relative!important;top:auto!important;z-index:18!important;margin:0 0 13px!important;border-radius:13px!important;box-shadow:0 8px 22px #0004!important}
+#chars .collection-tabs button{min-height:42px!important}
+#chars .shop-toolbar-v0975{margin:0 0 12px!important;padding:13px!important;border-radius:16px!important}
+#chars .collection-filter-v0976{margin:0 0 11px!important;padding:0 0 2px!important}
+
+/* Cleaner categorized fighter roster. */
+#charCards{display:grid!important;gap:14px!important}
+#charCards .rank-group{margin:0!important;padding:11px!important;border:1px solid #34435a66!important;border-radius:18px!important;background:linear-gradient(155deg,#0d121c,#080b11)!important;overflow:hidden!important}
+#charCards .rank-group-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;margin:0 0 9px!important;padding:0 2px 8px!important;border-bottom:1px solid #ffffff0d!important}
+#charCards .rank-group-head span{font-size:11px!important;font-weight:1000!important;letter-spacing:.10em!important;color:#f0dfb1!important}
+#charCards .rank-group-head small{display:block!important;margin-top:2px!important;font-size:8px!important;line-height:1.35!important;letter-spacing:.05em!important;color:#778298!important}
+#charCards .rank-group-head b{flex:0 0 auto!important;padding:5px 7px!important;border:1px solid #485771!important;border-radius:8px!important;font-size:8px!important;color:#b8c3d5!important;background:#09101a!important}
+#charCards .rank-fighters-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important}
+#charCards .rank-fighters-grid>.card{min-width:0!important;min-height:0!important;padding:10px!important;border-radius:14px!important;text-align:left!important}
+#charCards .rank-fighters-grid>.card .rank-card-top{display:flex!important;gap:5px!important;min-width:0!important;overflow:hidden!important}
+#charCards .rank-fighters-grid>.card .rank-chip,#charCards .rank-fighters-grid>.card .power-chip{min-width:0!important;padding:4px 6px!important;font-size:7px!important;line-height:1.1!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+#charCards .rank-fighters-grid>.card .portrait{height:112px!important;margin:7px 0!important;border-radius:11px!important}
+#charCards .rank-fighters-grid>.card .portrait .fighter{transform:scale(.60)!important}
+#charCards .rank-fighters-grid>.card h3{margin:4px 0 2px!important;font-size:13px!important;line-height:1.05!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#charCards .rank-fighters-grid>.card .fighter-role{font-size:8px!important;letter-spacing:.06em!important;color:#8995a9!important}
+#charCards .fighter-quick-stats-v0973{gap:4px!important;margin-top:7px!important}
+#charCards .fighter-quick-stats-v0973 span{padding:5px 3px!important;border-radius:7px!important}
+#charCards .fighter-quick-stats-v0973 small{font-size:6px!important}#charCards .fighter-quick-stats-v0973 b{font-size:10px!important}
+#charCards .fighter-shop-action-v0975,#charCards .fighter-quick-action-v0973{min-height:36px!important;margin-top:7px!important;padding:7px!important;font-size:8px!important;border-radius:8px!important}
+
+/* Captain America: one shield renderer only. The 7.6 arm shield is canonical. */
+.fighter.captain:after{display:none!important;content:none!important}
+.fighter.captain.shield-away .arm.r:after,.fighter.captain.shield-away .arm.r:before{display:none!important}
+
+/* Mobile audit fixes. */
+@media(max-width:700px){
+ #chars{padding-top:0!important;overflow-x:hidden!important}
+ #chars .sectionhead h2{font-size:29px!important;line-height:1!important}
+ #charCards .rank-fighters-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #charCards .rank-group{padding:9px!important;border-radius:15px!important}
+ #charCards .rank-fighters-grid>.card{padding:8px!important}
+ #charCards .rank-fighters-grid>.card .portrait{height:104px!important}
+ #fight .boss-phase-hud.boss-protocol-v09761{margin:6px 0 7px!important;padding:7px 8px!important;gap:2px 7px!important}
+ #fight .boss-phase-hud.boss-protocol-v09761 strong{font-size:10px!important}
+ #fight .boss-phase-hud.boss-protocol-v09761>span{font-size:7px!important;padding:4px 5px!important}
+}
+@media(max-width:370px){#charCards .rank-fighters-grid{grid-template-columns:1fr!important}}
+@media(prefers-reduced-motion:reduce){#fight .boss-phase-hud.boss-protocol-v09761{transition:none!important}}

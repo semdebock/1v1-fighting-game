@@ -9,8 +9,10 @@ const css=fs.readFileSync(path.join(root,'update-v0976.css'),'utf8');
 const campaign=fs.readFileSync(path.join(root,'campaign-v097.js'),'utf8');
 const shop=fs.readFileSync(path.join(root,'update-v0975.js'),'utf8');
 const hotfix=fs.readFileSync(path.join(root,'update-v09741.js'),'utf8');
-for(const m of ["const BUILD='0.9.7.6'","const ASSET='0976'","const SAVE_KEY='fightArenaV08'","'update-v0976.js'",'core-runtime-v0958.js'])if(!boot.includes(m))throw new Error('v0.9.7.6 bootstrap marker missing '+m);
-for(const m of ['t976','transform-v0976.js',"patch:'0.9.7.6'",'updateBossPhaseV0976','boss-chest-v0976'])if(!builder.includes(m))throw new Error('v0.9.7.6 builder marker missing '+m);
+for(const m of ["const SAVE_KEY='fightArenaV08'","'update-v0976.js'",'core-runtime-v0958.js'])if(!boot.includes(m))throw new Error('v0.9.7.6 compatibility bootstrap marker missing '+m);
+if(!/const BUILD='0\.9\.7\.6(?:\.\d+)*'/.test(boot))throw new Error('v0.9.7.6 compatibility requires 0.9.7.6+ bootstrap');
+if(!/const ASSET='0976\d*'/.test(boot))throw new Error('v0.9.7.6 compatibility requires 0976+ asset');
+for(const m of ['t976','transform-v0976.js','updateBossPhaseV0976','boss-chest-v0976'])if(!builder.includes(m))throw new Error('v0.9.7.6 builder marker missing '+m);
 for(const m of ['boss phase indicator helper','Doctor Octopus phase indicator','Magneto phase indicator','premium boss intro and clean phase start','boss chest result presentation'])if(!transform.includes(m))throw new Error('v0.9.7.6 transform marker missing '+m);
 for(const m of ['updateBossPhaseV0976','bossPhaseIndicatorV0976','boss-intro-v0976','boss-chest-v0976',"$('bossPhaseIndicatorV0976')?.remove();if(l.boss)",'gems=win&&l.boss?(l.gems||0):0','LEVELS.forEach(l=>{if(!l.boss)l.gems=0})'])if(!core.includes(m))throw new Error('v0.9.7.6 generated core marker missing '+m);
 for(const m of ["'Arena Champion'",'Kingpin','Doctor Octopus','Magneto'])if(!update.includes(m))throw new Error('boss reward map marker missing '+m);
@@ -23,4 +25,4 @@ for(const stable of ['DAILY_REWARD_COINS=1250','DAILY_COOLDOWN_MS=24*60*60*1000'
 for(const m of ['purchase-confirm-v0975','interceptLegacyPurchase','baseName=card.dataset.fighterName||visibleName'])if(!shop.includes(m))throw new Error('protected shop marker missing '+m);
 for(const m of ['restoreRematch','rematchWired09741'])if(!hotfix.includes(m))throw new Error('protected Rematch marker missing '+m);
 for(const forbidden of ['new MutationObserver','requestAnimationFrame(loop)','setInterval(','localStorage.removeItem(\'fightArenaV08\')'])if(update.includes(forbidden))throw new Error('unsafe v0.9.7.6 runtime marker '+forbidden);
-console.log('v0.9.7.6 Combat & Collection Overhaul checks passed');
+console.log('v0.9.7.6 Combat & Collection Overhaul compatibility checks passed');
