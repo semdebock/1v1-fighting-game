@@ -1,0 +1,19 @@
+name: Production Repo Audit
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate production load chain
+        run: |
+          node --check build/maintenance/repo-audit-v09772.js
+          node build/maintenance/repo-audit-v09772.js
+          node --check app/core/bootstrap-v096.js
+          node --check update-v09772.js

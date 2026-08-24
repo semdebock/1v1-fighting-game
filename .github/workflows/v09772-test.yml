@@ -1,7 +1,7 @@
 name: Validate v0.9.7.7.2 Owner Board
 on:
   push:
-    branches: [release/v0.9.7.7.2-owner-board]
+    branches: [release/v0.9.7.7.2-owner-board, maintenance/v09772-cleanup]
   pull_request:
     branches: [main]
 permissions:
@@ -14,13 +14,14 @@ jobs:
       - name: Syntax and release checks
         run: |
           node --check update-v09772.js
+          node --check owner-devtools-v09772.js
           node --check build/v09772/patch-index-v09772.js
           node --check build/v09772/release-check-v09772.js
           node --check app/core/bootstrap-v096.js
           node build/v09772/patch-index-v09772.js
           node build/v09772/release-check-v09772.js
       - name: Persist isolated index artifact
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/release/v0.9.7.7.2-owner-board'
         run: |
           if [ -n "$(git status --porcelain -- index.html)" ]; then
             git config user.name "github-actions[bot]"
