@@ -1,0 +1,31 @@
+name: Validate v0.9.7.7.2 Owner Board
+on:
+  push:
+    branches: [release/v0.9.7.7.2-owner-board]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax and release checks
+        run: |
+          node --check update-v09772.js
+          node --check build/v09772/patch-index-v09772.js
+          node --check build/v09772/release-check-v09772.js
+          node --check app/core/bootstrap-v096.js
+          node build/v09772/patch-index-v09772.js
+          node build/v09772/release-check-v09772.js
+      - name: Persist isolated index artifact
+        if: github.event_name == 'push'
+        run: |
+          if [ -n "$(git status --porcelain -- index.html)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add index.html
+            git commit -m "Build v0.9.7.7.2 Owner Board test artifact [skip ci]"
+            git push origin HEAD:release/v0.9.7.7.2-owner-board
+          fi
