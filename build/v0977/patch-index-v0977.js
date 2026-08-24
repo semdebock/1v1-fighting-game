@@ -1,0 +1,12 @@
+const fs=require('fs'),path=require('path');
+const file=path.resolve(__dirname,'../../index.html');let h=fs.readFileSync(file,'utf8');
+h=h.replace(/<title>[^<]*Multiverse Arena[^<]*<\/title>/,'<title>Multiverse Arena v0.9.7.7 — Hero Update + Bug Fixes</title>');
+h=h.replace(/MULTIVERSE ARENA <span class="tag">v0\.9\.7\.6\.1<\/span>/g,'MULTIVERSE ARENA <span class="tag">v0.9.7.7</span>');
+h=h.replace(/UPDATE LOG  •  v0\.9\.7\.6\.1/g,'UPDATE LOG  •  v0.9.7.7');
+h=h.replace(/<div class="dash-stat latest-stat"><small>LATEST UPDATE<\/small><b>v0\.9\.7\.6\.1<\/b><span>[^<]*<\/span><\/div>/g,'<div class="dash-stat latest-stat"><small>LATEST UPDATE</small><b>v0.9.7.7</b><span>Thor • Doctor Strange • Star-Lord • Bug Fixes</span></div>');
+h=h.replace(/<div class="build-health"><span>◆ BUILD HEALTH<\/span><b>[^<]*<\/b><\/div>/g,'<div class="build-health"><span>◆ BUILD HEALTH</span><b>v0.9.7.7 • HERO UPDATE • TEST BUILD</b></div>');
+h=h.replace(/\?v=09761(?=["'])/g,'?v=0977');
+h=h.replace(/app\/core\/bootstrap-v096\.js\?v=09761/g,'app/core/bootstrap-v096.js?v=0977');
+fs.writeFileSync(file,h);
+for(const m of ['Multiverse Arena v0.9.7.7 — Hero Update + Bug Fixes','v0.9.7.7','Thor • Doctor Strange • Star-Lord • Bug Fixes','app/core/bootstrap-v096.js?v=0977'])if(!h.includes(m))throw new Error('v0.9.7.7 index marker missing '+m);
+console.log('v0.9.7.7 index patch passed');

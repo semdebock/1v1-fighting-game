@@ -1,25 +1,17 @@
-name: Deploy Multiverse Arena to GitHub Pages
+name: Validate v0.9.7.7 Rebuild
 on:
   push:
+    branches: [release/v0.9.7.7-rebuild]
+  pull_request:
     branches: [main]
-  workflow_dispatch:
 permissions:
   contents: write
-  pages: write
-  id-token: write
-concurrency:
-  group: pages
-  cancel-in-progress: true
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  rebuild:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Validate v0.9.7.7 Hero Update + Bug Fixes
+      - uses: actions/checkout@v4
+      - name: Syntax check 7.7 sources
         run: |
           node --check build/v0977/transform-v0977.js
           node --check build/v0977/cleanup-transform-v0977.js
@@ -28,9 +20,13 @@ jobs:
           node --check build/v0958/build-core-v0958.js
           node --check app/core/bootstrap-v096.js
           node --check update-v0977.js
+      - name: Build isolated 7.7 release
+        run: |
           node build/v0958/build-core-v0958.js
           node --check app/core/core-runtime-v0958.js
           node build/v0977/patch-index-v0977.js
+      - name: Validate generated 7.7 release
+        run: |
           node build/v0977/release-check-v0977.js
           grep -q "'Thor':{cls:'thor'" app/core/core-runtime-v0958.js
           grep -q "'Doctor Strange':{cls:'doctorstrange'" app/core/core-runtime-v0958.js
@@ -49,27 +45,14 @@ jobs:
           grep -q "magnetoMaster" app/core/core-runtime-v0958.js
           grep -Fq "gems=win&&l.boss?(l.gems||0):0" app/core/core-runtime-v0958.js
           grep -q "campaignUnlockName=win?campaignNextName(l.name):null" app/core/core-runtime-v0958.js
-          grep -q "purchase-confirm-v0975" update-v0975.js
-          grep -q "restoreRematch" update-v09741.js
-          grep -q "multiTouch:true" touch-v0941.js
           grep -q "app/core/bootstrap-v096.js?v=0977" index.html
-      - name: Persist v0.9.7.7 release artifacts
+      - name: Persist test-branch release artifacts
+        if: github.event_name == 'push'
         run: |
           if [ -n "$(git status --porcelain -- index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json
-            git commit -m "Release Multiverse Arena v0.9.7.7 Hero Update + Bug Fixes [skip ci]"
-            git push
+            git commit -m "Build v0.9.7.7 isolated test release [skip ci]"
+            git push origin HEAD:release/v0.9.7.7-rebuild
           fi
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
