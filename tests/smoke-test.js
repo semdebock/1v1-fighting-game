@@ -24,6 +24,8 @@ const requiredFiles=[
   'app/ui/ui.js',
   'app/owner/storage.js',
   'app/owner/commands.js',
+  'app/debug/error-logger.js',
+  'app/debug/debug-panel.js',
   'app/ui/ownerboard.js',
   'app/systems/save.js'
 ];
@@ -35,6 +37,7 @@ for(const id of ['play','training','chars','fight','pF','eF','punch','kick','spe
 assert(index.includes('app/core/bootstrap-v096.js'), 'index no longer loads stable bootstrap');
 assert(bootstrap.includes('runtimeManifest'), 'bootstrap no longer uses runtime manifest');
 assert(bootstrap.includes('characterDB')&&bootstrap.includes('combatAPI'),'character database/combat API missing from bootstrap validation');
+assert(bootstrap.includes('errorLogger')&&bootstrap.includes('debug'),'debug/error logger missing from bootstrap validation');
 assert(bootstrap.includes('ownerStorage')&&bootstrap.includes('ownerCommands')&&bootstrap.includes('ownerboard'),'owner modules missing from bootstrap validation');
 
 const runtime=[...manifest.matchAll(/'([^']+\.js)'/g)].map(m=>m[1]);
@@ -48,11 +51,16 @@ assert(characterDB.includes('characterDB'),'central character database export mi
 assert(characterDB.includes('importLegacy'),'character database legacy import missing');
 for(const method of ['dealDamage','heal','stun','knockback','useAbility','endMatch'])assert(combatAPI.includes(method),`combat API missing ${method}`);
 
+const logger=read('app/debug/error-logger.js');
+const debug=read('app/debug/debug-panel.js');
+assert(logger.includes('unhandledrejection')&&logger.includes("addEventListener('error'"),'global error hooks missing');
+for(const method of ['show','hide','toggle','snapshot','copy'])assert(debug.includes(method),`debug panel missing ${method}`);
+
 const ownerStorage=read('app/owner/storage.js');
 const ownerCommands=read('app/owner/commands.js');
 const ownerBoard=read('app/ui/ownerboard.js');
 assert(ownerStorage.includes('ownerStorage'),'owner storage export missing');
 assert(ownerCommands.includes('ownerCommands'),'owner commands export missing');
-assert(ownerBoard.includes('ownerboard'),'ownerboard bridge export missing');
+assert(ownerBoard.includes('toggleDebug')&&ownerBoard.includes('copyDebugSnapshot'),'ownerboard debug commands missing');
 
-console.log(`Smoke test passed: ${requiredFiles.length} core files, ${runtime.length} runtime scripts, critical UI, character DB, combat API and owner modules verified.`);
+console.log(`Smoke test passed: ${requiredFiles.length} core files, ${runtime.length} runtime scripts, critical UI, character DB, combat API, debug/error logging and owner modules verified.`);
