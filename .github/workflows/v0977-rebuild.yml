@@ -14,6 +14,7 @@ jobs:
       - name: Syntax check 7.7 sources
         run: |
           node --check build/v0977/transform-v0977.js
+          node --check build/v0977/cleanup-transform-v0977.js
           node --check build/v0977/patch-index-v0977.js
           node --check build/v0977/release-check-v0977.js
           node --check build/v0958/build-core-v0958.js
