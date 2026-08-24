@@ -19,35 +19,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate v0.9.7.7.1 Hero Revamp
+      - name: Validate v0.9.7.7.2 runtime
         run: |
-          node --check build/v09771/transform-v09771.js
-          node --check build/v09771/patch-index-v09771.js
-          node --check build/v09771/release-check-v09771.js
-          node --check build/v0958/build-core-v0958.js
+          node --check build/v09772/patch-index-v09772.js
+          node --check build/v09772/release-check-v09772.js
           node --check app/core/bootstrap-v096.js
+          node --check update-v09772.js
           node --check update-v09771.js
           node build/v0958/build-core-v0958.js
           node --check app/core/core-runtime-v0958.js
-          node build/v09771/patch-index-v09771.js
-          node build/v09771/release-check-v09771.js
+          node build/v09772/patch-index-v09772.js
+          node build/v09772/release-check-v09772.js
           grep -q "classList.add('thor-cast','mjolnir-away')" app/core/core-runtime-v0958.js
           grep -q "FightArenaTrainingControls" app/core/core-runtime-v0958.js
           grep -q "DAILY_REWARD_COINS=1250" app/core/core-runtime-v0958.js
           grep -q "VERONICA CRASHDOWN" app/core/core-runtime-v0958.js
           grep -Fq "gems=win&&l.boss?(l.gems||0):0" app/core/core-runtime-v0958.js
           grep -q "campaignUnlockName=win?campaignNextName(l.name):null" app/core/core-runtime-v0958.js
-          grep -q "purchase-confirm-v0975" update-v0975.js
-          grep -q "restoreRematch" update-v09741.js
-          grep -q "multiTouch:true" touch-v0941.js
-          grep -q "app/core/bootstrap-v096.js?v=09771" index.html
-      - name: Persist v0.9.7.7.1 release artifacts
+          grep -q "CODE='OWNERBOARD'" update-v09772.js
+          grep -q "OWNER COMMAND CENTER" update-v09772.js
+          grep -q "app/core/bootstrap-v096.js?v=09772" index.html
+          grep -q "UPDATE LOG  •  v0.9.7.7.1" index.html
+          ! grep -q "Owner Board • Local Admin Controls" index.html
+      - name: Persist v0.9.7.7.2 release artifacts
         run: |
           if [ -n "$(git status --porcelain -- index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json
-            git commit -m "Release Multiverse Arena v0.9.7.7.1 Hero Revamp [skip ci]"
+            git commit -m "Release Multiverse Arena v0.9.7.7.2 [skip ci]"
             git push
           fi
       - name: Configure Pages
@@ -61,4 +61,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-# deploy trigger: v0.9.7.7.1
