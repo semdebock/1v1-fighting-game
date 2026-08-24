@@ -26,8 +26,12 @@ test('Multiverse Arena boots v0.9.8 and exposes critical controls', async ({ pag
   expect(errors).toEqual([]);
 });
 
-test('navigation reaches training/fight UI', async ({ page }) => {
+test('device choice then navigation reaches training/fight UI', async ({ page }) => {
   await page.goto(process.env.TEST_URL || 'http://127.0.0.1:4173/', { waitUntil:'domcontentloaded' });
+  await page.waitForFunction(() => window.FightArenaDevice && window.MultiverseArenaUpdate098?.version === '0.9.8', null, { timeout:10000 });
+  const chooser=page.locator('#deviceChooser');
+  if(await chooser.isVisible()) await page.locator('#deviceChooser [data-device-mode="desktop"]').click();
+  await expect(chooser).toBeHidden();
   await page.locator('#training').click();
   await page.waitForTimeout(250);
   const active=await page.locator('.screen.active').getAttribute('id');
