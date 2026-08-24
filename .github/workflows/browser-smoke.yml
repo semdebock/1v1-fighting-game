@@ -1,0 +1,30 @@
+name: Browser Gameplay Smoke
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install browser test runner
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save @playwright/test
+          npx playwright install --with-deps chromium
+      - name: Start local game server
+        run: |
+          python3 -m http.server 4173 >/tmp/arena-http.log 2>&1 &
+          echo $! > /tmp/arena-http.pid
+          sleep 2
+      - name: Run browser smoke tests
+        env:
+          TEST_URL: http://127.0.0.1:4173/
+        run: npx playwright test tests/browser-smoke.spec.js --reporter=line

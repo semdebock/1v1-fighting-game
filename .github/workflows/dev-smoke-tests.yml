@@ -1,0 +1,40 @@
+name: Dev Smoke Tests
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax check modular core
+        run: |
+          node --check app/core/bootstrap-v096.js
+          node --check app/config/runtime-manifest.js
+          node --check app/config/feature-flags.js
+          node --check app/state/state.js
+          node --check app/input/input.js
+          node --check app/characters/database.js
+          node --check app/characters/validator.js
+          node --check app/characters/characters.js
+          node --check app/combat/invariants.js
+          node --check app/combat/api.js
+          node --check app/combat/combat.js
+          node --check app/core/game.js
+          node --check app/ui/ui.js
+          node --check app/owner/storage.js
+          node --check app/owner/commands.js
+          node --check app/debug/error-logger.js
+          node --check app/debug/debug-panel.js
+          node --check app/save/migrations.js
+          node --check app/systems/save.js
+          node --check app/release/build-info.js
+          node --check app/ui/ownerboard.js
+          node --check update-v098.js
+          node --check update-v098-release.js
+      - name: Run Fight Arena smoke test
+        run: node tests/smoke-test.js

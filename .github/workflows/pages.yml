@@ -27,15 +27,29 @@ jobs:
         with:
           ref: dev
           path: site/dev
+      - name: Generate build metadata
+        run: |
+          MAIN_SHA=$(git -C site rev-parse HEAD)
+          DEV_SHA=$(git -C site/dev rev-parse HEAD)
+          NOW=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          printf '{"branch":"main","version":"0.9.7.7.2","commit":"%s","deployedAt":"%s"}\n' "$MAIN_SHA" "$NOW" > site/build-meta.json
+          printf '{"branch":"dev","version":"0.9.7.7.7-dev","commit":"%s","deployedAt":"%s"}\n' "$DEV_SHA" "$NOW" > site/dev/build-meta.json
       - name: Validate production and dev boot files
         run: |
           node --check site/app/core/bootstrap-v096.js
           node --check site/dev/app/core/bootstrap-v096.js
+          node --check site/dev/app/config/feature-flags.js
+          node --check site/dev/app/save/migrations.js
+          node --check site/dev/app/characters/validator.js
+          node --check site/dev/app/combat/invariants.js
+          node --check site/dev/app/release/build-info.js
           node --check site/dev/app/owner/storage.js
           node --check site/dev/app/owner/commands.js
           node --check site/dev/app/ui/ownerboard.js
           test -f site/index.html
           test -f site/dev/index.html
+          test -f site/build-meta.json
+          test -f site/dev/build-meta.json
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:

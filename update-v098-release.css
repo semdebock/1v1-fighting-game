@@ -1,0 +1,34 @@
+/* Multiverse Arena v0.9.8 — Gameplay & UX Release */
+:root{--ux-gap:12px;--ux-card:rgba(16,21,30,.96);--ux-line:rgba(255,255,255,.09);--ux-gold:#e7cf97;--ux-muted:#8d97a8}
+html,body{overscroll-behavior-y:none}.app{padding-bottom:calc(28px + env(safe-area-inset-bottom))!important}
+/* Collection & skins */
+#chars .card,#skins .skin-card,#charCards .card,#skinCards .skin-card{cursor:pointer;min-height:100%;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,filter .16s ease!important;contain:layout paint}
+#chars .card:active,#skins .skin-card:active,#charCards .card:active,#skinCards .skin-card:active{transform:scale(.985)!important;filter:brightness(1.06)}
+#chars .card button,#skins .skin-card button,#charCards .card button,#skinCards .skin-card button{width:100%;min-height:44px!important}
+#chars .portrait,#skins .portrait,#charCards .portrait,#skinCards .portrait{display:grid;place-items:center;overflow:hidden;aspect-ratio:4/3;min-height:132px}
+#chars .portrait>*,#skins .portrait>*,#charCards .portrait>*,#skinCards .portrait>*{max-width:94%;max-height:96%;transform-origin:center bottom}
+.card.locked,.skin-card.locked{opacity:.82;filter:saturate(.76)}.card.locked:hover,.skin-card.locked:hover{opacity:.94;filter:saturate(.9)}
+.card[data-ux-state="equipped"],.skin-card[data-ux-state="equipped"]{border-color:rgba(231,207,151,.58)!important;box-shadow:0 16px 38px #0008,0 0 0 1px rgba(231,207,151,.12)!important}
+.card[data-ux-state="locked"]:after,.skin-card[data-ux-state="locked"]:after{content:"LOCKED";position:absolute;right:10px;top:10px;padding:5px 8px;border-radius:999px;background:rgba(4,7,12,.82);border:1px solid rgba(255,255,255,.12);font-size:8px;font-weight:900;letter-spacing:.12em;color:#aab2c0;pointer-events:none}
+.collection-tabs{position:sticky;top:82px;z-index:60;backdrop-filter:blur(16px)}
+#chars .sectionhead,#skins .sectionhead{scroll-margin-top:90px}.gallery-summary{position:sticky;top:132px;z-index:55;backdrop-filter:blur(14px)}
+#ownerAccess,#ownerSection,.owner-access-section{grid-column:1/-1!important;width:100%!important}.owner-access-section{min-height:0!important}
+html:not(.owner-unlocked) .owner-access-section,html:not(.owner-unlocked) #ownerAccess,html:not(.owner-unlocked) #ownerSection{display:none!important}
+/* Navigation */
+.back{min-width:92px}.sectionhead{gap:14px}.sectionhead .back{margin-left:auto}.screen{scroll-margin-top:90px}
+/* Fight HUD */
+#fight.active{padding-bottom:calc(150px + env(safe-area-inset-bottom))!important}
+#fight .hud,#fight .topbar,#fight .fight-hud{position:sticky;top:68px;z-index:40;backdrop-filter:blur(12px)}
+#fight .bar,#fight .healthbar,#fight .meter{overflow:hidden;border-radius:999px!important}
+#fight .controls,#fight .actionwrap{position:fixed!important;left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));z-index:150!important;padding:10px!important;border-radius:18px!important;background:linear-gradient(180deg,rgba(10,14,21,.74),rgba(4,6,10,.94))!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:0 18px 50px rgba(0,0,0,.48)!important;backdrop-filter:blur(18px) saturate(130%)}
+#fight .actions,#fight .hero-actions{gap:8px!important}#fight .actions button,#fight #heroActions button,#fight #punch,#fight #kick,#fight #special,#fight #block,#fight #jump{min-width:58px!important;min-height:54px!important;border-radius:14px!important;font-size:11px!important}
+#fight #special.ready,#fight #special.special-ready{box-shadow:0 0 0 1px rgba(231,207,151,.36),0 0 28px rgba(231,207,151,.24)!important;animation:uxSpecialPulse 1.25s ease-in-out infinite}
+@keyframes uxSpecialPulse{50%{filter:brightness(1.16);transform:translateY(-1px)}}
+#fight button.cooldown,#fight button:disabled{opacity:.48!important;filter:saturate(.55);transform:none!important}
+/* Feedback */
+.ux-hit-flash{animation:uxHitFlash .14s ease-out}@keyframes uxHitFlash{0%{filter:brightness(1.7)}100%{filter:none}}
+.ux-ko{animation:uxKo .28s ease-out}@keyframes uxKo{0%{transform:scale(.98);opacity:.65}100%{transform:none;opacity:1}}
+/* iPad/mobile */
+@media(max-width:1100px){.rank-fighters-grid,.skin-hero-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.profile,.skin-profile{padding:16px!important}.collection-tabs{top:70px}.gallery-summary{top:120px}}
+@media(max-width:720px){.top{padding-left:12px!important;padding-right:12px!important}.currency{max-width:58vw;overflow-x:auto;scrollbar-width:none}.currency::-webkit-scrollbar{display:none}.sectionhead{top:64px!important}.collection-tabs{top:64px}.gallery-summary{position:relative;top:auto}.rank-fighters-grid,.skin-hero-grid{grid-template-columns:1fr!important}.card,.skin-card{min-height:0}.profile,.skin-profile{padding:14px!important}#fight .controls,#fight .actionwrap{padding:8px!important;border-radius:16px!important}#fight .actions button,#fight #heroActions button,#fight #punch,#fight #kick,#fight #special,#fight #block,#fight #jump{min-height:52px!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
