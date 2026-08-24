@@ -10,7 +10,7 @@ const bootstrap=read('app/core/bootstrap-v096.js');
 const manifest=read('app/config/runtime-manifest.js');
 
 const requiredFiles=[
-  'index.html','app/core/core-runtime-v0958.js','app/core/bootstrap-v096.js','app/config/runtime-manifest.js','app/config/feature-flags.js','app/state/state.js','app/input/input.js','app/characters/database.js','app/characters/validator.js','app/characters/characters.js','app/combat/invariants.js','app/combat/api.js','app/combat/combat.js','app/core/game.js','app/ui/ui.js','app/owner/storage.js','app/owner/commands.js','app/debug/error-logger.js','app/debug/debug-panel.js','app/save/migrations.js','app/systems/save.js','app/release/build-info.js','app/ui/ownerboard.js','update-v098.js','update-v098.css','tests/browser-smoke.spec.js'
+  'index.html','app/core/core-runtime-v0958.js','app/core/bootstrap-v096.js','app/config/runtime-manifest.js','app/config/feature-flags.js','app/state/state.js','app/input/input.js','app/characters/database.js','app/characters/validator.js','app/characters/characters.js','app/combat/invariants.js','app/combat/api.js','app/combat/combat.js','app/core/game.js','app/ui/ui.js','app/owner/storage.js','app/owner/commands.js','app/debug/error-logger.js','app/debug/debug-panel.js','app/save/migrations.js','app/systems/save.js','app/release/build-info.js','app/ui/ownerboard.js','update-v098.js','update-v098.css','update-v098-release.js','update-v098-release.css','tests/browser-smoke.spec.js'
 ];
 for(const file of requiredFiles)assert(exists(file),`missing required file: ${file}`);
 for(const id of ['play','training','chars','fight','pF','eF','punch','kick','special','block','toast'])assert(index.includes(`id="${id}"`),`missing critical UI id: ${id}`);
@@ -22,13 +22,15 @@ const runtime=[...manifest.matchAll(/'([^']+\.js)'/g)].map(m=>m[1]);
 assert(runtime.length>=10,'runtime manifest unexpectedly small');
 assert(new Set(runtime).size===runtime.length,'runtime manifest contains duplicate scripts');
 for(const file of runtime)assert(exists(file),`runtime manifest points to missing file: ${file}`);
-assert(runtime[runtime.length-1]==='update-v098.js','v0.9.8 patch must load last');
-assert(manifest.includes("version:'0.9.8-dev.1'"),'runtime manifest version is not v0.9.8-dev.1');
+assert(runtime[runtime.length-1]==='update-v098-release.js','v0.9.8 release layer must load last');
+assert(manifest.includes("version:'0.9.8'"),'runtime manifest version is not v0.9.8');
 
-const ux=read('update-v098.js'),uxCss=read('update-v098.css');
-assert(ux.includes("VERSION='0.9.8-dev.1'"),'v0.9.8 UX version missing');
-for(const token of ['FIGHT.<br>COLLECT.<br>CONQUER.','Owner Dock Safety','Gameplay & UX'])assert(ux.includes(token),`v0.9.8 UX patch missing ${token}`);
-for(const token of ['#home .home','.owner-board-dock','@media (max-width:900px)'])assert(uxCss.includes(token),`v0.9.8 responsive CSS missing ${token}`);
+const ux=read('update-v098.js'),release=read('update-v098-release.js'),uxCss=read('update-v098.css'),releaseCss=read('update-v098-release.css');
+assert(ux.includes('FIGHT.<br>COLLECT.<br>CONQUER.'),'v0.9.8 main menu rework missing');
+assert(release.includes("VERSION='0.9.8'"),'v0.9.8 release version missing');
+for(const token of ['markStates','touchFeedback','fightFeedback','ownerUnlocked','rememberScroll'])assert(release.includes(token),`v0.9.8 release behavior missing ${token}`);
+for(const token of ['#fight .controls','.card[data-ux-state="equipped"]','html:not(.owner-unlocked)','@media(max-width:720px)'])assert(releaseCss.includes(token),`v0.9.8 release CSS missing ${token}`);
+for(const token of ['#home .home','.owner-board-dock'])assert(uxCss.includes(token),`v0.9.8 main menu CSS missing ${token}`);
 
 const characterDB=read('app/characters/database.js');
 const validator=read('app/characters/validator.js');
@@ -54,4 +56,4 @@ for(const method of ['show','hide','toggle','snapshot','copy'])assert(debug.incl
 
 const ownerBoard=read('app/ui/ownerboard.js');
 assert(ownerBoard.includes('toggleDebug')&&ownerBoard.includes('copyDebugSnapshot'),'ownerboard debug commands missing');
-console.log(`V1 smoke test passed: ${requiredFiles.length} required files, ${runtime.length} runtime scripts, v0.9.8 dev.1 UX and release hardening verified.`);
+console.log(`V1 smoke test passed: ${requiredFiles.length} required files, ${runtime.length} runtime scripts, v0.9.8 gameplay/UX release verified.`);
