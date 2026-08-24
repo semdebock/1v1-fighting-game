@@ -19,47 +19,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate v0.9.7.7 Hero Update + Bug Fixes
+      - name: Validate v0.9.7.7.1 Hero Revamp
         run: |
-          node --check build/v0977/transform-v0977.js
-          node --check build/v0977/cleanup-transform-v0977.js
-          node --check build/v0977/patch-index-v0977.js
-          node --check build/v0977/release-check-v0977.js
+          node --check build/v09771/transform-v09771.js
+          node --check build/v09771/patch-index-v09771.js
+          node --check build/v09771/release-check-v09771.js
           node --check build/v0958/build-core-v0958.js
           node --check app/core/bootstrap-v096.js
-          node --check update-v0977.js
+          node --check update-v09771.js
           node build/v0958/build-core-v0958.js
           node --check app/core/core-runtime-v0958.js
-          node build/v0977/patch-index-v0977.js
-          node build/v0977/release-check-v0977.js
-          grep -q "'Thor':{cls:'thor'" app/core/core-runtime-v0958.js
-          grep -q "'Doctor Strange':{cls:'doctorstrange'" app/core/core-runtime-v0958.js
-          grep -q "'Star-Lord':{cls:'starlord'" app/core/core-runtime-v0958.js
-          grep -q "MJOLNIR THROW" app/core/core-runtime-v0958.js
-          grep -q "GOD OF THUNDER" app/core/core-runtime-v0958.js
-          grep -q "ELDRITCH BOLTS" app/core/core-runtime-v0958.js
-          grep -q "MIRROR DIMENSION" app/core/core-runtime-v0958.js
-          grep -q "ELEMENT BLASTER" app/core/core-runtime-v0958.js
-          grep -q "LEGENDARY OUTLAW" app/core/core-runtime-v0958.js
+          node build/v09771/patch-index-v09771.js
+          node build/v09771/release-check-v09771.js
+          grep -q "classList.add('thor-cast','mjolnir-away')" app/core/core-runtime-v0958.js
           grep -q "FightArenaTrainingControls" app/core/core-runtime-v0958.js
           grep -q "DAILY_REWARD_COINS=1250" app/core/core-runtime-v0958.js
           grep -q "VERONICA CRASHDOWN" app/core/core-runtime-v0958.js
-          grep -q "mystiqueTransform" app/core/core-runtime-v0958.js
-          grep -q "deadpoolLastStand" app/core/core-runtime-v0958.js
-          grep -q "magnetoMaster" app/core/core-runtime-v0958.js
           grep -Fq "gems=win&&l.boss?(l.gems||0):0" app/core/core-runtime-v0958.js
           grep -q "campaignUnlockName=win?campaignNextName(l.name):null" app/core/core-runtime-v0958.js
           grep -q "purchase-confirm-v0975" update-v0975.js
           grep -q "restoreRematch" update-v09741.js
           grep -q "multiTouch:true" touch-v0941.js
-          grep -q "app/core/bootstrap-v096.js?v=0977" index.html
-      - name: Persist v0.9.7.7 release artifacts
+          grep -q "app/core/bootstrap-v096.js?v=09771" index.html
+      - name: Persist v0.9.7.7.1 release artifacts
         run: |
           if [ -n "$(git status --porcelain -- index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html app/core/core-runtime-v0958.js app/core/core-runtime-v0958.meta.json
-            git commit -m "Release Multiverse Arena v0.9.7.7 Hero Update + Bug Fixes [skip ci]"
+            git commit -m "Release Multiverse Arena v0.9.7.7.1 Hero Revamp [skip ci]"
             git push
           fi
       - name: Configure Pages
