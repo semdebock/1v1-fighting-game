@@ -35,5 +35,6 @@ jobs:
           node --check app/release/build-info.js
           node --check app/ui/ownerboard.js
           node --check update-v098.js
+          node --check update-v098-release.js
       - name: Run Fight Arena smoke test
         run: node tests/smoke-test.js
