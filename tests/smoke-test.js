@@ -10,35 +10,13 @@ const bootstrap=read('app/core/bootstrap-v096.js');
 const manifest=read('app/config/runtime-manifest.js');
 
 const requiredFiles=[
-  'index.html',
-  'app/core/core-runtime-v0958.js',
-  'app/core/bootstrap-v096.js',
-  'app/config/runtime-manifest.js',
-  'app/state/state.js',
-  'app/input/input.js',
-  'app/characters/database.js',
-  'app/characters/characters.js',
-  'app/combat/api.js',
-  'app/combat/combat.js',
-  'app/core/game.js',
-  'app/ui/ui.js',
-  'app/owner/storage.js',
-  'app/owner/commands.js',
-  'app/debug/error-logger.js',
-  'app/debug/debug-panel.js',
-  'app/ui/ownerboard.js',
-  'app/systems/save.js'
+  'index.html','app/core/core-runtime-v0958.js','app/core/bootstrap-v096.js','app/config/runtime-manifest.js','app/config/feature-flags.js','app/state/state.js','app/input/input.js','app/characters/database.js','app/characters/validator.js','app/characters/characters.js','app/combat/invariants.js','app/combat/api.js','app/combat/combat.js','app/core/game.js','app/ui/ui.js','app/owner/storage.js','app/owner/commands.js','app/debug/error-logger.js','app/debug/debug-panel.js','app/save/migrations.js','app/systems/save.js','app/release/build-info.js','app/ui/ownerboard.js','tests/browser-smoke.spec.js'
 ];
 for(const file of requiredFiles)assert(exists(file),`missing required file: ${file}`);
-
-for(const id of ['play','training','chars','fight','pF','eF','punch','kick','special','block','toast']){
-  assert(index.includes(`id="${id}"`),`missing critical UI id: ${id}`);
-}
-assert(index.includes('app/core/bootstrap-v096.js'), 'index no longer loads stable bootstrap');
-assert(bootstrap.includes('runtimeManifest'), 'bootstrap no longer uses runtime manifest');
-assert(bootstrap.includes('characterDB')&&bootstrap.includes('combatAPI'),'character database/combat API missing from bootstrap validation');
-assert(bootstrap.includes('errorLogger')&&bootstrap.includes('debug'),'debug/error logger missing from bootstrap validation');
-assert(bootstrap.includes('ownerStorage')&&bootstrap.includes('ownerCommands')&&bootstrap.includes('ownerboard'),'owner modules missing from bootstrap validation');
+for(const id of ['play','training','chars','fight','pF','eF','punch','kick','special','block','toast'])assert(index.includes(`id="${id}"`),`missing critical UI id: ${id}`);
+assert(index.includes('app/core/bootstrap-v096.js'),'index no longer loads stable bootstrap');
+for(const token of ['runtimeManifest','features','characterDB','characterValidator','combatInvariants','combatAPI','errorLogger','debug','saveMigrations','buildInfo','ownerStorage','ownerCommands','ownerboard'])assert(bootstrap.includes(token),`bootstrap missing ${token}`);
+assert(bootstrap.includes("Date.now()"),'dev cache busting missing');
 
 const runtime=[...manifest.matchAll(/'([^']+\.js)'/g)].map(m=>m[1]);
 assert(runtime.length>=10,'runtime manifest unexpectedly small');
@@ -46,21 +24,27 @@ assert(new Set(runtime).size===runtime.length,'runtime manifest contains duplica
 for(const file of runtime)assert(exists(file),`runtime manifest points to missing file: ${file}`);
 
 const characterDB=read('app/characters/database.js');
+const validator=read('app/characters/validator.js');
 const combatAPI=read('app/combat/api.js');
-assert(characterDB.includes('characterDB'),'central character database export missing');
+const invariants=read('app/combat/invariants.js');
 assert(characterDB.includes('importLegacy'),'character database legacy import missing');
-for(const method of ['dealDamage','heal','stun','knockback','useAbility','endMatch'])assert(combatAPI.includes(method),`combat API missing ${method}`);
+assert(validator.includes('validateAll'),'character validator missing validateAll');
+for(const method of ['dealDamage','heal','stun','knockback','useAbility','endMatch','validate'])assert(combatAPI.includes(method),`combat API missing ${method}`);
+for(const token of ['safeDamage','normalizeFighter','assertState'])assert(invariants.includes(token),`combat invariant missing ${token}`);
 
-const logger=read('app/debug/error-logger.js');
-const debug=read('app/debug/debug-panel.js');
+const migrations=read('app/save/migrations.js');
+const save=read('app/systems/save.js');
+assert(migrations.includes('CURRENT=3')&&migrations.includes('BACKUP_KEY'),'save migration version/backup missing');
+assert(save.includes('restoreBackup')&&save.includes('saveMigrations'),'save migration integration missing');
+const flags=read('app/config/feature-flags.js');
+assert(flags.includes('experimentalAbilities:false')&&flags.includes('combatInvariants:true'),'feature flag defaults incomplete');
+const buildInfo=read('app/release/build-info.js');
+assert(buildInfo.includes('build-meta.json')&&buildInfo.includes('maBuildBadge'),'build identity integration missing');
+
+const logger=read('app/debug/error-logger.js'),debug=read('app/debug/debug-panel.js');
 assert(logger.includes('unhandledrejection')&&logger.includes("addEventListener('error'"),'global error hooks missing');
 for(const method of ['show','hide','toggle','snapshot','copy'])assert(debug.includes(method),`debug panel missing ${method}`);
 
-const ownerStorage=read('app/owner/storage.js');
-const ownerCommands=read('app/owner/commands.js');
 const ownerBoard=read('app/ui/ownerboard.js');
-assert(ownerStorage.includes('ownerStorage'),'owner storage export missing');
-assert(ownerCommands.includes('ownerCommands'),'owner commands export missing');
 assert(ownerBoard.includes('toggleDebug')&&ownerBoard.includes('copyDebugSnapshot'),'ownerboard debug commands missing');
-
-console.log(`Smoke test passed: ${requiredFiles.length} core files, ${runtime.length} runtime scripts, critical UI, character DB, combat API, debug/error logging and owner modules verified.`);
+console.log(`V1 smoke test passed: ${requiredFiles.length} required files, ${runtime.length} runtime scripts, release hardening verified.`);
