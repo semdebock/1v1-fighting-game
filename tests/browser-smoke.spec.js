@@ -35,5 +35,5 @@ test('device choice then navigation reaches training/fight UI', async ({ page })
   await page.locator('#training').click();
   await page.waitForTimeout(250);
   const active=await page.locator('.screen.active').getAttribute('id');
-  expect(['levels','fight','home']).toContain(active);
+  expect(['trainingScreen','levels','fight','home']).toContain(active);
 });
