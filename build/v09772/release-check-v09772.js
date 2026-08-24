@@ -4,8 +4,7 @@ for(const m of ["const BUILD='0.9.7.7.2'","const ASSET='09772'","'update-v09772.
 for(const m of ["CODE='OWNERBOARD'",'ownerBoardUnlocked','OWNER COMMAND CENTER','UNLOCK ALL FIGHTERS','UNLOCK ALL SKINS','UNLOCK THE ONE ABOVE ALL','UNLOCK ALL FIGHTS','MARK ALL CLEARED','ownerSaveBox','fightArenaV08','stopImmediatePropagation','document.addEventListener(\'click\'','setTimeout(()=>openBoard(),60)','OPENING BOARD','MultiverseArenaOwnerDevTools?.mount'])if(!ui.includes(m))throw new Error('owner runtime marker missing '+m);
 for(const m of ['FIGHT LAUNCHER','OWNER SAVE SLOTS','CAMPAIGN EDITOR','LIVE HUD','COPY BUG REPORT','fightArenaOwnerFlagsV09772','FightArenaCampaignControls','FightArenaTrainingControls'])if(!dev.includes(m))throw new Error('owner devtools marker missing '+m);
 for(const m of ['owner-board-overlay','owner-board-shell','owner-setting-row','owner-grid','owner-launch-grid','owner-flag-grid','owner-campaign-editor','owner-floating-perf'])if(!css.includes(m))throw new Error('owner CSS marker missing '+m);
-for(const m of ['app/core/bootstrap-v096.js?v=09772','UPDATE LOG  •  v0.9.7.7.1','Hero Visual Revamp • Training Repair • Mjolnir Fix'])if(!index.includes(m))throw new Error('stealth index marker missing '+m);
-if(index.includes('Owner Board • Local Admin Controls'))throw new Error('Owner Board exposed in visible battle/update log');
+for(const m of ['app/core/bootstrap-v096.js?v=09772','UPDATE LOG  •  v0.9.7.7.2','Owner Board Rework • Dev Tools • Repo Cleanup','v0.9.7.7.2 • OWNER TOOLS • STABLE'])if(!index.includes(m))throw new Error('visible index marker missing '+m);
 for(const m of ['FightArenaTrainingControls','DAILY_REWARD_COINS=1250','VERONICA CRASHDOWN','gems=win&&l.boss?(l.gems||0):0','campaignUnlockName=win?campaignNextName(l.name):null'])if(!core.includes(m))throw new Error('protected system missing '+m);
 if(ui.includes("localStorage.removeItem('fightArenaV08')"))throw new Error('owner board may not silently delete save');
-console.log('v0.9.7.7.2 Owner Board rework checks passed');
+console.log('v0.9.7.7.2 visible Owner Board rework checks passed');
